@@ -353,7 +353,11 @@
   </style>
 </head>
 <body>
-
+<div style="position: fixed; top: 15px; right: 15px; z-index: 1000; background: rgba(22, 22, 26, 0.9); padding: 8px 15px; border-radius: 50px; border: 1px solid rgba(232, 199, 122, 0.4); backdrop-filter: blur(8px); box-shadow: 0 4px 15px rgba(0,0,0,0.5);">
+  <span style="cursor: pointer; font-size: 13px; font-weight: 500; color: #f0ede6;" onclick="setLang('pt')">PT</span>
+  <span style="color: #e8c77a; margin: 0 8px; opacity: 0.5;">|</span>
+  <span style="cursor: pointer; font-size: 13px; font-weight: 500; color: #f0ede6;" onclick="setLang('en')">EN</span>
+</div>
 <!-- ── LANGUAGE POPUP ── -->
 <div id="lang-overlay">
   <div id="lang-box">
@@ -561,8 +565,19 @@
     document.getElementById('opt-jp').textContent = t.optJp;
     document.getElementById('opt-classic').textContent = t.optClassic;
     document.getElementById('footer-txt').textContent = t.footer;
-    document.documentElement.lang = lang;
-  }
+        if (lang === 'en') {
+      document.getElementById('about-title').textContent = "What is NameForge?";
+      document.getElementById('about-p1').innerHTML = "<strong>NameForge</strong> is a free online tool developed to help ENTREPRENEURS, content creators, and writers.";
+      document.getElementById('about-p2').textContent = "More than just a business name generator, NameForge offers versatility.";
+      document.getElementById('about-p3').textContent = "Having a strategic name is fundamental for digital success.";
+    } else {
+      document.getElementById('about-title').textContent = "O que é o NameForge?";
+      document.getElementById('about-p1').innerHTML = "O <strong>NameForge</strong> é uma ferramenta online gratuita.";
+      document.getElementById('about-p2').textContent = "Além de ser um gerador de NOMES COMERCIAIS.";
+      document.getElementById('about-p3').textContent = "Ter um nome estratégico é fundamental.";
+      document.documentElement.lang = lang;
+     }
+        }
 
   // ── NAME BANKS ──
   const NAMES = {
@@ -724,16 +739,14 @@
   document.head.appendChild(style);
 </script>
   <section style="max-width: 800px; margin: 40px auto; padding: 20px; line-height: 1.8; color: #f0ede6; opacity: 0.9;">
+    <h2 id="about-title" style="color: #e8c77a; margin-bottom: 20px; font-family: 'Playfair Display', serif;">O que é o NameForge?</h2>
     
-    <h2 style="color: #e8c77a; margin-bottom: 20px; font-family: 'Playfair Display', serif;">O que é o NameForge?</h2>
-    
-    <p>O <strong>NameForge</strong> é uma ferramenta online gratuita desenvolvida para auxiliar EMPREENDEDORES, criadores de conteúdo e escritores a encontrar a identidade perfeita para seus projetos. Sabemos que a escolha de um nome é uma das etapas mais cruciais na criação de uma marca ou personagem, pois ela carrega a primeira impressão e a essência do que está sendo construído. Nosso algoritmo organiza sugestões baseadas em diferentes NICHOS e estilos, facilitando o processo de brainstorming.</p>
+    <p id="about-p1">O <strong>NameForge</strong> é uma ferramenta online gratuita desenvolvida para auxiliar EMPREENDEDORES, criadores de conteúdo e escritores a encontrar a identidade perfeita para seus projetos. Sabemos que a escolha de um nome é uma das etapas mais cruciais na criação de uma marca ou personagem, pois ela carrega a primeira impressão e a essência do que está sendo construído. Nosso algoritmo organiza sugestões baseadas em diferentes NICHOS e estilos, facilitando o processo de brainstorming.</p>
 
-    <p>Além de ser um gerador de NOMES COMERCIAIS, o NameForge oferece versatilidade para o universo criativo. Seja você um jogador procurando um NICKNAME ou NAMETAG único para sua conta, um autor desenvolvendo nomes para personagens de ficção ou um desenvolvedor em busca de nomes para APLICATIVOS e STARTUPS, a plataforma entrega resultados rápidos e diversificados. Nossa missão é eliminar o bloqueio criativo e fornecer inspiração instantânea com apenas alguns cliques.</p>
+    <p id="about-p2">Além de ser um gerador de NOMES COMERCIAIS, o NameForge oferece versatilidade para o universo criativo. Seja você um jogador procurando um NICKNAME ou NAMETAG único para sua conta, um autor desenvolvendo nomes para personagens de ficção ou um desenvolvedor em busca de nomes para APLICATIVOS e STARTUPS, a plataforma entrega resultados rápidos e diversificados. Nossa missão é eliminar o bloqueio criativo e fornecer inspiração instantânea com apenas alguns cliques.</p>
 
-    <p>Ter um nome estratégico é fundamental para o sucesso digital e para o RECONHECIMENTO de marca. Por isso, o NameForge é constantemente atualizado com novas bases de dados que refletem as tendências modernas de mercado e entretenimento. Além de nomes para empresas e personagens, a ferramenta pode ser utilizada para batizar novos animais de estimação, projetos acadêmicos ou qualquer iniciativa que demande um toque de originalidade e exclusividade.</p>
-
-</section>
+    <p id="about-p3">Ter um nome estratégico é fundamental para o sucesso digital e para o RECONHECIMENTO de marca. Por isso, o NameForge é constantemente atualizado com novas bases de dados que refletem as tendências modernas de mercado e entretenimento. Além de nomes para empresas e personagens, a ferramenta pode ser utilizada para batizar novos animais de estimação, projetos acadêmicos ou qualquer iniciativa que demande um toque de originalidade e exclusividade.</p>
+  </section>
 <!-- Inicio codigo Contador -->
 <div align="center"><a title="contador de dias" href="https://www.calendario.cnt.br/ferramentas/contador-de-dias-calculadora-prazo-entre-datas"><img src="https://contador-gratis.com/contadores-de-visitas/050526062556736.gif"></a><div><a href="https://www.contador-gratis.com/" title="contador de visitas">Contador de Visitas</a></div></div>
 <!-- Fim do codigo Contador -->
