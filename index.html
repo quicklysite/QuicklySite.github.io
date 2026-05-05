@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NameForge – Gerador de Nomes / Name Generator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <!-- ADSENSE: substitua pelo seu código real -->
+  <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script> -->
+
+  <style>
+    :root {
+      --bg: #0d0d0f;
+      --surface: #16161a;
+      --surface2: #1e1e24;
+      --accent: #e8c77a;
+      --accent2: #c4a45a;
+      --text: #f0ede6;
+      --muted: #888;
+      --radius: 14px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── BACKGROUND TEXTURE ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 20% 10%, rgba(232,199,122,.07) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 80% at 85% 90%, rgba(196,164,90,.05) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── LANGUAGE POPUP ── */
+    #lang-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.75);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+    }
+
+    #lang-box {
+      background: var(--surface);
+      border: 1px solid rgba(232,199,122,.25);
+      border-radius: 20px;
+      padding: 48px 40px;
+      text-align: center;
+      max-width: 420px;
+      width: 90%;
+      box-shadow: 0 24px 80px rgba(0,0,0,.6);
+      animation: popIn .4s cubic-bezier(.34,1.56,.64,1);
+    }
+
+    @keyframes popIn {
+      from { opacity:0; transform: scale(.88) translateY(20px); }
+      to   { opacity:1; transform: scale(1) translateY(0); }
+    }
+
+    #lang-box .globe {
+      font-size: 44px;
+      margin-bottom: 16px;
+    }
+
+    #lang-box h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    #lang-box p {
+      color: var(--muted);
+      font-size: .9rem;
+      margin-bottom: 32px;
+      line-height: 1.5;
+    }
+
+    .lang-btns {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .lang-btn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--surface2);
+      border: 1.5px solid rgba(232,199,122,.2);
+      color: var(--text);
+      padding: 14px 28px;
+      border-radius: 50px;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1rem;
+      font-weight: 500;
+      transition: all .25s;
+    }
+
+    .lang-btn:hover {
+      border-color: var(--accent);
+      background: rgba(232,199,122,.1);
+      transform: translateY(-2px);
+    }
+
+    .lang-btn .flag { font-size: 1.4rem; }
+
+    /* ── HEADER ── */
+    header {
+      position: relative;
+      z-index: 1;
+      padding: 32px 24px 0;
+      text-align: center;
+    }
+
+    header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.2rem, 6vw, 3.8rem);
+      font-weight: 900;
+      letter-spacing: -1px;
+      line-height: 1.1;
+    }
+
+    header h1 span { color: var(--accent); }
+
+    header p.tagline {
+      color: var(--muted);
+      margin-top: 10px;
+      font-size: .95rem;
+      font-weight: 300;
+    }
+
+    /* ── AD SLOT TOP ── */
+    .ad-slot {
+      position: relative;
+      z-index: 1;
+      margin: 24px auto;
+      max-width: 728px;
+      width: 90%;
+      min-height: 90px;
+      background: var(--surface);
+      border: 1px dashed rgba(255,255,255,.08);
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: .75rem;
+    }
+
+    /* ── MAIN CARD ── */
+    main {
+      position: relative;
+      z-index: 1;
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 20px 60px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid rgba(255,255,255,.07);
+      border-radius: 20px;
+      padding: 36px;
+      margin-bottom: 20px;
+    }
+
+    /* ── TABS ── */
+    .tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 28px;
+      background: var(--surface2);
+      padding: 6px;
+      border-radius: 50px;
+    }
+
+    .tab {
+      flex: 1;
+      padding: 10px 0;
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      border-radius: 50px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: .9rem;
+      font-weight: 500;
+      transition: all .2s;
+    }
+
+    .tab.active {
+      background: var(--accent);
+      color: #0d0d0f;
+    }
+
+    /* ── CONTROLS ── */
+    .control-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .control-group label {
+      font-size: .8rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    select, input[type="number"] {
+      background: var(--surface2);
+      border: 1.5px solid rgba(255,255,255,.08);
+      color: var(--text);
+      padding: 12px 16px;
+      border-radius: 10px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: .95rem;
+      width: 100%;
+      appearance: none;
+      outline: none;
+      transition: border-color .2s;
+    }
+
+    select:focus, input[type="number"]:focus {
+      border-color: var(--accent);
+    }
+
+    .row { display: flex; gap: 16px; }
+    .row .control-group { flex: 1; }
+
+    /* ── GENERATE BUTTON ── */
+    .btn-generate {
+      width: 100%;
+      padding: 16px;
+      background: var(--accent);
+      color: #0d0d0f;
+      border: none;
+      border-radius: 50px;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all .25s;
+      letter-spacing: .02em;
+    }
+
+    .btn-generate:hover {
+      background: var(--accent2);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(232,199,122,.25);
+    }
+
+    .btn-generate:active { transform: translateY(0); }
+
+    /* ── RESULTS ── */
+    .results {
+      margin-top: 24px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 12px;
+    }
+
+    .name-chip {
+      background: var(--surface2);
+      border: 1px solid rgba(255,255,255,.06);
+      border-radius: 10px;
+      padding: 14px 16px;
+      font-size: 1rem;
+      font-weight: 500;
+      text-align: center;
+      cursor: pointer;
+      transition: all .2s;
+      position: relative;
+    }
+
+    .name-chip:hover {
+      border-color: var(--accent);
+      background: rgba(232,199,122,.08);
+    }
+
+    .name-chip::after {
+      content: '📋';
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: .75rem;
+      opacity: 0;
+      transition: opacity .2s;
+    }
+
+    .name-chip:hover::after { opacity: 1; }
+
+    .copy-toast {
+      position: fixed;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: var(--accent);
+      color: #0d0d0f;
+      padding: 10px 24px;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: .9rem;
+      opacity: 0;
+      transition: all .3s;
+      z-index: 100;
+      pointer-events: none;
+    }
+
+    .copy-toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* ── AD SLOT MID ── */
+
+    /* ── FOOTER ── */
+    footer {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      color: var(--muted);
+      font-size: .78rem;
+      padding: 0 20px 40px;
+    }
+
+    @media (max-width: 500px) {
+      .card { padding: 24px 18px; }
+      .row { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── LANGUAGE POPUP ── -->
+<div id="lang-overlay">
+  <div id="lang-box">
+    <div class="globe">🌐</div>
+    <h2 id="popup-title">Choose your language</h2>
+    <p id="popup-sub">Escolha o idioma / Select your language</p>
+    <div class="lang-btns">
+      <button class="lang-btn" onclick="setLang('pt')">
+        <span class="flag">🇧🇷</span> Português
+      </button>
+      <button class="lang-btn" onclick="setLang('en')">
+        <span class="flag">🇺🇸</span> English
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ── HEADER ── -->
+<header>
+  <h1><span>Name</span>Forge</h1>
+  <p class="tagline" id="tagline">Gerador de nomes para bebês, personagens e empresas</p>
+</header>
+
+<!-- AD SLOT TOP -->
+<div class="ad-slot" id="ad-top">
+  <!-- AdSense code here -->
+  <span>Anúncio</span>
+</div>
+
+<main>
+  <div class="card">
+
+    <!-- TABS -->
+    <div class="tabs">
+      <button class="tab active" onclick="setTab('baby', this)" id="tab-baby">👶 Bebê</button>
+      <button class="tab" onclick="setTab('char', this)" id="tab-char">⚔️ Personagem</button>
+      <button class="tab" onclick="setTab('biz', this)" id="tab-biz">🏢 Empresa</button>
+    </div>
+
+    <!-- BABY PANEL -->
+    <div id="panel-baby">
+      <div class="row">
+        <div class="control-group">
+          <label id="lbl-gender">Gênero</label>
+          <select id="baby-gender">
+            <option value="f" id="opt-f">Feminino</option>
+            <option value="m" id="opt-m">Masculino</option>
+            <option value="n" id="opt-n">Neutro / Unissex</option>
+          </select>
+        </div>
+        <div class="control-group">
+          <label id="lbl-origin">Origem</label>
+          <select id="baby-origin">
+            <option value="br" id="opt-br">Brasileiro</option>
+            <option value="en" id="opt-en-orig">Internacional / Inglês</option>
+            <option value="jp" id="opt-jp">Japonês / Anime</option>
+            <option value="classic" id="opt-classic">Clássico / Latino</option>
+          </select>
+        </div>
+      </div>
+      <div class="control-group">
+        <label id="lbl-qty">Quantidade</label>
+        <input type="number" id="baby-qty" value="8" min="1" max="20" />
+      </div>
+    </div>
+
+    <!-- CHAR PANEL -->
+    <div id="panel-char" style="display:none">
+      <div class="row">
+        <div class="control-group">
+          <label id="lbl-universe">Universo</label>
+          <select id="char-universe">
+            <option value="fantasy">Fantasy / Medieval</option>
+            <option value="sci">Sci-Fi / Futurista</option>
+            <option value="anime">Anime / Japonês</option>
+            <option value="dark">Dark / Gótico</option>
+            <option value="modern">Moderno / Urbano</option>
+          </select>
+        </div>
+        <div class="control-group">
+          <label id="lbl-gender2">Gênero</label>
+          <select id="char-gender">
+            <option value="f">Feminino</option>
+            <option value="m">Masculino</option>
+            <option value="n">Neutro</option>
+          </select>
+        </div>
+      </div>
+      <div class="control-group">
+        <label id="lbl-qty2">Quantidade</label>
+        <input type="number" id="char-qty" value="8" min="1" max="20" />
+      </div>
+    </div>
+
+    <!-- BIZ PANEL -->
+    <div id="panel-biz" style="display:none">
+      <div class="row">
+        <div class="control-group">
+          <label id="lbl-sector">Setor</label>
+          <select id="biz-sector">
+            <option value="tech">Tech / Startup</option>
+            <option value="food">Alimentação / Food</option>
+            <option value="fashion">Moda / Fashion</option>
+            <option value="health">Saúde / Bem-estar</option>
+            <option value="finance">Finanças / Negócios</option>
+            <option value="creative">Criativo / Arte</option>
+          </select>
+        </div>
+        <div class="control-group">
+          <label id="lbl-style">Estilo</label>
+          <select id="biz-style">
+            <option value="modern">Moderno / Curto</option>
+            <option value="classic">Clássico / Formal</option>
+            <option value="playful">Divertido / Jovem</option>
+          </select>
+        </div>
+      </div>
+      <div class="control-group">
+        <label id="lbl-qty3">Quantidade</label>
+        <input type="number" id="biz-qty" value="8" min="1" max="20" />
+      </div>
+    </div>
+
+    <!-- BUTTON -->
+    <button class="btn-generate" onclick="generate()" id="btn-gen">✨ Gerar Nomes</button>
+
+    <!-- RESULTS -->
+    <div class="results" id="results"></div>
+  </div>
+
+  <!-- AD SLOT MID -->
+  <div class="ad-slot">
+    <!-- AdSense code here -->
+    <span>Anúncio</span>
+  </div>
+
+</main>
+
+<footer>
+  <p id="footer-txt">© 2025 NameForge · Clique em um nome para copiar</p>
+</footer>
+
+<div class="copy-toast" id="toast"></div>
+
+<script>
+  // ── LANGUAGE DATA ──
+  const T = {
+    pt: {
+      tagline: 'Gerador de nomes para bebês, personagens e empresas',
+      tabBaby: '👶 Bebê', tabChar: '⚔️ Personagem', tabBiz: '🏢 Empresa',
+      lblGender: 'Gênero', lblOrigin: 'Origem', lblQty: 'Quantidade',
+      lblUniverse: 'Universo', lblGender2: 'Gênero',
+      lblSector: 'Setor', lblStyle: 'Estilo',
+      btnGen: '✨ Gerar Nomes',
+      optF: 'Feminino', optM: 'Masculino', optN: 'Neutro / Unissex',
+      optBr: 'Brasileiro', optEn: 'Internacional / Inglês', optJp: 'Japonês / Anime', optClassic: 'Clássico / Latino',
+      styleModern: 'Moderno / Curto', styleClassic: 'Clássico / Formal', stylePlayful: 'Divertido / Jovem',
+      copied: '✓ Copiado!',
+      footer: '© 2025 NameForge · Clique em um nome para copiar'
+    },
+    en: {
+      tagline: 'Name generator for babies, characters & businesses',
+      tabBaby: '👶 Baby', tabChar: '⚔️ Character', tabBiz: '🏢 Business',
+      lblGender: 'Gender', lblOrigin: 'Origin', lblQty: 'Quantity',
+      lblUniverse: 'Universe', lblGender2: 'Gender',
+      lblSector: 'Sector', lblStyle: 'Style',
+      btnGen: '✨ Generate Names',
+      optF: 'Female', optM: 'Male', optN: 'Neutral / Unisex',
+      optBr: 'Brazilian', optEn: 'International / English', optJp: 'Japanese / Anime', optClassic: 'Classic / Latin',
+      styleModern: 'Modern / Short', styleClassic: 'Classic / Formal', stylePlayful: 'Fun / Youthful',
+      copied: '✓ Copied!',
+      footer: '© 2025 NameForge · Click a name to copy'
+    }
+  };
+
+  let lang = 'pt';
+
+  function setLang(l) {
+    lang = l;
+    document.getElementById('lang-overlay').style.display = 'none';
+    applyTranslations();
+  }
+
+  function applyTranslations() {
+    const t = T[lang];
+    document.getElementById('tagline').textContent = t.tagline;
+    document.getElementById('tab-baby').textContent = t.tabBaby;
+    document.getElementById('tab-char').textContent = t.tabChar;
+    document.getElementById('tab-biz').textContent = t.tabBiz;
+    document.getElementById('lbl-gender').textContent = t.lblGender;
+    document.getElementById('lbl-origin').textContent = t.lblOrigin;
+    document.getElementById('lbl-qty').textContent = t.lblQty;
+    document.getElementById('lbl-universe').textContent = t.lblUniverse;
+    document.getElementById('lbl-gender2').textContent = t.lblGender2;
+    document.getElementById('lbl-sector').textContent = t.lblSector;
+    document.getElementById('lbl-style').textContent = t.lblStyle;
+    document.getElementById('lbl-qty2').textContent = t.lblQty;
+    document.getElementById('lbl-qty3').textContent = t.lblQty;
+    document.getElementById('btn-gen').textContent = t.btnGen;
+    document.getElementById('opt-f').textContent = t.optF;
+    document.getElementById('opt-m').textContent = t.optM;
+    document.getElementById('opt-n').textContent = t.optN;
+    document.getElementById('opt-br').textContent = t.optBr;
+    document.getElementById('opt-en-orig').textContent = t.optEn;
+    document.getElementById('opt-jp').textContent = t.optJp;
+    document.getElementById('opt-classic').textContent = t.optClassic;
+    document.getElementById('footer-txt').textContent = t.footer;
+    document.documentElement.lang = lang;
+  }
+
+  // ── NAME BANKS ──
+  const NAMES = {
+    baby: {
+      f: {
+        br: ['Ana', 'Beatriz', 'Camila', 'Isabela', 'Juliana', 'Letícia', 'Mariana', 'Natália', 'Patrícia', 'Rafaela', 'Sofia', 'Valentina', 'Yasmin', 'Lorena', 'Giovanna', 'Fernanda', 'Débora', 'Clara', 'Bruna', 'Alice'],
+        en: ['Amelia', 'Aria', 'Aurora', 'Charlotte', 'Chloe', 'Daisy', 'Eleanor', 'Emma', 'Grace', 'Harper', 'Isabella', 'Ivy', 'Luna', 'Mia', 'Nora', 'Olivia', 'Penelope', 'Scarlett', 'Violet', 'Zoe'],
+        jp: ['Akane', 'Hana', 'Hikari', 'Hinata', 'Ichika', 'Kagome', 'Koharu', 'Mei', 'Misaki', 'Natsuki', 'Rei', 'Sakura', 'Satsuki', 'Shiori', 'Yuki', 'Yuna', 'Ayame', 'Haruka', 'Rin', 'Suki'],
+        classic: ['Adriana', 'Alessandra', 'Aurora', 'Beatrice', 'Cecilia', 'Diana', 'Elena', 'Flavia', 'Gloria', 'Helena', 'Irene', 'Julia', 'Laura', 'Lucia', 'Maria', 'Natalia', 'Olivia', 'Paula', 'Rosa', 'Victoria']
+      },
+      m: {
+        br: ['Arthur', 'Bruno', 'Carlos', 'Daniel', 'Eduardo', 'Felipe', 'Gabriel', 'Henrique', 'Igor', 'João', 'Lucas', 'Mateus', 'Nicolas', 'Pedro', 'Rafael', 'Samuel', 'Thiago', 'Victor', 'Willian', 'Yago'],
+        en: ['Aiden', 'Benjamin', 'Caleb', 'Dominic', 'Elijah', 'Finn', 'Gabriel', 'Henry', 'Isaac', 'Jack', 'Liam', 'Mason', 'Nathan', 'Oliver', 'Owen', 'Sebastian', 'Theodore', 'William', 'Xavier', 'Zane'],
+        jp: ['Akira', 'Daichi', 'Haruto', 'Hayato', 'Hiroshi', 'Issei', 'Kaito', 'Kenji', 'Kōsei', 'Naoki', 'Ren', 'Riku', 'Ryuu', 'Sasuke', 'Shinji', 'Sora', 'Takashi', 'Tatsuya', 'Yuu', 'Zero'],
+        classic: ['Adrian', 'Alessandro', 'Alexei', 'Aldo', 'Augustus', 'Bruno', 'Caesar', 'Dante', 'Dario', 'Emilio', 'Felix', 'Luca', 'Marco', 'Maximus', 'Rafael', 'Romano', 'Sergio', 'Valentino', 'Victor', 'Xavier']
+      },
+      n: {
+        br: ['Ari', 'Davi', 'Eden', 'Emi', 'Íris', 'Kael', 'Lan', 'Lumi', 'Nael', 'Nori', 'Ori', 'Rael', 'Ren', 'Sael', 'Sol', 'Tael', 'Yael', 'Yara', 'Zael', 'Zen'],
+        en: ['Addison', 'Alex', 'Avery', 'Blake', 'Cameron', 'Casey', 'Dakota', 'Drew', 'Eden', 'Finley', 'Gray', 'Hayden', 'Jamie', 'Jordan', 'Morgan', 'Parker', 'Quinn', 'Riley', 'Sage', 'Taylor'],
+        jp: ['Akira', 'Hiro', 'Kei', 'Nao', 'Ren', 'Sora', 'Tomo', 'Yuu', 'Aoi', 'Kazu', 'Michi', 'Nori', 'Taki', 'Yori', 'Zuki', 'Haru', 'Masa', 'Nobu', 'Teru', 'Yoshi'],
+        classic: ['Adrian', 'Alex', 'Angel', 'Ari', 'Clem', 'Demi', 'Eden', 'Emile', 'Erin', 'Gael', 'Jules', 'Laurel', 'Lex', 'Loren', 'Noel', 'Remi', 'Robin', 'Sam', 'Theo', 'Val']
+      }
+    },
+    char: {
+      fantasy: {
+        f: ['Aelindra', 'Brynhild', 'Caelith', 'Dawnfire', 'Elara', 'Faelith', 'Galindra', 'Haelwyn', 'Ilvara', 'Kaelith', 'Lirien', 'Moonwhisper', 'Naerith', 'Odalys', 'Pyrantha', 'Quelith', 'Ryndara', 'Sylvara', 'Thalindra', 'Vexara'],
+        m: ['Aldric', 'Brandor', 'Corvain', 'Draveth', 'Eldran', 'Fendral', 'Garrith', 'Halvorn', 'Ironhide', 'Jarek', 'Keldric', 'Lorthain', 'Marik', 'Nordred', 'Orveth', 'Pyrax', 'Quelmar', 'Raveth', 'Stormveil', 'Thaddeus'],
+        n: ['Ashveil', 'Dawnwalker', 'Emberthorn', 'Frostweave', 'Ghostwhisper', 'Ironsong', 'Mistwalker', 'Nightveil', 'Oakheart', 'Runeblade', 'Shadowmere', 'Silverwind', 'Stormcaller', 'Thornback', 'Voidwalker', 'Windchaser', 'Wolfsbane', 'Wyrmthorn', 'Zeraphel', 'Zyrath']
+      },
+      sci: {
+        f: ['Ayla-7', 'Byte', 'Cipher', 'Delta-9', 'Elexis', 'Flux', 'Galaxy', 'Helix', 'Ion', 'Juno', 'Kira-X', 'Lyra', 'Matrix', 'Nova', 'Orbit', 'Pixel', 'Quantum', 'Radia', 'Synth', 'Vega'],
+        m: ['Axon', 'Binary', 'Cobalt', 'Droid-7', 'Electron', 'Forge', 'Grid', 'Halo', 'Ion', 'Jett', 'Kane', 'Laser', 'Macro', 'Nano', 'Ozone', 'Photon', 'Quartz', 'Rex-9', 'Sigma', 'Titan'],
+        n: ['Arc', 'Bolt', 'Core', 'Data', 'Echo', 'Flux', 'Grid', 'Hash', 'Index', 'Json', 'Kernel', 'Link', 'Mesh', 'Node', 'Omega', 'Patch', 'Query', 'Root', 'Stack', 'Token']
+      },
+      anime: {
+        f: ['Akatsuki', 'Amaterasu', 'Asuna', 'Chitoge', 'Erza', 'Hinata', 'Kagura', 'Kaguya', 'Kirito', 'Mikasa', 'Misaki', 'Nami', 'Raphtalia', 'Rem', 'Sakura', 'Sasha', 'Tohka', 'Usagi', 'Yuno', 'Zero'],
+        m: ['Araragi', 'Deku', 'Gintoki', 'Ichigo', 'Issei', 'Katsuki', 'Kazuto', 'Kirito', 'Lelouch', 'Light', 'Loid', 'Naruto', 'Natsu', 'Ren', 'Ryuunosuke', 'Sasuke', 'Shoto', 'Tatsuya', 'Yato', 'Zero'],
+        n: ['Akira', 'Aoi', 'Haru', 'Hikari', 'Kei', 'Natsu', 'Nori', 'Rei', 'Rin', 'Sora', 'Tomo', 'Yoru', 'Yuu', 'Zen', 'Zoro', 'Hiro', 'Kazu', 'Michi', 'Nao', 'Teru']
+      },
+      dark: {
+        f: ['Abyssia', 'Bloodmoon', 'Crimsonveil', 'Dusk', 'Eclipse', 'Gravemere', 'Hex', 'Lamia', 'Morrigan', 'Nightshade', 'Obsidian', 'Phantom', 'Ravenna', 'Seraphine', 'Shade', 'Silvermourne', 'Umbra', 'Vex', 'Voidheart', 'Wraith'],
+        m: ['Abyss', 'Bane', 'Damien', 'Dread', 'Dusk', 'Grimm', 'Hex', 'Lucian', 'Malice', 'Mortis', 'Necros', 'Noctis', 'Oblivion', 'Pestilence', 'Raven', 'Shadow', 'Sinister', 'Sorrow', 'Omen', 'Void'],
+        n: ['Ash', 'Blight', 'Curse', 'Dread', 'Dusk', 'Gloom', 'Grief', 'Haunt', 'Hex', 'Malice', 'Murk', 'Nightfall', 'Plague', 'Rot', 'Shade', 'Sorrow', 'Thorn', 'Woe', 'Wraith', 'Vex']
+      },
+      modern: {
+        f: ['Alexa', 'Brooke', 'Cameron', 'Diana', 'Elena', 'Fiona', 'Grace', 'Harper', 'Isla', 'Jade', 'Kate', 'Leah', 'Maya', 'Naomi', 'Olivia', 'Paige', 'Quinn', 'Ruby', 'Skye', 'Tara'],
+        m: ['Aiden', 'Blake', 'Cole', 'Dean', 'Ethan', 'Flynn', 'Grant', 'Hudson', 'Ivan', 'Jace', 'Kai', 'Leo', 'Marcus', 'Nathan', 'Owen', 'Preston', 'Quinn', 'Ryker', 'Slater', 'Ty'],
+        n: ['Ash', 'Bay', 'Blue', 'Brett', 'Brook', 'Cedar', 'Chase', 'Clay', 'Dale', 'Drew', 'Fern', 'Glen', 'Gray', 'Lake', 'Lane', 'Moss', 'Reed', 'River', 'Sage', 'Sky']
+      }
+    },
+    biz: {
+      tech: {
+        modern: ['Airu', 'Axelo', 'Bitly', 'Clouda', 'Devly', 'Drixo', 'Fluxr', 'Grida', 'Helix', 'Ionix', 'Kodex', 'Layr', 'Mesha', 'Nexo', 'Nodr', 'Orbia', 'Pixly', 'Qubix', 'Stackr', 'Voxly'],
+        classic: ['Axiom Technologies', 'Blueprint Systems', 'Catalyst Digital', 'Data Forge', 'Elevation Tech', 'Framework Solutions', 'Genesis Software', 'Horizon Systems', 'Infinity Code', 'Junction Tech'],
+        playful: ['Boop Labs', 'Clickity', 'Doodlecode', 'Fizzbyte', 'Gigglenet', 'Hackle', 'Jingletech', 'Noodledev', 'Pingpong', 'Wizzly']
+      },
+      food: {
+        modern: ['Açafrão', 'Brasa & Co', 'Colheita', 'Deli Roots', 'Êxodo', 'Fresco', 'Grão', 'Harvest', 'Içara', 'Jardim'],
+        classic: ['Casa Grande Restaurante', 'Fazenda Boa Mesa', 'Gastronomia Clássica', 'La Maison Cuisine', 'Mesa Farta', 'Quinta do Sabor', 'Rancho Bom', 'Sabor da Terra', 'Tradição à Mesa', 'Vila do Chef'],
+        playful: ['Bocão', 'Comilança', 'Delícia Express', 'Eita Que Bom', 'Faminto', 'Guloso', 'Happy Spoon', 'Lambança', 'Nhac!', 'Opa Que Gostoso']
+      },
+      fashion: {
+        modern: ['Âmbar', 'Brume', 'Corda', 'Drap', 'Éclat', 'Filum', 'Grain', 'Hilo', 'Irmã', 'Joia'],
+        classic: ['Atelier Beleza', 'Casa de Modas', 'Elegance Studio', 'Fashion House', 'Haute Couture', 'Luxe Wardrobe', 'Maison Chic', 'Noble Thread', 'Prestige Style', 'Royal Atelier'],
+        playful: ['Babado', 'Chique Assim', 'Diva Store', 'Estilosa', 'Fashion Lovers', 'Glamour Pop', 'Hype Closet', 'Instastyle', 'Joy Fashion', 'Kilofashion']
+      },
+      health: {
+        modern: ['Aura', 'Balance', 'Calm', 'Dwell', 'Elevate', 'Flow', 'Glow', 'Heal', 'Inner', 'Luma'],
+        classic: ['Bem-Estar Clínica', 'Centro de Saúde Integral', 'Equilíbrio Terapias', 'Harmonia Saúde', 'Instituto Vita', 'Medicina Natural', 'Núcleo de Saúde', 'Saúde Total', 'Vitalidade Centro', 'Zen Terapias'],
+        playful: ['AbraçoFit', 'BemBom Saúde', 'Corpão', 'Deu Exercício', 'FelizFit', 'GraçaDivina', 'Healthgram', 'Iogurtfit', 'Joinha Saúde', 'Korrendo']
+      },
+      finance: {
+        modern: ['Axio', 'Capita', 'Certo', 'Dime', 'Finra', 'Fluxo', 'Grão', 'Hertz', 'Ibex', 'Juros'],
+        classic: ['Acerto Financeiro', 'Capital Seguro', 'Crédito Sólido', 'Estratégia Wealth', 'Fidelis Finance', 'Gestão Patrimonial', 'Herança Consultoria', 'Investimento Certo', 'Justos Negócios', 'Korvus Capital'],
+        playful: ['Boa Grana', 'Conta Alegre', 'Dinheirinho', 'Economizei', 'Faz Sentido', 'Grana Feliz', 'Happy Cash', 'Investe Aí', 'Jurinhos', 'Kilodindin']
+      },
+      creative: {
+        modern: ['Aura', 'Blot', 'Canvas', 'Dab', 'Étude', 'Form', 'Grain', 'Haze', 'Ink', 'Jarva'],
+        classic: ['Arte & Forma Studio', 'Atelier Criativo', 'Casa das Artes', 'Design Clássico', 'Estúdio Beleza', 'Forma e Arte', 'Galeria Criativa', 'Harmonia Studio', 'Instituto de Design', 'Jardim das Artes'],
+        playful: ['Borrifada', 'Colorex', 'Doodle Studio', 'Esguicho', 'Flipfop Design', 'Garatujas', 'Hagaki Art', 'Irriquieto Studio', 'Jogando Tinta', 'Kreativoz']
+      }
+    }
+  };
+
+  // ── STATE ──
+  let currentTab = 'baby';
+
+  function setTab(tab, btn) {
+    currentTab = tab;
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('panel-baby').style.display = tab === 'baby' ? 'block' : 'none';
+    document.getElementById('panel-char').style.display = tab === 'char' ? 'block' : 'none';
+    document.getElementById('panel-biz').style.display  = tab === 'biz'  ? 'block' : 'none';
+    document.getElementById('results').innerHTML = '';
+  }
+
+  function pick(arr, n) {
+    const shuffled = [...arr].sort(() => Math.random() - 0.5);
+    return shuffled.slice(0, Math.min(n, shuffled.length));
+  }
+
+  function generate() {
+    const resultsEl = document.getElementById('results');
+    resultsEl.innerHTML = '';
+    let names = [];
+
+    if (currentTab === 'baby') {
+      const gender = document.getElementById('baby-gender').value;
+      const origin = document.getElementById('baby-origin').value;
+      const qty    = parseInt(document.getElementById('baby-qty').value);
+      const pool   = NAMES.baby[gender][origin] || [];
+      names = pick(pool, qty);
+    }
+
+    if (currentTab === 'char') {
+      const universe = document.getElementById('char-universe').value;
+      const gender   = document.getElementById('char-gender').value;
+      const qty      = parseInt(document.getElementById('char-qty').value);
+      const pool     = (NAMES.char[universe] || {})[gender] || NAMES.char[universe]?.n || [];
+      names = pick(pool, qty);
+    }
+
+    if (currentTab === 'biz') {
+      const sector = document.getElementById('biz-sector').value;
+      const style  = document.getElementById('biz-style').value;
+      const qty    = parseInt(document.getElementById('biz-qty').value);
+      const pool   = (NAMES.biz[sector] || {})[style] || [];
+      names = pick(pool, qty);
+    }
+
+    names.forEach((name, i) => {
+      const chip = document.createElement('div');
+      chip.className = 'name-chip';
+      chip.textContent = name;
+      chip.style.animationDelay = `${i * 0.05}s`;
+      chip.style.animation = 'fadeUp .35s ease both';
+      chip.onclick = () => copyName(name);
+      resultsEl.appendChild(chip);
+    });
+  }
+
+  function copyName(name) {
+    navigator.clipboard.writeText(name).catch(() => {});
+    const toast = document.getElementById('toast');
+    toast.textContent = T[lang].copied + ' ' + name;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2000);
+  }
+
+  // ── CSS ANIMATION ──
+  const style = document.createElement('style');
+  style.textContent = `
+    @keyframes fadeUp {
+      from { opacity:0; transform: translateY(12px); }
+      to   { opacity:1; transform: translateY(0); }
+    }
+  `;
+  document.head.appendChild(style);
+</script>
+</body>
+</html>
