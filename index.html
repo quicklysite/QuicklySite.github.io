@@ -53,21 +53,7 @@
       pointer-events: none;
       z-index: 0;
     }
-<!-- ── MENU HAMBURGUER ── -->
-<button id="menu-btn" onclick="toggleSidebar()">☰</button>
-
-<!-- ── SIDEBAR ── -->
-<div id="nav-overlay" onclick="closeSidebar()"></div>
-<nav id="sidebar">
-  <div class="sidebar-logo">⚡ NameForge</div>
-  <div class="nav-section" id="ns-names-label">Gerador de Nomes</div>
-  <div class="nav-item nav-active" onclick="showConv('names')" id="ni-names">✨ <span id="nl-names">Nomes</span></div>
-  <div class="nav-section" id="ns-conv-label">Conversores</div>
-  <div class="nav-item" onclick="showConv('weight')" id="ni-weight">⚖️ <span id="nl-weight">Peso</span></div>
-  <div class="nav-item" onclick="showConv('temp')" id="ni-temp">🌡️ <span id="nl-temp">Temperatura</span></div>
-  <div class="nav-item" onclick="showConv('kitchen')" id="ni-kitchen">🍳 <span id="nl-kitchen">Medidas de Cozinha</span></div>
-  <div class="nav-item" onclick="showConv('clothing')" id="ni-clothing">👕 <span id="nl-clothing">Tamanho de Roupa</span></div>
-</nav>
+   
     /* ── LANGUAGE POPUP ── */
     #lang-overlay {
       position: fixed;
@@ -457,6 +443,21 @@
   <span style="color: #e8c77a; margin: 0 8px; opacity: 0.5;">|</span>
   <span style="cursor: pointer; font-size: 13px; font-weight: 500; color: #f0ede6;" onclick="setLang('en')">EN</span>
 </div>
+  <!-- ── MENU HAMBURGUER ── -->
+<button id="menu-btn" onclick="toggleSidebar()">☰</button>
+
+<!-- ── SIDEBAR ── -->
+<div id="nav-overlay" onclick="closeSidebar()"></div>
+<nav id="sidebar">
+  <div class="sidebar-logo">⚡ NameForge</div>
+  <div class="nav-section" id="ns-names-label">Gerador de Nomes</div>
+  <div class="nav-item nav-active" onclick="showConv('names')" id="ni-names">✨ <span id="nl-names">Nomes</span></div>
+  <div class="nav-section" id="ns-conv-label">Conversores</div>
+  <div class="nav-item" onclick="showConv('weight')" id="ni-weight">⚖️ <span id="nl-weight">Peso</span></div>
+  <div class="nav-item" onclick="showConv('temp')" id="ni-temp">🌡️ <span id="nl-temp">Temperatura</span></div>
+  <div class="nav-item" onclick="showConv('kitchen')" id="ni-kitchen">🍳 <span id="nl-kitchen">Medidas de Cozinha</span></div>
+  <div class="nav-item" onclick="showConv('clothing')" id="ni-clothing">👕 <span id="nl-clothing">Tamanho de Roupa</span></div>
+</nav>
 <!-- ── LANGUAGE POPUP ── -->
 <div id="lang-overlay">
   <div id="lang-box">
