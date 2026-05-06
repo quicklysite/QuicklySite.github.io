@@ -586,92 +586,267 @@
     document.getElementById('about-p3').textContent = tP3;
     document.documentElement.lang = lang;
   } // ── NAME BANKS ──
-    // ── BANCO DE DADOS DE NOMES EXPANDIDO ──
   const NAMES = {
+    baby: {
+      f: {
+        br: [
+          'Ana', 'Beatriz', 'Camila', 'Isabela', 'Juliana', 'Letícia', 'Mariana', 'Natália', 'Patrícia', 'Rafaela', 
+          'Sofia', 'Valentina', 'Yasmin', 'Lorena', 'Giovanna', 'Fernanda', 'Débora', 'Clara', 'Bruna', 'Alice',
+          'Helena', 'Manuela', 'Laura', 'Lívia', 'Luiza', 'Cecília', 'Antonella', 'Heloísa', 'Isadora', 'Maitê',
+          'Maria', 'Gabriela', 'Carolina', 'Clara', 'Emanuelle', 'Nicole', 'Rebeca', 'Yasmin', 'Sarah', 'Stella'
+        ],
+        en: [
+          'Amelia', 'Aria', 'Aurora', 'Charlotte', 'Chloe', 'Daisy', 'Eleanor', 'Emma', 'Grace', 'Harper', 
+          'Isabella', 'Ivy', 'Luna', 'Mia', 'Nora', 'Olivia', 'Penelope', 'Scarlett', 'Violet', 'Zoe',
+          'Hazel', 'Lily', 'Nova', 'Elena', 'Emilia', 'Maya', 'Stella', 'Ruby', 'Delilah', 'Iris',
+          'Ayla', 'Alice', 'Lucy', 'Violet', 'Audrey', 'Clara', 'Cora', 'Eva', 'Sadie', 'Genevieve'
+        ],
+        jp: [
+          'Akane', 'Hana', 'Hikari', 'Hinata', 'Ichika', 'Kagome', 'Koharu', 'Mei', 'Misaki', 'Natsuki', 
+          'Rei', 'Sakura', 'Satsuki', 'Shiori', 'Yuki', 'Yuna', 'Ayame', 'Haruka', 'Rin', 'Suki',
+          'Asuka', 'Chiyo', 'Emi', 'Haru', 'Kimi', 'Mai', 'Mana', 'Mio', 'Naomi', 'Sayuri',
+          'Sora', 'Tomoko', 'Yoko', 'Yoshiko', 'Yua', 'Aoi', 'Hina', 'Rio', 'Noa', 'Anzu'
+        ],
+        classic: [
+          'Adriana', 'Alessandra', 'Aurora', 'Beatrice', 'Cecilia', 'Diana', 'Elena', 'Flavia', 'Gloria', 'Helena', 
+          'Irene', 'Julia', 'Laura', 'Lucia', 'Maria', 'Natalia', 'Olivia', 'Paula', 'Rosa', 'Victoria',
+          'Augusta', 'Camila', 'Clara', 'Emilia', 'Faustina', 'Isadora', 'Letícia', 'Luísa', 'Marina', 'Regina',
+          'Silvia', 'Teresa', 'Valéria', 'Verônica', 'Viviana', 'Antônia', 'Francisca', 'Juliana', 'Amélia', 'Olívia'
+        ]
+      },
+      m: {
+        br: [
+          'Arthur', 'Bruno', 'Carlos', 'Daniel', 'Eduardo', 'Felipe', 'Gabriel', 'Henrique', 'Igor', 'João', 
+          'Lucas', 'Mateus', 'Nicolas', 'Pedro', 'Rafael', 'Samuel', 'Thiago', 'Victor', 'Willian', 'Yago',
+          'Bernardo', 'Heitor', 'Davi', 'Lorenzo', 'Joaquim', 'Murilo', 'Noah', 'Gustavo', 'Theo', 'Vicente',
+          'Enzo', 'Guilherme', 'Ryan', 'Otávio', 'Augusto', 'Caleb', 'Levi', 'Thomas', 'Vitor', 'Caio'
+        ],
+        en: [
+          'Aiden', 'Benjamin', 'Caleb', 'Dominic', 'Elijah', 'Finn', 'Gabriel', 'Henry', 'Isaac', 'Jack', 
+          'Liam', 'Mason', 'Nathan', 'Oliver', 'Owen', 'Sebastian', 'Theodore', 'William', 'Xavier', 'Zane',
+          'Luke', 'Wyatt', 'Julian', 'Levi', 'Leo', 'Asher', 'Carter', 'Dylan', 'Lincoln', 'Hudson',
+          'Ezra', 'Maverick', 'Thomas', 'Charles', 'Christopher', 'Miles', 'Parker', 'Cole', 'Chase', 'Ryder'
+        ],
+        jp: [
+          'Akira', 'Daichi', 'Haruto', 'Hayato', 'Hiroshi', 'Issei', 'Kaito', 'Kenji', 'Kōsei', 'Naoki', 
+          'Ren', 'Riku', 'Ryuu', 'Sasuke', 'Shinji', 'Sora', 'Takashi', 'Tatsuya', 'Yuu', 'Zero',
+          'Hotaru', 'Itsuki', 'Kazuki', 'Minato', 'Ryo', 'Souta', 'Taiga', 'Yamato', 'Yuto', 'Tsubasa',
+          'Asahi', 'Kouta', 'Masato', 'Ryuunosuke', 'Shouta', 'Soji', 'Takeru', 'Yoshio', 'Yusei', 'Yuma'
+        ],
+        classic: [
+          'Adrian', 'Alessandro', 'Alexei', 'Aldo', 'Augustus', 'Bruno', 'Caesar', 'Dante', 'Dario', 'Emilio', 
+          'Felix', 'Luca', 'Marco', 'Maximus', 'Rafael', 'Romano', 'Sergio', 'Valentino', 'Victor', 'Xavier',
+          'Antonio', 'Augusto', 'Benedito', 'Claudio', 'Estevão', 'Francisco', 'Gaspar', 'Inácio', 'Jorge', 'Leonardo',
+          'Manuel', 'Otávio', 'Patrício', 'Raimundo', 'Sebastião', 'Tito', 'Tomás', 'Vicente', 'Arnaldo', 'Gregório'
+        ]
+      },
+      n: {
+        br: [
+          'Ari', 'Davi', 'Eden', 'Emi', 'Íris', 'Kael', 'Lan', 'Lumi', 'Nael', 'Nori', 
+          'Ori', 'Rael', 'Ren', 'Sael', 'Sol', 'Tael', 'Yael', 'Yara', 'Zael', 'Zen',
+          'Ariel', 'Céu', 'Chris', 'Duda', 'Fran', 'Gabi', 'Kim', 'Manu', 'Michel', 'Micael',
+          'Nícolas', 'Nuri', 'Rafa', 'Sacha', 'Val', 'Alix', 'Aki', 'Bili', 'Jaci', 'Noá'
+        ],
+        en: [
+          'Addison', 'Alex', 'Avery', 'Blake', 'Cameron', 'Casey', 'Dakota', 'Drew', 'Eden', 'Finley', 
+          'Gray', 'Hayden', 'Jamie', 'Jordan', 'Morgan', 'Parker', 'Quinn', 'Riley', 'Sage', 'Taylor',
+          'Rowan', 'River', 'Charlie', 'Skyler', 'Phoenix', 'Emery', 'Dallas', 'Logan', 'Harlow', 'Ellis',
+          'Reese', 'Alexis', 'Arden', 'Finley', 'Haven', 'Marlowe', 'Oakley', 'Remi', 'Rory', 'Shiloh'
+        ],
+        jp: [
+          'Akira', 'Hiro', 'Kei', 'Nao', 'Ren', 'Sora', 'Tomo', 'Yuu', 'Aoi', 'Kazu', 
+          'Michi', 'Nori', 'Taki', 'Yori', 'Zuki', 'Haru', 'Masa', 'Nobu', 'Teru', 'Yoshi',
+          'Asuka', 'Chiharu', 'Hikaru', 'Kaoru', 'Kohaku', 'Makoto', 'Mitsuru', 'Ran', 'Rin', 'Shion',
+          'Shinobu', 'Tsukasa', 'Chiaki', 'Ibuki', 'Kanade', 'Misao', 'Rei', 'Shizuka', 'Subaru', 'Yuki'
+        ],
+        classic: [
+          'Adrian', 'Alex', 'Angel', 'Ari', 'Clem', 'Demi', 'Eden', 'Emile', 'Erin', 'Gael', 
+          'Jules', 'Laurel', 'Lex', 'Loren', 'Noel', 'Remi', 'Robin', 'Sam', 'Theo', 'Val',
+          'Amor', 'Auguste', 'Claude', 'Dominique', 'Francis', 'Gabriel', 'Julian', 'Leon', 'Luz', 'Marie',
+          'Pascale', 'Paz', 'Rene', 'Sacha', 'Sasha', 'Simone', 'Valentine', 'Vivian', 'Alix', 'Céleste'
+        ]
+      }
+    },
     char: {
-      med: {
-        m: [
-          'Alistair', 'Aethelred', 'Balian', 'Benedict', 'Cedric', 'Conrad', 'Dorian', 'Eldred', 'Gareth', 'Gavin',
-          'Godfrey', 'Gideon', 'Hadrian', 'Kaelen', 'Lionel', 'Luther', 'Merrick', 'Osric', 'Percival', 'Roderick',
-          'Tristan', 'Valerius', 'Wystan', 'Uther', 'Yvain', 'Aldous', 'Broderic', 'Caelum', 'Eamon', 'Faramund',
-          'Garrick', 'Haldor', 'Ivor', 'Jorund', 'Kenric', 'Leofric', 'Morcant', 'Orin', 'Rowan', 'Theodoric'
-        ],
+      fantasy: {
         f: [
+          'Aelindra', 'Brynhild', 'Caelith', 'Dawnfire', 'Elara', 'Faelith', 'Galindra', 'Haelwyn', 'Ilvara', 'Kaelith', 
+          'Lirien', 'Moonwhisper', 'Naerith', 'Odalys', 'Pyrantha', 'Quelith', 'Ryndara', 'Sylvara', 'Thalindra', 'Vexara',
           'Adela', 'Beatrix', 'Clotilde', 'Elowen', 'Genevieve', 'Guinevere', 'Gisela', 'Helena', 'Isolde', 'Maeve',
-          'Melisande', 'Rowena', 'Sybilla', 'Theodora', 'Yvaine', 'Alys', 'Anora', 'Brangwen', 'Cecily', 'Elysia',
-          'Freya', 'Gemma', 'Idonea', 'Juliana', 'Kerrigan', 'Lysandra', 'Mirela', 'Nesta', 'Olwen', 'Rosamund',
-          'Sigrid', 'Tamsin', 'Ursula', 'Valeska', 'Winifred', 'Ysolt', 'Zelda', 'Astrid', 'Eira', 'Ginevra'
-        ]
-      },
-      mod: {
-        m: [
-          'Arthur', 'Benjamin', 'Bernardo', 'Caio', 'Daniel', 'Davi', 'Eduardo', 'Enzo', 'Gabriel', 'Gustavo',
-          'Heitor', 'Henrique', 'Ian', 'Isaac', 'João', 'Joaquim', 'Lorenzo', 'Lucas', 'Matheus', 'Miguel',
-          'Murilo', 'Noah', 'Oliver', 'Pedro', 'Rafael', 'Samuel', 'Theo', 'Vicente', 'Felipe', 'Guilherme',
-          'Nicolas', 'Ryan', 'Otávio', 'Augusto', 'Caleb', 'Levi', 'Anthony', 'Thomas', 'Vitor', 'Yago'
+          'Melisande', 'Rowena', 'Sybilla', 'Theodora', 'Yvaine', 'Alys', 'Anora', 'Brangwen', 'Cecily', 'Elysia'
         ],
-        f: [
-          'Alice', 'Ana', 'Beatriz', 'Camila', 'Carolina', 'Clara', 'Emanuelle', 'Emily', 'Gabriela', 'Giovanna',
-          'Helena', 'Isabella', 'Julia', 'Laura', 'Lívia', 'Luiza', 'Manuela', 'Maria', 'Mariana', 'Melissa',
-          'Milena', 'Nicole', 'Olivia', 'Rafaela', 'Rebeca', 'Sophia', 'Valentina', 'Yasmin', 'Cecília', 'Antonella',
-          'Heloísa', 'Isadora', 'Lorena', 'Laís', 'Maitê', 'Sarah', 'Stella', 'Luna', 'Maya', 'Aurora'
+        m: [
+          'Aldric', 'Brandor', 'Corvain', 'Draveth', 'Eldran', 'Fendral', 'Garrith', 'Halvorn', 'Ironhide', 'Jarek', 
+          'Keldric', 'Lorthain', 'Marik', 'Nordred', 'Orveth', 'Pyrax', 'Quelmar', 'Raveth', 'Stormveil', 'Thaddeus',
+          'Alistair', 'Aethelred', 'Balian', 'Benedict', 'Cedric', 'Conrad', 'Dorian', 'Eldred', 'Gareth', 'Gavin',
+          'Godfrey', 'Gideon', 'Hadrian', 'Kaelen', 'Lionel', 'Luther', 'Merrick', 'Osric', 'Percival', 'Roderick'
+        ],
+        n: [
+          'Ashveil', 'Dawnwalker', 'Emberthorn', 'Frostweave', 'Ghostwhisper', 'Ironsong', 'Mistwalker', 'Nightveil', 'Oakheart', 'Runeblade', 
+          'Shadowmere', 'Silverwind', 'Stormcaller', 'Thornback', 'Voidwalker', 'Windchaser', 'Wolfsbane', 'Wyrmthorn', 'Zeraphel', 'Zyrath',
+          'Eamon', 'Faramund', 'Garrick', 'Haldor', 'Ivor', 'Jorund', 'Kenric', 'Leofric', 'Morcant', 'Orin',
+          'Rowan', 'Theodoric', 'Aldous', 'Broderic', 'Caelum', 'Freya', 'Gemma', 'Idonea', 'Juliana', 'Kerrigan'
         ]
       },
-      fut: {
+      sci: {
+        f: [
+          'Ayla-7', 'Byte', 'Cipher', 'Delta-9', 'Elexis', 'Flux', 'Galaxy', 'Helix', 'Ion', 'Juno', 
+          'Kira-X', 'Lyra', 'Matrix', 'Nova', 'Orbit', 'Pixel', 'Quantum', 'Radia', 'Synth', 'Vega',
+          'Aero', 'Apex', 'Astra', 'Axis', 'Cosmo', 'Cyber', 'Echo', 'Krypton', 'Nexus', 'Obsidian',
+          'Omega', 'Pulse', 'Specter', 'Synapse', 'Talon', 'Vector', 'Vortex', 'Xenon', 'Zenith', 'Zephyr'
+        ],
+        m: [
+          'Axon', 'Binary', 'Cobalt', 'Droid-7', 'Electron', 'Forge', 'Grid', 'Halo', 'Ion', 'Jett', 
+          'Kane', 'Laser', 'Macro', 'Nano', 'Ozone', 'Photon', 'Quartz', 'Rex-9', 'Sigma', 'Titan',
+          'Cortex', 'Decibel', 'Glitch', 'Kestrel', 'Modulus', 'Neutron', 'Proxy', 'Vapor', 'Vandal', 'Zero'
+        ],
         n: [
-          'Aero', 'Apex', 'Astra', 'Axis', 'Byte', 'Cipher', 'Cosmo', 'Cyber', 'Echo', 'Helix',
-          'Icon', 'Ion', 'Krypton', 'Matrix', 'Neo', 'Nexus', 'Nova', 'Obsidian', 'Omega', 'Orbit',
-          'Orion', 'Pulse', 'Quantum', 'Quark', 'Radon', 'Rift', 'Scythe', 'Sigma', 'Solar', 'Specter',
-          'Synapse', 'Talon', 'Vector', 'Vortex', 'Xenon', 'Zenith', 'Zephyr', 'Zero', 'Zion', 'Vandal',
-          'Aileron', 'Cortex', 'Decibel', 'Flux', 'Glitch', 'Kestrel', 'Modulus', 'Neutron', 'Proxy', 'Vapor'
+          'Arc', 'Bolt', 'Core', 'Data', 'Echo', 'Flux', 'Grid', 'Hash', 'Index', 'Json', 
+          'Kernel', 'Link', 'Mesh', 'Node', 'Omega', 'Patch', 'Query', 'Root', 'Stack', 'Token',
+          'Aileron', 'Byte', 'Cipher', 'Helix', 'Ion', 'Matrix', 'Nova', 'Quantum', 'Vector', 'Vortex'
+        ]
+      },
+      anime: {
+        f: [
+          'Akatsuki', 'Amaterasu', 'Asuna', 'Chitoge', 'Erza', 'Hinata', 'Kagura', 'Kaguya', 'Kirito', 'Mikasa', 
+          'Misaki', 'Nami', 'Raphtalia', 'Rem', 'Sakura', 'Sasha', 'Tohka', 'Usagi', 'Yuno', 'Zero',
+          'Akane', 'Hana', 'Hikari', 'Ichika', 'Kagome', 'Koharu', 'Mei', 'Natsuki', 'Rei', 'Satsuki',
+          'Shiori', 'Yuki', 'Yuna', 'Ayame', 'Haruka', 'Rin', 'Suki', 'Chiyo', 'Sayuri', 'Hina'
+        ],
+        m: [
+          'Araragi', 'Deku', 'Gintoki', 'Ichigo', 'Issei', 'Katsuki', 'Kazuto', 'Kirito', 'Lelouch', 'Light', 
+          'Loid', 'Naruto', 'Natsu', 'Ren', 'Ryuunosuke', 'Sasuke', 'Shoto', 'Tatsuya', 'Yato', 'Zero',
+          'Akira', 'Daichi', 'Haruto', 'Hayato', 'Hiroshi', 'Kaito', 'Kenji', 'Shinji', 'Sora', 'Takashi',
+          'Itsuki', 'Kazuki', 'Minato', 'Ryo', 'Souta', 'Taiga', 'Yamato', 'Yuto', 'Tsubasa', 'Asahi'
+        ],
+        n: [
+          'Akira', 'Aoi', 'Haru', 'Hikari', 'Kei', 'Natsu', 'Nori', 'Rei', 'Rin', 'Sora', 
+          'Tomo', 'Yoru', 'Yuu', 'Zen', 'Zoro', 'Hiro', 'Kazu', 'Michi', 'Nao', 'Teru',
+          'Asuka', 'Chiharu', 'Kaoru', 'Kohaku', 'Makoto', 'Mitsuru', 'Ran', 'Shion', 'Shinobu', 'Tsukasa'
+        ]
+      },
+      dark: {
+        f: [
+          'Abyssia', 'Bloodmoon', 'Crimsonveil', 'Dusk', 'Eclipse', 'Gravemere', 'Hex', 'Lamia', 'Morrigan', 'Nightshade', 
+          'Obsidian', 'Phantom', 'Ravenna', 'Seraphine', 'Shade', 'Silvermourne', 'Umbra', 'Vex', 'Voidheart', 'Wraith',
+          'Lysandra', 'Mirela', 'Nesta', 'Olwen', 'Rosamund', 'Sigrid', 'Tamsin', 'Ursula', 'Valeska', 'Winifred'
+        ],
+        m: [
+          'Abyss', 'Bane', 'Damien', 'Dread', 'Dusk', 'Grimm', 'Hex', 'Lucian', 'Malice', 'Mortis', 
+          'Necros', 'Noctis', 'Oblivion', 'Pestilence', 'Raven', 'Shadow', 'Sinister', 'Sorrow', 'Omen', 'Void',
+          'Morcant', 'Orin', 'Theodoric', 'Aldous', 'Broderic', 'Uther', 'Yvain', 'Eldred', 'Merrick', 'Osric'
+        ],
+        n: [
+          'Ash', 'Blight', 'Curse', 'Dread', 'Dusk', 'Gloom', 'Grief', 'Haunt', 'Hex', 'Malice', 
+          'Murk', 'Nightfall', 'Plague', 'Rot', 'Shade', 'Sorrow', 'Thorn', 'Woe', 'Wraith', 'Vex',
+          'Obsidian', 'DarkVogue', 'ViperChic', 'ZeroGravity', 'VandalWear', 'AnarchyThread', 'AcidVogue', 'ToxicLoom', 'GothicSilk', 'AsphaltWear'
+        ]
+      },
+      modern: {
+        f: [
+          'Alexa', 'Brooke', 'Cameron', 'Diana', 'Elena', 'Fiona', 'Grace', 'Harper', 'Isla', 'Jade', 
+          'Kate', 'Leah', 'Maya', 'Naomi', 'Olivia', 'Paige', 'Quinn', 'Ruby', 'Skye', 'Tara',
+          'Alice', 'Ana', 'Beatriz', 'Camila', 'Carolina', 'Clara', 'Emanuelle', 'Emily', 'Gabriela', 'Giovanna',
+          'Helena', 'Isabella', 'Julia', 'Laura', 'Lívia', 'Luiza', 'Manuela', 'Maria', 'Mariana', 'Melissa'
+        ],
+        m: [
+          'Aiden', 'Blake', 'Cole', 'Dean', 'Ethan', 'Flynn', 'Grant', 'Hudson', 'Ivan', 'Jace', 
+          'Kai', 'Leo', 'Marcus', 'Nathan', 'Owen', 'Preston', 'Quinn', 'Ryker', 'Slater', 'Ty',
+          'Arthur', 'Benjamin', 'Bernardo', 'Caio', 'Daniel', 'Davi', 'Eduardo', 'Enzo', 'Gabriel', 'Gustavo',
+          'Heitor', 'Henrique', 'Ian', 'Isaac', 'João', 'Joaquim', 'Lorenzo', 'Lucas', 'Matheus', 'Miguel'
+        ],
+        n: [
+          'Ash', 'Bay', 'Blue', 'Brett', 'Brook', 'Cedar', 'Chase', 'Clay', 'Dale', 'Drew', 
+          'Fern', 'Glen', 'Gray', 'Lake', 'Lane', 'Moss', 'Reed', 'River', 'Sage', 'Sky',
+          'Addison', 'Alex', 'Avery', 'Cameron', 'Casey', 'Dakota', 'Finley', 'Hayden', 'Jamie', 'Jordan'
         ]
       }
     },
     biz: {
       tech: {
         modern: [
+          'Airu', 'Axelo', 'Bitly', 'Clouda', 'Devly', 'Drixo', 'Fluxr', 'Grida', 'Helix', 'Ionix', 
+          'Kodex', 'Layr', 'Mesha', 'Nexo', 'Nodr', 'Orbia', 'Pixly', 'Qubix', 'Stackr', 'Voxly',
           'AppForge', 'ByteWave', 'CloudNest', 'CodeCraft', 'DataPulse', 'DevFlow', 'GridSync', 'InnoNet', 'LinkHive', 'LogicGate',
-          'MindGrid', 'NetSphere', 'NovaCode', 'OmniTech', 'PixelCore', 'QuantumLab', 'ShiftTech', 'SyncBase', 'TechVibe', 'WebSpan',
-          'ApexLogic', 'CoreAxis', 'DigitX', 'FluxIT', 'HelixCode', 'InfiniTech', 'KryptonLab', 'MetaNode', 'Nexura', 'OntoTech',
-          'PrimeDev', 'Sintax', 'Tesseract', 'Vektor', 'Vertexa', 'WarpTech', 'XenonIT', 'Zenithal', 'ZettaByte', 'Zonix'
+          'MindGrid', 'NetSphere', 'NovaCode', 'OmniTech', 'PixelCore', 'QuantumLab', 'ShiftTech', 'SyncBase', 'TechVibe', 'WebSpan'
         ],
         classic: [
-          'Sistemas Alfa', 'Inovação Digital', 'Tecnologia Avançada', 'Soluções Integradas', 'Rede Global', 'Engenharia de Sistemas', 'Matriz Tecnológica', 'Consultoria Computacional', 'Sistemas Conectados', 'Dinâmica Digital',
-          'Tecnologia União', 'Pioneira Digital', 'Forte Sistemas', 'Progresso Tecnológico', 'Vanguarda Digital', 'Aliança de Software', 'Consórcio de TI', 'Engenharia Alpha', 'Sistemas Líder', 'Base Computação'
+          'Axiom Technologies', 'Blueprint Systems', 'Catalyst Digital', 'Data Forge', 'Elevation Tech', 'Framework Solutions', 'Genesis Software', 'Horizon Systems', 'Infinity Code', 'Junction Tech',
+          'Sistemas Alfa', 'Inovação Digital', 'Tecnologia Avançada', 'Soluções Integradas', 'Rede Global', 'Engenharia de Sistemas', 'Matriz Tecnológica', 'Consultoria Computacional', 'Sistemas Conectados', 'Dinâmica Digital'
         ],
-        bold: [
-          'CyberVanguard', 'HyperQuantum', 'IronCode', 'NeonMatrix', 'NovaStrike', 'ApexVortex', 'ThunderTech', 'AlphaTrigger', 'TitanBytes', 'KryptonX',
-          'VoltSphere', 'ZephyrOS', 'XenonForce', 'GlitchArt', 'RiftTech', 'CortexBurn', 'SonicCode', 'VaporLogic', 'NexusViper', 'PhobiaTech'
+        playful: [
+          'Boop Labs', 'Clickity', 'Doodlecode', 'Fizzbyte', 'Gigglenet', 'Hackle', 'Jingletech', 'Noodledev', 'Pingpong', 'Wizzly',
+          'CyberVanguard', 'HyperQuantum', 'IronCode', 'NeonMatrix', 'NovaStrike', 'ApexVortex', 'ThunderTech', 'AlphaTrigger', 'TitanBytes', 'KryptonX'
         ]
       },
       food: {
         modern: [
-          'BiteLab', 'BowlGreen', 'CraveYard', 'DailyDish', 'FreshFeast', 'GastroHub', 'HerbIvory', 'NutriBox', 'SavorStreet', 'SpiceRoute',
-          'SweetArt', 'TastyBite', 'UrbanEats', 'VeggieVibe', 'YumYard', 'ZestKitchen', 'FlavorWave', 'EcoEats', 'ForkRoot', 'PlatePalace',
-          'BlendBar', 'CrunchBox', 'DeliDrop', 'Eatsy', 'GourmetGo', 'NectarNook', 'OasisGrill', 'PurePlatter', 'SaborModerno', 'ZestyEat'
+          'Açafrão', 'Brasa & Co', 'Colheita', 'Deli Roots', 'Êxodo', 'Fresco', 'Grão', 'Harvest', 'Içara', 'Jardim',
+          'BiteLab', 'BowlGreen', 'CraveYard', 'DailyDish', 'FreshFeast', 'GastroHub', 'HerbIvory', 'NutriBox', 'SavorStreet', 'SpiceRoute'
         ],
         classic: [
-          'Sabor Real', 'Tempero d\'Ouro', 'Cantinho do Paladar', 'Fogo de Chão', 'Bella Itália', 'Panela de Barro', 'Recanto Mineiro', 'Estrela do Mar', 'Tradição Gaúcha', 'Sabores de Família',
-          'Taberna Real', 'Casa da Massa', 'Fogão à Lenha', 'Cantina Nostra', 'Sabor & Arte', 'Banquete Nobre', 'Tempero Caseiro', 'Churrasco d\'Ouro', 'Doce Encanto', 'Sabor da Terra'
+          'Casa Grande Restaurante', 'Fazenda Boa Mesa', 'Gastronomia Clássica', 'La Maison Cuisine', 'Mesa Farta', 'Quinta do Sabor', 'Rancho Bom', 'Sabor da Terra', 'Tradição à Mesa', 'Vila do Chef',
+          'Sabor Real', 'Tempero d\'Ouro', 'Cantinho do Paladar', 'Fogo de Chão', 'Bella Itália', 'Panela de Barro', 'Recanto Mineiro', 'Estrela do Mar', 'Tradição Gaúcha', 'Sabores de Família'
         ],
-        bold: [
-          'ChilliBomb', 'FireGrill', 'MadSpices', 'RavageEats', 'SmashMonster', 'VikingFeast', 'WildFork', 'SpicySavage', 'MeatHeads', 'VulcanoBite',
-          'CaffeineOverdose', 'SugarRush', 'GuerrillaKitchen', 'StreetCarnivore', 'InfernoGrill', 'HolyGuacamole', 'TacoTerror', 'BurgerChaos', 'NeonBites', 'AshesGrill'
+        playful: [
+          'Bocão', 'Comilança', 'Delícia Express', 'Eita Que Bom', 'Faminto', 'Guloso', 'Happy Spoon', 'Lambança', 'Nhac!', 'Opa Que Gostoso',
+          'ChilliBomb', 'FireGrill', 'MadSpices', 'RavageEats', 'SmashMonster', 'VikingFeast', 'WildFork', 'SpicySavage', 'MeatHeads', 'VulcanoBite'
         ]
       },
       fashion: {
         modern: [
-          'AuraWear', 'ChicNest', 'DrapeStudio', 'EthosThread', 'FormaModa', 'HaloWear', 'IconicThread', 'LoomLine', 'ModaVibe', 'NovaWeave',
-          'SilkRoad', 'ThreadBare', 'UrbanChic', 'VelaStudio', 'VogueGrid', 'WeaveCraft', 'AtelierNovo', 'CloakCo', 'EspritWear', 'MinimalThread',
-          'BespokeArt', 'ConceptDress', 'FabricLab', 'InStyle', 'LuxeLoom', 'ModeStudio', 'OrigamiWear', 'Stylus', 'TrendGrid', 'VogueVibe'
+          'Âmbar', 'Brume', 'Corda', 'Drap', 'Éclat', 'Filum', 'Grain', 'Hilo', 'Irmã', 'Joia',
+          'AuraWear', 'ChicNest', 'DrapeStudio', 'EthosThread', 'FormaModa', 'HaloWear', 'IconicThread', 'LoomLine', 'ModaVibe', 'NovaWeave'
         ],
         classic: [
-          'Alta Costura', 'Bela Estampa', 'Casa da Seda', 'Estilo Clássico', 'Fio de Ouro', 'Moda Imperial', 'Oficina de Estilo', 'Sartoria Fina', 'Tecido Nobre', 'Toque de Seda',
+          'Atelier Beleza', 'Casa de Modas', 'Elegance Studio', 'Fashion House', 'Haute Couture', 'Luxe Wardrobe', 'Maison Chic', 'Noble Thread', 'Prestige Style', 'Royal Atelier',
+          'Alta Costura', 'Bela Estampa', 'Casa da Seda', 'Estilo Clássico', 'Fio de Ouro', 'Moda Imperial', 'Oficina de Estilo', 'Sartoria Fina', 'Tecido Nobre', 'Toque de Seda'
+        ],
+        playful: [
+          'Babado', 'Chique Assim', 'Diva Store', 'Estilosa', 'Fashion Lovers', 'Glamour Pop', 'Hype Closet', 'Instastyle', 'Joy Fashion', 'Kilofashion',
+          'BlackLace', 'CyberThread', 'DarkVogue', 'IronWeave', 'NeonSartorial', 'RebelWear', 'SavageStyle', 'ViperChic', 'XenonModa', 'ZeroGravity'
+        ]
+      },
+      health: {
+        modern: [
+          'Aura', 'Balance', 'Calm', 'Dwell', 'Elevate', 'Flow', 'Glow', 'Heal', 'Inner', 'Luma',
+          'PurePlatter', 'BlendBar', 'CrunchBox', 'DeliDrop', 'Eatsy', 'GourmetGo', 'NectarNook', 'OasisGrill', 'SaborModerno', 'ZestyEat'
+        ],
+        classic: [
+          'Bem-Estar Clínica', 'Centro de Saúde Integral', 'Equilíbrio Terapias', 'Harmonia Saúde', 'Instituto Vita', 'Medicina Natural', 'Núcleo de Saúde', 'Saúde Total', 'Vitalidade Centro', 'Zen Terapias',
+          'Taberna Real', 'Casa da Massa', 'Fogão à Lenha', 'Cantina Nostra', 'Sabor & Arte', 'Banquete Nobre', 'Tempero Caseiro', 'Churrasco d\'Ouro', 'Doce Encanto', 'Sabor da Terra'
+        ],
+        playful: [
+          'AbraçoFit', 'BemBom Saúde', 'Corpão', 'Deu Exercício', 'FelizFit', 'GraçaDivina', 'Healthgram', 'Iogurtfit', 'Joinha Saúde', 'Korrendo',
+          'SugarRush', 'GuerrillaKitchen', 'StreetCarnivore', 'NeonBites', 'EcoEats', 'ForkRoot', 'PlatePalace', 'FlavorWave', 'SweetArt', 'TastyBite'
+        ]
+      },
+      finance: {
+        modern: [
+          'Axio', 'Capita', 'Certo', 'Dime', 'Finra', 'Fluxo', 'Grão', 'Hertz', 'Ibex', 'Juros',
+          'InStyle', 'LuxeLoom', 'ModeStudio', 'OrigamiWear', 'Stylus', 'TrendGrid', 'VogueVibe', 'BespokeArt', 'ConceptDress', 'FabricLab'
+        ],
+        classic: [
+          'Acerto Financeiro', 'Capital Seguro', 'Crédito Sólido', 'Estratégia Wealth', 'Fidelis Finance', 'Gestão Patrimonial', 'Herança Consultoria', 'Investimento Certo', 'Justos Negócios', 'Korvus Capital',
           'Ateliê de Paris', 'Clássico Toque', 'Elegância Real', 'Fina Linha', 'Herança de Estilo', 'Loom Tradicional', 'Maison Nobre', 'Ponto d\'Ouro', 'Seda Pura', 'Vestuário Fino'
         ],
-        bold: [
-          'BlackLace', 'CyberThread', 'DarkVogue', 'IronWeave', 'NeonSartorial', 'RebelWear', 'SavageStyle', 'ViperChic', 'XenonModa', 'ZeroGravity',
-          'VandalWear', 'AnarchyThread', 'AcidVogue', 'ToxicLoom', 'MetalSartoria', 'PunkAtelier', 'RiotFashion', 'GothicSilk', 'StreetArmor', 'AsphaltWear'
+        playful: [
+          'Boa Grana', 'Conta Alegre', 'Dinheirinho', 'Economizei', 'Faz Sentido', 'Grana Feliz', 'Happy Cash', 'Investe Aí', 'Jurinhos', 'Kilodindin',
+          'PunkAtelier', 'RiotFashion', 'GothicSilk', 'StreetArmor', 'AsphaltWear', 'VandalWear', 'AnarchyThread', 'AcidVogue', 'ToxicLoom', 'MetalSartoria'
+        ]
+      },
+      creative: {
+        modern: [
+          'Aura', 'Blot', 'Canvas', 'Dab', 'Étude', 'Form', 'Grain', 'Haze', 'Ink', 'Jarva',
+          'SilkRoad', 'ThreadBare', 'UrbanChic', 'VelaStudio', 'VogueGrid', 'WeaveCraft', 'Atelier Novo', 'CloakCo', 'EspritWear', 'MinimalThread'
+        ],
+        classic: [
+          'Arte & Forma Studio', 'Atelier Criativo', 'Casa das Artes', 'Design Clássico', 'Estúdio Beleza', 'Forma e Arte', 'Galeria Criativa', 'Harmonia Studio', 'Instituto de Design', 'Jardim das Artes',
+          'Alta Costura', 'Bela Estampa', 'Casa da Seda', 'Estilo Clássico', 'Fio de Ouro', 'Moda Imperial', 'Oficina de Estilo', 'Sartoria Fina', 'Tecido Nobre', 'Toque de Seda'
+        ],
+        playful: [
+          'Borrifada', 'Colorex', 'Doodle Studio', 'Esguicho', 'Flipfop Design', 'Garatujas', 'Hagaki Art', 'Irriquieto Studio', 'Jogando Tinta', 'Kreativoz',
+          'BlackLace', 'CyberThread', 'DarkVogue', 'IronWeave', 'NeonSartorial', 'RebelWear', 'SavageStyle', 'ViperChic', 'XenonModa', 'ZeroGravity'
         ]
       }
     }
