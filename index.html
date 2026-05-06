@@ -1032,6 +1032,192 @@
 
     <p id="about-p3">Ter um nome estratégico é fundamental para o sucesso digital e para o RECONHECIMENTO de marca. Por isso, o NameForge é constantemente atualizado com novas bases de dados que refletem as tendências modernas de mercado e entretenimento. Além de nomes para empresas e personagens, a ferramenta pode ser utilizada para batizar novos animais de estimação, projetos acadêmicos ou qualquer iniciativa que demande um toque de originalidade e exclusividade.</p>
   </section>
+  <!-- ── CONVERSORES ── -->
+<div id="conv-weight" class="conv-section" style="max-width:720px;margin:0 auto;padding:0 20px 60px">
+  <div class="section-heading" id="ch-weight">⚖️ Conversor de Peso</div>
+  <div class="section-sub" id="cs-weight">Converta kg, lb, oz e gramas instantaneamente</div>
+  <div class="card">
+    <div class="conv-row">
+      <div><label class="conv-label" id="cl-from">De</label>
+        <select id="w-from" onchange="convWeight()">
+          <option value="kg" id="wo-kg">Quilograma (kg)</option>
+          <option value="lb" id="wo-lb">Libra (lb)</option>
+          <option value="oz" id="wo-oz">Onça (oz)</option>
+          <option value="g" id="wo-g">Grama (g)</option>
+        </select>
+      </div>
+      <div><label class="conv-label" id="cl-to">Para</label>
+        <select id="w-to" onchange="convWeight()">
+          <option value="lb" id="wo-lb2">Libra (lb)</option>
+          <option value="kg" id="wo-kg2">Quilograma (kg)</option>
+          <option value="oz" id="wo-oz2">Onça (oz)</option>
+          <option value="g" id="wo-g2">Grama (g)</option>
+        </select>
+      </div>
+    </div>
+    <label class="conv-label" id="cl-val">Valor</label>
+    <input type="number" id="w-val" value="1" oninput="convWeight()" />
+    <div class="conv-result" id="w-result">—</div>
+  </div>
+</div>
+
+<div id="conv-temp" class="conv-section" style="max-width:720px;margin:0 auto;padding:0 20px 60px">
+  <div class="section-heading" id="ch-temp">🌡️ Conversor de Temperatura</div>
+  <div class="section-sub" id="cs-temp">Celsius, Fahrenheit e Kelvin</div>
+  <div class="card">
+    <div class="conv-row">
+      <div><label class="conv-label">De</label>
+        <select id="t-from" onchange="convTemp()">
+          <option value="c">Celsius (°C)</option>
+          <option value="f">Fahrenheit (°F)</option>
+          <option value="k">Kelvin (K)</option>
+        </select>
+      </div>
+      <div><label class="conv-label">Para</label>
+        <select id="t-to" onchange="convTemp()">
+          <option value="f">Fahrenheit (°F)</option>
+          <option value="c">Celsius (°C)</option>
+          <option value="k">Kelvin (K)</option>
+        </select>
+      </div>
+    </div>
+    <label class="conv-label">Valor</label>
+    <input type="number" id="t-val" value="25" oninput="convTemp()" />
+    <div class="conv-result" id="t-result">—</div>
+  </div>
+  <div class="card">
+    <p style="color:var(--accent);font-family:'Playfair Display',serif;margin-bottom:12px" id="ct-ref">📌 Referências rápidas</p>
+    <table class="conv-table">
+      <tr><th>°C</th><th>°F</th><th id="ct-situation">Situação</th></tr>
+      <tr><td>0°C</td><td>32°F</td><td id="ct-r1">Ponto de congelamento</td></tr>
+      <tr><td>20°C</td><td>68°F</td><td id="ct-r2">Temperatura ambiente</td></tr>
+      <tr><td>37°C</td><td>98.6°F</td><td id="ct-r3">Temperatura corporal</td></tr>
+      <tr><td>100°C</td><td>212°F</td><td id="ct-r4">Ponto de ebulição</td></tr>
+      <tr><td>180°C</td><td>356°F</td><td id="ct-r5">Forno médio (culinária)</td></tr>
+    </table>
+  </div>
+</div>
+
+<div id="conv-kitchen" class="conv-section" style="max-width:720px;margin:0 auto;padding:0 20px 60px">
+  <div class="section-heading" id="ch-kitchen">🍳 Medidas de Cozinha</div>
+  <div class="section-sub" id="cs-kitchen">Converta xícaras, colheres, ml e fl oz</div>
+  <div class="card">
+    <div class="conv-row">
+      <div><label class="conv-label">De</label>
+        <select id="k-from" onchange="convKitchen()">
+          <option value="cup_br" id="ko-cupbr">Xícara BR (200ml)</option>
+          <option value="cup_us" id="ko-cupus">Xícara US (240ml)</option>
+          <option value="tbsp" id="ko-tbsp">Colher de sopa (15ml)</option>
+          <option value="tsp" id="ko-tsp">Colher de chá (5ml)</option>
+          <option value="ml" id="ko-ml">Mililitro (ml)</option>
+          <option value="floz" id="ko-floz">Fl oz (30ml)</option>
+        </select>
+      </div>
+      <div><label class="conv-label">Para</label>
+        <select id="k-to" onchange="convKitchen()">
+          <option value="ml" id="ko-ml2">Mililitro (ml)</option>
+          <option value="cup_br" id="ko-cupbr2">Xícara BR (200ml)</option>
+          <option value="cup_us" id="ko-cupus2">Xícara US (240ml)</option>
+          <option value="tbsp" id="ko-tbsp2">Colher de sopa (15ml)</option>
+          <option value="tsp" id="ko-tsp2">Colher de chá (5ml)</option>
+          <option value="floz" id="ko-floz2">Fl oz (30ml)</option>
+        </select>
+      </div>
+    </div>
+    <label class="conv-label">Quantidade</label>
+    <input type="number" id="k-val" value="1" oninput="convKitchen()" />
+    <div class="conv-result" id="k-result">—</div>
+    <div class="conv-warning" id="k-warning"></div>
+  </div>
+  <div class="card">
+    <p style="color:var(--accent);font-family:'Playfair Display',serif;margin-bottom:12px" id="ck-ref">📌 Tabela de equivalência</p>
+    <table class="conv-table">
+      <tr><th id="ck-th1">Medida</th><th>ml</th><th id="ck-th2">Equivale a</th></tr>
+      <tr><td id="ck-r1a">1 xícara BR</td><td>200ml</td><td id="ck-r1b">≈ 13 col. de sopa</td></tr>
+      <tr><td id="ck-r2a">1 xícara US</td><td>240ml</td><td id="ck-r2b">16 col. de sopa</td></tr>
+      <tr><td id="ck-r3a">1 col. sopa</td><td>15ml</td><td id="ck-r3b">3 col. de chá</td></tr>
+      <tr><td id="ck-r4a">1 col. chá</td><td>5ml</td><td id="ck-r4b">—</td></tr>
+      <tr><td id="ck-r5a">1 fl oz</td><td>30ml</td><td id="ck-r5b">2 col. de sopa</td></tr>
+    </table>
+  </div>
+</div>
+
+<div id="conv-clothing" class="conv-section" style="max-width:720px;margin:0 auto;padding:0 20px 60px">
+  <div class="section-heading" id="ch-clothing">👕 Tamanho de Roupa</div>
+  <div class="section-sub" id="cs-clothing">Converta entre BR, US, EU — camisas, calças e calçados</div>
+  <div class="card">
+    <div class="tabs" style="margin-bottom:20px">
+      <button class="tab active" onclick="setClothTab('top',this)" id="clt-top">Camisas</button>
+      <button class="tab" onclick="setClothTab('pants',this)" id="clt-pants">Calças</button>
+      <button class="tab" onclick="setClothTab('shoes',this)" id="clt-shoes">Calçados</button>
+    </div>
+    <div id="cl-top">
+      <label class="conv-label" id="cl-select-label">Selecione seu tamanho BR</label>
+      <select id="cl-top-sel" onchange="hlCloth('top')">
+        <option value="">-- Escolha --</option>
+        <option value="0">PP</option><option value="1">P</option>
+        <option value="2">M</option><option value="3">G</option>
+        <option value="4">GG</option><option value="5">GGG / XGG</option>
+        <option value="6">GGGG / 3XL</option>
+      </select>
+      <table class="conv-table" style="margin-top:14px">
+        <tr><th>BR</th><th>US / INT</th><th>EU</th></tr>
+        <tr id="ct0"><td>PP</td><td>XS (0-2)</td><td>32/34</td></tr>
+        <tr id="ct1"><td>P</td><td>S (4-6)</td><td>36/38</td></tr>
+        <tr id="ct2"><td>M</td><td>M (8-10)</td><td>40/42</td></tr>
+        <tr id="ct3"><td>G</td><td>L (12-14)</td><td>44/46</td></tr>
+        <tr id="ct4"><td>GG</td><td>XL (16-18)</td><td>48/50</td></tr>
+        <tr id="ct5"><td>GGG / XGG</td><td>XXL (20-22)</td><td>52/54</td></tr>
+        <tr id="ct6"><td>GGGG / 3XL</td><td>3XL (24-26)</td><td>56/58</td></tr>
+      </table>
+    </div>
+    <div id="cl-pants" style="display:none">
+      <label class="conv-label">Selecione seu número BR</label>
+      <select id="cl-pants-sel" onchange="hlCloth('pants')">
+        <option value="">-- Escolha --</option>
+        <option value="0">36 (70cm)</option><option value="1">38 (74cm)</option>
+        <option value="2">40 (78cm)</option><option value="3">42 (82cm)</option>
+        <option value="4">44 (86cm)</option><option value="5">46 (90cm)</option>
+        <option value="6">48 (94cm)</option><option value="7">50 (98cm)</option>
+      </select>
+      <table class="conv-table" style="margin-top:14px">
+        <tr><th>BR</th><th>US (Waist)</th><th>EU</th><th>INT</th></tr>
+        <tr id="cp0"><td>36 (70cm)</td><td>W27</td><td>36</td><td>XS</td></tr>
+        <tr id="cp1"><td>38 (74cm)</td><td>W29</td><td>38</td><td>S</td></tr>
+        <tr id="cp2"><td>40 (78cm)</td><td>W31</td><td>40</td><td>M</td></tr>
+        <tr id="cp3"><td>42 (82cm)</td><td>W32</td><td>42</td><td>M</td></tr>
+        <tr id="cp4"><td>44 (86cm)</td><td>W34</td><td>44</td><td>L</td></tr>
+        <tr id="cp5"><td>46 (90cm)</td><td>W36</td><td>46</td><td>L</td></tr>
+        <tr id="cp6"><td>48 (94cm)</td><td>W37</td><td>48</td><td>XL</td></tr>
+        <tr id="cp7"><td>50 (98cm)</td><td>W39</td><td>50</td><td>XXL</td></tr>
+      </table>
+    </div>
+    <div id="cl-shoes" style="display:none">
+      <label class="conv-label">Selecione seu número BR</label>
+      <select id="cl-shoes-sel" onchange="hlCloth('shoes')">
+        <option value="">-- Escolha --</option>
+        <option value="0">34</option><option value="1">35</option><option value="2">36</option>
+        <option value="3">37</option><option value="4">38</option><option value="5">39</option>
+        <option value="6">40</option><option value="7">41</option><option value="8">42</option>
+        <option value="9">43</option><option value="10">44</option>
+      </select>
+      <table class="conv-table" style="margin-top:14px">
+        <tr><th>BR</th><th>US ♀</th><th>US ♂</th><th>EU</th><th>UK</th></tr>
+        <tr id="cs0"><td>34</td><td>4</td><td>3</td><td>34</td><td>2</td></tr>
+        <tr id="cs1"><td>35</td><td>5</td><td>4</td><td>35</td><td>3</td></tr>
+        <tr id="cs2"><td>36</td><td>6</td><td>4.5</td><td>36</td><td>3.5</td></tr>
+        <tr id="cs3"><td>37</td><td>6.5</td><td>5</td><td>37</td><td>4</td></tr>
+        <tr id="cs4"><td>38</td><td>7.5</td><td>6</td><td>38</td><td>5</td></tr>
+        <tr id="cs5"><td>39</td><td>8.5</td><td>7</td><td>39</td><td>6</td></tr>
+        <tr id="cs6"><td>40</td><td>9</td><td>7.5</td><td>40</td><td>6.5</td></tr>
+        <tr id="cs7"><td>41</td><td>10</td><td>8</td><td>41</td><td>7</td></tr>
+        <tr id="cs8"><td>42</td><td>11</td><td>9</td><td>42</td><td>8</td></tr>
+        <tr id="cs9"><td>43</td><td>11.5</td><td>9.5</td><td>43</td><td>9</td></tr>
+        <tr id="cs10"><td>44</td><td>12.5</td><td>10.5</td><td>44</td><td>10</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
 <!-- Inicio codigo Contador -->
 <div align="center"><a title="contador de dias" href="https://www.calendario.cnt.br/ferramentas/contador-de-dias-calculadora-prazo-entre-datas"><img src="https://contador-gratis.com/contadores-de-visitas/050526062556736.gif"></a><div><a href="https://www.contador-gratis.com/" title="contador de visitas">Contador de Visitas</a></div></div>
 <!-- Fim do codigo Contador -->
