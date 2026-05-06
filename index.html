@@ -565,19 +565,18 @@
     document.getElementById('opt-jp').textContent = t.optJp;
     document.getElementById('opt-classic').textContent = t.optClassic;
     document.getElementById('footer-txt').textContent = t.footer;
-                if (lang === 'en') {
-      document.getElementById('about-title').textContent = "What is NameForge?";
-      document.getElementById('about-p1').innerHTML = "The <strong>NameForge</strong> is a free online tool developed to assist ENTREPRENEURS, content creators, and writers in finding the perfect identity for their projects. We know that choosing a name is one of the most crucial steps in creating a brand or character, as it carries the first impression and the essence of what is being built. Our algorithm organizes suggestions based on different NICHES and styles, making the brainstorming process much easier.";
-      document.getElementById('about-p2').textContent = "Beyond being a BUSINESS NAME generator, NameForge offers versatility for the creative universe. Whether you are a gamer looking for a unique NICKNAME or NAMETAG, an author developing fictional characters, or a developer seeking names for APPS and STARTUPS, the platform delivers fast and diverse results. Our mission is to eliminate creative block and provide instant inspiration with just a few clicks.";
-      document.getElementById('about-p3').textContent = "Having a strategic name is fundamental for digital success and BRAND RECOGNITION. Therefore, NameForge is constantly updated with new databases that reflect modern market and entertainment trends. In addition to names for companies and characters, the tool can be used to name new pets, academic projects, or any initiative that demands a touch of originality and exclusivity.";
-    } else {
-      document.getElementById('about-title').textContent = "O que é o NameForge?";
-      document.getElementById('about-p1').innerHTML = "O <strong>NameForge</strong> é uma ferramenta online gratuita desenvolvida para auxiliar EMPREENDEDORES, criadores de conteúdo e escritores a encontrar a identidade perfeita para seus projetos. Sabemos que a escolha de um nome é uma das etapas mais cruciais na criação de uma marca ou personagem, pois ela carrega a primeira impressão e a essência do que está sendo construído. Nosso algoritmo organiza sugestões baseadas em diferentes NICHOS e estilos, facilitando o processo de brainstorming.";
-      document.getElementById('about-p2').textContent = "Além de ser um gerador de NOMES COMERCIAIS, o NameForge oferece versatilidade para o universo criativo. Seja você um jogador procurando um NICKNAME ou NAMETAG único para sua conta, um autor desenvolvendo nomes para personagens de ficção ou um desenvolvedor em busca de nomes para APLICATIVOS e STARTUPS, a plataforma entrega resultados rápidos e diversificados. Nossa missão é eliminar o bloqueio criativo e fornecer inspiração instantânea com apenas alguns cliques.";
-      document.getElementById('about-p3').textContent = "Ter um nome estratégico é fundamental para o sucesso digital e para o RECONHECIMENTO de marca. Por isso, o NameForge é constantemente atualizado com novas bases de dados que refletem as tendências modernas de mercado e entretenimento. Além de nomes para empresas e personagens, a ferramenta pode ser utilizada para batizar novos animais de estimação, projetos acadêmicos ou qualquer iniciativa que demande um toque de originalidade e exclusividade.";
-      }
- 
-    // ── NAME BANKS ──
+    const isEn = (lang === 'en')
+    const tTitle = isEn ? "What is NameForge?" : "O que é o NameForge?";
+    const tP1 = isEn ? "The <strong>NameForge</strong> is a free online tool developed to assist ENTREPRENEURS, content creators, and writers." : "O <strong>NameForge</strong> é uma ferramenta online gratuita desenvolvida para auxiliar EMPREENDEDORES, criadores de conteúdo e escritores.";
+    const tP2 = isEn ? "Beyond being a BUSINESS NAME generator, NameForge offers versatility for the creative universe." : "Além de ser um gerador de NOMES COMERCIAIS, o NameForge oferece versatilidade para o universo criativo.";
+    const tP3 = isEn ? "Having a strategic name is fundamental for digital success and BRAND RECOGNITION." : "Ter um nome estratégico é fundamental para o sucesso digital e para o RECONHECIMENTO de marca.";
+
+    document.getElementById('about-title').textContent = tTitle;
+    document.getElementById('about-p1').innerHTML = tP1;
+    document.getElementById('about-p2').textContent = tP2;
+    document.getElementById('about-p3').textContent = tP3;
+    document.documentElement.lang = lang;
+  } // ── NAME BANKS ──
   const NAMES = {
     baby: {
       f: {
