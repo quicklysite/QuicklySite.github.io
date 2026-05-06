@@ -1012,7 +1012,118 @@
     toast.classList.add('show');
     setTimeout(() => toast.classList.remove('show'), 2000);
   }
+// ── SIDEBAR ──
+function toggleSidebar(){
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('nav-overlay').classList.toggle('open');
+}
+function closeSidebar(){
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('nav-overlay').classList.remove('open');
+}
 
+// ── SEÇÕES ──
+function showConv(id){
+  document.querySelectorAll('.conv-section').forEach(s=>s.classList.remove('conv-active'));
+  const target = document.getElementById('conv-'+id);
+  if(target) target.classList.add('conv-active');
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('nav-active'));
+  document.getElementById('ni-'+id).classList.add('nav-active');
+  closeSidebar();
+  if(id==='weight') convWeight();
+  if(id==='temp') convTemp();
+  if(id==='kitchen') convKitchen();
+}
+
+// ── PESO ──
+const wKg={kg:1,lb:0.453592,oz:0.0283495,g:0.001};
+function convWeight(){
+  const f=document.getElementById('w-from').value;
+  const t=document.getElementById('w-to').value;
+  const v=parseFloat(document.getElementById('w-val').value)||0;
+  document.getElementById('w-result').textContent=rnd(v*wKg[f]/wKg[t])+' '+t;
+}
+
+// ── TEMPERATURA ──
+function convTemp(){
+  const f=document.getElementById('t-from').value;
+  const t=document.getElementById('t-to').value;
+  let v=parseFloat(document.getElementById('t-val').value);
+  if(isNaN(v)){document.getElementById('t-result').textContent='—';return;}
+  let c=f==='c'?v:f==='f'?(v-32)*5/9:v-273.15;
+  let res=t==='c'?c:t==='f'?c*9/5+32:c+273.15;
+  const u=t==='c'?'°C':t==='f'?'°F':'K';
+  document.getElementById('t-result').textContent=rnd(res)+' '+u;
+}
+
+// ── COZINHA ──
+const kMl={cup_br:200,cup_us:240,tbsp:15,tsp:5,ml:1,floz:30};
+function convKitchen(){
+  const f=document.getElementById('k-from').value;
+  const t=document.getElementById('k-to').value;
+  const v=parseFloat(document.getElementById('k-val').value)||0;
+  const lb={cup_br:lang==='pt'?'xícara(s) BR':'cup(s) BR',cup_us:lang==='pt'?'xícara(s) US':'cup(s) US',tbsp:'tbsp',tsp:'tsp',ml:'ml',floz:'fl oz'};
+  document.getElementById('k-result').textContent=rnd(v*kMl[f]/kMl[t])+' '+lb[t];
+  const warn=document.getElementById('k-warning');
+  if(f==='cup_br'||t==='cup_br'||f==='cup_us'||t==='cup_us'){
+    warn.textContent=lang==='pt'
+      ?'⚠️ Atenção: a xícara brasileira tem 200ml. A xícara americana (cup) tem 240ml. Verifique o padrão da sua receita.'
+      :'⚠️ Note: Brazilian cup = 200ml. US cup = 240ml. Check which standard your recipe uses.';
+    warn.classList.add('show');
+  } else {
+    warn.classList.remove('show');
+  }
+}
+
+// ── ROUPA ──
+let clothTab='top';
+function setClothTab(tab,btn){
+  clothTab=tab;
+  document.querySelectorAll('#conv-clothing .tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  ['top','pants','shoes'].forEach(t=>{
+    document.getElementById('cl-'+t).style.display=t===tab?'block':'none';
+  });
+}
+function hlCloth(type){
+  const prefMap={top:'ct',pants:'cp',shoes:'cs'};
+  const selMap={top:'cl-top-sel',pants:'cl-pants-sel',shoes:'cl-shoes-sel'};
+  const p=prefMap[type];
+  const val=document.getElementById(selMap[type]).value;
+  document.querySelectorAll('[id^="'+p+'"]').forEach(r=>r.classList.remove('row-hl'));
+  if(val!==''){const row=document.getElementById(p+val);if(row)row.classList.add('row-hl');}
+}
+
+// ── ARREDONDAMENTO ──
+function rnd(n){return Math.round(n*10000)/10000;}
+
+// ── TRADUÇÃO SIDEBAR E CONVERSORES ──
+function translateConverters(t){
+  const ids={
+    'ns-names-label':t.nsNames,'ns-conv-label':t.nsConv,
+    'nl-names':t.nlNames,'nl-weight':t.nlWeight,'nl-temp':t.nlTemp,
+    'nl-kitchen':t.nlKitchen,'nl-clothing':t.nlClothing,
+    'ch-weight':t.chWeight,'cs-weight':t.csWeight,
+    'ch-temp':t.chTemp,'cs-temp':t.csTemp,
+    'ch-kitchen':t.chKitchen,'cs-kitchen':t.csKitchen,
+    'ch-clothing':t.chClothing,'cs-clothing':t.csClothing,
+    'ct-ref':t.ctRef,'ct-situation':t.ctSituation,
+    'ct-r1':t.ctR1,'ct-r2':t.ctR2,'ct-r3':t.ctR3,'ct-r4':t.ctR4,'ct-r5':t.ctR5,
+    'ck-ref':t.ckRef,'ck-th1':t.ckTh1,'ck-th2':t.ckTh2,
+    'ck-r1a':t.ckR1a,'ck-r1b':t.ckR1b,'ck-r2a':t.ckR2a,'ck-r2b':t.ckR2b,
+    'ck-r3a':t.ckR3a,'ck-r3b':t.ckR3b,'ck-r4a':t.ckR4a,'ck-r4b':t.ckR4b,
+    'ck-r5a':t.ckR5a,'ck-r5b':t.ckR5b,
+    'cl-select-label':t.clSelect,
+    'clt-top':t.cltTop,'clt-pants':t.cltPants,'clt-shoes':t.cltShoes,
+    'cl-from':t.clFrom,'cl-to':t.clTo,'cl-val':t.clVal
+  };
+  for(const[id,val]of Object.entries(ids)){
+    const el=document.getElementById(id);
+    if(el&&val)el.textContent=val;
+  }
+  const kw=document.getElementById('k-warning');
+  if(kw&&kw.classList.contains('show')) convKitchen();
+}
   // ── CSS ANIMATION ──
   const style = document.createElement('style');
   style.textContent = `
