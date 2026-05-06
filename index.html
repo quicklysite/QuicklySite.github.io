@@ -1175,65 +1175,7 @@ function showConv(id){
   if(id==='kitchen')convKitchen();
 }
 
-// ── PESO ──
-const wKg={kg:1,lb:0.453592,oz:0.0283495,g:0.001};
-function convWeight(){
-  const f=document.getElementById('w-from').value;
-  const t=document.getElementById('w-to').value;
-  const v=parseFloat(document.getElementById('w-val').value)||0;
-  document.getElementById('w-result').textContent=rnd(v*wKg[f]/wKg[t])+' '+t;
-}
 
-// ── TEMPERATURA ──
-function convTemp(){
-  const f=document.getElementById('t-from').value;
-  const t=document.getElementById('t-to').value;
-  let v=parseFloat(document.getElementById('t-val').value);
-  if(isNaN(v)){document.getElementById('t-result').textContent='—';return;}
-  let c=f==='c'?v:f==='f'?(v-32)*5/9:v-273.15;
-  let res=t==='c'?c:t==='f'?c*9/5+32:c+273.15;
-  const u=t==='c'?'°C':t==='f'?'°F':'K';
-  document.getElementById('t-result').textContent=rnd(res)+' '+u;
-}
-
-// ── COZINHA ──
-const kMl={cup_br:200,cup_us:240,tbsp:15,tsp:5,ml:1,floz:30};
-function convKitchen(){
-  const f=document.getElementById('k-from').value;
-  const t=document.getElementById('k-to').value;
-  const v=parseFloat(document.getElementById('k-val').value)||0;
-  const lb={cup_br:lang==='pt'?'xícara(s) BR':'cup(s) BR',cup_us:lang==='pt'?'xícara(s) US':'cup(s) US',tbsp:'tbsp',tsp:'tsp',ml:'ml',floz:'fl oz'};
-  document.getElementById('k-result').textContent=rnd(v*kMl[f]/kMl[t])+' '+lb[t];
-  const warn=document.getElementById('k-warning');
-  if(f==='cup_br'||t==='cup_br'||f==='cup_us'||t==='cup_us'){
-    warn.textContent=lang==='pt'
-      ?'⚠️ Atenção: a xícara brasileira tem 200ml. A xícara americana (cup) tem 240ml. Verifique o padrão da sua receita.'
-      :'⚠️ Note: Brazilian cup = 200ml. US cup = 240ml. Check which standard your recipe uses.';
-    warn.classList.add('show');
-  } else {
-    warn.classList.remove('show');
-  }
-}
-
-// ── ROUPA ──
-function setClothTab(tab,btn){
-  document.querySelectorAll('#conv-clothing .tab').forEach(t=>t.classList.remove('active'));
-  btn.classList.add('active');
-  ['top','pants','shoes'].forEach(t=>{
-    document.getElementById('cl-'+t).style.display=t===tab?'block':'none';
-  });
-}
-function hlCloth(type){
-  const prefMap={top:'ct',pants:'cp',shoes:'cs'};
-  const selMap={top:'cl-top-sel',pants:'cl-pants-sel',shoes:'cl-shoes-sel'};
-  const p=prefMap[type];
-  const val=document.getElementById(selMap[type]).value;
-  document.querySelectorAll('[id^="'+p+'"]').forEach(r=>r.classList.remove('row-hl'));
-  if(val!==''){const row=document.getElementById(p+val);if(row)row.classList.add('row-hl');}
-}
-
-// ── ARREDONDAMENTO ──
-function rnd(n){return Math.round(n*10000)/10000;}
   // ── CSS ANIMATION ──
   const style = document.createElement('style');
   style.textContent = `
