@@ -13,10 +13,10 @@
   <meta name="google-site-verification" content="J598geleuRAfDioJqAjsRrwJafNAv85DJRXaYhJwQFU" />
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NameForge â€“ Gerador de Nomes / Name Generator</title>
+  <title>NameForge – Gerador de Nomes / Name Generator</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
 
-  <!-- ADSENSE: substitua pelo seu cÃ³digo real -->
+  <!-- ADSENSE: substitua pelo seu código real -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8800851624013593"
      crossorigin="anonymous"></script>
 
@@ -42,7 +42,7 @@
       overflow-x: hidden;
     }
 
-    /* â”€â”€ BACKGROUND TEXTURE â”€â”€ */
+    /* ── BACKGROUND TEXTURE ── */
     body::before {
       content: '';
       position: fixed;
@@ -54,7 +54,7 @@
       z-index: 0;
     }
    
-    /* â”€â”€ LANGUAGE POPUP â”€â”€ */
+    /* ── LANGUAGE POPUP ── */
     #lang-overlay {
       position: fixed;
       inset: 0;
@@ -133,7 +133,7 @@
 
     .lang-btn .flag { font-size: 1.4rem; }
 
-    /* â”€â”€ HEADER â”€â”€ */
+    /* ── HEADER ── */
     header {
       position: relative;
       z-index: 1;
@@ -158,7 +158,7 @@
       font-weight: 300;
     }
 
-    /* â”€â”€ AD SLOT TOP â”€â”€ */
+    /* ── AD SLOT TOP ── */
     .ad-slot {
       position: relative;
       z-index: 1;
@@ -176,7 +176,7 @@
       font-size: .75rem;
     }
 
-    /* â”€â”€ MAIN CARD â”€â”€ */
+    /* ── MAIN CARD ── */
     main {
       position: relative;
       z-index: 1;
@@ -193,7 +193,7 @@
       margin-bottom: 20px;
     }
 
-    /* â”€â”€ TABS â”€â”€ */
+    /* ── TABS ── */
     .tabs {
       display: flex;
       gap: 8px;
@@ -222,7 +222,7 @@
       color: #0d0d0f;
     }
 
-    /* â”€â”€ CONTROLS â”€â”€ */
+    /* ── CONTROLS ── */
     .control-group {
       display: flex;
       flex-direction: column;
@@ -258,7 +258,7 @@
     .row { display: flex; gap: 16px; }
     .row .control-group { flex: 1; }
 
-    /* â”€â”€ GENERATE BUTTON â”€â”€ */
+    /* ── GENERATE BUTTON ── */
     .btn-generate {
       width: 100%;
       padding: 16px;
@@ -282,7 +282,7 @@
 
     .btn-generate:active { transform: translateY(0); }
 
-    /* â”€â”€ RESULTS â”€â”€ */
+    /* ── RESULTS ── */
     .results {
       margin-top: 24px;
       display: grid;
@@ -309,7 +309,7 @@
     }
 
     .name-chip::after {
-      content: 'ðŸ“‹';
+      content: '📋';
       position: absolute;
       right: 10px;
       top: 50%;
@@ -343,9 +343,9 @@
       transform: translateX(-50%) translateY(0);
     }
 
-    /* â”€â”€ AD SLOT MID â”€â”€ */
+    /* ── AD SLOT MID ── */
 
-    /* â”€â”€ FOOTER â”€â”€ */
+    /* ── FOOTER ── */
     footer {
       position: relative;
       z-index: 1;
@@ -354,7 +354,7 @@
       font-size: .78rem;
       padding: 0 20px 40px;
     }
-/* â”€â”€ MENU HAMBURGUER + SIDEBAR â”€â”€ */
+/* ── MENU HAMBURGUER + SIDEBAR ── */
 #menu-btn {
   position: fixed; top: 15px; left: 15px; z-index: 1001;
   background: rgba(22,22,26,.9); border: 1px solid rgba(232,199,122,.4);
@@ -397,7 +397,7 @@
   background: rgba(232,199,122,.08);
   border-left-color: var(--accent); color: var(--accent);
 }
-/* â”€â”€ CONVERSORES â”€â”€ */
+/* ── CONVERSORES ── */
 .conv-section { display: none; }
 .conv-section.conv-active { display: block; animation: fadeUp .3s ease both; }
 .conv-result {
@@ -443,48 +443,49 @@
   <span style="color: #e8c77a; margin: 0 8px; opacity: 0.5;">|</span>
   <span style="cursor: pointer; font-size: 13px; font-weight: 500; color: #f0ede6;" onclick="setLang('en')">EN</span>
 </div>
-  <!-- â”€â”€ MENU HAMBURGUER â”€â”€ -->
-<button id="menu-btn" onclick="toggleSidebar()">â˜°</button>
+  <!-- ── MENU HAMBURGUER ── -->
+<button id="menu-btn" onclick="toggleSidebar()">☰</button>
 
-<!-- â”€â”€ SIDEBAR â”€â”€ -->
+<!-- ── SIDEBAR ── -->
 <div id="nav-overlay" onclick="closeSidebar()"></div>
 <nav id="sidebar">
-  <div class="sidebar-logo">âš¡ NameForge</div>
+  <div class="sidebar-logo">⚡ NameForge</div>
   <div class="nav-section" id="ns-names-label">Gerador de Nomes</div>
-  <div class="nav-item nav-active" onclick="showConv('names')" id="ni-names">âœ¨ <span id="nl-names">Nomes</span></div>
+  <div class="nav-item nav-active" onclick="showConv('names')" id="ni-names">✨ <span id="nl-names">Nomes</span></div>
   <div class="nav-section" id="ns-conv-label">Conversores</div>
-  <div class="nav-item" onclick="showConv('weight')" id="ni-weight">âš–ï¸ <span id="nl-weight">Peso</span></div>
-  <div class="nav-item" onclick="showConv('temp')" id="ni-temp">ðŸŒ¡ï¸ <span id="nl-temp">Temperatura</span></div>
-  <div class="nav-item" onclick="showConv('kitchen')" id="ni-kitchen">ðŸ³ <span id="nl-kitchen">Medidas de Cozinha</span></div>
-  <div class="nav-item" onclick="showConv('clothing')" id="ni-clothing">ðŸ‘• <span id="nl-clothing">Tamanho de Roupa</span></div>
+  <div class="nav-item" onclick="showConv('weight')" id="ni-weight">⚖️ <span id="nl-weight">Peso</span></div>
+  <div class="nav-item" onclick="showConv('temp')" id="ni-temp">🌡️ <span id="nl-temp">Temperatura</span></div>
+  <div class="nav-item" onclick="showConv('kitchen')" id="ni-kitchen">🍳 <span id="nl-kitchen">Medidas de Cozinha</span></div>
+  <div class="nav-item" onclick="showConv('clothing')" id="ni-clothing">👕 <span id="nl-clothing">Tamanho de Roupa</span></div>
 </nav>
-<!-- â”€â”€ LANGUAGE POPUP â”€â”€ -->
+<!-- ── LANGUAGE POPUP ── -->
 <div id="lang-overlay">
   <div id="lang-box">
-    <div class="globe">ðŸŒ</div>
+    <div class="globe">🌐</div>
     <h2 id="popup-title">Choose your language</h2>
     <p id="popup-sub">Escolha o idioma / Select your language</p>
     <div class="lang-btns">
       <button class="lang-btn" onclick="setLang('pt')">
-        <span class="flag">ðŸ‡§ðŸ‡·</span> PortuguÃªs
+        <span class="flag">🇧🇷</span> Português
       </button>
       <button class="lang-btn" onclick="setLang('en')">
-        <span class="flag">ðŸ‡ºðŸ‡¸</span> English
+        <span class="flag">🇺🇸</span> English
       </button>
     </div>
   </div>
 </div>
 
-<!-- â”€â”€ HEADER â”€â”€ -->
+<div id="conv-names" class="conv-section conv-active">
+<!-- ── HEADER ── -->
 <header>
   <h1><span>Name</span>Forge</h1>
-  <p class="tagline" id="tagline">Gerador de nomes para bebÃªs, personagens e empresas</p>
+  <p class="tagline" id="tagline">Gerador de nomes para bebês, personagens e empresas</p>
 </header>
 
 <!-- AD SLOT TOP -->
 <div class="ad-slot" id="ad-top">
   <!-- AdSense code here -->
-  <span>AnÃºncio</span>
+  <span>Anúncio</span>
 </div>
 
 <main>
@@ -492,16 +493,16 @@
 
     <!-- TABS -->
     <div class="tabs">
-      <button class="tab active" onclick="setTab('baby', this)" id="tab-baby">ðŸ‘¶ BebÃª</button>
-      <button class="tab" onclick="setTab('char', this)" id="tab-char">âš”ï¸ Personagem</button>
-      <button class="tab" onclick="setTab('biz', this)" id="tab-biz">ðŸ¢ Empresa</button>
+      <button class="tab active" onclick="setTab('baby', this)" id="tab-baby">👶 Bebê</button>
+      <button class="tab" onclick="setTab('char', this)" id="tab-char">⚔️ Personagem</button>
+      <button class="tab" onclick="setTab('biz', this)" id="tab-biz">🏢 Empresa</button>
     </div>
 
     <!-- BABY PANEL -->
     <div id="panel-baby">
       <div class="row">
         <div class="control-group">
-          <label id="lbl-gender">GÃªnero</label>
+          <label id="lbl-gender">Gênero</label>
           <select id="baby-gender">
             <option value="f" id="opt-f">Feminino</option>
             <option value="m" id="opt-m">Masculino</option>
@@ -512,9 +513,9 @@
           <label id="lbl-origin">Origem</label>
           <select id="baby-origin">
             <option value="br" id="opt-br">Brasileiro</option>
-            <option value="en" id="opt-en-orig">Internacional / InglÃªs</option>
-            <option value="jp" id="opt-jp">JaponÃªs / Anime</option>
-            <option value="classic" id="opt-classic">ClÃ¡ssico / Latino</option>
+            <option value="en" id="opt-en-orig">Internacional / Inglês</option>
+            <option value="jp" id="opt-jp">Japonês / Anime</option>
+            <option value="classic" id="opt-classic">Clássico / Latino</option>
           </select>
         </div>
       </div>
@@ -532,13 +533,13 @@
           <select id="char-universe">
             <option value="fantasy">Fantasy / Medieval</option>
             <option value="sci">Sci-Fi / Futurista</option>
-            <option value="anime">Anime / JaponÃªs</option>
-            <option value="dark">Dark / GÃ³tico</option>
+            <option value="anime">Anime / Japonês</option>
+            <option value="dark">Dark / Gótico</option>
             <option value="modern">Moderno / Urbano</option>
           </select>
         </div>
         <div class="control-group">
-          <label id="lbl-gender2">GÃªnero</label>
+          <label id="lbl-gender2">Gênero</label>
           <select id="char-gender">
             <option value="f">Feminino</option>
             <option value="m">Masculino</option>
@@ -559,10 +560,10 @@
           <label id="lbl-sector">Setor</label>
           <select id="biz-sector">
             <option value="tech">Tech / Startup</option>
-            <option value="food">AlimentaÃ§Ã£o / Food</option>
+            <option value="food">Alimentação / Food</option>
             <option value="fashion">Moda / Fashion</option>
-            <option value="health">SaÃºde / Bem-estar</option>
-            <option value="finance">FinanÃ§as / NegÃ³cios</option>
+            <option value="health">Saúde / Bem-estar</option>
+            <option value="finance">Finanças / Negócios</option>
             <option value="creative">Criativo / Arte</option>
           </select>
         </div>
@@ -570,7 +571,7 @@
           <label id="lbl-style">Estilo</label>
           <select id="biz-style">
             <option value="modern">Moderno / Curto</option>
-            <option value="classic">ClÃ¡ssico / Formal</option>
+            <option value="classic">Clássico / Formal</option>
             <option value="playful">Divertido / Jovem</option>
           </select>
         </div>
@@ -582,7 +583,7 @@
     </div>
 
     <!-- BUTTON -->
-    <button class="btn-generate" onclick="generate()" id="btn-gen">âœ¨ Gerar Nomes</button>
+    <button class="btn-generate" onclick="generate()" id="btn-gen">✨ Gerar Nomes</button>
 
     <!-- RESULTS -->
     <div class="results" id="results"></div>
@@ -591,69 +592,66 @@
   <!-- AD SLOT MID -->
   <div class="ad-slot">
     <!-- AdSense code here -->
-    <span>AnÃºncio</span>
+    <span>Anúncio</span>
   </div>
 
 </main>
-
-<footer>
-  <p id="footer-txt">Â© 2025 NameForge Â· Clique em um nome para copiar</p>
-</footer>
+</div><!-- /conv-names -->
 
 <div class="copy-toast" id="toast"></div>
 
 <script>
-  // â”€â”€ LANGUAGE DATA â”€â”€
+  // ── LANGUAGE DATA ──
   const T = {
     pt: {
-      tagline: 'Gerador de nomes para bebÃªs, personagens e empresas',
-      tabBaby: 'ðŸ‘¶ BebÃª', tabChar: 'âš”ï¸ Personagem', tabBiz: 'ðŸ¢ Empresa',
-      lblGender: 'GÃªnero', lblOrigin: 'Origem', lblQty: 'Quantidade',
-      lblUniverse: 'Universo', lblGender2: 'GÃªnero',
+      tagline: 'Gerador de nomes para bebês, personagens e empresas',
+      tabBaby: '👶 Bebê', tabChar: '⚔️ Personagem', tabBiz: '🏢 Empresa',
+      lblGender: 'Gênero', lblOrigin: 'Origem', lblQty: 'Quantidade',
+      lblUniverse: 'Universo', lblGender2: 'Gênero',
       lblSector: 'Setor', lblStyle: 'Estilo',
-      btnGen: 'âœ¨ Gerar Nomes',
+      btnGen: '✨ Gerar Nomes',
       optF: 'Feminino', optM: 'Masculino', optN: 'Neutro / Unissex',
-      optBr: 'Brasileiro', optEn: 'Internacional / InglÃªs', optJp: 'JaponÃªs / Anime', optClassic: 'ClÃ¡ssico / Latino',
-      styleModern: 'Moderno / Curto', styleClassic: 'ClÃ¡ssico / Formal', stylePlayful: 'Divertido / Jovem',
-      copied: 'âœ“ Copiado!',
-      footer: 'Â© 2025 NameForge Â· Clique em um nome para copiar',
+      optBr: 'Brasileiro', optEn: 'Internacional / Inglês', optJp: 'Japonês / Anime', optClassic: 'Clássico / Latino',
+      styleModern: 'Moderno / Curto', styleClassic: 'Clássico / Formal', stylePlayful: 'Divertido / Jovem',
+      copied: '✓ Copiado!',
+      footer: '© 2025 NameForge · Clique em um nome para copiar',
       nsNames:'Gerador de Nomes', nsConv:'Conversores',
       nlNames:'Nomes', nlWeight:'Peso', nlTemp:'Temperatura', nlKitchen:'Medidas de Cozinha', nlClothing:'Tamanho de Roupa',
-      chWeight:'âš–ï¸ Conversor de Peso', csWeight:'Converta kg, lb, oz e gramas instantaneamente',
-      chTemp:'ðŸŒ¡ï¸ Conversor de Temperatura', csTemp:'Celsius, Fahrenheit e Kelvin',
-      chKitchen:'ðŸ³ Medidas de Cozinha', csKitchen:'Converta xÃ­caras, colheres, ml e fl oz',
-      chClothing:'ðŸ‘• Tamanho de Roupa', csClothing:'Converta entre BR, US, EU â€” camisas, calÃ§as e calÃ§ados',
-      ctRef:'ðŸ“Œ ReferÃªncias rÃ¡pidas', ctSituation:'SituaÃ§Ã£o',
-      ctR1:'Ponto de congelamento', ctR2:'Temperatura ambiente', ctR3:'Temperatura corporal', ctR4:'Ponto de ebuliÃ§Ã£o', ctR5:'Forno mÃ©dio (culinÃ¡ria)',
-      ckRef:'ðŸ“Œ Tabela de equivalÃªncia', ckTh1:'Medida', ckTh2:'Equivale a',
-      ckR1a:'1 xÃ­cara BR', ckR1b:'â‰ˆ 13 col. de sopa', ckR2a:'1 xÃ­cara US', ckR2b:'16 col. de sopa',
-      ckR3a:'1 col. sopa', ckR3b:'3 col. de chÃ¡', ckR4a:'1 col. chÃ¡', ckR4b:'â€”', ckR5a:'1 fl oz', ckR5b:'2 col. de sopa',
-      clSelect:'Selecione seu tamanho BR', cltTop:'Camisas', cltPants:'CalÃ§as', cltShoes:'CalÃ§ados',
+      chWeight:'⚖️ Conversor de Peso', csWeight:'Converta kg, lb, oz e gramas instantaneamente',
+      chTemp:'🌡️ Conversor de Temperatura', csTemp:'Celsius, Fahrenheit e Kelvin',
+      chKitchen:'🍳 Medidas de Cozinha', csKitchen:'Converta xícaras, colheres, ml e fl oz',
+      chClothing:'👕 Tamanho de Roupa', csClothing:'Converta entre BR, US, EU — camisas, calças e calçados',
+      ctRef:'📌 Referências rápidas', ctSituation:'Situação',
+      ctR1:'Ponto de congelamento', ctR2:'Temperatura ambiente', ctR3:'Temperatura corporal', ctR4:'Ponto de ebulição', ctR5:'Forno médio (culinária)',
+      ckRef:'📌 Tabela de equivalência', ckTh1:'Medida', ckTh2:'Equivale a',
+      ckR1a:'1 xícara BR', ckR1b:'≈ 13 col. de sopa', ckR2a:'1 xícara US', ckR2b:'16 col. de sopa',
+      ckR3a:'1 col. sopa', ckR3b:'3 col. de chá', ckR4a:'1 col. chá', ckR4b:'—', ckR5a:'1 fl oz', ckR5b:'2 col. de sopa',
+      clSelect:'Selecione seu tamanho BR', cltTop:'Camisas', cltPants:'Calças', cltShoes:'Calçados',
       clFrom:'De', clTo:'Para', clVal:'Valor'
     },
     en: {
       tagline: 'Name generator for babies, characters & businesses',
-      tabBaby: 'ðŸ‘¶ Baby', tabChar: 'âš”ï¸ Character', tabBiz: 'ðŸ¢ Business',
+      tabBaby: '👶 Baby', tabChar: '⚔️ Character', tabBiz: '🏢 Business',
       lblGender: 'Gender', lblOrigin: 'Origin', lblQty: 'Quantity',
       lblUniverse: 'Universe', lblGender2: 'Gender',
       lblSector: 'Sector', lblStyle: 'Style',
-      btnGen: 'âœ¨ Generate Names',
+      btnGen: '✨ Generate Names',
       optF: 'Female', optM: 'Male', optN: 'Neutral / Unisex',
       optBr: 'Brazilian', optEn: 'International / English', optJp: 'Japanese / Anime', optClassic: 'Classic / Latin',
       styleModern: 'Modern / Short', styleClassic: 'Classic / Formal', stylePlayful: 'Fun / Youthful',
-      copied: 'âœ“ Copied!',
-      footer: 'Â© 2025 NameForge Â· Click a name to copy',
+      copied: '✓ Copied!',
+      footer: '© 2025 NameForge · Click a name to copy',
       nsNames:'Name Generator', nsConv:'Converters',
       nlNames:'Names', nlWeight:'Weight', nlTemp:'Temperature', nlKitchen:'Kitchen Measures', nlClothing:'Clothing Size',
-      chWeight:'âš–ï¸ Weight Converter', csWeight:'Convert kg, lb, oz and grams instantly',
-      chTemp:'ðŸŒ¡ï¸ Temperature Converter', csTemp:'Celsius, Fahrenheit and Kelvin',
-      chKitchen:'ðŸ³ Kitchen Measures', csKitchen:'Convert cups, spoons, ml and fl oz',
-      chClothing:'ðŸ‘• Clothing Size', csClothing:'Convert between BR, US, EU sizes',
-      ctRef:'ðŸ“Œ Quick References', ctSituation:'Situation',
+      chWeight:'⚖️ Weight Converter', csWeight:'Convert kg, lb, oz and grams instantly',
+      chTemp:'🌡️ Temperature Converter', csTemp:'Celsius, Fahrenheit and Kelvin',
+      chKitchen:'🍳 Kitchen Measures', csKitchen:'Convert cups, spoons, ml and fl oz',
+      chClothing:'👕 Clothing Size', csClothing:'Convert between BR, US, EU sizes',
+      ctRef:'📌 Quick References', ctSituation:'Situation',
       ctR1:'Freezing point', ctR2:'Room temperature', ctR3:'Body temperature', ctR4:'Boiling point', ctR5:'Medium oven (cooking)',
-      ckRef:'ðŸ“Œ Equivalence Table', ckTh1:'Measure', ckTh2:'Equals',
-      ckR1a:'1 BR cup', ckR1b:'â‰ˆ 13 tablespoons', ckR2a:'1 US cup', ckR2b:'16 tablespoons',
-      ckR3a:'1 tbsp', ckR3b:'3 teaspoons', ckR4a:'1 tsp', ckR4b:'â€”', ckR5a:'1 fl oz', ckR5b:'2 tablespoons',
+      ckRef:'📌 Equivalence Table', ckTh1:'Measure', ckTh2:'Equals',
+      ckR1a:'1 BR cup', ckR1b:'≈ 13 tablespoons', ckR2a:'1 US cup', ckR2b:'16 tablespoons',
+      ckR3a:'1 tbsp', ckR3b:'3 teaspoons', ckR4a:'1 tsp', ckR4b:'—', ckR5a:'1 fl oz', ckR5b:'2 tablespoons',
       clSelect:'Select your BR size', cltTop:'Shirts', cltPants:'Pants', cltShoes:'Shoes',
       clFrom:'From', clTo:'To', clVal:'Value'
     }
@@ -692,10 +690,10 @@
     document.getElementById('opt-classic').textContent = t.optClassic;
     document.getElementById('footer-txt').textContent = t.footer;
     const isEn = (lang === 'en')
-    const tTitle = isEn ? "What is NameForge?" : "O que Ã© o NameForge?";
-    const tP1 = isEn ? "The <strong>NameForge</strong> is a free online tool developed to assist ENTREPRENEURS, content creators, and writers." : "O <strong>NameForge</strong> Ã© uma ferramenta online gratuita desenvolvida para auxiliar EMPREENDEDORES, criadores de conteÃºdo e escritores.";
-    const tP2 = isEn ? "Beyond being a BUSINESS NAME generator, NameForge offers versatility for the creative universe." : "AlÃ©m de ser um gerador de NOMES COMERCIAIS, o NameForge oferece versatilidade para o universo criativo.";
-    const tP3 = isEn ? "Having a strategic name is fundamental for digital success and BRAND RECOGNITION." : "Ter um nome estratÃ©gico Ã© fundamental para o sucesso digital e para o RECONHECIMENTO de marca.";
+    const tTitle = isEn ? "What is NameForge?" : "O que é o NameForge?";
+    const tP1 = isEn ? "The <strong>NameForge</strong> is a free online tool developed to assist ENTREPRENEURS, content creators, and writers." : "O <strong>NameForge</strong> é uma ferramenta online gratuita desenvolvida para auxiliar EMPREENDEDORES, criadores de conteúdo e escritores.";
+    const tP2 = isEn ? "Beyond being a BUSINESS NAME generator, NameForge offers versatility for the creative universe." : "Além de ser um gerador de NOMES COMERCIAIS, o NameForge oferece versatilidade para o universo criativo.";
+    const tP3 = isEn ? "Having a strategic name is fundamental for digital success and BRAND RECOGNITION." : "Ter um nome estratégico é fundamental para o sucesso digital e para o RECONHECIMENTO de marca.";
 
     document.getElementById('about-title').textContent = tTitle;
     document.getElementById('about-p1').innerHTML = tP1;
@@ -703,14 +701,14 @@
     document.getElementById('about-p3').textContent = tP3;
     document.documentElement.lang = lang;
     translateConverters(t);
-  } // â”€â”€ NAME BANKS â”€â”€
+  } // ── NAME BANKS ──
   const NAMES = {
     baby: {
       f: {
         br: [
-          'Ana', 'Beatriz', 'Camila', 'Isabela', 'Juliana', 'LetÃ­cia', 'Mariana', 'NatÃ¡lia', 'PatrÃ­cia', 'Rafaela', 
-          'Sofia', 'Valentina', 'Yasmin', 'Lorena', 'Giovanna', 'Fernanda', 'DÃ©bora', 'Clara', 'Bruna', 'Alice', 'Anis',
-          'Helena', 'Manuela', 'Laura', 'LÃ­via', 'Luiza', 'CecÃ­lia', 'Antonella', 'HeloÃ­sa', 'Isadora', 'MaitÃª',
+          'Ana', 'Beatriz', 'Camila', 'Isabela', 'Juliana', 'Letícia', 'Mariana', 'Natália', 'Patrícia', 'Rafaela', 
+          'Sofia', 'Valentina', 'Yasmin', 'Lorena', 'Giovanna', 'Fernanda', 'Débora', 'Clara', 'Bruna', 'Alice', 'Anis',
+          'Helena', 'Manuela', 'Laura', 'Lívia', 'Luiza', 'Cecília', 'Antonella', 'Heloísa', 'Isadora', 'Maitê',
           'Maria', 'Gabriela', 'Carolina', 'Clara', 'Emanuelle', 'Nicole', 'Rebeca', 'Yasmin', 'Sarah', 'Stella'
         ],
         en: [
@@ -728,16 +726,16 @@
         classic: [
           'Adriana', 'Alessandra', 'Aurora', 'Beatrice', 'Cecilia', 'Diana', 'Elena', 'Flavia', 'Gloria', 'Helena', 
           'Irene', 'Julia', 'Laura', 'Lucia', 'Maria', 'Natalia', 'Olivia', 'Paula', 'Rosa', 'Victoria', 'Miryan',
-          'Augusta', 'Camila', 'Clara', 'Emilia', 'Faustina', 'Isadora', 'LetÃ­cia', 'LuÃ­sa', 'Marina', 'Regina', 'Violetta',
-          'Silvia', 'Teresa', 'ValÃ©ria', 'VerÃ´nica', 'Viviana', 'AntÃ´nia', 'Francisca', 'Juliana', 'AmÃ©lia', 'OlÃ­via'
+          'Augusta', 'Camila', 'Clara', 'Emilia', 'Faustina', 'Isadora', 'Letícia', 'Luísa', 'Marina', 'Regina', 'Violetta',
+          'Silvia', 'Teresa', 'Valéria', 'Verônica', 'Viviana', 'Antônia', 'Francisca', 'Juliana', 'Amélia', 'Olívia'
         ]
       },
       m: {
         br: [
-          'Arthur', 'Bruno', 'Carlos', 'Daniel', 'Eduardo', 'Felipe', 'Gabriel', 'Henrique', 'Igor', 'JoÃ£o', 'BartÃ´',
+          'Arthur', 'Bruno', 'Carlos', 'Daniel', 'Eduardo', 'Felipe', 'Gabriel', 'Henrique', 'Igor', 'João', 'Bartô',
           'Lucas', 'Mateus', 'Nicolas', 'Pedro', 'Rafael', 'Samuel', 'Thiago', 'Victor', 'Willian', 'Yago', 'Andreas',
           'Bernardo', 'Heitor', 'Davi', 'Lorenzo', 'Joaquim', 'Murilo', 'Noah', 'Gustavo', 'Theo', 'Vicente',
-          'Enzo', 'Guilherme', 'Ryan', 'OtÃ¡vio', 'Augusto', 'Caleb', 'Levi', 'Thomas', 'Vitor', 'Caio'
+          'Enzo', 'Guilherme', 'Ryan', 'Otávio', 'Augusto', 'Caleb', 'Levi', 'Thomas', 'Vitor', 'Caio'
         ],
         en: [
           'Aiden', 'Benjamin', 'Caleb', 'Dominic', 'Elijah', 'Finn', 'Gabriel', 'Henry', 'Isaac', 'Jack', 'Emmett', 'Wade',
@@ -746,7 +744,7 @@
           'Ezra', 'Maverick', 'Thomas', 'Charles', 'Christopher', 'Miles', 'Parker', 'Cole', 'Chase', 'Ryder'
         ],
         jp: [
-          'Akira', 'Daichi', 'Haruto', 'Hayato', 'Hiroshi', 'Issei', 'Kaito', 'Kenji', 'KÅsei', 'Naoki', 
+          'Akira', 'Daichi', 'Haruto', 'Hayato', 'Hiroshi', 'Issei', 'Kaito', 'Kenji', 'Kōsei', 'Naoki', 
           'Ren', 'Riku', 'Ryuu', 'Sasuke', 'Shinji', 'Sora', 'Takashi', 'Tatsuya', 'Yuu', 'Zero',
           'Hotaru', 'Itsuki', 'Kazuki', 'Minato', 'Ryo', 'Souta', 'Taiga', 'Yamato', 'Yuto', 'Tsubasa',
           'Asahi', 'Kouta', 'Masato', 'Ryuunosuke', 'Shouta', 'Soji', 'Takeru', 'Yoshio', 'Yusei', 'Yuma'
@@ -754,16 +752,16 @@
         classic: [
           'Adrian', 'Alessandro', 'Alexei', 'Aldo', 'Augustus', 'Bruno', 'Caesar', 'Dante', 'Dario', 'Emilio', 'Ivan', 'Vladimir',
           'Felix', 'Luca', 'Marco', 'Maximus', 'Rafael', 'Romano', 'Sergio', 'Valentino', 'Victor', 'Xavier', 'Ludwig',
-          'Antonio', 'Augusto', 'Benedito', 'Claudio', 'EstevÃ£o', 'Francisco', 'Gaspar', 'InÃ¡cio', 'Jorge', 'Leonardo',
-          'Manuel', 'OtÃ¡vio', 'PatrÃ­cio', 'Raimundo', 'SebastiÃ£o', 'Tito', 'TomÃ¡s', 'Vicente', 'Arnaldo', 'GregÃ³rio'
+          'Antonio', 'Augusto', 'Benedito', 'Claudio', 'Estevão', 'Francisco', 'Gaspar', 'Inácio', 'Jorge', 'Leonardo',
+          'Manuel', 'Otávio', 'Patrício', 'Raimundo', 'Sebastião', 'Tito', 'Tomás', 'Vicente', 'Arnaldo', 'Gregório'
         ]
       },
       n: {
         br: [
-          'Ari', 'Davi', 'Eden', 'Emi', 'Ãris', 'Kael', 'Lan', 'Lumi', 'Nael', 'Nori', 
+          'Ari', 'Davi', 'Eden', 'Emi', 'Íris', 'Kael', 'Lan', 'Lumi', 'Nael', 'Nori', 
           'Ori', 'Rael', 'Ren', 'Sael', 'Sol', 'Tael', 'Yael', 'Yara', 'Zael', 'Zen',
-          'Ariel', 'CÃ©u', 'Chris', 'Duda', 'Fran', 'Gabi', 'Kim', 'Manu', 'Michel', 'Micael',
-          'NÃ­colas', 'Nuri', 'Rafa', 'Sacha', 'Val', 'Alix', 'Aki', 'Bili', 'Jaci', 'NoÃ¡'
+          'Ariel', 'Céu', 'Chris', 'Duda', 'Fran', 'Gabi', 'Kim', 'Manu', 'Michel', 'Micael',
+          'Nícolas', 'Nuri', 'Rafa', 'Sacha', 'Val', 'Alix', 'Aki', 'Bili', 'Jaci', 'Noá'
         ],
         en: [
           'Addison', 'Alex', 'Avery', 'Blake', 'Cameron', 'Casey', 'Dakota', 'Drew', 'Eden', 'Finley', 'Bo',
@@ -781,7 +779,7 @@
           'Adrian', 'Alex', 'Angel', 'Ari', 'Clem', 'Demi', 'Eden', 'Emile', 'Erin', 'Gael', 'Andreas',
           'Jules', 'Laurel', 'Lex', 'Loren', 'Noel', 'Remi', 'Robin', 'Sam', 'Theo', 'Val', 'Felix',
           'Amor', 'Auguste', 'Claude', 'Dominique', 'Francis', 'Gabriel', 'Julian', 'Leon', 'Luz', 'Marie',
-          'Pascale', 'Paz', 'Rene', 'Sacha', 'Sasha', 'Simone', 'Valentine', 'Vivian', 'Alix', 'CÃ©leste'
+          'Pascale', 'Paz', 'Rene', 'Sacha', 'Sasha', 'Simone', 'Valentine', 'Vivian', 'Alix', 'Céleste'
         ]
       }
     },
@@ -789,15 +787,15 @@
       fantasy: {
         f: [
           'Kora', 'Meredith', 'Aelindra', 'Brynhild', 'Caelith', 'Dawnfire', 'Elara', 'Faelith', 'Galindra', 'Haelwyn', 'Ilvara', 'Kaelith', 'Faye', 'Ivory', 'Lysandra',
-          'Lirien', 'Moonwhisper', 'Naerith', 'Odalys', 'Pyrantha', 'Quelith', 'Ryndara', 'Sylvara', 'Thalindra', 'Vexara', 'GalatÃ©a', 'Valkyria', 'Lorna', 'Ophelia',
-          'Marcey', 'Adela', 'Beatrix', 'Clotilde', 'Elowen', 'Genevieve', 'Guinevere', 'Gisela', 'Helena', 'Isolde', 'Maeve', 'Ymir', 'Bridget', 'CalÃ­ope', 'Lysandria',
-          'LÃºmia', 'Nala', 'Lyora', 'Melisande', 'Viola', 'Rowena', 'Sybilla', 'Theodora', 'Yvaine', 'Alys', 'Anora', 'Brangwen', 'Cecily', 'Elysia', 'Nephelia'
+          'Lirien', 'Moonwhisper', 'Naerith', 'Odalys', 'Pyrantha', 'Quelith', 'Ryndara', 'Sylvara', 'Thalindra', 'Vexara', 'Galatéa', 'Valkyria', 'Lorna', 'Ophelia',
+          'Marcey', 'Adela', 'Beatrix', 'Clotilde', 'Elowen', 'Genevieve', 'Guinevere', 'Gisela', 'Helena', 'Isolde', 'Maeve', 'Ymir', 'Bridget', 'Calíope', 'Lysandria',
+          'Lúmia', 'Nala', 'Lyora', 'Melisande', 'Viola', 'Rowena', 'Sybilla', 'Theodora', 'Yvaine', 'Alys', 'Anora', 'Brangwen', 'Cecily', 'Elysia', 'Nephelia'
         ],
         m: [
           'Baltarus', 'Gorn', 'Vernon', 'Fastus', 'Palamidas', 'Darius', 'Klauz', 'Beorn', 'Urssix', 'Caius', 'Cassius', 'Baltor', 'Argus', 'Cragg', 'Garrett', 'Vizimir',
           'Orsted', 'Aldric', 'Brandor', 'Corvain', 'Draveth', 'Eldran', 'Fendral', 'Garrith', 'Halvorn', 'Ironhide', 'Jarek', 'Orn', 'Baldur', 'Iros', 'Quadd',
           'Endrigan', 'Keldric', 'Lorthain', 'Marik', 'Nordred', 'Orveth', 'Pyrax', 'Quelmar', 'Raveth', 'Stormveil', 'Thaddeus', 'Ornstein', 'Bastion', 'Nephelius',
-          'Foghel', 'Alistair', 'Aethelred', 'InÃ¡rius', 'Balian', 'Benedict', 'Cedric', 'Conrad', 'Dorian', 'Eldred', 'Gareth', 'Bastion', 'Gavin', 'Benhart',
+          'Foghel', 'Alistair', 'Aethelred', 'Inárius', 'Balian', 'Benedict', 'Cedric', 'Conrad', 'Dorian', 'Eldred', 'Gareth', 'Bastion', 'Gavin', 'Benhart',
           'Godfrey', 'Gideon', 'Hadrian', 'Kaelen', 'Lionel', 'Luther', 'Merrick', 'Osric', 'Percival', 'Roderick', 'Wolstagg', 'Lars', 'Fulgorn'
         ],
         n: [
@@ -866,13 +864,13 @@
           'Alexa', 'Brooke', 'Cameron', 'Diana', 'Elena', 'Fiona', 'Grace', 'Harper', 'Isla', 'Jade', 'Brie', 'Melissa', 'Vanellope',
           'Kate', 'Leah', 'Maya', 'Naomi', 'Olivia', 'Paige', 'Quinn', 'Ruby', 'Skye', 'Tara', 'Yvaine', 'Gwen', 'Naiobi', 'Nairobi',
           'Alice', 'Ana', 'Beatriz', 'Camila', 'Carolina', 'Clara', 'Emanuelle', 'Emily', 'Gabriela', 'Giovanna',
-          'Helena', 'Isabella', 'Julia', 'Laura', 'LÃ­via', 'Luiza', 'Manuela', 'Maria', 'Mariana', 'Melissa'
+          'Helena', 'Isabella', 'Julia', 'Laura', 'Lívia', 'Luiza', 'Manuela', 'Maria', 'Mariana', 'Melissa'
         ],
         m: [
           'Aiden', 'Blake', 'Cole', 'Dean', 'Ethan', 'Flynn', 'Grant', 'Hudson', 'Ivan', 'Jace', 'Sullivan', 'Barrett', 'Marvin',
           'Kai', 'Leo', 'Marcus', 'Nathan', 'Owen', 'Preston', 'Quinn', 'Ryker', 'Slater', 'Ty', 'Donovan',
           'Arthur', 'Benjamin', 'Bernardo', 'Caio', 'Daniel', 'Davi', 'Eduardo', 'Enzo', 'Gabriel', 'Gustavo',
-          'Heitor', 'Henrique', 'Ian', 'Isaac', 'JoÃ£o', 'Joaquim', 'Lorenzo', 'Lucas', 'Matheus', 'Miguel'
+          'Heitor', 'Henrique', 'Ian', 'Isaac', 'João', 'Joaquim', 'Lorenzo', 'Lucas', 'Matheus', 'Miguel'
         ],
         n: [
           'Ash', 'Bay', 'Blue', 'Brett', 'Brook', 'Cedar', 'Chase', 'Clay', 'Dale', 'Drew', 
@@ -891,7 +889,7 @@
         ],
         classic: [
           'Axiom Technologies', 'Blueprint Systems', 'Catalyst Digital', 'Data Forge', 'Elevation Tech', 'Framework Solutions', 'Genesis Software', 'Horizon Systems', 'Infinity Code', 'Junction Tech',
-          'Sistemas Alfa', 'InovaÃ§Ã£o Digital', 'Tecnologia AvanÃ§ada', 'SoluÃ§Ãµes Integradas', 'Rede Global', 'Engenharia de Sistemas', 'Matriz TecnolÃ³gica', 'Consultoria Computacional', 'Sistemas Conectados', 'DinÃ¢mica Digital'
+          'Sistemas Alfa', 'Inovação Digital', 'Tecnologia Avançada', 'Soluções Integradas', 'Rede Global', 'Engenharia de Sistemas', 'Matriz Tecnológica', 'Consultoria Computacional', 'Sistemas Conectados', 'Dinâmica Digital'
         ],
         playful: [
           'Boop Labs', 'Clickity', 'Doodlecode', 'Fizzbyte', 'Gigglenet', 'Hackle', 'Jingletech', 'Noodledev', 'Pingpong', 'Wizzly', 'Stallion',
@@ -900,26 +898,26 @@
       },
       food: {
         modern: [
-          'AÃ§afrÃ£o', 'Brasa & Co', 'Colheita', 'Deli Roots', 'ÃŠxodo', 'Fresco', 'GrÃ£o', 'Harvest', 'IÃ§ara', 'Jardim',
+          'Açafrão', 'Brasa & Co', 'Colheita', 'Deli Roots', 'Êxodo', 'Fresco', 'Grão', 'Harvest', 'Içara', 'Jardim',
           'BiteLab', 'BowlGreen', 'CraveYard', 'DailyDish', 'FreshFeast', 'GastroHub', 'HerbIvory', 'NutriBox', 'SavorStreet', 'SpiceRoute'
         ],
         classic: [
-          'Casa Grande Restaurante', 'Fazenda Boa Mesa', 'Gastronomia ClÃ¡ssica', 'La Maison Cuisine', 'Mesa Farta', 'Quinta do Sabor', 'Rancho Bom', 'Sabor da Terra', 'TradiÃ§Ã£o Ã  Mesa', 'Vila do Chef',
-          'Sabor Real', 'Tempero d\'Ouro', 'Cantinho do Paladar', 'Fogo de ChÃ£o', 'Bella ItÃ¡lia', 'Panela de Barro', 'Recanto Mineiro', 'Estrela do Mar', 'TradiÃ§Ã£o GaÃºcha', 'Sabores de FamÃ­lia'
+          'Casa Grande Restaurante', 'Fazenda Boa Mesa', 'Gastronomia Clássica', 'La Maison Cuisine', 'Mesa Farta', 'Quinta do Sabor', 'Rancho Bom', 'Sabor da Terra', 'Tradição à Mesa', 'Vila do Chef',
+          'Sabor Real', 'Tempero d\'Ouro', 'Cantinho do Paladar', 'Fogo de Chão', 'Bella Itália', 'Panela de Barro', 'Recanto Mineiro', 'Estrela do Mar', 'Tradição Gaúcha', 'Sabores de Família'
         ],
         playful: [
-          'BocÃ£o', 'ComilanÃ§a', 'DelÃ­cia Express', 'Eita Que Bom', 'Faminto', 'Guloso', 'Happy Spoon', 'LambanÃ§a', 'Nhac!', 'Opa Que Gostoso',
+          'Bocão', 'Comilança', 'Delícia Express', 'Eita Que Bom', 'Faminto', 'Guloso', 'Happy Spoon', 'Lambança', 'Nhac!', 'Opa Que Gostoso',
           'ChilliBomb', 'FireGrill', 'MadSpices', 'RavageEats', 'SmashMonster', 'VikingFeast', 'WildFork', 'SpicySavage', 'MeatHeads', 'VulcanoBite'
         ]
       },
       fashion: {
         modern: [
-          'Ã‚mbar', 'Brume', 'Corda', 'Drap', 'Ã‰clat', 'Filum', 'Grain', 'Hilo', 'IrmÃ£', 'Joia', 'Ivory',
+          'Âmbar', 'Brume', 'Corda', 'Drap', 'Éclat', 'Filum', 'Grain', 'Hilo', 'Irmã', 'Joia', 'Ivory',
           'AuraWear', 'ChicNest', 'DrapeStudio', 'EthosThread', 'FormaModa', 'HaloWear', 'IconicThread', 'LoomLine', 'ModaVibe', 'NovaWeave'
         ],
         classic: [
           'Atelier Beleza', 'Casa de Modas', 'Elegance Studio', 'Fashion House', 'Haute Couture', 'Luxe Wardrobe', 'Maison Chic', 'Noble Thread', 'Prestige Style', 'Royal Atelier',
-          'Alta Costura', 'Bela Estampa', 'Casa da Seda', 'Estilo ClÃ¡ssico', 'Fio de Ouro', 'Moda Imperial', 'Oficina de Estilo', 'Sartoria Fina', 'Tecido Nobre', 'Toque de Seda'
+          'Alta Costura', 'Bela Estampa', 'Casa da Seda', 'Estilo Clássico', 'Fio de Ouro', 'Moda Imperial', 'Oficina de Estilo', 'Sartoria Fina', 'Tecido Nobre', 'Toque de Seda'
         ],
         playful: [
           'Babado', 'Chique Assim', 'Diva Store', 'Estilosa', 'Fashion Lovers', 'Glamour Pop', 'Hype Closet', 'Instastyle', 'Joy Fashion', 'Kilofashion',
@@ -932,36 +930,36 @@
           'PurePlatter', 'BlendBar', 'CrunchBox', 'DeliDrop', 'Eatsy', 'GourmetGo', 'NectarNook', 'OasisGrill', 'SaborModerno', 'ZestyEat'
         ],
         classic: [
-          'Bem-Estar ClÃ­nica', 'Centro de SaÃºde Integral', 'EquilÃ­brio Terapias', 'Harmonia SaÃºde', 'Instituto Vita', 'Medicina Natural', 'NÃºcleo de SaÃºde', 'SaÃºde Total', 'Vitalidade Centro', 'Zen Terapias',
-          'Taberna Real', 'Casa da Massa', 'FogÃ£o Ã  Lenha', 'Cantina Nostra', 'Sabor & Arte', 'Banquete Nobre', 'Tempero Caseiro', 'Churrasco d\'Ouro', 'Doce Encanto', 'Sabor da Terra'
+          'Bem-Estar Clínica', 'Centro de Saúde Integral', 'Equilíbrio Terapias', 'Harmonia Saúde', 'Instituto Vita', 'Medicina Natural', 'Núcleo de Saúde', 'Saúde Total', 'Vitalidade Centro', 'Zen Terapias',
+          'Taberna Real', 'Casa da Massa', 'Fogão à Lenha', 'Cantina Nostra', 'Sabor & Arte', 'Banquete Nobre', 'Tempero Caseiro', 'Churrasco d\'Ouro', 'Doce Encanto', 'Sabor da Terra'
         ],
         playful: [
-          'AbraÃ§oFit', 'BemBom SaÃºde', 'CorpÃ£o', 'Deu ExercÃ­cio', 'FelizFit', 'GraÃ§aDivina', 'Healthgram', 'Iogurtfit', 'Joinha SaÃºde', 'Korrendo',
+          'AbraçoFit', 'BemBom Saúde', 'Corpão', 'Deu Exercício', 'FelizFit', 'GraçaDivina', 'Healthgram', 'Iogurtfit', 'Joinha Saúde', 'Korrendo',
           'SugarRush', 'GuerrillaKitchen', 'StreetCarnivore', 'NeonBites', 'EcoEats', 'ForkRoot', 'PlatePalace', 'FlavorWave', 'SweetArt', 'TastyBite'
         ]
       },
       finance: {
         modern: [
-          'Axio', 'Capita', 'Certo', 'Dime', 'Finra', 'Fluxo', 'GrÃ£o', 'Hertz', 'Ibex', 'Juros',
+          'Axio', 'Capita', 'Certo', 'Dime', 'Finra', 'Fluxo', 'Grão', 'Hertz', 'Ibex', 'Juros',
           'InStyle', 'LuxeLoom', 'ModeStudio', 'OrigamiWear', 'Stylus', 'TrendGrid', 'VogueVibe', 'BespokeArt', 'ConceptDress', 'FabricLab'
         ],
         classic: [
-          'Acerto Financeiro', 'Capital Seguro', 'CrÃ©dito SÃ³lido', 'EstratÃ©gia Wealth', 'Fidelis Finance', 'GestÃ£o Patrimonial', 'HeranÃ§a Consultoria', 'Investimento Certo', 'Justos NegÃ³cios', 'Korvus Capital',
-          'AteliÃª de Paris', 'ClÃ¡ssico Toque', 'ElegÃ¢ncia Real', 'Fina Linha', 'HeranÃ§a de Estilo', 'Loom Tradicional', 'Maison Nobre', 'Ponto d\'Ouro', 'Connelly', 'Seda Pura', 'VestuÃ¡rio Fino', 'Grant',
+          'Acerto Financeiro', 'Capital Seguro', 'Crédito Sólido', 'Estratégia Wealth', 'Fidelis Finance', 'Gestão Patrimonial', 'Herança Consultoria', 'Investimento Certo', 'Justos Negócios', 'Korvus Capital',
+          'Ateliê de Paris', 'Clássico Toque', 'Elegância Real', 'Fina Linha', 'Herança de Estilo', 'Loom Tradicional', 'Maison Nobre', 'Ponto d\'Ouro', 'Connelly', 'Seda Pura', 'Vestuário Fino', 'Grant',
         ],
         playful: [
-          'Boa Grana', 'Conta Alegre', 'Dinheirinho', 'Economizei', 'Faz Sentido', 'Grana Feliz', 'Happy Cash', 'Investe AÃ­', 'Jurinhos', 'Kilodindin',
+          'Boa Grana', 'Conta Alegre', 'Dinheirinho', 'Economizei', 'Faz Sentido', 'Grana Feliz', 'Happy Cash', 'Investe Aí', 'Jurinhos', 'Kilodindin',
           'PunkAtelier', 'RiotFashion', 'GothicSilk', 'StreetArmor', 'AsphaltWear', 'VandalWear', 'AnarchyThread', 'AcidVogue', 'ToxicLoom', 'MetalSartoria'
         ]
       },
       creative: {
         modern: [
-          'Aura', 'Blot', 'Canvas', 'Dab', 'Ã‰tude', 'Form', 'Grain', 'Haze', 'Ink', 'Jarva', 'Tundra',
+          'Aura', 'Blot', 'Canvas', 'Dab', 'Étude', 'Form', 'Grain', 'Haze', 'Ink', 'Jarva', 'Tundra',
           'SilkRoad', 'ThreadBare', 'UrbanChic', 'VelaStudio', 'VogueGrid', 'WeaveCraft', 'Atelier Novo', 'CloakCo', 'EspritWear', 'MinimalThread'
         ],
         classic: [
-          'Arte & Forma Studio', 'Atelier Criativo', 'Casa das Artes', 'Design ClÃ¡ssico', 'EstÃºdio Beleza', 'Forma e Arte', 'Galeria Criativa', 'Harmonia Studio', 'Instituto de Design', 'Jardim das Artes',
-          'Alta Costura', 'Bela Estampa', 'Casa da Seda', 'Estilo ClÃ¡ssico', 'Fio de Ouro', 'Moda Imperial', 'Oficina de Estilo', 'Sartoria Fina', 'Tecido Nobre', 'Toque de Seda'
+          'Arte & Forma Studio', 'Atelier Criativo', 'Casa das Artes', 'Design Clássico', 'Estúdio Beleza', 'Forma e Arte', 'Galeria Criativa', 'Harmonia Studio', 'Instituto de Design', 'Jardim das Artes',
+          'Alta Costura', 'Bela Estampa', 'Casa da Seda', 'Estilo Clássico', 'Fio de Ouro', 'Moda Imperial', 'Oficina de Estilo', 'Sartoria Fina', 'Tecido Nobre', 'Toque de Seda'
         ],
         playful: [
           'Borrifada', 'Colorex', 'Doodle Studio', 'Esguicho', 'Flipfop Design', 'Garatujas', 'Hagaki Art', 'Irriquieto Studio', 'Jogando Tinta', 'Kreativoz',
@@ -971,7 +969,7 @@
     }
   };
 
-  // â”€â”€ STATE â”€â”€
+  // ── STATE ──
   let currentTab = 'baby';
 
   function setTab(tab, btn) {
@@ -1040,7 +1038,7 @@
     toast.classList.add('show');
     setTimeout(() => toast.classList.remove('show'), 2000);
   }
-// â”€â”€ SIDEBAR â”€â”€
+// ── SIDEBAR ──
 function toggleSidebar(){
   document.getElementById('sidebar').classList.toggle('open');
   document.getElementById('nav-overlay').classList.toggle('open');
@@ -1050,7 +1048,7 @@ function closeSidebar(){
   document.getElementById('nav-overlay').classList.remove('open');
 }
 
-// â”€â”€ SEÃ‡Ã•ES â”€â”€
+// ── SEÇÕES ──
 function showConv(id){
   document.querySelectorAll('.conv-section').forEach(s=>s.classList.remove('conv-active'));
   const target = document.getElementById('conv-'+id);
@@ -1063,7 +1061,7 @@ function showConv(id){
   if(id==='kitchen') convKitchen();
 }
 
-// â”€â”€ PESO â”€â”€
+// ── PESO ──
 const wKg={kg:1,lb:0.453592,oz:0.0283495,g:0.001};
 function convWeight(){
   const f=document.getElementById('w-from').value;
@@ -1072,38 +1070,38 @@ function convWeight(){
   document.getElementById('w-result').textContent=rnd(v*wKg[f]/wKg[t])+' '+t;
 }
 
-// â”€â”€ TEMPERATURA â”€â”€
+// ── TEMPERATURA ──
 function convTemp(){
   const f=document.getElementById('t-from').value;
   const t=document.getElementById('t-to').value;
   let v=parseFloat(document.getElementById('t-val').value);
-  if(isNaN(v)){document.getElementById('t-result').textContent='â€”';return;}
+  if(isNaN(v)){document.getElementById('t-result').textContent='—';return;}
   let c=f==='c'?v:f==='f'?(v-32)*5/9:v-273.15;
   let res=t==='c'?c:t==='f'?c*9/5+32:c+273.15;
-  const u=t==='c'?'Â°C':t==='f'?'Â°F':'K';
+  const u=t==='c'?'°C':t==='f'?'°F':'K';
   document.getElementById('t-result').textContent=rnd(res)+' '+u;
 }
 
-// â”€â”€ COZINHA â”€â”€
+// ── COZINHA ──
 const kMl={cup_br:200,cup_us:240,tbsp:15,tsp:5,ml:1,floz:30};
 function convKitchen(){
   const f=document.getElementById('k-from').value;
   const t=document.getElementById('k-to').value;
   const v=parseFloat(document.getElementById('k-val').value)||0;
-  const lb={cup_br:lang==='pt'?'xÃ­cara(s) BR':'cup(s) BR',cup_us:lang==='pt'?'xÃ­cara(s) US':'cup(s) US',tbsp:'tbsp',tsp:'tsp',ml:'ml',floz:'fl oz'};
+  const lb={cup_br:lang==='pt'?'xícara(s) BR':'cup(s) BR',cup_us:lang==='pt'?'xícara(s) US':'cup(s) US',tbsp:'tbsp',tsp:'tsp',ml:'ml',floz:'fl oz'};
   document.getElementById('k-result').textContent=rnd(v*kMl[f]/kMl[t])+' '+lb[t];
   const warn=document.getElementById('k-warning');
   if(f==='cup_br'||t==='cup_br'||f==='cup_us'||t==='cup_us'){
     warn.textContent=lang==='pt'
-      ?'âš ï¸ AtenÃ§Ã£o: a xÃ­cara brasileira tem 200ml. A xÃ­cara americana (cup) tem 240ml. Verifique o padrÃ£o da sua receita.'
-      :'âš ï¸ Note: Brazilian cup = 200ml. US cup = 240ml. Check which standard your recipe uses.';
+      ?'⚠️ Atenção: a xícara brasileira tem 200ml. A xícara americana (cup) tem 240ml. Verifique o padrão da sua receita.'
+      :'⚠️ Note: Brazilian cup = 200ml. US cup = 240ml. Check which standard your recipe uses.';
     warn.classList.add('show');
   } else {
     warn.classList.remove('show');
   }
 }
 
-// â”€â”€ ROUPA â”€â”€
+// ── ROUPA ──
 let clothTab='top';
 function setClothTab(tab,btn){
   clothTab=tab;
@@ -1122,10 +1120,10 @@ function hlCloth(type){
   if(val!==''){const row=document.getElementById(p+val);if(row)row.classList.add('row-hl');}
 }
 
-// â”€â”€ ARREDONDAMENTO â”€â”€
+// ── ARREDONDAMENTO ──
 function rnd(n){return Math.round(n*10000)/10000;}
 
-// â”€â”€ TRADUÃ‡ÃƒO SIDEBAR E CONVERSORES â”€â”€
+// ── TRADUÇÃO SIDEBAR E CONVERSORES ──
 function translateConverters(t){
   const ids={
     'ns-names-label':t.nsNames,'ns-conv-label':t.nsConv,
@@ -1152,31 +1150,7 @@ function translateConverters(t){
   const kw=document.getElementById('k-warning');
   if(kw&&kw.classList.contains('show')) convKitchen();
 }
-  // â”€â”€ SIDEBAR â”€â”€
-function toggleSidebar(){
-  document.getElementById('sidebar').classList.toggle('open');
-  document.getElementById('nav-overlay').classList.toggle('open');
-}
-function closeSidebar(){
-  document.getElementById('sidebar').classList.remove('open');
-  document.getElementById('nav-overlay').classList.remove('open');
-}
-
-// â”€â”€ SEÃ‡Ã•ES â”€â”€
-function showConv(id){
-  document.querySelectorAll('.conv-section').forEach(s=>s.classList.remove('conv-active'));
-  const target=document.getElementById('conv-'+id);
-  if(target)target.classList.add('conv-active');
-  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('nav-active'));
-  document.getElementById('ni-'+id).classList.add('nav-active');
-  closeSidebar();
-  if(id==='weight')convWeight();
-  if(id==='temp')convTemp();
-  if(id==='kitchen')convKitchen();
-}
-
-
-  // â”€â”€ CSS ANIMATION â”€â”€
+  // ── CSS ANIMATION ──
   const style = document.createElement('style');
   style.textContent = `
     @keyframes fadeUp {
@@ -1187,17 +1161,17 @@ function showConv(id){
   document.head.appendChild(style);
 </script>
   <section style="max-width: 800px; margin: 40px auto; padding: 20px; line-height: 1.8; color: #f0ede6; opacity: 0.9;">
-    <h2 id="about-title" style="color: #e8c77a; margin-bottom: 20px; font-family: 'Playfair Display', serif;">O que Ã© o NameForge?</h2>
+    <h2 id="about-title" style="color: #e8c77a; margin-bottom: 20px; font-family: 'Playfair Display', serif;">O que é o NameForge?</h2>
     
-    <p id="about-p1">O <strong>NameForge</strong> Ã© uma ferramenta online gratuita desenvolvida para auxiliar EMPREENDEDORES, criadores de conteÃºdo e escritores a encontrar a identidade perfeita para seus projetos. Sabemos que a escolha de um nome Ã© uma das etapas mais cruciais na criaÃ§Ã£o de uma marca ou personagem, pois ela carrega a primeira impressÃ£o e a essÃªncia do que estÃ¡ sendo construÃ­do. Nosso algoritmo organiza sugestÃµes baseadas em diferentes NICHOS e estilos, facilitando o processo de brainstorming.</p>
+    <p id="about-p1">O <strong>NameForge</strong> é uma ferramenta online gratuita desenvolvida para auxiliar EMPREENDEDORES, criadores de conteúdo e escritores a encontrar a identidade perfeita para seus projetos. Sabemos que a escolha de um nome é uma das etapas mais cruciais na criação de uma marca ou personagem, pois ela carrega a primeira impressão e a essência do que está sendo construído. Nosso algoritmo organiza sugestões baseadas em diferentes NICHOS e estilos, facilitando o processo de brainstorming.</p>
 
-    <p id="about-p2">AlÃ©m de ser um gerador de NOMES COMERCIAIS, o NameForge oferece versatilidade para o universo criativo. Seja vocÃª um jogador procurando um NICKNAME ou NAMETAG Ãºnico para sua conta, um autor desenvolvendo nomes para personagens de ficÃ§Ã£o ou um desenvolvedor em busca de nomes para APLICATIVOS e STARTUPS, a plataforma entrega resultados rÃ¡pidos e diversificados. Nossa missÃ£o Ã© eliminar o bloqueio criativo e fornecer inspiraÃ§Ã£o instantÃ¢nea com apenas alguns cliques.</p>
+    <p id="about-p2">Além de ser um gerador de NOMES COMERCIAIS, o NameForge oferece versatilidade para o universo criativo. Seja você um jogador procurando um NICKNAME ou NAMETAG único para sua conta, um autor desenvolvendo nomes para personagens de ficção ou um desenvolvedor em busca de nomes para APLICATIVOS e STARTUPS, a plataforma entrega resultados rápidos e diversificados. Nossa missão é eliminar o bloqueio criativo e fornecer inspiração instantânea com apenas alguns cliques.</p>
 
-    <p id="about-p3">Ter um nome estratÃ©gico Ã© fundamental para o sucesso digital e para o RECONHECIMENTO de marca. Por isso, o NameForge Ã© constantemente atualizado com novas bases de dados que refletem as tendÃªncias modernas de mercado e entretenimento. AlÃ©m de nomes para empresas e personagens, a ferramenta pode ser utilizada para batizar novos animais de estimaÃ§Ã£o, projetos acadÃªmicos ou qualquer iniciativa que demande um toque de originalidade e exclusividade.</p>
+    <p id="about-p3">Ter um nome estratégico é fundamental para o sucesso digital e para o RECONHECIMENTO de marca. Por isso, o NameForge é constantemente atualizado com novas bases de dados que refletem as tendências modernas de mercado e entretenimento. Além de nomes para empresas e personagens, a ferramenta pode ser utilizada para batizar novos animais de estimação, projetos acadêmicos ou qualquer iniciativa que demande um toque de originalidade e exclusividade.</p>
   </section>
-  <!-- â”€â”€ CONVERSORES â”€â”€ -->
+  <!-- ── CONVERSORES ── -->
 <div id="conv-weight" class="conv-section" style="max-width:720px;margin:0 auto;padding:0 20px 60px">
-  <div class="section-heading" id="ch-weight">âš–ï¸ Conversor de Peso</div>
+  <div class="section-heading" id="ch-weight">⚖️ Conversor de Peso</div>
   <div class="section-sub" id="cs-weight">Converta kg, lb, oz e gramas instantaneamente</div>
   <div class="card">
     <div class="conv-row">
@@ -1205,7 +1179,7 @@ function showConv(id){
         <select id="w-from" onchange="convWeight()">
           <option value="kg" id="wo-kg">Quilograma (kg)</option>
           <option value="lb" id="wo-lb">Libra (lb)</option>
-          <option value="oz" id="wo-oz">OnÃ§a (oz)</option>
+          <option value="oz" id="wo-oz">Onça (oz)</option>
           <option value="g" id="wo-g">Grama (g)</option>
         </select>
       </div>
@@ -1213,65 +1187,65 @@ function showConv(id){
         <select id="w-to" onchange="convWeight()">
           <option value="lb" id="wo-lb2">Libra (lb)</option>
           <option value="kg" id="wo-kg2">Quilograma (kg)</option>
-          <option value="oz" id="wo-oz2">OnÃ§a (oz)</option>
+          <option value="oz" id="wo-oz2">Onça (oz)</option>
           <option value="g" id="wo-g2">Grama (g)</option>
         </select>
       </div>
     </div>
     <label class="conv-label" id="cl-val">Valor</label>
     <input type="number" id="w-val" value="1" oninput="convWeight()" />
-    <div class="conv-result" id="w-result">â€”</div>
+    <div class="conv-result" id="w-result">—</div>
   </div>
 </div>
 
 <div id="conv-temp" class="conv-section" style="max-width:720px;margin:0 auto;padding:0 20px 60px">
-  <div class="section-heading" id="ch-temp">ðŸŒ¡ï¸ Conversor de Temperatura</div>
+  <div class="section-heading" id="ch-temp">🌡️ Conversor de Temperatura</div>
   <div class="section-sub" id="cs-temp">Celsius, Fahrenheit e Kelvin</div>
   <div class="card">
     <div class="conv-row">
       <div><label class="conv-label">De</label>
         <select id="t-from" onchange="convTemp()">
-          <option value="c">Celsius (Â°C)</option>
-          <option value="f">Fahrenheit (Â°F)</option>
+          <option value="c">Celsius (°C)</option>
+          <option value="f">Fahrenheit (°F)</option>
           <option value="k">Kelvin (K)</option>
         </select>
       </div>
       <div><label class="conv-label">Para</label>
         <select id="t-to" onchange="convTemp()">
-          <option value="f">Fahrenheit (Â°F)</option>
-          <option value="c">Celsius (Â°C)</option>
+          <option value="f">Fahrenheit (°F)</option>
+          <option value="c">Celsius (°C)</option>
           <option value="k">Kelvin (K)</option>
         </select>
       </div>
     </div>
     <label class="conv-label">Valor</label>
     <input type="number" id="t-val" value="25" oninput="convTemp()" />
-    <div class="conv-result" id="t-result">â€”</div>
+    <div class="conv-result" id="t-result">—</div>
   </div>
   <div class="card">
-    <p style="color:var(--accent);font-family:'Playfair Display',serif;margin-bottom:12px" id="ct-ref">ðŸ“Œ ReferÃªncias rÃ¡pidas</p>
+    <p style="color:var(--accent);font-family:'Playfair Display',serif;margin-bottom:12px" id="ct-ref">📌 Referências rápidas</p>
     <table class="conv-table">
-      <tr><th>Â°C</th><th>Â°F</th><th id="ct-situation">SituaÃ§Ã£o</th></tr>
-      <tr><td>0Â°C</td><td>32Â°F</td><td id="ct-r1">Ponto de congelamento</td></tr>
-      <tr><td>20Â°C</td><td>68Â°F</td><td id="ct-r2">Temperatura ambiente</td></tr>
-      <tr><td>37Â°C</td><td>98.6Â°F</td><td id="ct-r3">Temperatura corporal</td></tr>
-      <tr><td>100Â°C</td><td>212Â°F</td><td id="ct-r4">Ponto de ebuliÃ§Ã£o</td></tr>
-      <tr><td>180Â°C</td><td>356Â°F</td><td id="ct-r5">Forno mÃ©dio (culinÃ¡ria)</td></tr>
+      <tr><th>°C</th><th>°F</th><th id="ct-situation">Situação</th></tr>
+      <tr><td>0°C</td><td>32°F</td><td id="ct-r1">Ponto de congelamento</td></tr>
+      <tr><td>20°C</td><td>68°F</td><td id="ct-r2">Temperatura ambiente</td></tr>
+      <tr><td>37°C</td><td>98.6°F</td><td id="ct-r3">Temperatura corporal</td></tr>
+      <tr><td>100°C</td><td>212°F</td><td id="ct-r4">Ponto de ebulição</td></tr>
+      <tr><td>180°C</td><td>356°F</td><td id="ct-r5">Forno médio (culinária)</td></tr>
     </table>
   </div>
 </div>
 
 <div id="conv-kitchen" class="conv-section" style="max-width:720px;margin:0 auto;padding:0 20px 60px">
-  <div class="section-heading" id="ch-kitchen">ðŸ³ Medidas de Cozinha</div>
-  <div class="section-sub" id="cs-kitchen">Converta xÃ­caras, colheres, ml e fl oz</div>
+  <div class="section-heading" id="ch-kitchen">🍳 Medidas de Cozinha</div>
+  <div class="section-sub" id="cs-kitchen">Converta xícaras, colheres, ml e fl oz</div>
   <div class="card">
     <div class="conv-row">
       <div><label class="conv-label">De</label>
         <select id="k-from" onchange="convKitchen()">
-          <option value="cup_br" id="ko-cupbr">XÃ­cara BR (200ml)</option>
-          <option value="cup_us" id="ko-cupus">XÃ­cara US (240ml)</option>
+          <option value="cup_br" id="ko-cupbr">Xícara BR (200ml)</option>
+          <option value="cup_us" id="ko-cupus">Xícara US (240ml)</option>
           <option value="tbsp" id="ko-tbsp">Colher de sopa (15ml)</option>
-          <option value="tsp" id="ko-tsp">Colher de chÃ¡ (5ml)</option>
+          <option value="tsp" id="ko-tsp">Colher de chá (5ml)</option>
           <option value="ml" id="ko-ml">Mililitro (ml)</option>
           <option value="floz" id="ko-floz">Fl oz (30ml)</option>
         </select>
@@ -1279,40 +1253,40 @@ function showConv(id){
       <div><label class="conv-label">Para</label>
         <select id="k-to" onchange="convKitchen()">
           <option value="ml" id="ko-ml2">Mililitro (ml)</option>
-          <option value="cup_br" id="ko-cupbr2">XÃ­cara BR (200ml)</option>
-          <option value="cup_us" id="ko-cupus2">XÃ­cara US (240ml)</option>
+          <option value="cup_br" id="ko-cupbr2">Xícara BR (200ml)</option>
+          <option value="cup_us" id="ko-cupus2">Xícara US (240ml)</option>
           <option value="tbsp" id="ko-tbsp2">Colher de sopa (15ml)</option>
-          <option value="tsp" id="ko-tsp2">Colher de chÃ¡ (5ml)</option>
+          <option value="tsp" id="ko-tsp2">Colher de chá (5ml)</option>
           <option value="floz" id="ko-floz2">Fl oz (30ml)</option>
         </select>
       </div>
     </div>
     <label class="conv-label">Quantidade</label>
     <input type="number" id="k-val" value="1" oninput="convKitchen()" />
-    <div class="conv-result" id="k-result">â€”</div>
+    <div class="conv-result" id="k-result">—</div>
     <div class="conv-warning" id="k-warning"></div>
   </div>
   <div class="card">
-    <p style="color:var(--accent);font-family:'Playfair Display',serif;margin-bottom:12px" id="ck-ref">ðŸ“Œ Tabela de equivalÃªncia</p>
+    <p style="color:var(--accent);font-family:'Playfair Display',serif;margin-bottom:12px" id="ck-ref">📌 Tabela de equivalência</p>
     <table class="conv-table">
       <tr><th id="ck-th1">Medida</th><th>ml</th><th id="ck-th2">Equivale a</th></tr>
-      <tr><td id="ck-r1a">1 xÃ­cara BR</td><td>200ml</td><td id="ck-r1b">â‰ˆ 13 col. de sopa</td></tr>
-      <tr><td id="ck-r2a">1 xÃ­cara US</td><td>240ml</td><td id="ck-r2b">16 col. de sopa</td></tr>
-      <tr><td id="ck-r3a">1 col. sopa</td><td>15ml</td><td id="ck-r3b">3 col. de chÃ¡</td></tr>
-      <tr><td id="ck-r4a">1 col. chÃ¡</td><td>5ml</td><td id="ck-r4b">â€”</td></tr>
+      <tr><td id="ck-r1a">1 xícara BR</td><td>200ml</td><td id="ck-r1b">≈ 13 col. de sopa</td></tr>
+      <tr><td id="ck-r2a">1 xícara US</td><td>240ml</td><td id="ck-r2b">16 col. de sopa</td></tr>
+      <tr><td id="ck-r3a">1 col. sopa</td><td>15ml</td><td id="ck-r3b">3 col. de chá</td></tr>
+      <tr><td id="ck-r4a">1 col. chá</td><td>5ml</td><td id="ck-r4b">—</td></tr>
       <tr><td id="ck-r5a">1 fl oz</td><td>30ml</td><td id="ck-r5b">2 col. de sopa</td></tr>
     </table>
   </div>
 </div>
 
 <div id="conv-clothing" class="conv-section" style="max-width:720px;margin:0 auto;padding:0 20px 60px">
-  <div class="section-heading" id="ch-clothing">ðŸ‘• Tamanho de Roupa</div>
-  <div class="section-sub" id="cs-clothing">Converta entre BR, US, EU â€” camisas, calÃ§as e calÃ§ados</div>
+  <div class="section-heading" id="ch-clothing">👕 Tamanho de Roupa</div>
+  <div class="section-sub" id="cs-clothing">Converta entre BR, US, EU — camisas, calças e calçados</div>
   <div class="card">
     <div class="tabs" style="margin-bottom:20px">
       <button class="tab active" onclick="setClothTab('top',this)" id="clt-top">Camisas</button>
-      <button class="tab" onclick="setClothTab('pants',this)" id="clt-pants">CalÃ§as</button>
-      <button class="tab" onclick="setClothTab('shoes',this)" id="clt-shoes">CalÃ§ados</button>
+      <button class="tab" onclick="setClothTab('pants',this)" id="clt-pants">Calças</button>
+      <button class="tab" onclick="setClothTab('shoes',this)" id="clt-shoes">Calçados</button>
     </div>
     <div id="cl-top">
       <label class="conv-label" id="cl-select-label">Selecione seu tamanho BR</label>
@@ -1335,7 +1309,7 @@ function showConv(id){
       </table>
     </div>
     <div id="cl-pants" style="display:none">
-      <label class="conv-label">Selecione seu nÃºmero BR</label>
+      <label class="conv-label">Selecione seu número BR</label>
       <select id="cl-pants-sel" onchange="hlCloth('pants')">
         <option value="">-- Escolha --</option>
         <option value="0">36 (70cm)</option><option value="1">38 (74cm)</option>
@@ -1356,7 +1330,7 @@ function showConv(id){
       </table>
     </div>
     <div id="cl-shoes" style="display:none">
-      <label class="conv-label">Selecione seu nÃºmero BR</label>
+      <label class="conv-label">Selecione seu número BR</label>
       <select id="cl-shoes-sel" onchange="hlCloth('shoes')">
         <option value="">-- Escolha --</option>
         <option value="0">34</option><option value="1">35</option><option value="2">36</option>
@@ -1365,7 +1339,7 @@ function showConv(id){
         <option value="9">43</option><option value="10">44</option>
       </select>
       <table class="conv-table" style="margin-top:14px">
-        <tr><th>BR</th><th>US â™€</th><th>US â™‚</th><th>EU</th><th>UK</th></tr>
+        <tr><th>BR</th><th>US ♀</th><th>US ♂</th><th>EU</th><th>UK</th></tr>
         <tr id="cs0"><td>34</td><td>4</td><td>3</td><td>34</td><td>2</td></tr>
         <tr id="cs1"><td>35</td><td>5</td><td>4</td><td>35</td><td>3</td></tr>
         <tr id="cs2"><td>36</td><td>6</td><td>4.5</td><td>36</td><td>3.5</td></tr>
@@ -1386,7 +1360,7 @@ function showConv(id){
 <!-- Fim do codigo Contador -->
   <footer style="text-align: center; padding: 40px 20px; border-top: 1px solid #1e1e24; margin-top: 50px;">
     <p style="color: #888; font-size: 14px;">&copy; 2026 NameForge</p>
-    <a href="privacidade.html" style="color: #e8c77a; text-decoration: none; font-size: 14px; font-weight: 500;">PolÃ­tica de Privacidade</a> |
+    <a href="privacidade.html" style="color: #e8c77a; text-decoration: none; font-size: 14px; font-weight: 500;">Política de Privacidade</a> |
 <a href="about.html" style="color: #e8c77a; text-decoration: none; font-size: 14px;">Sobre</a> |
 <a href="contact.html" style="color: #e8c77a; text-decoration: none; font-size: 14px;">Contato</a> |
 <a href="terms.html" style="color: #e8c77a; text-decoration: none; font-size: 14px;">Termos</a>
