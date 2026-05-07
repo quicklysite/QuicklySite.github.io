@@ -1,20 +1,24 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3FEPS5KJLN"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-3FEPS5KJLN');
-  </script>
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3FEPS5KJLN"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3FEPS5KJLN');
+</script>
   <meta name="google-site-verification" content="J598geleuRAfDioJqAjsRrwJafNAv85DJRXaYhJwQFU" />
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NameForge – Gerador de Nomes / Name Generator</title>
+  <title>NameForge â€“ Gerador de Nomes / Name Generator</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
 
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8800851624013593" crossorigin="anonymous"></script>
+  <!-- ADSENSE: substitua pelo seu cÃ³digo real -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8800851624013593"
+     crossorigin="anonymous"></script>
 
   <style>
     :root {
@@ -22,110 +26,1370 @@
       --surface: #16161a;
       --surface2: #1e1e24;
       --accent: #e8c77a;
+      --accent2: #c4a45a;
       --text: #f0ede6;
       --muted: #888;
       --radius: 14px;
     }
+
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; min-height: 100vh; }
-    header { padding: 32px 24px; text-align: center; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* â”€â”€ BACKGROUND TEXTURE â”€â”€ */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 20% 10%, rgba(232,199,122,.07) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 80% at 85% 90%, rgba(196,164,90,.05) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+   
+    /* â”€â”€ LANGUAGE POPUP â”€â”€ */
+    #lang-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.75);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+    }
+
+    #lang-box {
+      background: var(--surface);
+      border: 1px solid rgba(232,199,122,.25);
+      border-radius: 20px;
+      padding: 48px 40px;
+      text-align: center;
+      max-width: 420px;
+      width: 90%;
+      box-shadow: 0 24px 80px rgba(0,0,0,.6);
+      animation: popIn .4s cubic-bezier(.34,1.56,.64,1);
+    }
+
+    @keyframes popIn {
+      from { opacity:0; transform: scale(.88) translateY(20px); }
+      to   { opacity:1; transform: scale(1) translateY(0); }
+    }
+
+    #lang-box .globe {
+      font-size: 44px;
+      margin-bottom: 16px;
+    }
+
+    #lang-box h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    #lang-box p {
+      color: var(--muted);
+      font-size: .9rem;
+      margin-bottom: 32px;
+      line-height: 1.5;
+    }
+
+    .lang-btns {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .lang-btn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--surface2);
+      border: 1.5px solid rgba(232,199,122,.2);
+      color: var(--text);
+      padding: 14px 28px;
+      border-radius: 50px;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1rem;
+      font-weight: 500;
+      transition: all .25s;
+    }
+
+    .lang-btn:hover {
+      border-color: var(--accent);
+      background: rgba(232,199,122,.1);
+      transform: translateY(-2px);
+    }
+
+    .lang-btn .flag { font-size: 1.4rem; }
+
+    /* â”€â”€ HEADER â”€â”€ */
+    header {
+      position: relative;
+      z-index: 1;
+      padding: 32px 24px 0;
+      text-align: center;
+    }
+
+    header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.2rem, 6vw, 3.8rem);
+      font-weight: 900;
+      letter-spacing: -1px;
+      line-height: 1.1;
+    }
+
     header h1 span { color: var(--accent); }
-    main { max-width: 720px; margin: 0 auto; padding: 0 20px 60px; }
-    .card { background: var(--surface); border: 1px solid rgba(255,255,255,.07); border-radius: 20px; padding: 36px; margin-bottom: 20px; }
-    .tabs { display: flex; gap: 8px; margin-bottom: 28px; background: var(--surface2); padding: 6px; border-radius: 50px; }
-    .tab { flex: 1; padding: 10px 0; border: none; background: transparent; color: var(--muted); cursor: pointer; border-radius: 50px; font-weight: 500; }
-    .tab.active { background: var(--accent); color: #0d0d0f; }
-    .control-group { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
-    select, input { background: var(--surface2); border: 1.5px solid rgba(255,255,255,.08); color: var(--text); padding: 12px; border-radius: 10px; width: 100%; }
-    .btn-generate { width: 100%; padding: 16px; background: var(--accent); color: #0d0d0f; border: none; border-radius: 50px; font-weight: 700; cursor: pointer; }
-    .results { margin-top: 24px; display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; }
-    .name-chip { background: var(--surface2); padding: 14px; border-radius: 10px; text-align: center; cursor: pointer; }
-    footer { text-align: center; padding: 40px 20px; border-top: 1px solid #1e1e24; color: var(--muted); font-size: 14px; }
-    footer a { color: var(--accent); text-decoration: none; margin: 0 10px; }
-    .conv-section { display: none; }
-    .conv-active { display: block; }
-    #menu-btn { position: fixed; top: 15px; left: 15px; z-index: 1001; background: var(--surface); border: 1px solid var(--accent); color: #fff; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; }
-    #sidebar { position: fixed; top: 0; left: 0; width: 250px; height: 100%; background: var(--surface); z-index: 1000; transform: translateX(-100%); transition: 0.3s; padding-top: 60px; }
-    #sidebar.open { transform: translateX(0); }
-    .nav-item { padding: 15px 25px; cursor: pointer; border-bottom: 1px solid rgba(255,255,255,0.05); }
-    .nav-item:hover { color: var(--accent); }
+
+    header p.tagline {
+      color: var(--muted);
+      margin-top: 10px;
+      font-size: .95rem;
+      font-weight: 300;
+    }
+
+    /* â”€â”€ AD SLOT TOP â”€â”€ */
+    .ad-slot {
+      position: relative;
+      z-index: 1;
+      margin: 24px auto;
+      max-width: 728px;
+      width: 90%;
+      min-height: 90px;
+      background: var(--surface);
+      border: 1px dashed rgba(255,255,255,.08);
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: .75rem;
+    }
+
+    /* â”€â”€ MAIN CARD â”€â”€ */
+    main {
+      position: relative;
+      z-index: 1;
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 20px 60px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid rgba(255,255,255,.07);
+      border-radius: 20px;
+      padding: 36px;
+      margin-bottom: 20px;
+    }
+
+    /* â”€â”€ TABS â”€â”€ */
+    .tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 28px;
+      background: var(--surface2);
+      padding: 6px;
+      border-radius: 50px;
+    }
+
+    .tab {
+      flex: 1;
+      padding: 10px 0;
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      border-radius: 50px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: .9rem;
+      font-weight: 500;
+      transition: all .2s;
+    }
+
+    .tab.active {
+      background: var(--accent);
+      color: #0d0d0f;
+    }
+
+    /* â”€â”€ CONTROLS â”€â”€ */
+    .control-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .control-group label {
+      font-size: .8rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    select, input[type="number"] {
+      background: var(--surface2);
+      border: 1.5px solid rgba(255,255,255,.08);
+      color: var(--text);
+      padding: 12px 16px;
+      border-radius: 10px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: .95rem;
+      width: 100%;
+      appearance: none;
+      outline: none;
+      transition: border-color .2s;
+    }
+
+    select:focus, input[type="number"]:focus {
+      border-color: var(--accent);
+    }
+
+    .row { display: flex; gap: 16px; }
+    .row .control-group { flex: 1; }
+
+    /* â”€â”€ GENERATE BUTTON â”€â”€ */
+    .btn-generate {
+      width: 100%;
+      padding: 16px;
+      background: var(--accent);
+      color: #0d0d0f;
+      border: none;
+      border-radius: 50px;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all .25s;
+      letter-spacing: .02em;
+    }
+
+    .btn-generate:hover {
+      background: var(--accent2);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(232,199,122,.25);
+    }
+
+    .btn-generate:active { transform: translateY(0); }
+
+    /* â”€â”€ RESULTS â”€â”€ */
+    .results {
+      margin-top: 24px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 12px;
+    }
+
+    .name-chip {
+      background: var(--surface2);
+      border: 1px solid rgba(255,255,255,.06);
+      border-radius: 10px;
+      padding: 14px 16px;
+      font-size: 1rem;
+      font-weight: 500;
+      text-align: center;
+      cursor: pointer;
+      transition: all .2s;
+      position: relative;
+    }
+
+    .name-chip:hover {
+      border-color: var(--accent);
+      background: rgba(232,199,122,.08);
+    }
+
+    .name-chip::after {
+      content: 'ðŸ“‹';
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: .75rem;
+      opacity: 0;
+      transition: opacity .2s;
+    }
+
+    .name-chip:hover::after { opacity: 1; }
+
+    .copy-toast {
+      position: fixed;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: var(--accent);
+      color: #0d0d0f;
+      padding: 10px 24px;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: .9rem;
+      opacity: 0;
+      transition: all .3s;
+      z-index: 100;
+      pointer-events: none;
+    }
+
+    .copy-toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* â”€â”€ AD SLOT MID â”€â”€ */
+
+    /* â”€â”€ FOOTER â”€â”€ */
+    footer {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      color: var(--muted);
+      font-size: .78rem;
+      padding: 0 20px 40px;
+    }
+/* â”€â”€ MENU HAMBURGUER + SIDEBAR â”€â”€ */
+#menu-btn {
+  position: fixed; top: 15px; left: 15px; z-index: 1001;
+  background: rgba(22,22,26,.9); border: 1px solid rgba(232,199,122,.4);
+  backdrop-filter: blur(8px); color: #f0ede6;
+  width: 44px; height: 44px; border-radius: 50px;
+  font-size: 1.3rem; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 15px rgba(0,0,0,.5); transition: all .2s;
+}
+#menu-btn:hover { border-color: var(--accent); }
+#nav-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,.5);
+  z-index: 800; opacity: 0; pointer-events: none; transition: opacity .3s;
+}
+#nav-overlay.open { opacity: 1; pointer-events: all; }
+#sidebar {
+  position: fixed; top: 0; left: 0; width: 270px; height: 100%;
+  background: var(--surface); border-right: 1px solid rgba(255,255,255,.07);
+  z-index: 900; transform: translateX(-100%);
+  transition: transform .3s cubic-bezier(.4,0,.2,1);
+  display: flex; flex-direction: column; padding: 24px 0; overflow-y: auto;
+}
+#sidebar.open { transform: translateX(0); }
+.sidebar-logo {
+  font-family: 'Playfair Display', serif; font-size: 1.3rem;
+  color: var(--accent); padding: 0 24px 20px;
+  border-bottom: 1px solid rgba(255,255,255,.07); margin-bottom: 12px;
+}
+.nav-section {
+  padding: 8px 24px; color: var(--muted);
+  font-size: .7rem; text-transform: uppercase; letter-spacing: .1em; margin-top: 8px;
+}
+.nav-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 24px; cursor: pointer; color: var(--text);
+  font-weight: 500; font-size: .92rem;
+  transition: all .2s; border-left: 3px solid transparent;
+}
+.nav-item:hover, .nav-item.nav-active {
+  background: rgba(232,199,122,.08);
+  border-left-color: var(--accent); color: var(--accent);
+}
+/* â”€â”€ CONVERSORES â”€â”€ */
+.conv-section { display: none; }
+.conv-section.conv-active { display: block; animation: fadeUp .3s ease both; }
+.conv-result {
+  background: rgba(232,199,122,.07); border: 1.5px solid rgba(232,199,122,.25);
+  border-radius: 12px; padding: 18px 20px;
+  font-family: 'Playfair Display', serif; font-size: 1.5rem;
+  color: var(--accent); text-align: center; margin-top: 16px;
+  min-height: 60px; display: flex; align-items: center; justify-content: center;
+}
+.conv-label {
+  font-size: .8rem; color: var(--muted);
+  text-transform: uppercase; letter-spacing: .08em;
+  margin-bottom: 6px; display: block;
+}
+.conv-row { display: flex; gap: 14px; margin-bottom: 16px; }
+.conv-row > * { flex: 1; }
+.conv-group { margin-bottom: 16px; }
+.conv-table { width: 100%; border-collapse: collapse; margin-top: 14px; font-size: .88rem; }
+.conv-table th { background: rgba(232,199,122,.1); color: var(--accent); padding: 9px 12px; text-align: left; }
+.conv-table td { padding: 9px 12px; border-bottom: 1px solid rgba(255,255,255,.05); }
+.conv-table tr.row-hl td { background: rgba(232,199,122,.1); color: var(--accent); font-weight: 700; }
+.section-heading {
+  font-family: 'Playfair Display', serif; font-size: 1.4rem;
+  color: var(--accent); margin-bottom: 4px;
+}
+.section-sub { color: var(--muted); font-size: .88rem; margin-bottom: 22px; }
+.conv-warning {
+  background: rgba(232,199,122,.1); border-left: 3px solid var(--accent);
+  border-radius: 8px; padding: 10px 14px; margin-top: 12px;
+  font-size: .85rem; color: var(--text); line-height: 1.5; display: none;
+}
+.conv-warning.show { display: block; }
+@media(max-width:500px){ .conv-row { flex-direction: column; } }
+    @media (max-width: 500px) {
+      .card { padding: 24px 18px; }
+      .row { flex-direction: column; }
+    }
   </style>
 </head>
 <body>
+<div style="position: fixed; top: 15px; right: 15px; z-index: 1000; background: rgba(22, 22, 26, 0.9); padding: 8px 15px; border-radius: 50px; border: 1px solid rgba(232, 199, 122, 0.4); backdrop-filter: blur(8px); box-shadow: 0 4px 15px rgba(0,0,0,0.5);">
+  <span style="cursor: pointer; font-size: 13px; font-weight: 500; color: #f0ede6;" onclick="setLang('pt')">PT</span>
+  <span style="color: #e8c77a; margin: 0 8px; opacity: 0.5;">|</span>
+  <span style="cursor: pointer; font-size: 13px; font-weight: 500; color: #f0ede6;" onclick="setLang('en')">EN</span>
+</div>
+  <!-- â”€â”€ MENU HAMBURGUER â”€â”€ -->
+<button id="menu-btn" onclick="toggleSidebar()">â˜°</button>
 
-<button id="menu-btn" onclick="toggleSidebar()">☰</button>
+<!-- â”€â”€ SIDEBAR â”€â”€ -->
+<div id="nav-overlay" onclick="closeSidebar()"></div>
 <nav id="sidebar">
-  <div class="nav-item" onclick="showConv('names')">✨ Gerador de Nomes</div>
-  <div class="nav-item" onclick="showConv('weight')">⚖️ Peso</div>
-  <div class="nav-item" onclick="showConv('temp')">🌡️ Temperatura</div>
-  <div class="nav-item" onclick="showConv('kitchen')">🍳 Cozinha</div>
+  <div class="sidebar-logo">âš¡ NameForge</div>
+  <div class="nav-section" id="ns-names-label">Gerador de Nomes</div>
+  <div class="nav-item nav-active" onclick="showConv('names')" id="ni-names">âœ¨ <span id="nl-names">Nomes</span></div>
+  <div class="nav-section" id="ns-conv-label">Conversores</div>
+  <div class="nav-item" onclick="showConv('weight')" id="ni-weight">âš–ï¸ <span id="nl-weight">Peso</span></div>
+  <div class="nav-item" onclick="showConv('temp')" id="ni-temp">ðŸŒ¡ï¸ <span id="nl-temp">Temperatura</span></div>
+  <div class="nav-item" onclick="showConv('kitchen')" id="ni-kitchen">ðŸ³ <span id="nl-kitchen">Medidas de Cozinha</span></div>
+  <div class="nav-item" onclick="showConv('clothing')" id="ni-clothing">ðŸ‘• <span id="nl-clothing">Tamanho de Roupa</span></div>
 </nav>
+<!-- â”€â”€ LANGUAGE POPUP â”€â”€ -->
+<div id="lang-overlay">
+  <div id="lang-box">
+    <div class="globe">ðŸŒ</div>
+    <h2 id="popup-title">Choose your language</h2>
+    <p id="popup-sub">Escolha o idioma / Select your language</p>
+    <div class="lang-btns">
+      <button class="lang-btn" onclick="setLang('pt')">
+        <span class="flag">ðŸ‡§ðŸ‡·</span> PortuguÃªs
+      </button>
+      <button class="lang-btn" onclick="setLang('en')">
+        <span class="flag">ðŸ‡ºðŸ‡¸</span> English
+      </button>
+    </div>
+  </div>
+</div>
 
+<!-- â”€â”€ HEADER â”€â”€ -->
 <header>
   <h1><span>Name</span>Forge</h1>
-  <p id="tagline">Gerador de nomes para bebês, personagens e empresas</p>
+  <p class="tagline" id="tagline">Gerador de nomes para bebÃªs, personagens e empresas</p>
 </header>
 
+<!-- AD SLOT TOP -->
+<div class="ad-slot" id="ad-top">
+  <!-- AdSense code here -->
+  <span>AnÃºncio</span>
+</div>
+
 <main>
-  <div class="card" id="main-card">
+  <div class="card">
+
+    <!-- TABS -->
     <div class="tabs">
-      <button class="tab active" onclick="setTab('baby', this)">👶 Bebê</button>
-      <button class="tab" onclick="setTab('char', this)">⚔️ Personagem</button>
-      <button class="tab" onclick="setTab('biz', this)">🏢 Empresa</button>
+      <button class="tab active" onclick="setTab('baby', this)" id="tab-baby">ðŸ‘¶ BebÃª</button>
+      <button class="tab" onclick="setTab('char', this)" id="tab-char">âš”ï¸ Personagem</button>
+      <button class="tab" onclick="setTab('biz', this)" id="tab-biz">ðŸ¢ Empresa</button>
     </div>
+
+    <!-- BABY PANEL -->
     <div id="panel-baby">
-      <div class="control-group"><label>Gênero</label><select id="baby-gender"><option value="f">Feminino</option><option value="m">Masculino</option></select></div>
-      <div class="control-group"><label>Quantidade</label><input type="number" id="baby-qty" value="8"></div>
+      <div class="row">
+        <div class="control-group">
+          <label id="lbl-gender">GÃªnero</label>
+          <select id="baby-gender">
+            <option value="f" id="opt-f">Feminino</option>
+            <option value="m" id="opt-m">Masculino</option>
+            <option value="n" id="opt-n">Neutro / Unissex</option>
+          </select>
+        </div>
+        <div class="control-group">
+          <label id="lbl-origin">Origem</label>
+          <select id="baby-origin">
+            <option value="br" id="opt-br">Brasileiro</option>
+            <option value="en" id="opt-en-orig">Internacional / InglÃªs</option>
+            <option value="jp" id="opt-jp">JaponÃªs / Anime</option>
+            <option value="classic" id="opt-classic">ClÃ¡ssico / Latino</option>
+          </select>
+        </div>
+      </div>
+      <div class="control-group">
+        <label id="lbl-qty">Quantidade</label>
+        <input type="number" id="baby-qty" value="8" min="1" max="20" />
+      </div>
     </div>
-    <button class="btn-generate" onclick="generate()">✨ Gerar Nomes</button>
+
+    <!-- CHAR PANEL -->
+    <div id="panel-char" style="display:none">
+      <div class="row">
+        <div class="control-group">
+          <label id="lbl-universe">Universo</label>
+          <select id="char-universe">
+            <option value="fantasy">Fantasy / Medieval</option>
+            <option value="sci">Sci-Fi / Futurista</option>
+            <option value="anime">Anime / JaponÃªs</option>
+            <option value="dark">Dark / GÃ³tico</option>
+            <option value="modern">Moderno / Urbano</option>
+          </select>
+        </div>
+        <div class="control-group">
+          <label id="lbl-gender2">GÃªnero</label>
+          <select id="char-gender">
+            <option value="f">Feminino</option>
+            <option value="m">Masculino</option>
+            <option value="n">Neutro</option>
+          </select>
+        </div>
+      </div>
+      <div class="control-group">
+        <label id="lbl-qty2">Quantidade</label>
+        <input type="number" id="char-qty" value="8" min="1" max="20" />
+      </div>
+    </div>
+
+    <!-- BIZ PANEL -->
+    <div id="panel-biz" style="display:none">
+      <div class="row">
+        <div class="control-group">
+          <label id="lbl-sector">Setor</label>
+          <select id="biz-sector">
+            <option value="tech">Tech / Startup</option>
+            <option value="food">AlimentaÃ§Ã£o / Food</option>
+            <option value="fashion">Moda / Fashion</option>
+            <option value="health">SaÃºde / Bem-estar</option>
+            <option value="finance">FinanÃ§as / NegÃ³cios</option>
+            <option value="creative">Criativo / Arte</option>
+          </select>
+        </div>
+        <div class="control-group">
+          <label id="lbl-style">Estilo</label>
+          <select id="biz-style">
+            <option value="modern">Moderno / Curto</option>
+            <option value="classic">ClÃ¡ssico / Formal</option>
+            <option value="playful">Divertido / Jovem</option>
+          </select>
+        </div>
+      </div>
+      <div class="control-group">
+        <label id="lbl-qty3">Quantidade</label>
+        <input type="number" id="biz-qty" value="8" min="1" max="20" />
+      </div>
+    </div>
+
+    <!-- BUTTON -->
+    <button class="btn-generate" onclick="generate()" id="btn-gen">âœ¨ Gerar Nomes</button>
+
+    <!-- RESULTS -->
     <div class="results" id="results"></div>
   </div>
 
-  <div id="conv-weight" class="conv-section card">
-    <h2 style="color:var(--accent); margin-bottom:15px;">⚖️ Conversor de Peso</h2>
-    <input type="number" id="w-val" value="1" oninput="runWeight()" placeholder="Valor">
-    <div style="display:flex; gap:10px; margin-top:10px;">
-      <select id="w-from" onchange="runWeight()"><option value="kg">Kg</option><option value="lb">Libras</option></select>
-      <select id="w-to" onchange="runWeight()"><option value="lb">Libras</option><option value="kg">Kg</option></select>
-    </div>
-    <div id="w-res" style="font-size:24px; text-align:center; margin-top:20px; color:var(--accent);">2.20 lb</div>
+  <!-- AD SLOT MID -->
+  <div class="ad-slot">
+    <!-- AdSense code here -->
+    <span>AnÃºncio</span>
   </div>
+
 </main>
 
 <footer>
-  <p>&copy; 2026 NameForge</p>
-  <div style="margin-top:15px;">
-    <a href="about.html">Sobre</a> | 
-    <a href="privacy.html">Política de Privacidade</a> | 
-    <a href="terms.html">Termos de Uso</a>
-  </div>
-  <div style="margin-top:20px;">
-    <a href="#"><img src="https://contador-gratis.com/contadores-de-visitas/050526062556736.gif" alt="Contador"></a>
-  </div>
+  <p id="footer-txt">Â© 2025 NameForge Â· Clique em um nome para copiar</p>
 </footer>
 
+<div class="copy-toast" id="toast"></div>
+
 <script>
-  function toggleSidebar() { document.getElementById('sidebar').classList.toggle('open'); }
-  
-  function showConv(id) {
-    document.getElementById('sidebar').classList.remove('open');
-    document.getElementById('main-card').style.display = id === 'names' ? 'block' : 'none';
-    document.querySelectorAll('.conv-section').forEach(s => s.style.display = 'none');
-    if(id !== 'names') document.getElementById('conv-' + id).style.display = 'block';
+  // â”€â”€ LANGUAGE DATA â”€â”€
+  const T = {
+    pt: {
+      tagline: 'Gerador de nomes para bebÃªs, personagens e empresas',
+      tabBaby: 'ðŸ‘¶ BebÃª', tabChar: 'âš”ï¸ Personagem', tabBiz: 'ðŸ¢ Empresa',
+      lblGender: 'GÃªnero', lblOrigin: 'Origem', lblQty: 'Quantidade',
+      lblUniverse: 'Universo', lblGender2: 'GÃªnero',
+      lblSector: 'Setor', lblStyle: 'Estilo',
+      btnGen: 'âœ¨ Gerar Nomes',
+      optF: 'Feminino', optM: 'Masculino', optN: 'Neutro / Unissex',
+      optBr: 'Brasileiro', optEn: 'Internacional / InglÃªs', optJp: 'JaponÃªs / Anime', optClassic: 'ClÃ¡ssico / Latino',
+      styleModern: 'Moderno / Curto', styleClassic: 'ClÃ¡ssico / Formal', stylePlayful: 'Divertido / Jovem',
+      copied: 'âœ“ Copiado!',
+      footer: 'Â© 2025 NameForge Â· Clique em um nome para copiar',
+      nsNames:'Gerador de Nomes', nsConv:'Conversores',
+      nlNames:'Nomes', nlWeight:'Peso', nlTemp:'Temperatura', nlKitchen:'Medidas de Cozinha', nlClothing:'Tamanho de Roupa',
+      chWeight:'âš–ï¸ Conversor de Peso', csWeight:'Converta kg, lb, oz e gramas instantaneamente',
+      chTemp:'ðŸŒ¡ï¸ Conversor de Temperatura', csTemp:'Celsius, Fahrenheit e Kelvin',
+      chKitchen:'ðŸ³ Medidas de Cozinha', csKitchen:'Converta xÃ­caras, colheres, ml e fl oz',
+      chClothing:'ðŸ‘• Tamanho de Roupa', csClothing:'Converta entre BR, US, EU â€” camisas, calÃ§as e calÃ§ados',
+      ctRef:'ðŸ“Œ ReferÃªncias rÃ¡pidas', ctSituation:'SituaÃ§Ã£o',
+      ctR1:'Ponto de congelamento', ctR2:'Temperatura ambiente', ctR3:'Temperatura corporal', ctR4:'Ponto de ebuliÃ§Ã£o', ctR5:'Forno mÃ©dio (culinÃ¡ria)',
+      ckRef:'ðŸ“Œ Tabela de equivalÃªncia', ckTh1:'Medida', ckTh2:'Equivale a',
+      ckR1a:'1 xÃ­cara BR', ckR1b:'â‰ˆ 13 col. de sopa', ckR2a:'1 xÃ­cara US', ckR2b:'16 col. de sopa',
+      ckR3a:'1 col. sopa', ckR3b:'3 col. de chÃ¡', ckR4a:'1 col. chÃ¡', ckR4b:'â€”', ckR5a:'1 fl oz', ckR5b:'2 col. de sopa',
+      clSelect:'Selecione seu tamanho BR', cltTop:'Camisas', cltPants:'CalÃ§as', cltShoes:'CalÃ§ados',
+      clFrom:'De', clTo:'Para', clVal:'Valor'
+    },
+    en: {
+      tagline: 'Name generator for babies, characters & businesses',
+      tabBaby: 'ðŸ‘¶ Baby', tabChar: 'âš”ï¸ Character', tabBiz: 'ðŸ¢ Business',
+      lblGender: 'Gender', lblOrigin: 'Origin', lblQty: 'Quantity',
+      lblUniverse: 'Universe', lblGender2: 'Gender',
+      lblSector: 'Sector', lblStyle: 'Style',
+      btnGen: 'âœ¨ Generate Names',
+      optF: 'Female', optM: 'Male', optN: 'Neutral / Unisex',
+      optBr: 'Brazilian', optEn: 'International / English', optJp: 'Japanese / Anime', optClassic: 'Classic / Latin',
+      styleModern: 'Modern / Short', styleClassic: 'Classic / Formal', stylePlayful: 'Fun / Youthful',
+      copied: 'âœ“ Copied!',
+      footer: 'Â© 2025 NameForge Â· Click a name to copy',
+      nsNames:'Name Generator', nsConv:'Converters',
+      nlNames:'Names', nlWeight:'Weight', nlTemp:'Temperature', nlKitchen:'Kitchen Measures', nlClothing:'Clothing Size',
+      chWeight:'âš–ï¸ Weight Converter', csWeight:'Convert kg, lb, oz and grams instantly',
+      chTemp:'ðŸŒ¡ï¸ Temperature Converter', csTemp:'Celsius, Fahrenheit and Kelvin',
+      chKitchen:'ðŸ³ Kitchen Measures', csKitchen:'Convert cups, spoons, ml and fl oz',
+      chClothing:'ðŸ‘• Clothing Size', csClothing:'Convert between BR, US, EU sizes',
+      ctRef:'ðŸ“Œ Quick References', ctSituation:'Situation',
+      ctR1:'Freezing point', ctR2:'Room temperature', ctR3:'Body temperature', ctR4:'Boiling point', ctR5:'Medium oven (cooking)',
+      ckRef:'ðŸ“Œ Equivalence Table', ckTh1:'Measure', ckTh2:'Equals',
+      ckR1a:'1 BR cup', ckR1b:'â‰ˆ 13 tablespoons', ckR2a:'1 US cup', ckR2b:'16 tablespoons',
+      ckR3a:'1 tbsp', ckR3b:'3 teaspoons', ckR4a:'1 tsp', ckR4b:'â€”', ckR5a:'1 fl oz', ckR5b:'2 tablespoons',
+      clSelect:'Select your BR size', cltTop:'Shirts', cltPants:'Pants', cltShoes:'Shoes',
+      clFrom:'From', clTo:'To', clVal:'Value'
+    }
+  };
+
+  let lang = 'pt';
+
+  function setLang(l) {
+    lang = l;
+    document.getElementById('lang-overlay').style.display = 'none';
+    applyTranslations();
   }
 
-  function runWeight() {
-    let v = parseFloat(document.getElementById('w-val').value) || 0;
-    let f = document.getElementById('w-from').value;
-    let t = document.getElementById('w-to').value;
-    let res = (f === 'kg' && t === 'lb') ? v * 2.20462 : (f === 'lb' && t === 'kg') ? v / 2.20462 : v;
-    document.getElementById('w-res').innerText = res.toFixed(2) + " " + t;
+  function applyTranslations() {
+    const t = T[lang];
+    document.getElementById('tagline').textContent = t.tagline;
+    document.getElementById('tab-baby').textContent = t.tabBaby;
+    document.getElementById('tab-char').textContent = t.tabChar;
+    document.getElementById('tab-biz').textContent = t.tabBiz;
+    document.getElementById('lbl-gender').textContent = t.lblGender;
+    document.getElementById('lbl-origin').textContent = t.lblOrigin;
+    document.getElementById('lbl-qty').textContent = t.lblQty;
+    document.getElementById('lbl-universe').textContent = t.lblUniverse;
+    document.getElementById('lbl-gender2').textContent = t.lblGender2;
+    document.getElementById('lbl-sector').textContent = t.lblSector;
+    document.getElementById('lbl-style').textContent = t.lblStyle;
+    document.getElementById('lbl-qty2').textContent = t.lblQty;
+    document.getElementById('lbl-qty3').textContent = t.lblQty;
+    document.getElementById('btn-gen').textContent = t.btnGen;
+    document.getElementById('opt-f').textContent = t.optF;
+    document.getElementById('opt-m').textContent = t.optM;
+    document.getElementById('opt-n').textContent = t.optN;
+    document.getElementById('opt-br').textContent = t.optBr;
+    document.getElementById('opt-en-orig').textContent = t.optEn;
+    document.getElementById('opt-jp').textContent = t.optJp;
+    document.getElementById('opt-classic').textContent = t.optClassic;
+    document.getElementById('footer-txt').textContent = t.footer;
+    const isEn = (lang === 'en')
+    const tTitle = isEn ? "What is NameForge?" : "O que Ã© o NameForge?";
+    const tP1 = isEn ? "The <strong>NameForge</strong> is a free online tool developed to assist ENTREPRENEURS, content creators, and writers." : "O <strong>NameForge</strong> Ã© uma ferramenta online gratuita desenvolvida para auxiliar EMPREENDEDORES, criadores de conteÃºdo e escritores.";
+    const tP2 = isEn ? "Beyond being a BUSINESS NAME generator, NameForge offers versatility for the creative universe." : "AlÃ©m de ser um gerador de NOMES COMERCIAIS, o NameForge oferece versatilidade para o universo criativo.";
+    const tP3 = isEn ? "Having a strategic name is fundamental for digital success and BRAND RECOGNITION." : "Ter um nome estratÃ©gico Ã© fundamental para o sucesso digital e para o RECONHECIMENTO de marca.";
+
+    document.getElementById('about-title').textContent = tTitle;
+    document.getElementById('about-p1').innerHTML = tP1;
+    document.getElementById('about-p2').textContent = tP2;
+    document.getElementById('about-p3').textContent = tP3;
+    document.documentElement.lang = lang;
+    translateConverters(t);
+  } // â”€â”€ NAME BANKS â”€â”€
+  const NAMES = {
+    baby: {
+      f: {
+        br: [
+          'Ana', 'Beatriz', 'Camila', 'Isabela', 'Juliana', 'LetÃ­cia', 'Mariana', 'NatÃ¡lia', 'PatrÃ­cia', 'Rafaela', 
+          'Sofia', 'Valentina', 'Yasmin', 'Lorena', 'Giovanna', 'Fernanda', 'DÃ©bora', 'Clara', 'Bruna', 'Alice', 'Anis',
+          'Helena', 'Manuela', 'Laura', 'LÃ­via', 'Luiza', 'CecÃ­lia', 'Antonella', 'HeloÃ­sa', 'Isadora', 'MaitÃª',
+          'Maria', 'Gabriela', 'Carolina', 'Clara', 'Emanuelle', 'Nicole', 'Rebeca', 'Yasmin', 'Sarah', 'Stella'
+        ],
+        en: [
+          'Amelia', 'Aria', 'Aurora', 'Charlotte', 'Chloe', 'Daisy', 'Eleanor', 'Emma', 'Grace', 'Harper', 
+          'Isabella', 'Ivy', 'Luna', 'Mia', 'Nora', 'Olivia', 'Penelope', 'Scarlett', 'Violet', 'Zoe', 'Gwyneth',
+          'Hazel', 'Lily', 'Nova', 'Elena', 'Emilia', 'Maya', 'Stella', 'Ruby', 'Delilah', 'Iris', 'Eleanor',
+          'Ayla', 'Alice', 'Lucy', 'Violet', 'Audrey', 'Clara', 'Cora', 'Eva', 'Sadie', 'Genevieve'
+        ],
+        jp: [
+          'Akane', 'Hana', 'Hikari', 'Hinata', 'Ichika', 'Kagome', 'Koharu', 'Mei', 'Misaki', 'Natsuki', 
+          'Rei', 'Sakura', 'Satsuki', 'Shiori', 'Yuki', 'Yuna', 'Ayame', 'Haruka', 'Rin', 'Suki',
+          'Asuka', 'Chiyo', 'Emi', 'Haru', 'Kimi', 'Mai', 'Mana', 'Mio', 'Naomi', 'Sayuri', 'Akami',
+          'Sora', 'Tomoko', 'Yoko', 'Noriko', 'Yoshiko', 'Yua', 'Aoi', 'Hina', 'Rio', 'Noa', 'Anzu'
+        ],
+        classic: [
+          'Adriana', 'Alessandra', 'Aurora', 'Beatrice', 'Cecilia', 'Diana', 'Elena', 'Flavia', 'Gloria', 'Helena', 
+          'Irene', 'Julia', 'Laura', 'Lucia', 'Maria', 'Natalia', 'Olivia', 'Paula', 'Rosa', 'Victoria', 'Miryan',
+          'Augusta', 'Camila', 'Clara', 'Emilia', 'Faustina', 'Isadora', 'LetÃ­cia', 'LuÃ­sa', 'Marina', 'Regina', 'Violetta',
+          'Silvia', 'Teresa', 'ValÃ©ria', 'VerÃ´nica', 'Viviana', 'AntÃ´nia', 'Francisca', 'Juliana', 'AmÃ©lia', 'OlÃ­via'
+        ]
+      },
+      m: {
+        br: [
+          'Arthur', 'Bruno', 'Carlos', 'Daniel', 'Eduardo', 'Felipe', 'Gabriel', 'Henrique', 'Igor', 'JoÃ£o', 'BartÃ´',
+          'Lucas', 'Mateus', 'Nicolas', 'Pedro', 'Rafael', 'Samuel', 'Thiago', 'Victor', 'Willian', 'Yago', 'Andreas',
+          'Bernardo', 'Heitor', 'Davi', 'Lorenzo', 'Joaquim', 'Murilo', 'Noah', 'Gustavo', 'Theo', 'Vicente',
+          'Enzo', 'Guilherme', 'Ryan', 'OtÃ¡vio', 'Augusto', 'Caleb', 'Levi', 'Thomas', 'Vitor', 'Caio'
+        ],
+        en: [
+          'Aiden', 'Benjamin', 'Caleb', 'Dominic', 'Elijah', 'Finn', 'Gabriel', 'Henry', 'Isaac', 'Jack', 'Emmett', 'Wade',
+          'Liam', 'Mason', 'Nathan', 'Oliver', 'Owen', 'Sebastian', 'Theodore', 'William', 'Xavier', 'Zane', 'Ron',
+          'Luke', 'Wyatt', 'Julian', 'Levi', 'Leo', 'Asher', 'Carter', 'Dylan', 'Lincoln', 'Hudson', 'Colin', 'Vern',
+          'Ezra', 'Maverick', 'Thomas', 'Charles', 'Christopher', 'Miles', 'Parker', 'Cole', 'Chase', 'Ryder'
+        ],
+        jp: [
+          'Akira', 'Daichi', 'Haruto', 'Hayato', 'Hiroshi', 'Issei', 'Kaito', 'Kenji', 'KÅsei', 'Naoki', 
+          'Ren', 'Riku', 'Ryuu', 'Sasuke', 'Shinji', 'Sora', 'Takashi', 'Tatsuya', 'Yuu', 'Zero',
+          'Hotaru', 'Itsuki', 'Kazuki', 'Minato', 'Ryo', 'Souta', 'Taiga', 'Yamato', 'Yuto', 'Tsubasa',
+          'Asahi', 'Kouta', 'Masato', 'Ryuunosuke', 'Shouta', 'Soji', 'Takeru', 'Yoshio', 'Yusei', 'Yuma'
+        ],
+        classic: [
+          'Adrian', 'Alessandro', 'Alexei', 'Aldo', 'Augustus', 'Bruno', 'Caesar', 'Dante', 'Dario', 'Emilio', 'Ivan', 'Vladimir',
+          'Felix', 'Luca', 'Marco', 'Maximus', 'Rafael', 'Romano', 'Sergio', 'Valentino', 'Victor', 'Xavier', 'Ludwig',
+          'Antonio', 'Augusto', 'Benedito', 'Claudio', 'EstevÃ£o', 'Francisco', 'Gaspar', 'InÃ¡cio', 'Jorge', 'Leonardo',
+          'Manuel', 'OtÃ¡vio', 'PatrÃ­cio', 'Raimundo', 'SebastiÃ£o', 'Tito', 'TomÃ¡s', 'Vicente', 'Arnaldo', 'GregÃ³rio'
+        ]
+      },
+      n: {
+        br: [
+          'Ari', 'Davi', 'Eden', 'Emi', 'Ãris', 'Kael', 'Lan', 'Lumi', 'Nael', 'Nori', 
+          'Ori', 'Rael', 'Ren', 'Sael', 'Sol', 'Tael', 'Yael', 'Yara', 'Zael', 'Zen',
+          'Ariel', 'CÃ©u', 'Chris', 'Duda', 'Fran', 'Gabi', 'Kim', 'Manu', 'Michel', 'Micael',
+          'NÃ­colas', 'Nuri', 'Rafa', 'Sacha', 'Val', 'Alix', 'Aki', 'Bili', 'Jaci', 'NoÃ¡'
+        ],
+        en: [
+          'Addison', 'Alex', 'Avery', 'Blake', 'Cameron', 'Casey', 'Dakota', 'Drew', 'Eden', 'Finley', 'Bo',
+          'Gray', 'Hayden', 'Jamie', 'Jordan', 'Morgan', 'Parker', 'Quinn', 'Riley', 'Sage', 'Taylor', 'Kay',
+          'Rowan', 'River', 'Charlie', 'Skyler', 'Phoenix', 'Emery', 'Dallas', 'Logan', 'Harlow', 'Ellis', 'Lien',
+          'Reese', 'Alexis', 'Arden', 'Finley', 'Haven', 'Marlowe', 'Oakley', 'Remi', 'Rory', 'Shiloh' ,'Ray'
+        ],
+        jp: [
+          'Keiko', 'Shizuko', 'Akira', 'Hiro', 'Kei', 'Nao', 'Ren', 'Sora', 'Tomo', 'Yuu', 'Aoi', 'Kazu', 
+          'Michi', 'Nori', 'Taki', 'Yori', 'Zuki', 'Haru', 'Masa', 'Nobu', 'Teru', 'Yoshi', 'Bo', 'Lien',
+          'Asuka', 'Chiharu', 'Hikaru', 'Kaoru', 'Kohaku', 'Makoto', 'Mitsuru', 'Ran', 'Rin', 'Shion', 'Makoto',
+          'Shinobu', 'Tsukasa', 'Chiaki', 'Ibuki', 'Kanade', 'Misao', 'Rei', 'Shizuka', 'Subaru', 'Yuki', 'Kasuhira' 
+        ],
+        classic: [
+          'Adrian', 'Alex', 'Angel', 'Ari', 'Clem', 'Demi', 'Eden', 'Emile', 'Erin', 'Gael', 'Andreas',
+          'Jules', 'Laurel', 'Lex', 'Loren', 'Noel', 'Remi', 'Robin', 'Sam', 'Theo', 'Val', 'Felix',
+          'Amor', 'Auguste', 'Claude', 'Dominique', 'Francis', 'Gabriel', 'Julian', 'Leon', 'Luz', 'Marie',
+          'Pascale', 'Paz', 'Rene', 'Sacha', 'Sasha', 'Simone', 'Valentine', 'Vivian', 'Alix', 'CÃ©leste'
+        ]
+      }
+    },
+    char: {
+      fantasy: {
+        f: [
+          'Kora', 'Meredith', 'Aelindra', 'Brynhild', 'Caelith', 'Dawnfire', 'Elara', 'Faelith', 'Galindra', 'Haelwyn', 'Ilvara', 'Kaelith', 'Faye', 'Ivory', 'Lysandra',
+          'Lirien', 'Moonwhisper', 'Naerith', 'Odalys', 'Pyrantha', 'Quelith', 'Ryndara', 'Sylvara', 'Thalindra', 'Vexara', 'GalatÃ©a', 'Valkyria', 'Lorna', 'Ophelia',
+          'Marcey', 'Adela', 'Beatrix', 'Clotilde', 'Elowen', 'Genevieve', 'Guinevere', 'Gisela', 'Helena', 'Isolde', 'Maeve', 'Ymir', 'Bridget', 'CalÃ­ope', 'Lysandria',
+          'LÃºmia', 'Nala', 'Lyora', 'Melisande', 'Viola', 'Rowena', 'Sybilla', 'Theodora', 'Yvaine', 'Alys', 'Anora', 'Brangwen', 'Cecily', 'Elysia', 'Nephelia'
+        ],
+        m: [
+          'Baltarus', 'Gorn', 'Vernon', 'Fastus', 'Palamidas', 'Darius', 'Klauz', 'Beorn', 'Urssix', 'Caius', 'Cassius', 'Baltor', 'Argus', 'Cragg', 'Garrett', 'Vizimir',
+          'Orsted', 'Aldric', 'Brandor', 'Corvain', 'Draveth', 'Eldran', 'Fendral', 'Garrith', 'Halvorn', 'Ironhide', 'Jarek', 'Orn', 'Baldur', 'Iros', 'Quadd',
+          'Endrigan', 'Keldric', 'Lorthain', 'Marik', 'Nordred', 'Orveth', 'Pyrax', 'Quelmar', 'Raveth', 'Stormveil', 'Thaddeus', 'Ornstein', 'Bastion', 'Nephelius',
+          'Foghel', 'Alistair', 'Aethelred', 'InÃ¡rius', 'Balian', 'Benedict', 'Cedric', 'Conrad', 'Dorian', 'Eldred', 'Gareth', 'Bastion', 'Gavin', 'Benhart',
+          'Godfrey', 'Gideon', 'Hadrian', 'Kaelen', 'Lionel', 'Luther', 'Merrick', 'Osric', 'Percival', 'Roderick', 'Wolstagg', 'Lars', 'Fulgorn'
+        ],
+        n: [
+          'Ashveil', 'Dawnwalker', 'Emberthorn', 'Frostweave', 'Ghostwhisper', 'Ironsong', 'Mistwalker', 'Nightveil', 'Oakheart', 'Runeblade', 'Purjay',
+          'Shadowmere', 'Silverwind', 'Juno', 'Stormcaller', 'Thornback', 'Voidwalker', 'Windchaser', 'Wolfsbane', 'Wyrmthorn', 'Zeraphel', 'Zyrath',
+          'Eamon', 'Faramund', 'Garrick', 'Haldor', 'Ivor', 'Jorund', 'Kenric', 'Leofric', 'Morcant', 'Orin', 'Astel', 'Flint', 'Yorveth',
+          'Rowan', 'Theodoric', 'Aldous', 'Broderic', 'Caelum', 'Freya', 'Gemma', 'Idonea', 'Juliana', 'Kerrigan', 'Ivern'
+        ]
+      },
+      sci: {
+        f: [
+          'Ayla-7', 'Byte', 'Cipher', 'Delta-9', 'Elexis', 'Flux', 'Galaxy', 'Helix', 'Ion', 'Enn', 
+          'Kira-X', 'Lyra', 'Matrix', 'Nova', 'Orbit', 'Pixel', 'Quantum', 'Radia', 'Synth', 'Vega',
+          'Aero', 'Apex', 'Astra', 'Axis', 'Cosmo', 'Cyber', 'Echo', 'Krypton', 'Nexus', 'Obsidian', 'Pulse',
+          'Omega', 'Pulse', 'Specter', 'Synapse', 'Talon', 'Vector', 'Vortex', 'Xenon', 'Zenith', 'Zephyr'
+        ],
+        m: [
+          'Axon', 'Binary', 'Cobalt', 'Droid-7', 'Electron', 'Forge', 'Grid', 'Halo', 'Ion', 'Jett', 'Dex',
+          'Kane', 'Laser', 'Macro', 'Nano', 'Ozone', 'Photon', 'Quartz', 'Rex-9', 'Sigma', 'Titan', 'Quadd',
+          'Cortex', 'Decibel', 'Glitch', 'Kestrel', 'Modulus', 'Neutron', 'Proxy', 'Vapor', 'Vandal', 'Zero'
+        ],
+        n: [
+          'Arc', 'Azix', 'Ornfex', 'Volgen', 'Bolt', 'Core', 'Data', 'Echo', 'Flux', 'Grid', 'Hash', 'Index', 'Json', 'Venous',
+          'Kernel', 'Link', 'Mesh', 'Node', 'Omega', 'Patch', 'Query', 'Root', 'Stack', 'Token', 'Gamma', 'Drift', 'Raz',
+          'Aileron', 'Byte', 'Cipher', 'Helix', 'Ion', 'Matrix', 'Nova', 'Quantum', 'Vector', 'Vortex'
+        ]
+      },
+      anime: {
+        f: [
+          'Akatsuki', 'Amaterasu', 'Asuna', 'Chitoge', 'Erza', 'Hinata', 'Kagura', 'Kaguya', 'Kirito', 'Mikasa', 'Akura',
+          'Misaki', 'Nami', 'Raphtalia', 'Rem', 'Sakura', 'Sasha', 'Tohka', 'Usagi', 'Yuno', 'Zero', 'Sai', 'Kanai', 'Azula',
+          'Akane', 'Hana', 'Hikari', 'Ichika', 'Kagome', 'Koharu', 'Mei', 'Natsuki', 'Rei', 'Satsuki', 'Kikyo', 'Saya',
+          'Shiori', 'Yuki', 'Yuna', 'Ayame', 'Haruka', 'Rin', 'Suki', 'Chiyo', 'Sayuri', 'Hina', 'Junko'
+        ],
+        m: [
+          'Araragi', 'Deku', 'Gintoki', 'Ichigo', 'Issei', 'Katsuki', 'Kazuto', 'Kirito', 'Lelouch', 'Light', 'Naname', 'Dio', 'Nobo', 'Tadashi',
+          'Loid', 'Naruto', 'Natsu', 'Ren', 'Ryuunosuke', 'Sasuke', 'Shoto', 'Tatsuya', 'Yato', 'Zero', 'Taiga', 'Yamato', 'Yuto', 'Takeda',
+          'Akira', 'Daichi', 'Haruto', 'Hayato', 'Hiroshi', 'Kaito', 'Kenji', 'Shinji', 'Sora', 'Takashi', 'Kenchiro', 'Kaz', 'Mako',
+          'Itsuki', 'Kazuki', 'Shiki', 'Gon', 'Ryujin', 'Kazuhira', 'Saiki', 'Minato', 'Ryo', 'Souta', 'Tsubasa', 'Asahi',
+        ],
+        n: [
+          'Akira', 'Aoi', 'Haru', 'Hikari', 'Kei', 'Natsu', 'Nori', 'Rei', 'Rin', 'Sora', 'Daizu', 'Shikishima', 'Kami', 'Makoto',
+          'Tomo', 'Yoru', 'Yuu', 'Zen', 'Zoro', 'Hiro', 'Kazu', 'Michi', 'Nao', 'Teru', 'Myukio', 'Kage', 'Akami', 'Luang',
+          'Asuka', 'Chiharu', 'Kaoru', 'Kohaku', 'Makoto', 'Mitsuru', 'Ran', 'Shion', 'Shinobu', 'Tsukasa', 'Sakurai'
+        ]
+      },
+      dark: {
+        f: [
+          'Abyssia', 'Bloodmoon', 'Crimsonveil', 'Dusk', 'Eclipse', 'Gravemere', 'Hex', 'Lamia', 'Morrigan', 'Nightshade', 'Zenoveth',
+          'Obsidian', 'Phantom', 'Ravenna', 'Seraphine', 'Shade', 'Silvermourne', 'Umbra', 'Vex', 'Voidheart', 'Wraith', 'Kendra',
+          'Lysandra', 'Mirela', 'Nesta', 'Olwen', 'Rosamund', 'Sigrid', 'Tamsin', 'Ursula', 'Valeska', 'Winifred', 'Ophelia'
+        ],
+        m: [
+          'Abyss', 'Bane', 'Damien', 'Dread', 'Dusk', 'Grimm', 'Hex', 'Lucian', 'Malice', 'Mortis', 'Amont', 'Dredd',
+          'Necros', 'Noctis', 'Oblivion', 'Pestilence', 'Raven', 'Shadow', 'Sinister', 'Sorrow', 'Omen', 'Void', 'Vergil',
+          'Morcant', 'Orin', 'Theodoric', 'Aldous', 'Broderic', 'Uther', 'Yvain', 'Eldred', 'Merrick', 'Osric'
+        ],
+        n: [
+          'Orvth', 'Ash', 'Blight', 'Curse', 'Dread', 'Dusk', 'Gloom', 'Grief', 'Haunt', 'Hex', 'Malice', 'Belmont', 'Vult',
+          'Murk', 'Nightfall', 'Plague', 'Rot', 'Shade', 'Sorrow', 'Thorn', 'Woe', 'Wraith', 'Vex', 'Belinsky', 'Rus',
+          'Obsidian', 'DarkVogue', 'ViperChic', 'ZeroGravity', 'VandalWear', 'AnarchyThread', 'AcidVogue', 'ToxicLoom', 'GothicSilk', 'AsphaltWear'
+        ]
+      },
+      modern: {
+        f: [
+          'Alexa', 'Brooke', 'Cameron', 'Diana', 'Elena', 'Fiona', 'Grace', 'Harper', 'Isla', 'Jade', 'Brie', 'Melissa', 'Vanellope',
+          'Kate', 'Leah', 'Maya', 'Naomi', 'Olivia', 'Paige', 'Quinn', 'Ruby', 'Skye', 'Tara', 'Yvaine', 'Gwen', 'Naiobi', 'Nairobi',
+          'Alice', 'Ana', 'Beatriz', 'Camila', 'Carolina', 'Clara', 'Emanuelle', 'Emily', 'Gabriela', 'Giovanna',
+          'Helena', 'Isabella', 'Julia', 'Laura', 'LÃ­via', 'Luiza', 'Manuela', 'Maria', 'Mariana', 'Melissa'
+        ],
+        m: [
+          'Aiden', 'Blake', 'Cole', 'Dean', 'Ethan', 'Flynn', 'Grant', 'Hudson', 'Ivan', 'Jace', 'Sullivan', 'Barrett', 'Marvin',
+          'Kai', 'Leo', 'Marcus', 'Nathan', 'Owen', 'Preston', 'Quinn', 'Ryker', 'Slater', 'Ty', 'Donovan',
+          'Arthur', 'Benjamin', 'Bernardo', 'Caio', 'Daniel', 'Davi', 'Eduardo', 'Enzo', 'Gabriel', 'Gustavo',
+          'Heitor', 'Henrique', 'Ian', 'Isaac', 'JoÃ£o', 'Joaquim', 'Lorenzo', 'Lucas', 'Matheus', 'Miguel'
+        ],
+        n: [
+          'Ash', 'Bay', 'Blue', 'Brett', 'Brook', 'Cedar', 'Chase', 'Clay', 'Dale', 'Drew', 
+          'Fern', 'Glen', 'Gray', 'Lake', 'Lane', 'Moss', 'Reed', 'River', 'Sage', 'Sky',
+          'Addison', 'Alex', 'Avery', 'Cameron', 'Casey', 'Dakota', 'Finley', 'Hayden', 'Jamie', 'Jordan'
+        ]
+      }
+    },
+    biz: {
+      tech: {
+        modern: [
+          'Airu', 'Axelo', 'Bitly', 'Clouda', 'Devly', 'Drixo', 'Fluxr', 'Grida', 'Helix', 'Ionix', 
+          'Kodex', 'Layr', 'Mesha', 'Nexo', 'Nodr', 'Orbia', 'Pixly', 'Qubix', 'Stackr', 'Voxly', 'Forge',
+          'AppForge', 'ByteWave', 'CloudNest', 'CodeCraft', 'DataPulse', 'DevFlow', 'GridSync', 'InnoNet', 'LinkHive', 'LogicGate',
+          'MindGrid', 'NetSphere', 'NovaCode', 'OmniTech', 'PixelCore', 'QuantumLab', 'ShiftTech', 'SyncBase', 'TechVibe', 'WebSpan'
+        ],
+        classic: [
+          'Axiom Technologies', 'Blueprint Systems', 'Catalyst Digital', 'Data Forge', 'Elevation Tech', 'Framework Solutions', 'Genesis Software', 'Horizon Systems', 'Infinity Code', 'Junction Tech',
+          'Sistemas Alfa', 'InovaÃ§Ã£o Digital', 'Tecnologia AvanÃ§ada', 'SoluÃ§Ãµes Integradas', 'Rede Global', 'Engenharia de Sistemas', 'Matriz TecnolÃ³gica', 'Consultoria Computacional', 'Sistemas Conectados', 'DinÃ¢mica Digital'
+        ],
+        playful: [
+          'Boop Labs', 'Clickity', 'Doodlecode', 'Fizzbyte', 'Gigglenet', 'Hackle', 'Jingletech', 'Noodledev', 'Pingpong', 'Wizzly', 'Stallion',
+          'CyberVanguard', 'HyperQuantum', 'IronCode', 'NeonMatrix', 'NovaStrike', 'ApexVortex', 'ThunderTech', 'AlphaTrigger', 'TitanBytes', 'KryptonX'
+        ]
+      },
+      food: {
+        modern: [
+          'AÃ§afrÃ£o', 'Brasa & Co', 'Colheita', 'Deli Roots', 'ÃŠxodo', 'Fresco', 'GrÃ£o', 'Harvest', 'IÃ§ara', 'Jardim',
+          'BiteLab', 'BowlGreen', 'CraveYard', 'DailyDish', 'FreshFeast', 'GastroHub', 'HerbIvory', 'NutriBox', 'SavorStreet', 'SpiceRoute'
+        ],
+        classic: [
+          'Casa Grande Restaurante', 'Fazenda Boa Mesa', 'Gastronomia ClÃ¡ssica', 'La Maison Cuisine', 'Mesa Farta', 'Quinta do Sabor', 'Rancho Bom', 'Sabor da Terra', 'TradiÃ§Ã£o Ã  Mesa', 'Vila do Chef',
+          'Sabor Real', 'Tempero d\'Ouro', 'Cantinho do Paladar', 'Fogo de ChÃ£o', 'Bella ItÃ¡lia', 'Panela de Barro', 'Recanto Mineiro', 'Estrela do Mar', 'TradiÃ§Ã£o GaÃºcha', 'Sabores de FamÃ­lia'
+        ],
+        playful: [
+          'BocÃ£o', 'ComilanÃ§a', 'DelÃ­cia Express', 'Eita Que Bom', 'Faminto', 'Guloso', 'Happy Spoon', 'LambanÃ§a', 'Nhac!', 'Opa Que Gostoso',
+          'ChilliBomb', 'FireGrill', 'MadSpices', 'RavageEats', 'SmashMonster', 'VikingFeast', 'WildFork', 'SpicySavage', 'MeatHeads', 'VulcanoBite'
+        ]
+      },
+      fashion: {
+        modern: [
+          'Ã‚mbar', 'Brume', 'Corda', 'Drap', 'Ã‰clat', 'Filum', 'Grain', 'Hilo', 'IrmÃ£', 'Joia', 'Ivory',
+          'AuraWear', 'ChicNest', 'DrapeStudio', 'EthosThread', 'FormaModa', 'HaloWear', 'IconicThread', 'LoomLine', 'ModaVibe', 'NovaWeave'
+        ],
+        classic: [
+          'Atelier Beleza', 'Casa de Modas', 'Elegance Studio', 'Fashion House', 'Haute Couture', 'Luxe Wardrobe', 'Maison Chic', 'Noble Thread', 'Prestige Style', 'Royal Atelier',
+          'Alta Costura', 'Bela Estampa', 'Casa da Seda', 'Estilo ClÃ¡ssico', 'Fio de Ouro', 'Moda Imperial', 'Oficina de Estilo', 'Sartoria Fina', 'Tecido Nobre', 'Toque de Seda'
+        ],
+        playful: [
+          'Babado', 'Chique Assim', 'Diva Store', 'Estilosa', 'Fashion Lovers', 'Glamour Pop', 'Hype Closet', 'Instastyle', 'Joy Fashion', 'Kilofashion',
+          'BlackLace', 'CyberThread', 'DarkVogue', 'IronWeave', 'NeonSartorial', 'RebelWear', 'SavageStyle', 'ViperChic', 'XenonModa', 'ZeroGravity'
+        ]
+      },
+      health: {
+        modern: [
+          'Aura', 'Balance', 'Calm', 'Dwell', 'Elevate', 'Flow', 'Glow', 'Heal', 'Inner', 'Luma',
+          'PurePlatter', 'BlendBar', 'CrunchBox', 'DeliDrop', 'Eatsy', 'GourmetGo', 'NectarNook', 'OasisGrill', 'SaborModerno', 'ZestyEat'
+        ],
+        classic: [
+          'Bem-Estar ClÃ­nica', 'Centro de SaÃºde Integral', 'EquilÃ­brio Terapias', 'Harmonia SaÃºde', 'Instituto Vita', 'Medicina Natural', 'NÃºcleo de SaÃºde', 'SaÃºde Total', 'Vitalidade Centro', 'Zen Terapias',
+          'Taberna Real', 'Casa da Massa', 'FogÃ£o Ã  Lenha', 'Cantina Nostra', 'Sabor & Arte', 'Banquete Nobre', 'Tempero Caseiro', 'Churrasco d\'Ouro', 'Doce Encanto', 'Sabor da Terra'
+        ],
+        playful: [
+          'AbraÃ§oFit', 'BemBom SaÃºde', 'CorpÃ£o', 'Deu ExercÃ­cio', 'FelizFit', 'GraÃ§aDivina', 'Healthgram', 'Iogurtfit', 'Joinha SaÃºde', 'Korrendo',
+          'SugarRush', 'GuerrillaKitchen', 'StreetCarnivore', 'NeonBites', 'EcoEats', 'ForkRoot', 'PlatePalace', 'FlavorWave', 'SweetArt', 'TastyBite'
+        ]
+      },
+      finance: {
+        modern: [
+          'Axio', 'Capita', 'Certo', 'Dime', 'Finra', 'Fluxo', 'GrÃ£o', 'Hertz', 'Ibex', 'Juros',
+          'InStyle', 'LuxeLoom', 'ModeStudio', 'OrigamiWear', 'Stylus', 'TrendGrid', 'VogueVibe', 'BespokeArt', 'ConceptDress', 'FabricLab'
+        ],
+        classic: [
+          'Acerto Financeiro', 'Capital Seguro', 'CrÃ©dito SÃ³lido', 'EstratÃ©gia Wealth', 'Fidelis Finance', 'GestÃ£o Patrimonial', 'HeranÃ§a Consultoria', 'Investimento Certo', 'Justos NegÃ³cios', 'Korvus Capital',
+          'AteliÃª de Paris', 'ClÃ¡ssico Toque', 'ElegÃ¢ncia Real', 'Fina Linha', 'HeranÃ§a de Estilo', 'Loom Tradicional', 'Maison Nobre', 'Ponto d\'Ouro', 'Connelly', 'Seda Pura', 'VestuÃ¡rio Fino', 'Grant',
+        ],
+        playful: [
+          'Boa Grana', 'Conta Alegre', 'Dinheirinho', 'Economizei', 'Faz Sentido', 'Grana Feliz', 'Happy Cash', 'Investe AÃ­', 'Jurinhos', 'Kilodindin',
+          'PunkAtelier', 'RiotFashion', 'GothicSilk', 'StreetArmor', 'AsphaltWear', 'VandalWear', 'AnarchyThread', 'AcidVogue', 'ToxicLoom', 'MetalSartoria'
+        ]
+      },
+      creative: {
+        modern: [
+          'Aura', 'Blot', 'Canvas', 'Dab', 'Ã‰tude', 'Form', 'Grain', 'Haze', 'Ink', 'Jarva', 'Tundra',
+          'SilkRoad', 'ThreadBare', 'UrbanChic', 'VelaStudio', 'VogueGrid', 'WeaveCraft', 'Atelier Novo', 'CloakCo', 'EspritWear', 'MinimalThread'
+        ],
+        classic: [
+          'Arte & Forma Studio', 'Atelier Criativo', 'Casa das Artes', 'Design ClÃ¡ssico', 'EstÃºdio Beleza', 'Forma e Arte', 'Galeria Criativa', 'Harmonia Studio', 'Instituto de Design', 'Jardim das Artes',
+          'Alta Costura', 'Bela Estampa', 'Casa da Seda', 'Estilo ClÃ¡ssico', 'Fio de Ouro', 'Moda Imperial', 'Oficina de Estilo', 'Sartoria Fina', 'Tecido Nobre', 'Toque de Seda'
+        ],
+        playful: [
+          'Borrifada', 'Colorex', 'Doodle Studio', 'Esguicho', 'Flipfop Design', 'Garatujas', 'Hagaki Art', 'Irriquieto Studio', 'Jogando Tinta', 'Kreativoz',
+          'BlackLace', 'CyberThread', 'DarkVogue', 'IronWeave', 'NeonSartorial', 'RebelWear', 'SavageStyle', 'ViperChic', 'XenonModa', 'ZeroGravity'
+        ]
+      }
+    }
+  };
+
+  // â”€â”€ STATE â”€â”€
+  let currentTab = 'baby';
+
+  function setTab(tab, btn) {
+    currentTab = tab;
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('panel-baby').style.display = tab === 'baby' ? 'block' : 'none';
+    document.getElementById('panel-char').style.display = tab === 'char' ? 'block' : 'none';
+    document.getElementById('panel-biz').style.display  = tab === 'biz'  ? 'block' : 'none';
+    document.getElementById('results').innerHTML = '';
   }
 
-  function generate() {
-    const res = document.getElementById('results');
-    res.innerHTML = '<div class="name-chip">Exemplo de Nome</div>';
+    function pick(arr, n) {
+    const shuffled = [...arr];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled.slice(0, Math.min(n, shuffled.length));
+   }
+
+    function generate() {
+    const resultsEl = document.getElementById('results');
+    resultsEl.innerHTML = '';
+    let names = [];
+
+    if (currentTab === 'baby') {
+      const gender = document.getElementById('baby-gender').value;
+      const origin = document.getElementById('baby-origin').value;
+      const qty    = parseInt(document.getElementById('baby-qty').value);
+      const pool   = NAMES.baby[gender][origin] || [];
+      names = pick(pool, qty);
+    }
+
+    if (currentTab === 'char') {
+      const universe = document.getElementById('char-universe').value;
+      const gender   = document.getElementById('char-gender').value;
+      const qty      = parseInt(document.getElementById('char-qty').value);
+      const pool     = (NAMES.char[universe] || {})[gender] || NAMES.char[universe]?.n || [];
+      names = pick(pool, qty);
+    }
+
+    if (currentTab === 'biz') {
+      const sector = document.getElementById('biz-sector').value;
+      const style  = document.getElementById('biz-style').value;
+      const qty    = parseInt(document.getElementById('biz-qty').value);
+      const pool   = (NAMES.biz[sector] || {})[style] || [];
+      names = pick(pool, qty);
+    }
+
+    names.forEach((name, i) => {
+      const chip = document.createElement('div');
+      chip.className = 'name-chip';
+      chip.textContent = name;
+      chip.style.animationDelay = `${i * 0.05}s`;
+      chip.style.animation = 'fadeUp .35s ease both';
+      chip.onclick = () => copyName(name);
+      resultsEl.appendChild(chip);
+    });
   }
+
+  function copyName(name) {
+    navigator.clipboard.writeText(name).catch(() => {});
+    const toast = document.getElementById('toast');
+    toast.textContent = T[lang].copied + ' ' + name;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2000);
+  }
+// â”€â”€ SIDEBAR â”€â”€
+function toggleSidebar(){
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('nav-overlay').classList.toggle('open');
+}
+function closeSidebar(){
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('nav-overlay').classList.remove('open');
+}
+
+// â”€â”€ SEÃ‡Ã•ES â”€â”€
+function showConv(id){
+  document.querySelectorAll('.conv-section').forEach(s=>s.classList.remove('conv-active'));
+  const target = document.getElementById('conv-'+id);
+  if(target) target.classList.add('conv-active');
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('nav-active'));
+  document.getElementById('ni-'+id).classList.add('nav-active');
+  closeSidebar();
+  if(id==='weight') convWeight();
+  if(id==='temp') convTemp();
+  if(id==='kitchen') convKitchen();
+}
+
+// â”€â”€ PESO â”€â”€
+const wKg={kg:1,lb:0.453592,oz:0.0283495,g:0.001};
+function convWeight(){
+  const f=document.getElementById('w-from').value;
+  const t=document.getElementById('w-to').value;
+  const v=parseFloat(document.getElementById('w-val').value)||0;
+  document.getElementById('w-result').textContent=rnd(v*wKg[f]/wKg[t])+' '+t;
+}
+
+// â”€â”€ TEMPERATURA â”€â”€
+function convTemp(){
+  const f=document.getElementById('t-from').value;
+  const t=document.getElementById('t-to').value;
+  let v=parseFloat(document.getElementById('t-val').value);
+  if(isNaN(v)){document.getElementById('t-result').textContent='â€”';return;}
+  let c=f==='c'?v:f==='f'?(v-32)*5/9:v-273.15;
+  let res=t==='c'?c:t==='f'?c*9/5+32:c+273.15;
+  const u=t==='c'?'Â°C':t==='f'?'Â°F':'K';
+  document.getElementById('t-result').textContent=rnd(res)+' '+u;
+}
+
+// â”€â”€ COZINHA â”€â”€
+const kMl={cup_br:200,cup_us:240,tbsp:15,tsp:5,ml:1,floz:30};
+function convKitchen(){
+  const f=document.getElementById('k-from').value;
+  const t=document.getElementById('k-to').value;
+  const v=parseFloat(document.getElementById('k-val').value)||0;
+  const lb={cup_br:lang==='pt'?'xÃ­cara(s) BR':'cup(s) BR',cup_us:lang==='pt'?'xÃ­cara(s) US':'cup(s) US',tbsp:'tbsp',tsp:'tsp',ml:'ml',floz:'fl oz'};
+  document.getElementById('k-result').textContent=rnd(v*kMl[f]/kMl[t])+' '+lb[t];
+  const warn=document.getElementById('k-warning');
+  if(f==='cup_br'||t==='cup_br'||f==='cup_us'||t==='cup_us'){
+    warn.textContent=lang==='pt'
+      ?'âš ï¸ AtenÃ§Ã£o: a xÃ­cara brasileira tem 200ml. A xÃ­cara americana (cup) tem 240ml. Verifique o padrÃ£o da sua receita.'
+      :'âš ï¸ Note: Brazilian cup = 200ml. US cup = 240ml. Check which standard your recipe uses.';
+    warn.classList.add('show');
+  } else {
+    warn.classList.remove('show');
+  }
+}
+
+// â”€â”€ ROUPA â”€â”€
+let clothTab='top';
+function setClothTab(tab,btn){
+  clothTab=tab;
+  document.querySelectorAll('#conv-clothing .tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  ['top','pants','shoes'].forEach(t=>{
+    document.getElementById('cl-'+t).style.display=t===tab?'block':'none';
+  });
+}
+function hlCloth(type){
+  const prefMap={top:'ct',pants:'cp',shoes:'cs'};
+  const selMap={top:'cl-top-sel',pants:'cl-pants-sel',shoes:'cl-shoes-sel'};
+  const p=prefMap[type];
+  const val=document.getElementById(selMap[type]).value;
+  document.querySelectorAll('[id^="'+p+'"]').forEach(r=>r.classList.remove('row-hl'));
+  if(val!==''){const row=document.getElementById(p+val);if(row)row.classList.add('row-hl');}
+}
+
+// â”€â”€ ARREDONDAMENTO â”€â”€
+function rnd(n){return Math.round(n*10000)/10000;}
+
+// â”€â”€ TRADUÃ‡ÃƒO SIDEBAR E CONVERSORES â”€â”€
+function translateConverters(t){
+  const ids={
+    'ns-names-label':t.nsNames,'ns-conv-label':t.nsConv,
+    'nl-names':t.nlNames,'nl-weight':t.nlWeight,'nl-temp':t.nlTemp,
+    'nl-kitchen':t.nlKitchen,'nl-clothing':t.nlClothing,
+    'ch-weight':t.chWeight,'cs-weight':t.csWeight,
+    'ch-temp':t.chTemp,'cs-temp':t.csTemp,
+    'ch-kitchen':t.chKitchen,'cs-kitchen':t.csKitchen,
+    'ch-clothing':t.chClothing,'cs-clothing':t.csClothing,
+    'ct-ref':t.ctRef,'ct-situation':t.ctSituation,
+    'ct-r1':t.ctR1,'ct-r2':t.ctR2,'ct-r3':t.ctR3,'ct-r4':t.ctR4,'ct-r5':t.ctR5,
+    'ck-ref':t.ckRef,'ck-th1':t.ckTh1,'ck-th2':t.ckTh2,
+    'ck-r1a':t.ckR1a,'ck-r1b':t.ckR1b,'ck-r2a':t.ckR2a,'ck-r2b':t.ckR2b,
+    'ck-r3a':t.ckR3a,'ck-r3b':t.ckR3b,'ck-r4a':t.ckR4a,'ck-r4b':t.ckR4b,
+    'ck-r5a':t.ckR5a,'ck-r5b':t.ckR5b,
+    'cl-select-label':t.clSelect,
+    'clt-top':t.cltTop,'clt-pants':t.cltPants,'clt-shoes':t.cltShoes,
+    'cl-from':t.clFrom,'cl-to':t.clTo,'cl-val':t.clVal
+  };
+  for(const[id,val]of Object.entries(ids)){
+    const el=document.getElementById(id);
+    if(el&&val)el.textContent=val;
+  }
+  const kw=document.getElementById('k-warning');
+  if(kw&&kw.classList.contains('show')) convKitchen();
+}
+  // â”€â”€ SIDEBAR â”€â”€
+function toggleSidebar(){
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('nav-overlay').classList.toggle('open');
+}
+function closeSidebar(){
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('nav-overlay').classList.remove('open');
+}
+
+// â”€â”€ SEÃ‡Ã•ES â”€â”€
+function showConv(id){
+  document.querySelectorAll('.conv-section').forEach(s=>s.classList.remove('conv-active'));
+  const target=document.getElementById('conv-'+id);
+  if(target)target.classList.add('conv-active');
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('nav-active'));
+  document.getElementById('ni-'+id).classList.add('nav-active');
+  closeSidebar();
+  if(id==='weight')convWeight();
+  if(id==='temp')convTemp();
+  if(id==='kitchen')convKitchen();
+}
+
+
+  // â”€â”€ CSS ANIMATION â”€â”€
+  const style = document.createElement('style');
+  style.textContent = `
+    @keyframes fadeUp {
+      from { opacity:0; transform: translateY(12px); }
+      to   { opacity:1; transform: translateY(0); }
+    }
+  `;
+  document.head.appendChild(style);
 </script>
+  <section style="max-width: 800px; margin: 40px auto; padding: 20px; line-height: 1.8; color: #f0ede6; opacity: 0.9;">
+    <h2 id="about-title" style="color: #e8c77a; margin-bottom: 20px; font-family: 'Playfair Display', serif;">O que Ã© o NameForge?</h2>
+    
+    <p id="about-p1">O <strong>NameForge</strong> Ã© uma ferramenta online gratuita desenvolvida para auxiliar EMPREENDEDORES, criadores de conteÃºdo e escritores a encontrar a identidade perfeita para seus projetos. Sabemos que a escolha de um nome Ã© uma das etapas mais cruciais na criaÃ§Ã£o de uma marca ou personagem, pois ela carrega a primeira impressÃ£o e a essÃªncia do que estÃ¡ sendo construÃ­do. Nosso algoritmo organiza sugestÃµes baseadas em diferentes NICHOS e estilos, facilitando o processo de brainstorming.</p>
+
+    <p id="about-p2">AlÃ©m de ser um gerador de NOMES COMERCIAIS, o NameForge oferece versatilidade para o universo criativo. Seja vocÃª um jogador procurando um NICKNAME ou NAMETAG Ãºnico para sua conta, um autor desenvolvendo nomes para personagens de ficÃ§Ã£o ou um desenvolvedor em busca de nomes para APLICATIVOS e STARTUPS, a plataforma entrega resultados rÃ¡pidos e diversificados. Nossa missÃ£o Ã© eliminar o bloqueio criativo e fornecer inspiraÃ§Ã£o instantÃ¢nea com apenas alguns cliques.</p>
+
+    <p id="about-p3">Ter um nome estratÃ©gico Ã© fundamental para o sucesso digital e para o RECONHECIMENTO de marca. Por isso, o NameForge Ã© constantemente atualizado com novas bases de dados que refletem as tendÃªncias modernas de mercado e entretenimento. AlÃ©m de nomes para empresas e personagens, a ferramenta pode ser utilizada para batizar novos animais de estimaÃ§Ã£o, projetos acadÃªmicos ou qualquer iniciativa que demande um toque de originalidade e exclusividade.</p>
+  </section>
+  <!-- â”€â”€ CONVERSORES â”€â”€ -->
+<div id="conv-weight" class="conv-section" style="max-width:720px;margin:0 auto;padding:0 20px 60px">
+  <div class="section-heading" id="ch-weight">âš–ï¸ Conversor de Peso</div>
+  <div class="section-sub" id="cs-weight">Converta kg, lb, oz e gramas instantaneamente</div>
+  <div class="card">
+    <div class="conv-row">
+      <div><label class="conv-label" id="cl-from">De</label>
+        <select id="w-from" onchange="convWeight()">
+          <option value="kg" id="wo-kg">Quilograma (kg)</option>
+          <option value="lb" id="wo-lb">Libra (lb)</option>
+          <option value="oz" id="wo-oz">OnÃ§a (oz)</option>
+          <option value="g" id="wo-g">Grama (g)</option>
+        </select>
+      </div>
+      <div><label class="conv-label" id="cl-to">Para</label>
+        <select id="w-to" onchange="convWeight()">
+          <option value="lb" id="wo-lb2">Libra (lb)</option>
+          <option value="kg" id="wo-kg2">Quilograma (kg)</option>
+          <option value="oz" id="wo-oz2">OnÃ§a (oz)</option>
+          <option value="g" id="wo-g2">Grama (g)</option>
+        </select>
+      </div>
+    </div>
+    <label class="conv-label" id="cl-val">Valor</label>
+    <input type="number" id="w-val" value="1" oninput="convWeight()" />
+    <div class="conv-result" id="w-result">â€”</div>
+  </div>
+</div>
+
+<div id="conv-temp" class="conv-section" style="max-width:720px;margin:0 auto;padding:0 20px 60px">
+  <div class="section-heading" id="ch-temp">ðŸŒ¡ï¸ Conversor de Temperatura</div>
+  <div class="section-sub" id="cs-temp">Celsius, Fahrenheit e Kelvin</div>
+  <div class="card">
+    <div class="conv-row">
+      <div><label class="conv-label">De</label>
+        <select id="t-from" onchange="convTemp()">
+          <option value="c">Celsius (Â°C)</option>
+          <option value="f">Fahrenheit (Â°F)</option>
+          <option value="k">Kelvin (K)</option>
+        </select>
+      </div>
+      <div><label class="conv-label">Para</label>
+        <select id="t-to" onchange="convTemp()">
+          <option value="f">Fahrenheit (Â°F)</option>
+          <option value="c">Celsius (Â°C)</option>
+          <option value="k">Kelvin (K)</option>
+        </select>
+      </div>
+    </div>
+    <label class="conv-label">Valor</label>
+    <input type="number" id="t-val" value="25" oninput="convTemp()" />
+    <div class="conv-result" id="t-result">â€”</div>
+  </div>
+  <div class="card">
+    <p style="color:var(--accent);font-family:'Playfair Display',serif;margin-bottom:12px" id="ct-ref">ðŸ“Œ ReferÃªncias rÃ¡pidas</p>
+    <table class="conv-table">
+      <tr><th>Â°C</th><th>Â°F</th><th id="ct-situation">SituaÃ§Ã£o</th></tr>
+      <tr><td>0Â°C</td><td>32Â°F</td><td id="ct-r1">Ponto de congelamento</td></tr>
+      <tr><td>20Â°C</td><td>68Â°F</td><td id="ct-r2">Temperatura ambiente</td></tr>
+      <tr><td>37Â°C</td><td>98.6Â°F</td><td id="ct-r3">Temperatura corporal</td></tr>
+      <tr><td>100Â°C</td><td>212Â°F</td><td id="ct-r4">Ponto de ebuliÃ§Ã£o</td></tr>
+      <tr><td>180Â°C</td><td>356Â°F</td><td id="ct-r5">Forno mÃ©dio (culinÃ¡ria)</td></tr>
+    </table>
+  </div>
+</div>
+
+<div id="conv-kitchen" class="conv-section" style="max-width:720px;margin:0 auto;padding:0 20px 60px">
+  <div class="section-heading" id="ch-kitchen">ðŸ³ Medidas de Cozinha</div>
+  <div class="section-sub" id="cs-kitchen">Converta xÃ­caras, colheres, ml e fl oz</div>
+  <div class="card">
+    <div class="conv-row">
+      <div><label class="conv-label">De</label>
+        <select id="k-from" onchange="convKitchen()">
+          <option value="cup_br" id="ko-cupbr">XÃ­cara BR (200ml)</option>
+          <option value="cup_us" id="ko-cupus">XÃ­cara US (240ml)</option>
+          <option value="tbsp" id="ko-tbsp">Colher de sopa (15ml)</option>
+          <option value="tsp" id="ko-tsp">Colher de chÃ¡ (5ml)</option>
+          <option value="ml" id="ko-ml">Mililitro (ml)</option>
+          <option value="floz" id="ko-floz">Fl oz (30ml)</option>
+        </select>
+      </div>
+      <div><label class="conv-label">Para</label>
+        <select id="k-to" onchange="convKitchen()">
+          <option value="ml" id="ko-ml2">Mililitro (ml)</option>
+          <option value="cup_br" id="ko-cupbr2">XÃ­cara BR (200ml)</option>
+          <option value="cup_us" id="ko-cupus2">XÃ­cara US (240ml)</option>
+          <option value="tbsp" id="ko-tbsp2">Colher de sopa (15ml)</option>
+          <option value="tsp" id="ko-tsp2">Colher de chÃ¡ (5ml)</option>
+          <option value="floz" id="ko-floz2">Fl oz (30ml)</option>
+        </select>
+      </div>
+    </div>
+    <label class="conv-label">Quantidade</label>
+    <input type="number" id="k-val" value="1" oninput="convKitchen()" />
+    <div class="conv-result" id="k-result">â€”</div>
+    <div class="conv-warning" id="k-warning"></div>
+  </div>
+  <div class="card">
+    <p style="color:var(--accent);font-family:'Playfair Display',serif;margin-bottom:12px" id="ck-ref">ðŸ“Œ Tabela de equivalÃªncia</p>
+    <table class="conv-table">
+      <tr><th id="ck-th1">Medida</th><th>ml</th><th id="ck-th2">Equivale a</th></tr>
+      <tr><td id="ck-r1a">1 xÃ­cara BR</td><td>200ml</td><td id="ck-r1b">â‰ˆ 13 col. de sopa</td></tr>
+      <tr><td id="ck-r2a">1 xÃ­cara US</td><td>240ml</td><td id="ck-r2b">16 col. de sopa</td></tr>
+      <tr><td id="ck-r3a">1 col. sopa</td><td>15ml</td><td id="ck-r3b">3 col. de chÃ¡</td></tr>
+      <tr><td id="ck-r4a">1 col. chÃ¡</td><td>5ml</td><td id="ck-r4b">â€”</td></tr>
+      <tr><td id="ck-r5a">1 fl oz</td><td>30ml</td><td id="ck-r5b">2 col. de sopa</td></tr>
+    </table>
+  </div>
+</div>
+
+<div id="conv-clothing" class="conv-section" style="max-width:720px;margin:0 auto;padding:0 20px 60px">
+  <div class="section-heading" id="ch-clothing">ðŸ‘• Tamanho de Roupa</div>
+  <div class="section-sub" id="cs-clothing">Converta entre BR, US, EU â€” camisas, calÃ§as e calÃ§ados</div>
+  <div class="card">
+    <div class="tabs" style="margin-bottom:20px">
+      <button class="tab active" onclick="setClothTab('top',this)" id="clt-top">Camisas</button>
+      <button class="tab" onclick="setClothTab('pants',this)" id="clt-pants">CalÃ§as</button>
+      <button class="tab" onclick="setClothTab('shoes',this)" id="clt-shoes">CalÃ§ados</button>
+    </div>
+    <div id="cl-top">
+      <label class="conv-label" id="cl-select-label">Selecione seu tamanho BR</label>
+      <select id="cl-top-sel" onchange="hlCloth('top')">
+        <option value="">-- Escolha --</option>
+        <option value="0">PP</option><option value="1">P</option>
+        <option value="2">M</option><option value="3">G</option>
+        <option value="4">GG</option><option value="5">GGG / XGG</option>
+        <option value="6">GGGG / 3XL</option>
+      </select>
+      <table class="conv-table" style="margin-top:14px">
+        <tr><th>BR</th><th>US / INT</th><th>EU</th></tr>
+        <tr id="ct0"><td>PP</td><td>XS (0-2)</td><td>32/34</td></tr>
+        <tr id="ct1"><td>P</td><td>S (4-6)</td><td>36/38</td></tr>
+        <tr id="ct2"><td>M</td><td>M (8-10)</td><td>40/42</td></tr>
+        <tr id="ct3"><td>G</td><td>L (12-14)</td><td>44/46</td></tr>
+        <tr id="ct4"><td>GG</td><td>XL (16-18)</td><td>48/50</td></tr>
+        <tr id="ct5"><td>GGG / XGG</td><td>XXL (20-22)</td><td>52/54</td></tr>
+        <tr id="ct6"><td>GGGG / 3XL</td><td>3XL (24-26)</td><td>56/58</td></tr>
+      </table>
+    </div>
+    <div id="cl-pants" style="display:none">
+      <label class="conv-label">Selecione seu nÃºmero BR</label>
+      <select id="cl-pants-sel" onchange="hlCloth('pants')">
+        <option value="">-- Escolha --</option>
+        <option value="0">36 (70cm)</option><option value="1">38 (74cm)</option>
+        <option value="2">40 (78cm)</option><option value="3">42 (82cm)</option>
+        <option value="4">44 (86cm)</option><option value="5">46 (90cm)</option>
+        <option value="6">48 (94cm)</option><option value="7">50 (98cm)</option>
+      </select>
+      <table class="conv-table" style="margin-top:14px">
+        <tr><th>BR</th><th>US (Waist)</th><th>EU</th><th>INT</th></tr>
+        <tr id="cp0"><td>36 (70cm)</td><td>W27</td><td>36</td><td>XS</td></tr>
+        <tr id="cp1"><td>38 (74cm)</td><td>W29</td><td>38</td><td>S</td></tr>
+        <tr id="cp2"><td>40 (78cm)</td><td>W31</td><td>40</td><td>M</td></tr>
+        <tr id="cp3"><td>42 (82cm)</td><td>W32</td><td>42</td><td>M</td></tr>
+        <tr id="cp4"><td>44 (86cm)</td><td>W34</td><td>44</td><td>L</td></tr>
+        <tr id="cp5"><td>46 (90cm)</td><td>W36</td><td>46</td><td>L</td></tr>
+        <tr id="cp6"><td>48 (94cm)</td><td>W37</td><td>48</td><td>XL</td></tr>
+        <tr id="cp7"><td>50 (98cm)</td><td>W39</td><td>50</td><td>XXL</td></tr>
+      </table>
+    </div>
+    <div id="cl-shoes" style="display:none">
+      <label class="conv-label">Selecione seu nÃºmero BR</label>
+      <select id="cl-shoes-sel" onchange="hlCloth('shoes')">
+        <option value="">-- Escolha --</option>
+        <option value="0">34</option><option value="1">35</option><option value="2">36</option>
+        <option value="3">37</option><option value="4">38</option><option value="5">39</option>
+        <option value="6">40</option><option value="7">41</option><option value="8">42</option>
+        <option value="9">43</option><option value="10">44</option>
+      </select>
+      <table class="conv-table" style="margin-top:14px">
+        <tr><th>BR</th><th>US â™€</th><th>US â™‚</th><th>EU</th><th>UK</th></tr>
+        <tr id="cs0"><td>34</td><td>4</td><td>3</td><td>34</td><td>2</td></tr>
+        <tr id="cs1"><td>35</td><td>5</td><td>4</td><td>35</td><td>3</td></tr>
+        <tr id="cs2"><td>36</td><td>6</td><td>4.5</td><td>36</td><td>3.5</td></tr>
+        <tr id="cs3"><td>37</td><td>6.5</td><td>5</td><td>37</td><td>4</td></tr>
+        <tr id="cs4"><td>38</td><td>7.5</td><td>6</td><td>38</td><td>5</td></tr>
+        <tr id="cs5"><td>39</td><td>8.5</td><td>7</td><td>39</td><td>6</td></tr>
+        <tr id="cs6"><td>40</td><td>9</td><td>7.5</td><td>40</td><td>6.5</td></tr>
+        <tr id="cs7"><td>41</td><td>10</td><td>8</td><td>41</td><td>7</td></tr>
+        <tr id="cs8"><td>42</td><td>11</td><td>9</td><td>42</td><td>8</td></tr>
+        <tr id="cs9"><td>43</td><td>11.5</td><td>9.5</td><td>43</td><td>9</td></tr>
+        <tr id="cs10"><td>44</td><td>12.5</td><td>10.5</td><td>44</td><td>10</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+<!-- Inicio codigo Contador -->
+<div align="center"><a title="contador de dias" href="https://www.calendario.cnt.br/ferramentas/contador-de-dias-calculadora-prazo-entre-datas"><img src="https://contador-gratis.com/contadores-de-visitas/050526062556736.gif"></a><div><a href="https://www.contador-gratis.com/" title="contador de visitas">Contador de Visitas</a></div></div>
+<!-- Fim do codigo Contador -->
+  <footer style="text-align: center; padding: 40px 20px; border-top: 1px solid #1e1e24; margin-top: 50px;">
+    <p style="color: #888; font-size: 14px;">&copy; 2026 NameForge</p>
+    <a href="privacidade.html" style="color: #e8c77a; text-decoration: none; font-size: 14px; font-weight: 500;">PolÃ­tica de Privacidade</a> |
+<a href="about.html" style="color: #e8c77a; text-decoration: none; font-size: 14px;">Sobre</a> |
+<a href="contact.html" style="color: #e8c77a; text-decoration: none; font-size: 14px;">Contato</a> |
+<a href="terms.html" style="color: #e8c77a; text-decoration: none; font-size: 14px;">Termos</a>
+  </footer>
 </body>
 </html>
