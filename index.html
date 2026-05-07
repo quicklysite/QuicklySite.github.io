@@ -1144,10 +1144,11 @@ function showConv(id){
     if(btnBack) btnBack.parentElement.style.display='block';
   } else {
     if(btnBack) btnBack.parentElement.style.display='none';
-    // Esconde seção "sobre" nos conversores
+  }
+
+  // Mostra/esconde seção "O que é o NameForge?"
   const aboutSec = document.querySelector('section');
   if(aboutSec) aboutSec.style.display = id==='names' ? 'block' : 'none';
-  }
 
   if(id==='weight')convWeight();
   if(id==='temp')convTemp();
