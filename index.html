@@ -580,6 +580,171 @@
         <input type="number" id="biz-qty" value="8" min="1" max="20" />
       </div>
     </div>
+    <div id="panel-weight" class="conv-section">
+      <h2 class="section-heading" id="ch-weight">⚖️ Conversor de Peso</h2>
+      <p class="section-sub" id="cs-weight">Converta kg, lb, oz e gramas instantaneamente</p>
+
+      <div class="row">
+        <div class="control-group">
+          <label id="lbl-weight-val">Valor</label>
+          <input type="number" id="weight-val" value="1" oninput="calculateWeight()" />
+        </div>
+      </div>
+
+      <div class="conv-row">
+        <div class="control-group">
+          <label id="lbl-weight-from">De</label>
+          <select id="weight-from" onchange="calculateWeight()">
+            <option value="kg" id="opt-w-kg1">Quilogramas (kg)</option>
+            <option value="lb" id="opt-w-lb1">Libras (lb)</option>
+            <option value="oz" id="opt-w-oz1">Onças (oz)</option>
+            <option value="g" id="opt-w-g1">Gramas (g)</option>
+          </select>
+        </div>
+
+        <div class="control-group">
+          <label id="lbl-weight-to">Para</label>
+          <select id="weight-to" onchange="calculateWeight()">
+            <option value="lb" id="opt-w-lb2">Libras (lb)</option>
+            <option value="kg" id="opt-w-kg2">Quilogramas (kg)</option>
+            <option value="oz" id="opt-w-oz2">Onças (oz)</option>
+            <option value="g" id="opt-w-g2">Gramas (g)</option>
+          </select>
+        </div>
+      </div> 
+      
+      <div id="panel-temp" class="conv-section">
+      <h2 class="section-heading" id="ch-temp">🌡️ Conversor de Temperatura</h2>
+      <p class="section-sub" id="cs-temp">Converta Celsius, Fahrenheit e Kelvin instantaneamente</p>
+
+      <div class="row">
+        <div class="control-group">
+          <label id="lbl-temp-val">Valor</label>
+          <input type="number" id="temp-val" value="1" oninput="calculateTemp()" />
+        </div>
+      </div>
+
+      <div class="conv-row">
+        <div class="control-group">
+          <label id="lbl-temp-from">De</label>
+          <select id="temp-from" onchange="calculateTemp()">
+            <option value="C" id="opt-t-c1">Celsius (°C)</option>
+            <option value="F" id="opt-t-f1">Fahrenheit (°F)</option>
+            <option value="K" id="opt-t-k1">Kelvin (K)</option>
+          </select>
+        </div>
+
+        <div class="control-group">
+          <label id="lbl-temp-to">Para</label>
+          <select id="temp-to" onchange="calculateTemp()">
+            <option value="F" id="opt-t-f2">Fahrenheit (°F)</option>
+            <option value="C" id="opt-t-c2">Celsius (°C)</option>
+            <option value="K" id="opt-t-k2">Kelvin (K)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="conv-result" id="temp-result">33.80 °F</div>
+    </div>
+          <div id="panel-cook" class="conv-section">
+      <h2 class="section-heading" id="ch-cook">🍳 Conversor de Cozinha</h2>
+      <p class="section-sub" id="cs-cook">Converta xícaras, colheres e mililitros para suas receitas</p>
+
+      <div class="row">
+        <div class="control-group">
+          <label id="lbl-cook-val">Valor</label>
+          <input type="number" id="cook-val" value="1" oninput="calculateCook()" />
+        </div>
+      </div>
+
+      <div class="conv-row">
+        <div class="control-group">
+          <label id="lbl-cook-from">De</label>
+          <select id="cook-from" onchange="calculateCook()">
+            <option value="cup" id="opt-c-cup1">Xícaras</option>
+            <option value="tbsp" id="opt-c-tbsp1">Colheres de Sopa</option>
+            <option value="tsp" id="opt-c-tsp1">Colheres de Chá</option>
+            <option value="ml" id="opt-c-ml1">Mililitros (ml)</option>
+          </select>
+        </div>
+
+        <div class="control-group">
+          <label id="lbl-cook-to">Para</label>
+          <select id="cook-to" onchange="calculateCook()">
+            <option value="ml" id="opt-c-ml2">Mililitros (ml)</option>
+            <option value="cup" id="opt-c-cup2">Xícaras</option>
+            <option value="tbsp" id="opt-c-tbsp2">Colheres de Sopa</option>
+            <option value="tsp" id="opt-c-tsp2">Colheres de Chá</option>
+          </select>
+        </div>
+      </div>
+      <div id="panel-clothing" class="conv-section">
+      <h2 class="section-heading" id="ch-cloth">👕 Conversor de Roupas & Calçados</h2>
+      <p class="section-sub" id="cs-cloth">Descubra seu tamanho equivalente em lojas internacionais</p>
+
+      <div class="tabs" style="margin-bottom: 15px;">
+        <button class="tab-btn active" onclick="showClothTab('shoes-m')" id="btn-shoes-m">Calçados Masc.</button>
+        <button class="tab-btn" onclick="showClothTab('shoes-f')" id="btn-shoes-f">Calçados Fem.</button>
+        <button class="tab-btn" onclick="showClothTab('clothing-g')" id="btn-clothing-g">Roupas</button>
+      </div>
+
+      <div id="cloth-shoes-m" class="cloth-tab-content">
+        <table class="results-table">
+          <thead>
+            <tr><th>BR</th><th>US</th><th>EU</th><th>UK</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>38</td><td>7</td><td>40</td><td>6.5</td></tr>
+            <tr><td>39</td><td>8</td><td>41</td><td>7.5</td></tr>
+            <tr style="background: rgba(232,199,122,0.1); font-weight: bold;"><td>40</td><td>8.5</td><td>42</td><td>8</td></tr>
+            <tr><td>41</td><td>9.5</td><td>43</td><td>9</td></tr>
+            <tr><td>42</td><td>10</td><td>44</td><td>9.5</td></tr>
+            <tr><td>43</td><td>11</td><td>45</td><td>10.5</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div id="cloth-shoes-f" class="cloth-tab-content" style="display: none;">
+        <table class="results-table">
+          <thead>
+            <tr><th>BR</th><th>US</th><th>EU</th><th>UK</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>34</td><td>5</td><td>36</td><td>3</td></tr>
+            <tr><td>35</td><td>5.5</td><td>37</td><td>4</td></tr>
+            <tr style="background: rgba(232,199,122,0.1); font-weight: bold;"><td>36</td><td>6</td><td>38</td><td>5</td></tr>
+            <tr><td>37</td><td>7</td><td>39</td><td>6</td></tr>
+            <tr><td>38</td><td>7.5</td><td>40</td><td>6.5</td></tr>
+            <tr><td>39</td><td>8.5</td><td>41</td><td>7.5</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div id="cloth-clothing-g" class="cloth-tab-content" style="display: none;">
+        <table class="results-table">
+          <thead>
+            <tr><th>BR</th><th>US</th><th>EU</th><th>UK</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>PP</td><td>XXS</td><td>XXS</td><td>XXS</td></tr>
+            <tr><td>P</td><td>XS</td><td>XS</td><td>XS</td></tr>
+            <tr style="background: rgba(232,199,122,0.1); font-weight: bold;"><td>M</td><td>S</td><td>S</td><td>S</td></tr>
+            <tr><td>G</td><td>M</td><td>M</td><td>M</td></tr>
+            <tr><td>GG</td><td>L</td><td>L</td><td>L</td></tr>
+            <tr><td>XG</td><td>XL</td><td>XL</td><td>XL</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+          
+
+      <div class="conv-result" id="cook-result">240.00 ml</div>
+    </div>
+
+
+
+      <div class="conv-result" id="weight-result">1.00</div>
+    </div>
 
     <!-- BUTTON -->
     <button class="btn-generate" onclick="generate()" id="btn-gen">✨ Gerar Nomes</button>
@@ -629,9 +794,33 @@
       ckR1a:'1 xícara BR', ckR1b:'≈ 13 col. de sopa', ckR2a:'1 xícara US', ckR2b:'16 col. de sopa',
       ckR3a:'1 col. sopa', ckR3b:'3 col. de chá', ckR4a:'1 col. chá', ckR4b:'—', ckR5a:'1 fl oz', ckR5b:'2 col. de sopa',
       clSelect:'Selecione seu tamanho BR', cltTop:'Camisas', cltPants:'Calças', cltShoes:'Calçados',
-      clFrom:'De', clTo:'Para', clVal:'Valor'
+      clFrom:'De', clTo:'Para', clVal: 'Valor',
+      unitKg: 'Quilogramas (kg)',
+      unitLb: 'Libras (lb)',
+      unitOz: 'Onças (oz)',
+      unitG: 'Gramas (g)',
+      chWeight: '⚖️ Conversor de Peso',
+      csWeight: 'Converta kg, lb, oz e gramas instantaneamente',
+      chTemp: '🌡️ Conversor de Temperatura',
+      csTemp: 'Converta Celsius, Fahrenheit e Kelvin instantaneamente',
+      unitC: 'Celsius (°C)',
+      unitF: 'Fahrenheit (°F)',
+      unitK: 'Kelvin (K)',
+      chCook: '🍳 Conversor de Cozinha',
+      csCook: 'Converta xícaras, colheres e mililitros para suas receitas',
+      unitCup: 'Xícaras',
+      unitTbsp: 'Colheres de Sopa',
+      unitTsp: 'Colheres de Chá',
+      unitMl: 'Mililitros (ml)',
+      chCloth: '👕 Conversor de Roupas & Calçados',
+      csCloth: 'Descubra seu tamanho equivalente em lojas internacionais',
+      tabShoesM: 'Calçados Masc.',
+      tabShoesF: 'Calçados Fem.',
+      tabClothing: 'Roupas (Geral)'
+      
     },
-    en: {
+
+      en: {
       tagline: 'Name generator for babies, characters & businesses',
       tabBaby: '👶 Baby', tabChar: '⚔️ Character', tabBiz: '🏢 Business',
       lblGender: 'Gender', lblOrigin: 'Origin', lblQty: 'Quantity',
@@ -655,9 +844,33 @@
       ckR1a:'1 BR cup', ckR1b:'≈ 13 tablespoons', ckR2a:'1 US cup', ckR2b:'16 tablespoons',
       ckR3a:'1 tbsp', ckR3b:'3 teaspoons', ckR4a:'1 tsp', ckR4b:'—', ckR5a:'1 fl oz', ckR5b:'2 tablespoons',
       clSelect:'Select your BR size', cltTop:'Shirts', cltPants:'Pants', cltShoes:'Shoes',
-      clFrom:'From', clTo:'To', clVal:'Value'
+      clFrom:'From', clTo:'To', clVal: 'Value',
+      unitKg: 'Kilograms (kg)',
+      unitLb: 'Pounds (lb)',
+      unitOz: 'Ounces (oz)',
+      unitG: 'Grams (g)',
+      chWeight: '⚖️ Weight Converter',
+      csWeight: 'Convert kg, lb, oz and grams instantly',      
+      chTemp: '🌡️ Temperature Converter',
+      csTemp: 'Convert Celsius, Fahrenheit and Kelvin instantly',
+      unitC: 'Celsius (°C)',
+      unitF: 'Fahrenheit (°F)',
+      unitK: 'Kelvin (K)',
+      chCook: '🍳 Kitchen Converter',
+      csCook: 'Convert cups, spoons and milliliters for your recipes',
+      unitCup: 'Cups',
+      unitTbsp: 'Tablespoons (tbsp)',
+      unitTsp: 'Teaspoons (tsp)',
+      unitMl: 'Milliliters (ml)',
+      chCloth: '👕 Clothing & Shoe Converter',
+      csCloth: 'Find your equivalent size for international shopping',
+      tabShoesM: 'Men\'s Shoes',
+      tabShoesF: 'Women\'s Shoes',
+      tabClothing: 'Clothing (General)'
+
     }
   };
+
 
   let lang = 'pt';
 
@@ -670,6 +883,52 @@
   function applyTranslations() {
     const t = T[lang];
     document.getElementById('tagline').textContent = t.tagline;
+        // Tradução dos campos do painel de peso
+    document.getElementById('ch-weight').textContent = t.chWeight;
+    document.getElementById('cs-weight').textContent = t.csWeight;
+    document.getElementById('lbl-weight-val').textContent = t.clVal;
+    document.getElementById('lbl-weight-from').textContent = t.clFrom;
+    document.getElementById('lbl-weight-to').textContent = t.clTo;
+    document.getElementById('opt-w-kg1').textContent = t.unitKg;
+    document.getElementById('opt-w-kg2').textContent = t.unitKg;
+    document.getElementById('opt-w-lb1').textContent = t.unitLb;
+    document.getElementById('opt-w-lb2').textContent = t.unitLb;
+    document.getElementById('opt-w-oz1').textContent = t.unitOz;
+    document.getElementById('opt-w-oz2').textContent = t.unitOz;
+    document.getElementById('opt-w-g1').textContent = t.unitG;
+    document.getElementById('opt-w-g2').textContent = t.unitG;
+        // Tradução dos campos do painel de temperatura
+    document.getElementById('ch-temp').textContent = t.chTemp;
+    document.getElementById('cs-temp').textContent = t.csTemp;
+    document.getElementById('lbl-temp-val').textContent = t.clVal;
+    document.getElementById('lbl-temp-from').textContent = t.clFrom;
+    document.getElementById('lbl-temp-to').textContent = t.clTo;
+    document.getElementById('opt-t-c1').textContent = t.unitC;
+    document.getElementById('opt-t-c2').textContent = t.unitC;
+    document.getElementById('opt-t-f1').textContent = t.unitF;
+    document.getElementById('opt-t-f2').textContent = t.unitF;
+    document.getElementById('opt-t-k1').textContent = t.unitK;
+    document.getElementById('opt-t-k2').textContent = t.unitK;
+        // Tradução dos campos do painel de cozinha
+    document.getElementById('ch-cook').textContent = t.chCook;
+    document.getElementById('cs-cook').textContent = t.csCook;
+    document.getElementById('lbl-cook-val').textContent = t.clVal;
+    document.getElementById('lbl-cook-from').textContent = t.clFrom;
+    document.getElementById('lbl-cook-to').textContent = t.clTo;    
+    document.getElementById('opt-c-cup1').textContent = t.unitCup;
+    document.getElementById('opt-c-cup2').textContent = t.unitCup;
+    document.getElementById('opt-c-tbsp1').textContent = t.unitTbsp;
+    document.getElementById('opt-c-tbsp2').textContent = t.unitTbsp;
+    document.getElementById('opt-c-tsp1').textContent = t.unitTsp;
+    document.getElementById('opt-c-tsp2').textContent = t.unitTsp;
+    document.getElementById('opt-c-ml1').textContent = t.unitMl;
+    document.getElementById('opt-c-ml2').textContent = t.unitMl;
+        // Tradução dos campos do painel de roupas e calçados
+    document.getElementById('ch-cloth').textContent = t.chCloth;
+    document.getElementById('cs-cloth').textContent = t.csCloth;
+    document.getElementById('btn-shoes-m').textContent = t.tabShoesM;
+    document.getElementById('btn-shoes-f').textContent = t.tabShoesF;
+    document.getElementById('btn-clothing-g').textContent = t.tabClothing;   
     document.getElementById('tab-baby').textContent = t.tabBaby;
     document.getElementById('tab-char').textContent = t.tabChar;
     document.getElementById('tab-biz').textContent = t.tabBiz;
@@ -1040,6 +1299,117 @@
     toast.classList.add('show');
     setTimeout(() => toast.classList.remove('show'), 2000);
   }
+    // ── FUNÇÃO DE CÁLCULO DO CONVERSOR DE TEMPERATURA ──
+  function calculateTemp() {
+    const valInput = document.getElementById('temp-val');
+    const val = parseFloat(valInput.value);
+    const fromUnit = document.getElementById('temp-from').value;
+    const toUnit = document.getElementById('temp-to').value;
+    const resultEl = document.getElementById('temp-result');
+
+    if (isNaN(val)) {
+      resultEl.textContent = '0.00';
+      return;
+    }
+  // ── FUNÇÃO DE CÁLCULO DO CONVERSOR DE COZINHA ──
+  function calculateCook() {
+    const valInput = document.getElementById('cook-val');
+    const val = parseFloat(valInput.value);
+    const fromUnit = document.getElementById('cook-from').value;
+    const toUnit = document.getElementById('cook-to').value;
+    const resultEl = document.getElementById('cook-result');
+
+    if (isNaN(val)) {
+      resultEl.textContent = '0.00';
+      return;
+    }
+  // ── FUNÇÃO DE ALTERNÂNCIA DE ABAS DO CONVERSOR DE ROUPAS ──
+  function showClothTab(tabId) {
+    // Esconde todos os conteúdos de abas de roupas
+    const contents = document.querySelectorAll('.cloth-tab-content');
+    contents.forEach(content => content.style.display = 'none');
+
+    // Remove classe ativa de todos os botões de roupas
+    const buttons = document.querySelectorAll('#panel-clothing .tab-btn');
+    buttons.forEach(btn => btn.classList.remove('active'));
+
+    // Mostra a aba selecionada e ativa o botão correspondente
+    document.getElementById('cloth-' + tabId).style.display = 'block';
+    
+    // Identifica o botão clicado para ativar
+    if (tabId === 'shoes-m') document.getElementById('btn-shoes-m').classList.add('active');
+    if (tabId === 'shoes-f') document.getElementById('btn-shoes-f').classList.add('active');
+    if (tabId === 'clothing-g') document.getElementById('btn-clothing-g').classList.add('active');
+  }
+
+    // Fatores de conversão tendo Mililitros (ml) como base
+    const toMl = {
+      cup: 240,
+      tbsp: 15,
+      tsp: 5,
+      ml: 1
+    };
+
+    const valInMl = val * toMl[fromUnit];
+    const finalResult = valInMl / toMl[toUnit];
+
+    resultEl.textContent = finalResult.toLocaleString(lang === 'pt' ? 'pt-BR' : 'en-US', {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    }) + ' ' + toUnit;
+  }
+
+    let finalResult;
+
+    if (fromUnit === toUnit) {
+      finalResult = val;
+    } else if (fromUnit === 'C') {
+      if (toUnit === 'F') finalResult = (val * 9/5) + 32;
+      if (toUnit === 'K') finalResult = val + 273.15;
+    } else if (fromUnit === 'F') {
+      if (toUnit === 'C') finalResult = (val - 32) * 5/9;
+      if (toUnit === 'K') finalResult = ((val - 32) * 5/9) + 273.15;
+    } else if (fromUnit === 'K') {
+      if (toUnit === 'C') finalResult = val - 273.15;
+      if (toUnit === 'F') finalResult = ((val - 273.15) * 9/5) + 32;
+    }
+
+    resultEl.textContent = finalResult.toLocaleString(lang === 'pt' ? 'pt-BR' : 'en-US', {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    }) + ' ' + (toUnit === 'K' ? 'K' : '°' + toUnit);
+  }
+
+    // ── FUNÇÃO DE CÁLCULO DO CONVERSOR DE PESO ──
+  function calculateWeight() {
+    const valInput = document.getElementById('weight-val');
+    const val = parseFloat(valInput.value);
+    const fromUnit = document.getElementById('weight-from').value;
+    const toUnit = document.getElementById('weight-to').value;
+    const resultEl = document.getElementById('weight-result');
+
+    if (isNaN(val)) {
+      resultEl.textContent = '0.00';
+      return;
+    }
+
+    // Fatores de conversão tendo Quilograma (kg) como base
+    const toKg = {
+      kg: 1,
+      lb: 0.45359237,
+      oz: 0.028349523125,
+      g: 0.001
+    };
+
+    const valInKg = val * toKg[fromUnit];
+    const finalResult = valInKg / toKg[toUnit];
+
+    resultEl.textContent = finalResult.toLocaleString(lang === 'pt' ? 'pt-BR' : 'en-US', {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 4
+    }) + ' ' + toUnit;
+  }
+
 // ── SIDEBAR ──
 function toggleSidebar(){
   document.getElementById('sidebar').classList.toggle('open');
