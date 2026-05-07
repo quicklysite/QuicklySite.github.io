@@ -1090,16 +1090,35 @@ function closeSidebar(){
 // ── SEÇÕES ──
 function showConv(id){
   document.querySelectorAll('.conv-section').forEach(s=>s.classList.remove('conv-active'));
-  const target = document.getElementById('conv-'+id);
-  if(target) target.classList.add('conv-active');
+  const target=document.getElementById('conv-'+id);
+  if(target)target.classList.add('conv-active');
   document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('nav-active'));
   document.getElementById('ni-'+id).classList.add('nav-active');
   closeSidebar();
-  if(id==='weight') convWeight();
-  if(id==='temp') convTemp();
-  if(id==='kitchen') convKitchen();
-}
 
+  // Esconde todas as intros e botão voltar
+  ['weight','temp','kitchen','clothing'].forEach(s=>{
+    const el=document.getElementById('intro-'+s);
+    if(el) el.style.display='none';
+  });
+  const btnBack=document.getElementById('btn-back');
+
+  // Mostra intro e botão voltar se for conversor
+  if(id!=='names'){
+    const intro=document.getElementById('intro-'+id);
+    if(intro) intro.style.display='block';
+    if(btnBack) btnBack.parentElement.style.display='block';
+  } else {
+    if(btnBack) btnBack.parentElement.style.display='none';
+  }
+
+  if(id==='weight')convWeight();
+  if(id==='temp')convTemp();
+  if(id==='kitchen')convKitchen();
+
+  // Scroll suave para o topo
+  window.scrollTo({top:0,behavior:'smooth'});
+}
 // ── PESO ──
 const wKg={kg:1,lb:0.453592,oz:0.0283495,g:0.001};
 function convWeight(){
