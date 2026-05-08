@@ -1258,8 +1258,9 @@ function translateConverters(t){
   for(const[id,val]of Object.entries(ids)){
     const el=document.getElementById(id);
     if(el && typeof val !== 'undefined'){
-  el.textContent = val;
-}
+      el.textContent = val;
+    }
+  }
   const kw=document.getElementById('k-warning');
   if(kw&&kw.classList.contains('show')) convKitchen();
 }
