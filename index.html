@@ -609,9 +609,9 @@
         <div class="control-group">
           <label id="lbl-style">Estilo</label>
           <select id="biz-style">
-            <option value="modern">Moderno / Curto</option>
-            <option value="classic">Clássico / Formal</option>
-            <option value="playful">Divertido / Jovem</option>
+            <option id="style-modern" value="modern">Moderno / Curto</option>
+            <option id="style-classic" value="classic">Clássico / Formal</option>
+            <option id="style-playful" value="playful">Divertido / Jovem</option>
           </select>
         </div>
       </div>
@@ -761,6 +761,9 @@ itClothingEx:'A "Size M" American shirt equals Brazilian size M (42/44). A "US 9
     document.getElementById('opt-en-orig').textContent = t.optEn;
     document.getElementById('opt-jp').textContent = t.optJp;
     document.getElementById('opt-classic').textContent = t.optClassic;
+    document.getElementById('style-modern').textContent = t.styleModern;
+    document.getElementById('style-classic').textContent = t.styleClassic;
+    document.getElementById('style-playful').textContent = t.stylePlayful;
     const ftEl = document.getElementById('footer-txt');
     if(ftEl) ftEl.textContent = t.footer;
     const isEn = (lang === 'en')
