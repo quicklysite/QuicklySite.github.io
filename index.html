@@ -580,9 +580,9 @@
         <div class="control-group">
           <label id="lbl-gender2">Gênero</label>
           <select id="char-gender">
-            <option value="f">Feminino</option>
-            <option value="m">Masculino</option>
-            <option value="n">Neutro</option>
+          <option id="char-female" value="f">Feminino</option>
+          <option id="char-male" value="m">Masculino</option>
+          <option id="char-neutral" value="n">Neutro</option>
           </select>
         </div>
       </div>
@@ -749,6 +749,9 @@ itClothingEx:'A "Size M" American shirt equals Brazilian size M (42/44). A "US 9
     document.getElementById('lbl-qty').textContent = t.lblQty;
     document.getElementById('lbl-universe').textContent = t.lblUniverse;
     document.getElementById('lbl-gender2').textContent = t.lblGender2;
+    document.getElementById('char-female').textContent = t.charFemale;
+    document.getElementById('char-male').textContent = t.charMale;
+    document.getElementById('char-neutral').textContent = t.charNeutral;
     document.getElementById('lbl-sector').textContent = t.lblSector;
     document.getElementById('lbl-style').textContent = t.lblStyle;
     document.getElementById('lbl-qty2').textContent = t.lblQty;
