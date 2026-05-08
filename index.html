@@ -1272,6 +1272,12 @@ function translateConverters(t){
     }
   `;
   document.head.appendChild(style);
+  // Estado inicial: esconde botão voltar e intros
+document.getElementById('btn-back').parentElement.style.display='none';
+['weight','temp','kitchen','clothing'].forEach(s=>{
+  const el=document.getElementById('intro-'+s);
+  if(el) el.style.display='none';
+});
 </script>
   <section style="max-width: 800px; margin: 40px auto; padding: 20px; line-height: 1.8; color: #f0ede6; opacity: 0.9;">
     <h2 id="about-title" style="color: #e8c77a; margin-bottom: 20px; font-family: 'Playfair Display', serif;">O que é o NameForge?</h2>
@@ -1282,7 +1288,8 @@ function translateConverters(t){
 
     <p id="about-p3">Ter um nome estratégico é fundamental para o sucesso digital e para o RECONHECIMENTO de marca. Por isso, o NameForge é constantemente atualizado com novas bases de dados que refletem as tendências modernas de mercado e entretenimento. Além de nomes para empresas e personagens, a ferramenta pode ser utilizada para batizar novos animais de estimação, projetos acadêmicos ou qualquer iniciativa que demande um toque de originalidade e exclusividade.</p>
   </section>
-  <!-- ── CONVERSORES ── -->
+</div><!-- /conv-names -->
+<!-- ── CONVERSORES ── -->
   <!-- BOTÃO VOLTAR (aparece em todos os conversores) -->
 <div style="max-width:720px;margin:20px auto 0;padding:0 20px">
   <button class="btn-back" onclick="showConv('names')" id="btn-back">← <span id="btn-back-txt">Voltar ao Gerador</span></button>
