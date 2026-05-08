@@ -774,7 +774,8 @@ itClothingEx:'A "Size M" American shirt equals Brazilian size M (42/44). A "US 9
     document.getElementById('about-p3').textContent = tP3;
     document.documentElement.lang = lang;
     translateConverters(t);
-  } // ── NAME BANKS ──
+    } 
+  // ── NAME BANKS ──
   const NAMES = {
     baby: {
       f: {
@@ -1246,8 +1247,14 @@ function translateConverters(t){
 'it-kitchen-title':t.itKitchenTitle,'it-kitchen-desc':t.itKitchenDesc,
 'it-kitchen-ex-label':t.itKitchenExLabel,'it-kitchen-ex':t.itKitchenEx,
 'it-clothing-title':t.itClothingTitle,'it-clothing-desc':t.itClothingDesc,
-'it-clothing-ex-label':t.itClothingExLabel,'it-clothing-ex':t.itClothingEx
-  };
+'it-clothing-ex-label':t.itClothingExLabel,
+'it-clothing-ex':t.itClothingEx,
+
+'about-title':t.aboutTitle,
+'about-p1':t.aboutP1,
+'about-p2':t.aboutP2,
+'about-p3':t.aboutP3
+};
   for(const[id,val]of Object.entries(ids)){
     const el=document.getElementById(id);
     if(el&&val)el.textContent=val;
