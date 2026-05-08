@@ -1268,12 +1268,15 @@ function translateConverters(t){
     }
   `;
   document.head.appendChild(style);
-  // Estado inicial: esconde botão voltar e intros
-document.getElementById('btn-back').parentElement.style.display='none';
-['weight','temp','kitchen','clothing'].forEach(s=>{
-  const el=document.getElementById('intro-'+s);
-  if(el) el.style.display='none';
-});
+  // Estado inicial: executa após página carregar
+  window.addEventListener('DOMContentLoaded', function(){
+    const btnBack = document.getElementById('btn-back');
+    if(btnBack) btnBack.parentElement.style.display='none';
+    ['weight','temp','kitchen','clothing'].forEach(s=>{
+      const el=document.getElementById('intro-'+s);
+      if(el) el.style.display='none';
+    });
+  });
 </script>
   <section style="max-width: 800px; margin: 40px auto; padding: 20px; line-height: 1.8; color: #f0ede6; opacity: 0.9;">
     <h2 id="about-title" style="color: #e8c77a; margin-bottom: 20px; font-family: 'Playfair Display', serif;">O que é o NameForge?</h2>
