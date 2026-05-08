@@ -761,7 +761,8 @@ itClothingEx:'A "Size M" American shirt equals Brazilian size M (42/44). A "US 9
     document.getElementById('opt-en-orig').textContent = t.optEn;
     document.getElementById('opt-jp').textContent = t.optJp;
     document.getElementById('opt-classic').textContent = t.optClassic;
-    document.getElementById('footer-txt').textContent = t.footer;
+    const ftEl = document.getElementById('footer-txt');
+    if(ftEl) ftEl.textContent = t.footer;
     const isEn = (lang === 'en')
     const tTitle = isEn ? "What is NameForge?" : "O que é o NameForge?";
     const tP1 = isEn ? "The <strong>NameForge</strong> is a free online tool developed to assist ENTREPRENEURS, content creators, and writers." : "O <strong>NameForge</strong> é uma ferramenta online gratuita desenvolvida para auxiliar EMPREENDEDORES, criadores de conteúdo e escritores.";
