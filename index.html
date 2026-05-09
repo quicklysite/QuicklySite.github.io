@@ -781,10 +781,14 @@ itClothingEx:'A "Size M" American shirt equals Brazilian size M (42/44). A "US 9
     const tP2 = isEn ? "Beyond being a BUSINESS NAME generator, NameForge offers versatility for the creative universe." : "Além de ser um gerador de NOMES COMERCIAIS, o NameForge oferece versatilidade para o universo criativo.";
     const tP3 = isEn ? "Having a strategic name is fundamental for digital success and BRAND RECOGNITION." : "Ter um nome estratégico é fundamental para o sucesso digital e para o RECONHECIMENTO de marca.";
 
-    document.getElementById('about-title').textContent = tTitle;
-    document.getElementById('about-p1').innerHTML = tP1;
-    document.getElementById('about-p2').textContent = tP2;
-    document.getElementById('about-p3').textContent = tP3;
+    const abTitle = document.getElementById('about-title');
+    const abP1 = document.getElementById('about-p1');
+    const abP2 = document.getElementById('about-p2');
+    const abP3 = document.getElementById('about-p3');
+    if(abTitle) abTitle.textContent = tTitle;
+    if(abP1) abP1.innerHTML = tP1;
+    if(abP2) abP2.textContent = tP2;
+    if(abP3) abP3.textContent = tP3;
     document.documentElement.lang = lang;
     translateConverters(t);
     } 
