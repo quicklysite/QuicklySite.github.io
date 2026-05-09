@@ -472,6 +472,49 @@
 .tool-intro-example strong { color: var(--accent); }
     @media (max-width: 500px) {
       .card { padding: 24px 18px; }
+      /* ── BITCOIN ── */
+.btc-price-box {
+  background: linear-gradient(135deg, rgba(247,147,26,.12), rgba(247,147,26,.04));
+  border: 1.5px solid rgba(247,147,26,.35);
+  border-radius: 18px; padding: 28px 24px;
+  text-align: center; margin-bottom: 20px;
+}
+.btc-icon { font-size: 3rem; margin-bottom: 8px; display: block; }
+.btc-price-label { color: var(--muted); font-size: .8rem; text-transform: uppercase; letter-spacing: .1em; margin-bottom: 6px; }
+.btc-price-value {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem; font-weight: 900;
+  color: #f7931a; line-height: 1;
+  margin-bottom: 4px;
+}
+.btc-price-sub { color: var(--muted); font-size: .82rem; margin-bottom: 16px; }
+.btc-change-up { color: #4caf50; font-weight: 700; }
+.btc-change-down { color: #f44336; font-weight: 700; }
+.btc-update-btn {
+  background: none; border: 1px solid rgba(247,147,26,.3);
+  color: #f7931a; padding: 6px 16px; border-radius: 50px;
+  cursor: pointer; font-size: .78rem; transition: all .2s;
+}
+.btc-update-btn:hover { background: rgba(247,147,26,.1); }
+.btc-calc-box { background: var(--surface2); border-radius: 14px; padding: 20px; margin-bottom: 20px; }
+.btc-calc-row { display: flex; gap: 10px; margin-bottom: 12px; align-items: center; }
+.btc-calc-row input {
+  flex: 1; background: var(--surface); border: 1.5px solid rgba(255,255,255,.08);
+  color: var(--text); padding: 10px 14px; border-radius: 10px;
+  font-family: 'DM Sans', sans-serif; font-size: .95rem; outline: none;
+}
+.btc-calc-row input:focus { border-color: #f7931a; }
+.btc-calc-label { color: var(--muted); font-size: .78rem; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 5px; }
+.btc-result-row {
+  display: flex; gap: 10px; margin-top: 8px;
+}
+.btc-result-card {
+  flex: 1; background: var(--surface); border-radius: 10px;
+  padding: 12px; text-align: center;
+}
+.btc-result-card .val { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: #f7931a; }
+.btc-result-card .cur { color: var(--muted); font-size: .75rem; margin-top: 2px; }
+.btc-status { text-align: center; color: var(--muted); font-size: .75rem; margin-top: 12px; }
       .row { flex-direction: column; }
     }
   </style>
@@ -496,6 +539,7 @@
   <div class="nav-item" onclick="showConv('temp')" id="ni-temp">🌡️ <span id="nl-temp">Temperatura</span></div>
   <div class="nav-item" onclick="showConv('kitchen')" id="ni-kitchen">🍳 <span id="nl-kitchen">Medidas de Cozinha</span></div>
   <div class="nav-item" onclick="showConv('clothing')" id="ni-clothing">👕 <span id="nl-clothing">Tamanho de Roupa</span></div>
+  <div class="nav-item" onclick="showConv('btc')" id="ni-btc">₿ <span id="nl-btc">Bitcoin</span></div>
 </nav>
 <!-- ── LANGUAGE POPUP ── -->
 <div id="lang-overlay">
