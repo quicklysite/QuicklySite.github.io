@@ -1214,6 +1214,56 @@ itClothingEx:'A "Size M" American shirt equals Brazilian size M (42/44). A "US 9
     toast.classList.add('show');
     setTimeout(() => toast.classList.remove('show'), 2000);
   }
+  // ── BITCOIN ──
+let btcPriceBRL = 0;
+let btcPriceUSD = 0;
+let btcTimer = null;
+
+async function fetchBTC() {
+  const statusEl = document.getElementById('btc-status');
+  const priceBrl = document.getElementById('btc-price-brl');
+  const priceUsdSub = document.getElementById('btc-price-usd-sub');
+  const changeEl = document.getElementById('btc-change-text');
+  if(statusEl) statusEl.textContent = lang === 'pt' ? 'Atualizando...' : 'Updating...';
+  try {
+    const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=brl,usd&include_24hr_change=true');
+    const data = await res.json();
+    btcPriceBRL = data.bitcoin.brl;
+    btcPriceUSD = data.bitcoin.usd;
+    const change = data.bitcoin.usd_24h_change;
+    const changeFixed = change.toFixed(2);
+    const changeClass = change >= 0 ? 'btc-change-up' : 'btc-change-down';
+    const changeSign = change >= 0 ? '+' : '';
+    if(priceBrl) priceBrl.textContent = 'R$ ' + btcPriceBRL.toLocaleString('pt-BR');
+    if(priceUsdSub) priceUsdSub.textContent = 'USD ' + btcPriceUSD.toLocaleString('en-US', {style:'currency', currency:'USD'});
+    if(changeEl) changeEl.innerHTML = `<span class="${changeClass}">${changeSign}${changeFixed}% (24h)</span>`;
+    const now = new Date();
+    const timeStr = now.toLocaleTimeString(lang === 'pt' ? 'pt-BR' : 'en-US');
+    if(statusEl) statusEl.textContent = (lang === 'pt' ? 'Última atualização: ' : 'Last update: ') + timeStr;
+    calcBTC();
+  } catch(e) {
+    if(priceBrl) priceBrl.textContent = lang === 'pt' ? 'Erro ao carregar' : 'Failed to load';
+    if(statusEl) statusEl.textContent = lang === 'pt' ? 'Tente novamente.' : 'Please try again.';
+  }
+}
+
+function calcBTC() {
+  const input = parseFloat(document.getElementById('btc-input')?.value) || 0;
+  const resBrl = document.getElementById('btc-res-brl');
+  const resUsd = document.getElementById('btc-res-usd');
+  if(resBrl) resBrl.textContent = btcPriceBRL > 0 ? 'R$ ' + (input * btcPriceBRL).toLocaleString('pt-BR', {maximumFractionDigits:2}) : '—';
+  if(resUsd) resUsd.textContent = btcPriceUSD > 0 ? '$ ' + (input * btcPriceUSD).toLocaleString('en-US', {maximumFractionDigits:2}) : '—';
+}
+
+function startBTCTimer() {
+  if(btcTimer) clearInterval(btcTimer);
+  fetchBTC();
+  btcTimer = setInterval(fetchBTC, 60000);
+}
+
+function stopBTCTimer() {
+  if(btcTimer) { clearInterval(btcTimer); btcTimer = null; }
+}
 // ── SIDEBAR ──
 function toggleSidebar(){
   document.getElementById('sidebar').classList.toggle('open');
@@ -1256,6 +1306,7 @@ function showConv(id){
   if(id==='weight')convWeight();
   if(id==='temp')convTemp();
   if(id==='kitchen')convKitchen();
+  if(id==='btc'){startBTCTimer();}else{stopBTCTimer();}
 
   // Scroll suave para o topo
   window.scrollTo({top:0,behavior:'smooth'});
@@ -1392,7 +1443,48 @@ function translateConverters(t){
 </div><!-- /conv-names -->
 <!-- ── CONVERSORES ── -->
   
+<!-- ── BITCOIN ── -->
+<div id="conv-btc" class="conv-section" style="max-width:720px;margin:0 auto;padding:0 20px 60px">
+  <div class="section-heading" id="ch-btc">₿ Bitcoin</div>
+  <div class="section-sub" id="cs-btc">Preço em tempo real e calculadora BTC/BRL/USD</div>
 
+  <div class="btc-price-box">
+    <span class="btc-icon">₿</span>
+    <div class="btc-price-label" id="btc-label-price">Preço atual do Bitcoin</div>
+    <div class="btc-price-value" id="btc-price-brl">Carregando...</div>
+    <div class="btc-price-sub" id="btc-price-usd-sub"></div>
+    <div class="btc-price-sub" id="btc-change-text"></div>
+    <button class="btc-update-btn" onclick="fetchBTC()" id="btc-refresh-btn">🔄 Atualizar</button>
+  </div>
+
+  <div class="btc-calc-box">
+    <div class="btc-calc-label" id="btc-calc-label">Calculadora</div>
+    <div class="btc-calc-row">
+      <div style="flex:1">
+        <div class="btc-calc-label" id="btc-input-label">Quantidade de BTC</div>
+        <input type="number" id="btc-input" placeholder="Ex: 0.5" oninput="calcBTC()" step="0.0001" min="0" />
+      </div>
+    </div>
+    <div class="btc-result-row">
+      <div class="btc-result-card">
+        <div class="btc-calc-label">BRL</div>
+        <div class="val" id="btc-res-brl">—</div>
+        <div class="cur">Reais</div>
+      </div>
+      <div class="btc-result-card">
+        <div class="btc-calc-label">USD</div>
+        <div class="val" id="btc-res-usd">—</div>
+        <div class="cur">Dólares</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="btc-status" id="btc-status">Última atualização: —</div>
+
+  <div style="text-align:center;margin-top:24px">
+    <button class="btn-back" onclick="showConv('names')" id="btn-back-btc">← <span id="btn-back-btc-txt">Voltar</span></button>
+  </div>
+</div>
 <!-- INTRO: PESO -->
 <div class="tool-intro" id="intro-weight" style="display:none">
   <div class="tool-intro-title" id="it-weight-title">📖 O que é este conversor?</div>
