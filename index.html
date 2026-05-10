@@ -535,11 +535,11 @@
   <div class="nav-section" id="ns-names-label">Gerador de Nomes</div>
   <div class="nav-item nav-active" onclick="showConv('names')" id="ni-names">✨ <span id="nl-names">Nomes</span></div>
   <div class="nav-section" id="ns-conv-label">Conversores</div>
-  <a class="nav-item" href="conversor-peso.html">⚖️ <span>Peso</span></a>
-<a class="nav-item" href="conversor-temperatura.html">🌡️ <span>Temperatura</span></a>
-<a class="nav-item" href="conversor-cozinha.html">🍳 <span>Medidas de Cozinha</span></a>
-<a class="nav-item" href="conversor-roupas.html">👕 <span>Tamanho de Roupa</span></a>
-<a class="nav-item" href="bitcoin.html">₿ <span>Bitcoin</span></a>
+  <a class="nav-item" id="nav-link-weight" href="conversor-peso.html">⚖️ <span id="nl-weight">Peso</span></a>
+<a class="nav-item" id="nav-link-temp" href="conversor-temperatura.html">🌡️ <span id="nl-temp">Temperatura</span></a>
+<a class="nav-item" id="nav-link-kitchen" href="conversor-cozinha.html">🍳 <span id="nl-kitchen">Medidas de Cozinha</span></a>
+<a class="nav-item" id="nav-link-clothing" href="conversor-roupas.html">👕 <span id="nl-clothing">Tamanho de Roupa</span></a>
+<a class="nav-item" id="nav-link-btc" href="bitcoin.html">₿ <span id="nl-btc">Bitcoin</span></a>
 </nav>
 <!-- ── LANGUAGE POPUP ── -->
 <div id="lang-overlay">
@@ -798,6 +798,7 @@ btcBack:'Back', nlBtc:'Bitcoin'
   document.getElementById('lang-overlay').style.display = 'none';
 
   applyTranslations();
+  updateSidebarLinks(l);
 }
 
   function applyTranslations() {
@@ -1437,6 +1438,21 @@ function translateConverters(t){
     }
   `;
   document.head.appendChild(style);
+  // ── ATUALIZA HREFS DO SIDEBAR COM PARÂMETRO DE IDIOMA ──
+  function updateSidebarLinks(l) {
+    const links = {
+      'nav-link-weight':   'conversor-peso.html',
+      'nav-link-temp':     'conversor-temperatura.html',
+      'nav-link-kitchen':  'conversor-cozinha.html',
+      'nav-link-clothing': 'conversor-roupas.html',
+      'nav-link-btc':      'bitcoin.html'
+    };
+    for (const [id, base] of Object.entries(links)) {
+      const el = document.getElementById(id);
+      if (el) el.href = base + '?lang=' + l;
+    }
+  }
+
   // Estado inicial: executa após página carregar
   window.addEventListener('DOMContentLoaded', function(){
     const btnBack = document.getElementById('btn-back');
@@ -1445,6 +1461,15 @@ function translateConverters(t){
       const el=document.getElementById('intro-'+s);
       if(el) el.style.display='none';
     });
+
+    // Lê idioma salvo — suprime popup se já escolheu antes
+    const saved = localStorage.getItem('siteLang');
+    if (saved === 'pt' || saved === 'en') {
+      lang = saved;
+      document.getElementById('lang-overlay').style.display = 'none';
+      applyTranslations();
+      updateSidebarLinks(lang);
+    }
   });
 </script>
   <section style="max-width: 800px; margin: 40px auto; padding: 20px; line-height: 1.8; color: #f0ede6; opacity: 0.9;">
