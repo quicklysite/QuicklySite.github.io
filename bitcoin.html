@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cotação Bitcoin & Ethereum em Tempo Real – NameForge</title>
+    <title>Bitcoin em Tempo Real BTC BRL USD – NameForge</title>
+    <meta name="description" content="Acompanhe o preço do Bitcoin em tempo real em reais e dólares. Calculadora BTC para BRL e USD. Atualização automática a cada 60 segundos.">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-3FEPS5KJLN"></script>
     <script>
@@ -12,313 +14,128 @@
       gtag('js', new Date());
       gtag('config', 'G-3FEPS5KJLN');
     </script>
-
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8800851624013593" crossorigin="anonymous"></script>
 
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-    
     <style>
-        :root {
-            --bg: #0d0d0f;
-            --surface: #16161a;
-            --surface2: #1e1e24;
-            --accent: #e8c77a;
-            --text: #f0f0f2;
-            --text-dim: #a1a1a6;
-            --up: #4cd964;
-            --down: #ff3b30;
-        }
+        :root { --bg:#0d0d0f; --surface:#16161a; --surface2:#1e1e24; --accent:#e8c77a; --text:#f0ede6; --muted:#888; --radius:14px; --btc:#f7931a; --eth:#627eea; }
+        * { box-sizing:border-box; margin:0; padding:0; }
+        body { background:var(--bg); color:var(--text); font-family:'DM Sans',sans-serif; line-height:1.6; }
+        .container { max-width:800px; margin:40px auto; padding:40px; background:var(--surface); border-radius:var(--radius); box-shadow:0 10px 30px rgba(0,0,0,.5); }
+        h1 { font-family:'Playfair Display',serif; color:var(--accent); font-size:2rem; margin-bottom:8px; }
+        h2 { color:var(--accent); font-family:'Playfair Display',serif; margin:28px 0 12px; font-size:1.2rem; }
+        p { color:var(--text); opacity:.9; margin-bottom:15px; }
+        a { color:var(--accent); text-decoration:none; }
+        a:hover { text-decoration:underline; }
+        .back-link { display:inline-block; margin-bottom:24px; font-weight:500; }
+        .subtitle { color:var(--muted); margin-bottom:24px; font-size:.95rem; }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background-color: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; padding: 20px; }
-        .container { max-width: 800px; margin: 0 auto; }
-
-        header { text-align: center; margin-bottom: 40px; }
-        h1 { font-family: 'Playfair Display', serif; color: var(--accent); font-size: 2.2rem; margin-bottom: 10px; }
+        /* COIN SELECTOR */
+        .coin-tabs { display:flex; align-items:center; gap:10px; margin-bottom:24px; }
+        .coin-tab { padding:10px 24px; border-radius:50px; border:1.5px solid rgba(247,147,26,.3); background:none; color:var(--muted); cursor:pointer; font-family:'DM Sans',sans-serif; font-size:.9rem; font-weight:600; transition:all .2s; }
+        .coin-tab.btc-active { background:rgba(247,147,26,.15); border-color:var(--btc); color:var(--btc); }
+        .coin-tab.eth-active { background:rgba(98,126,234,.15); border-color:var(--eth); color:var(--eth); }
         
-        .btn-back {
-            background: none; border: 1px solid var(--surface2); color: var(--accent);
-            padding: 8px 16px; cursor: pointer; border-radius: 8px; text-decoration: none;
-            display: inline-block; margin-bottom: 20px; font-size: 0.9rem; transition: 0.3s;
-        }
-        .btn-back:hover { background: var(--surface2); }
+        /* SETA ESTILO GOOGLE TRADUTOR */
+        .swap-btn { background:var(--surface2); border:1px solid rgba(232,199,122,0.2); color:var(--accent); width:40px; height:40px; border-radius:50%; cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:1.2rem; transition:all 0.2s; }
+        .swap-btn:hover { background:var(--accent); color:var(--bg); }
 
-        .price-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 25px;
-    margin-bottom: 40px;
-}
+        /* PRICE BOX */
+        .price-box { border-radius:18px; padding:32px 24px; text-align:center; margin-bottom:20px; }
+        .price-box.btc-theme { background:linear-gradient(135deg,rgba(247,147,26,.12),rgba(247,147,26,.04)); border:1.5px solid rgba(247,147,26,.35); }
+        .price-box.eth-theme { background:linear-gradient(135deg,rgba(98,126,234,.12),rgba(98,126,234,.04)); border:1.5px solid rgba(98,126,234,.35); }
+        .coin-icon { font-size:3.5rem; margin-bottom:10px; display:block; }
+        .price-label { color:var(--muted); font-size:.78rem; text-transform:uppercase; letter-spacing:.1em; margin-bottom:8px; }
+        .price-value { font-family:'Playfair Display',serif; font-size:2.4rem; font-weight:900; line-height:1; margin-bottom:6px; }
+        .price-value.btc-color { color:var(--btc); }
+        .price-value.eth-color { color:var(--eth); }
+        .price-sub { color:var(--muted); font-size:.88rem; margin-bottom:10px; }
+        .change-up { color:#4caf50; font-weight:700; }
+        .change-down { color:#f44336; font-weight:700; }
+        .refresh-btn { background:none; border:1px solid rgba(247,147,26,.3); color:var(--btc); padding:7px 18px; border-radius:50px; cursor:pointer; font-size:.8rem; transition:all .2s; margin-top:8px; }
+        .refresh-btn:hover { background:rgba(247,147,26,.1); }
+        .refresh-btn.eth-btn { border-color:rgba(98,126,234,.3); color:var(--eth); }
+        .refresh-btn.eth-btn:hover { background:rgba(98,126,234,.1); }
+        .auto-note { color:var(--muted); font-size:.75rem; margin-top:8px; opacity:.7; }
 
-.card {
-    background: var(--surface);
-    padding: 30px;
-    border-radius: 20px;
-    border: 1px solid var(--surface2);
-    text-align: center;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3); /* Dá profundidade ao quadro */
-    transition: transform 0.3s ease;
-}
+        /* CALCULATOR */
+        .calc-box { background:var(--surface2); border-radius:var(--radius); padding:24px; margin-bottom:20px; }
+        .calc-label { font-size:.78rem; color:var(--muted); text-transform:uppercase; letter-spacing:.08em; margin-bottom:6px; display:block; }
+        input[type=number] { width:100%; padding:12px 16px; background:var(--bg); border:1.5px solid rgba(255,255,255,.08); color:var(--text); border-radius:10px; font-family:'DM Sans',sans-serif; font-size:.95rem; outline:none; transition:border-color .2s; }
+        input[type=number]:focus { border-color:var(--btc); }
+        .result-row { display:flex; gap:12px; margin-top:14px; }
+        .result-card { flex:1; background:var(--bg); border-radius:10px; padding:14px; text-align:center; }
+        .result-card .val { font-family:'Playfair Display',serif; font-size:1.15rem; color:var(--btc); }
+        .result-card .cur { color:var(--muted); font-size:.75rem; margin-top:3px; }
+        .status { text-align:center; color:var(--muted); font-size:.75rem; margin-top:12px; }
 
-.card:hover {
-    transform: translateY(-5px);
-    border-color: var(--accent);
-}
-
-.card h2 { 
-    font-size: 1rem; 
-    color: var(--accent); 
-    text-transform: uppercase; 
-    letter-spacing: 2px;
-    margin-bottom: 20px; 
-}
-
-.price { 
-    font-size: 2.2rem; 
-    font-weight: 700; 
-    color: var(--text); 
-    display: block; 
-    margin-bottom: 10px; 
-}
-
-
-        /* Calculadora Estilo Google Tradutor */
-        .calc-container {
-            background: var(--surface); padding: 25px; border-radius: 16px;
-            border: 1px solid var(--surface2); margin-bottom: 30px;
-        }
-        .calc-row { display: flex; align-items: center; gap: 15px; transition: 0.3s; }
-        .calc-box { flex: 1; background: var(--surface2); padding: 15px; border-radius: 12px; }
-        .calc-box label { display: block; font-size: 0.7rem; color: var(--accent); text-transform: uppercase; margin-bottom: 5px; }
-        .calc-box input {
-            width: 100%; background: transparent; border: none; color: var(--text);
-            font-size: 1.3rem; font-weight: 700; outline: none;
-        }
-        .calc-box select {
-            background: transparent; border: none; color: var(--text-dim);
-            font-size: 0.85rem; cursor: pointer; outline: none; margin-top: 5px;
-        }
-
-        .swap-btn {
-            background: var(--surface2); border: 1px solid var(--surface2);
-            width: 44px; height: 44px; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            cursor: pointer; transition: 0.3s;
-        }
-        .swap-btn:hover { border-color: var(--accent); transform: scale(1.1); }
-        .swap-btn svg { width: 20px; fill: var(--accent); }
-
-        /* Explicações Acordeão */
-        .info-item {
-            background: var(--surface); border-radius: 12px; margin-bottom: 12px;
-            border: 1px solid var(--surface2); overflow: hidden;
-        }
-        .info-trigger {
-            width: 100%; padding: 18px; background: none; border: none;
-            color: var(--text); display: flex; justify-content: space-between;
-            align-items: center; cursor: pointer; font-weight: 500; font-size: 1rem;
-        }
-        .info-content {
-            padding: 0 18px; max-height: 0; overflow: hidden;
-            transition: 0.3s ease-out; color: var(--text-dim); font-size: 0.95rem; line-height: 1.6;
-        }
-        .info-item.open .info-content { padding: 0 18px 18px 18px; max-height: 300px; }
-        .arrow { transition: 0.3s; fill: var(--accent); width: 15px; }
-        .info-item.open .arrow { transform: rotate(180deg); }
-
-        #status { text-align: center; font-size: 0.75rem; color: var(--text-dim); margin-top: 20px; }
-
-        @media (max-width: 600px) {
-            .calc-row { flex-direction: column; }
-            .swap-btn { transform: rotate(90deg); }
-        }
+        .tools-nav { display:flex; flex-wrap:wrap; gap:10px; margin:32px 0 0; }
+        .tool-link { background:var(--surface2); border:1px solid rgba(232,199,122,.15); color:var(--text); padding:8px 16px; border-radius:50px; font-size:.85rem; text-decoration:none; transition:all .2s; }
+        .tool-link:hover { border-color:var(--accent); color:var(--accent); text-decoration:none; }
+        .tool-link.active { border-color:var(--accent); color:var(--accent); background:rgba(232,199,122,.08); }
+        footer { text-align:center; padding:40px 20px; color:var(--muted); font-size:.85rem; }
+        footer a { color:var(--muted); margin:0 8px; }
+        footer a:hover { color:var(--accent); }
+        .ad-slot { background:var(--surface2); border:1px dashed rgba(255,255,255,.08); border-radius:var(--radius); min-height:90px; display:flex; align-items:center; justify-content:center; color:var(--muted); font-size:.75rem; margin:20px 0; }
+        @media(max-width:600px){ .container{padding:24px 16px;margin:16px} .result-row{flex-direction:column} }
     </style>
 </head>
 <body>
-
 <div class="container">
-    <a href="index.html" id="link-back" class="btn-back">← Voltar</a>
-     <div class="price-grid">
-    <div class="card">
-        <h2 id="txt-btc-card">Bitcoin (BTC)</h2>
-        <span class="price" id="btc-price">...</span>
-        <div id="btc-change" style="font-weight: 500; font-size: 1.1rem;">--</div>
+    <a href="index.html" class="back-link" id="back-link">← Voltar ao NameForge</a>
+    <h1 id="page-title">₿ Criptomoedas em Tempo Real</h1>
+    <p class="subtitle" id="page-subtitle">Acompanhe o preço do Bitcoin e Ethereum em reais e dólares. Atualização automática a cada 60 segundos.</p>
+
+    <div class="ad-slot">Anúncio</div>
+
+    <div class="coin-tabs">
+        <button class="coin-tab btc-active" id="btn-btc" onclick="setCoin('btc')">₿ Bitcoin (BTC)</button>
+        <button class="swap-btn" onclick="toggleCoin()" title="Alternar Moeda">⇄</button>
+        <button class="coin-tab" id="btn-eth" onclick="setCoin('eth')">Ξ Ethereum (ETH)</button>
     </div>
 
-    <div class="card">
-        <h2 id="txt-eth-card">Ethereum (ETH)</h2>
-        <span class="price" id="eth-price">...</span>
-        <div id="eth-change" style="font-weight: 500; font-size: 1.1rem;">--</div>
-    </div>
-</div>
-
-    <header>
-        <h1 id="txt-title">Cotação Cripto</h1>
-    </header>
-
-    <div class="price-grid">
-        <div class="card">
-            <h2 id="txt-btc-card">Bitcoin (BTC)</h2>
-            <span class="price" id="btc-price">...</span>
-            <div id="btc-change">--</div>
-        </div>
-        <div class="card">
-            <h2 id="txt-eth-card">Ethereum (ETH)</h2>
-            <span class="price" id="eth-price">...</span>
-            <div id="eth-change">--</div>
-        </div>
+    <div class="price-box btc-theme" id="box-btc">
+        <span class="coin-icon">₿</span>
+        <div class="price-label" id="btc-label">Preço atual do Bitcoin</div>
+        <div class="price-value btc-color" id="btc-brl">Carregando...</div>
+        <div class="price-sub" id="btc-usd"></div>
+        <div class="price-sub" id="btc-change"></div>
+        <button class="refresh-btn" onclick="fetchPrices()" id="btn-refresh-btc">🔄 Atualizar</button>
+        <div class="auto-note" id="auto-note-btc">⏱ Atualização automática a cada 60 segundos</div>
     </div>
 
-    <div class="calc-container">
-        <div class="calc-row" id="calc-layout">
-            <div class="calc-box">
-                <label id="lbl-qty">Quantidade</label>
-                <input type="number" id="input-qty" value="1" oninput="updateCalc()">
-                <select id="select-coin" onchange="updateCalc()">
-                    <option value="btc">Bitcoin (BTC)</option>
-                    <option value="eth">Ethereum (ETH)</option>
-                </select>
+    <div class="price-box eth-theme" id="box-eth" style="display:none">
+        <span class="coin-icon">Ξ</span>
+        <div class="price-label" id="eth-label">Preço atual do Ethereum</div>
+        <div class="price-value eth-color" id="eth-brl">Carregando...</div>
+        <div class="price-sub" id="eth-usd"></div>
+        <div class="price-sub" id="eth-change"></div>
+        <button class="refresh-btn eth-btn" onclick="fetchPrices()" id="btn-refresh-eth">🔄 Atualizar</button>
+        <div class="auto-note" id="auto-note-eth">⏱ Atualização automática a cada 60 segundos</div>
+    </div>
+
+    <div class="calc-box">
+        <label class="calc-label" id="calc-title">Calculadora BTC</label>
+        <label class="calc-label" id="calc-input-label">Quantidade de moeda</label>
+        <input type="number" id="coin-input" placeholder="Ex: 0.5" oninput="calcCoin()" step="0.0001" min="0" />
+        <div class="result-row">
+            <div class="result-card">
+                <div class="calc-label">BRL</div>
+                <div class="val" id="res-brl">—</div>
+                <div class="cur" id="res-brl-label">Reais</div>
             </div>
-
-            <button class="swap-btn" onclick="swapCalc()">
-                <svg viewBox="0 0 24 24"><path d="M6.99 11L3 15l3.99 4v-3H14v-2H6.99v-3zM21 9l-3.99-4v3H10v2h7.01v3L21 9z"/></svg>
-            </button>
-
-            <div class="calc-box">
-                <label id="lbl-res">Resultado</label>
-                <input type="text" id="output-val" readonly>
-                <select id="select-fiat" onchange="updateCalc()">
-                    <option value="brl">Real (BRL)</option>
-                    <option value="usd">Dólar (USD)</option>
-                </select>
+            <div class="result-card">
+                <div class="calc-label">USD</div>
+                <div class="val" id="res-usd">—</div>
+                <div class="cur" id="res-usd-label">Dólares</div>
             </div>
         </div>
     </div>
 
-    <div class="info-item" onclick="this.classList.toggle('open')">
-        <button class="info-trigger">
-            <span id="q-btc">O que é o Bitcoin?</span>
-            <svg class="arrow" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
-        </button>
-        <div class="info-content" id="a-btc">...</div>
-    </div>
+    <div class="status" id="status">Última atualização: —</div>
 
-    <div class="info-item" onclick="this.classList.toggle('open')">
-        <button class="info-trigger">
-            <span id="q-eth">O que é o Ethereum?</span>
-            <svg class="arrow" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
-        </button>
-        <div class="info-content" id="a-eth">...</div>
-    </div>
+    <h2 id="title-what-btc">📖 O que é o Bitcoin?</h2>
+    <p id="p-what-btc">O Bitcoin (BTC) é a primeira e mais conhecida criptomoeda do mundo, criada em 2009. Funciona de forma descentralizada, sem banco central ou governo controlando sua emissão.</p>
+    <p id="p-source">O preço exibido aqui vem diretamente da API da <strong>CoinGecko</strong>, uma das fontes mais confiáveis do mercado, atualizada a cada 60 segundos automaticamente.</p>
 
-    <p id="status">...</p>
-</div>
-
-<script>
-// DICIONÁRIO DE TRADUÇÃO (MESMO PADRÃO DO INDEX)
-const T = {
-    pt: {
-        title: "Cotação Cripto",
-        back: "Voltar",
-        qty: "Quantidade",
-        res: "Resultado",
-        qBtc: "O que é o Bitcoin?",
-        aBtc: "O Bitcoin é uma moeda digital descentralizada lançada em 2009. Funciona através da tecnologia Blockchain, permitindo transações seguras e diretas (P2P) sem a necessidade de bancos ou intermediários. É limitado a 21 milhões de unidades.",
-        qEth: "O que é o Ethereum?",
-        aEth: "O Ethereum é muito mais que uma moeda; é uma rede blockchain que permite a criação de 'Contratos Inteligentes' e aplicativos descentralizados. Sua moeda nativa, o Ether (ETH), alimenta toda essa plataforma global.",
-        status: "Atualizado: "
-    },
-    en: {
-        title: "Crypto Rates",
-        back: "Back",
-        qty: "Amount",
-        res: "Result",
-        qBtc: "What is Bitcoin?",
-        aBtc: "Bitcoin is a decentralized digital currency launched in 2009. It operates through Blockchain technology, allowing secure and direct (P2P) transactions without the need for banks or intermediaries. It is limited to 21 million units.",
-        qEth: "What is Ethereum?",
-        aEth: "Ethereum is much more than a currency; it is a blockchain network that enables 'Smart Contracts' and decentralized applications. Its native currency, Ether (ETH), powers this global platform.",
-        status: "Updated: "
-    }
-};
-
-let prices = { btc: { brl: 0, usd: 0 }, eth: { brl: 0, usd: 0 } };
-let currentLang = 'pt';
-
-// LÓGICA DE LINGUAGEM VIA URL (PADRÃO CONVERSOR ROUPAS)
-const urlP = new URLSearchParams(window.location.search);
-currentLang = urlP.get('lang') || 'pt';
-
-function init() {
-    const t = T[currentLang];
-    document.getElementById('txt-title').textContent = t.title;
-    document.getElementById('link-back').innerHTML = `← ${t.back}`;
-    document.getElementById('link-back').href = `index.html?lang=${currentLang}`; // Mantém idioma ao voltar
-    document.getElementById('lbl-qty').textContent = t.qty;
-    document.getElementById('lbl-res').textContent = t.res;
-    document.getElementById('q-btc').textContent = t.qBtc;
-    document.getElementById('a-btc').textContent = t.aBtc;
-    document.getElementById('q-eth').textContent = t.qEth;
-    document.getElementById('a-eth').textContent = t.aEth;
-    document.documentElement.lang = currentLang;
-    
-    fetchPrices();
-}
-
-async function fetchPrices() {
-    try {
-        // API CoinGecko para dados reais
-        const res = await fetch('https://api.coingecko.com/api/v2/simple/price?ids=bitcoin,ethereum&vs_currencies=brl,usd&include_24hr_change=true');
-        const data = await res.json();
-        
-        prices.btc = { brl: data.bitcoin.brl, usd: data.bitcoin.usd, ch: data.bitcoin.brl_24h_change };
-        prices.eth = { brl: data.ethereum.brl, usd: data.ethereum.usd, ch: data.ethereum.brl_24h_change };
-
-        updateUI();
-    } catch(e) {
-        document.getElementById('status').textContent = currentLang === 'pt' ? "Erro na atualização." : "Update error.";
-    }
-}
-
-function updateUI() {
-    const btc = prices.btc;
-    const eth = prices.eth;
-
-    // Preenche o preço grande no meio do quadro
-    document.getElementById('btc-price').textContent = currentLang === 'pt' ? `R$ ${btc.brl.toLocaleString('pt-BR')}` : `$ ${btc.usd.toLocaleString('en-US')}`;
-    document.getElementById('eth-price').textContent = currentLang === 'pt' ? `R$ ${eth.brl.toLocaleString('pt-BR')}` : `$ ${eth.usd.toLocaleString('en-US')}`;
-
-    const b1 = btc.ch >= 0 ? '#4cd964' : '#ff3b30';
-    const e1 = eth.ch >= 0 ? '#4cd964' : '#ff3b30';
-
-    // Preenche a porcentagem no rodapé do quadro
-    document.getElementById('btc-change').innerHTML = `<span style="color:${b1}">${btc.ch >= 0 ? '▲' : '▼'} ${btc.ch.toFixed(2)}% (24h)</span>`;
-    document.getElementById('eth-change').innerHTML = `<span style="color:${e1}">${eth.ch >= 0 ? '▲' : '▼'} ${eth.ch.toFixed(2)}% (24h)</span>`;
-    
-    document.getElementById('status').textContent = T[currentLang].status + new Date().toLocaleTimeString();
-    updateCalc();
-}
-
-
-function updateCalc() {
-    const qty = parseFloat(document.getElementById('input-qty').value) || 0;
-    const coin = document.getElementById('select-coin').value;
-    const fiat = document.getElementById('select-fiat').value;
-    
-    const res = qty * prices[coin][fiat];
-    document.getElementById('output-val').value = res.toLocaleString(currentLang === 'pt' ? 'pt-BR' : 'en-US', {
-        style: 'currency', currency: fiat.toUpperCase()
-    });
-}
-
-function swapCalc() {
-    const layout = document.getElementById('calc-layout');
-    layout.style.flexDirection = layout.style.flexDirection === 'row-reverse' ? 'row' : 'row-reverse';
-}
-
-init();
-// ATUALIZAÇÃO AUTOMÁTICA EM TEMPO REAL (60 SEGUNDOS)
-setInterval(fetchPrices, 60000);
-</script>
-
-</body>
-</html>
+    <h2 id="title-what-eth">📖 O que é o Ethereum?</h2>
+    <p id="p-what-eth">O Ethereum (ETH) é a segunda maior criptomoeda por capitalização de mercado. Além de moeda, é uma plataforma para
