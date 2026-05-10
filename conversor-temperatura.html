@@ -50,14 +50,14 @@
 </head>
 <body>
 <div class="container">
-    <a href="index.html" class="back-link">← Voltar ao NameForge</a>
-    <h1>🌡️ Conversor de Temperatura</h1>
-    <p class="subtitle">Converta Celsius, Fahrenheit e Kelvin instantaneamente. Ideal para receitas americanas e previsão do tempo internacional.</p>
+    <a href="index.html" class="back-link" id="back-link">← Voltar ao NameForge</a>
+    <h1 id="page-title">🌡️ Conversor de Temperatura</h1>
+    <p class="subtitle" id="page-subtitle">Converta Celsius, Fahrenheit e Kelvin instantaneamente. Ideal para receitas americanas e previsão do tempo internacional.</p>
     <div class="ad-slot">Anúncio</div>
     <div class="conv-card">
         <div class="conv-row">
             <div>
-                <label>De</label>
+                <label id="label-from">De</label>
                 <select id="t-from" onchange="convertTemp()">
                     <option value="c">Celsius (°C)</option>
                     <option value="f">Fahrenheit (°F)</option>
@@ -65,7 +65,7 @@
                 </select>
             </div>
             <div>
-                <label>Para</label>
+                <label id="label-to">Para</label>
                 <select id="t-to" onchange="convertTemp()">
                     <option value="f">Fahrenheit (°F)</option>
                     <option value="c">Celsius (°C)</option>
@@ -73,57 +73,162 @@
                 </select>
             </div>
         </div>
-        <label>Temperatura</label>
+        <label id="label-val">Temperatura</label>
         <input type="number" id="t-val" value="25" oninput="convertTemp()" />
         <div class="result-box" id="t-result">—</div>
     </div>
-    <h2>📌 Referências rápidas</h2>
+    <h2 id="table-title">📌 Referências rápidas</h2>
     <div class="conv-card">
         <table>
-            <tr><th>°C</th><th>°F</th><th>K</th><th>Situação</th></tr>
-            <tr><td>-40°C</td><td>-40°F</td><td>233 K</td><td>Ponto em que °C = °F</td></tr>
-            <tr><td>0°C</td><td>32°F</td><td>273 K</td><td>Ponto de congelamento da água</td></tr>
-            <tr><td>20°C</td><td>68°F</td><td>293 K</td><td>Temperatura ambiente agradável</td></tr>
-            <tr><td>37°C</td><td>98.6°F</td><td>310 K</td><td>Temperatura corporal humana</td></tr>
-            <tr><td>100°C</td><td>212°F</td><td>373 K</td><td>Ponto de ebulição da água</td></tr>
-            <tr><td>180°C</td><td>356°F</td><td>453 K</td><td>Forno médio (culinária)</td></tr>
-            <tr><td>200°C</td><td>392°F</td><td>473 K</td><td>Forno alto (culinária)</td></tr>
+            <tr><th>°C</th><th>°F</th><th>K</th><th id="th-situation">Situação</th></tr>
+            <tr><td>-40°C</td><td>-40°F</td><td>233 K</td><td id="tr-r0">Ponto em que °C = °F</td></tr>
+            <tr><td>0°C</td><td>32°F</td><td>273 K</td><td id="tr-r1">Ponto de congelamento da água</td></tr>
+            <tr><td>20°C</td><td>68°F</td><td>293 K</td><td id="tr-r2">Temperatura ambiente agradável</td></tr>
+            <tr><td>37°C</td><td>98.6°F</td><td>310 K</td><td id="tr-r3">Temperatura corporal humana</td></tr>
+            <tr><td>100°C</td><td>212°F</td><td>373 K</td><td id="tr-r4">Ponto de ebulição da água</td></tr>
+            <tr><td>180°C</td><td>356°F</td><td>453 K</td><td id="tr-r5">Forno médio (culinária)</td></tr>
+            <tr><td>200°C</td><td>392°F</td><td>473 K</td><td id="tr-r6">Forno alto (culinária)</td></tr>
         </table>
     </div>
-    <h2>📖 Como usar?</h2>
-    <p>Selecione a unidade de origem, a unidade de destino e digite o valor. O resultado aparece automaticamente.</p>
-    <p><strong>Exemplo prático:</strong> Uma receita americana pede forno a 350°F. Selecione °F → °C, digite 350 e o resultado será 176.67°C — ajuste seu forno para 180°C.</p>
-    <p><strong>Dica:</strong> Para converter mentalmente °F para °C, subtraia 32 e divida por 1.8.</p>
+    <h2 id="how-title">📖 Como usar?</h2>
+    <p id="how-p1">Selecione a unidade de origem, a unidade de destino e digite o valor. O resultado aparece automaticamente.</p>
+    <p id="how-p2"><strong id="how-p2-bold">Exemplo prático:</strong> <span id="how-p2-text">Uma receita americana pede forno a 350°F. Selecione °F → °C, digite 350 e o resultado será 176.67°C — ajuste seu forno para 180°C.</span></p>
+    <p id="how-p3"><strong id="how-p3-bold">Dica:</strong> <span id="how-p3-text">Para converter mentalmente °F para °C, subtraia 32 e divida por 1.8.</span></p>
     <div class="ad-slot">Anúncio</div>
-    <h2>🔧 Outras ferramentas</h2>
+    <h2 id="other-title">🔧 Outras ferramentas</h2>
     <div class="tools-nav">
-        <a href="index.html" class="tool-link">✨ Gerador de Nomes</a>
-        <a href="conversor-peso.html" class="tool-link">⚖️ Peso</a>
-        <a href="conversor-temperatura.html" class="tool-link active">🌡️ Temperatura</a>
-        <a href="conversor-cozinha.html" class="tool-link">🍳 Medidas de Cozinha</a>
-        <a href="conversor-roupas.html" class="tool-link">👕 Tamanho de Roupa</a>
-        <a href="bitcoin.html" class="tool-link">₿ Bitcoin</a>
+        <a href="index.html" class="tool-link" id="link-names">✨ Gerador de Nomes</a>
+        <a href="conversor-peso.html" class="tool-link" id="link-weight">⚖️ Peso</a>
+        <a href="conversor-temperatura.html" class="tool-link active" id="link-temp">🌡️ Temperatura</a>
+        <a href="conversor-cozinha.html" class="tool-link" id="link-kitchen">🍳 Medidas de Cozinha</a>
+        <a href="conversor-roupas.html" class="tool-link" id="link-cloth">👕 Tamanho de Roupa</a>
+        <a href="bitcoin.html" class="tool-link" id="link-btc">₿ Bitcoin</a>
     </div>
 </div>
 <footer>
     <p>&copy; 2026 NameForge</p>
     <p style="margin-top:8px">
-        <a href="about.html">Sobre</a>
-        <a href="contact.html">Contato</a>
-        <a href="terms.html">Termos</a>
-        <a href="privacidade.html">Privacidade</a>
+        <a href="about.html" id="footer-about">Sobre</a>
+        <a href="contact.html" id="footer-contact">Contato</a>
+        <a href="terms.html" id="footer-terms">Termos</a>
+        <a href="privacidade.html" id="footer-priv">Privacidade</a>
     </p>
 </footer>
 <script>
-function convertTemp(){
-    const f=document.getElementById('t-from').value;
-    const t=document.getElementById('t-to').value;
-    let v=parseFloat(document.getElementById('t-val').value);
-    if(isNaN(v)){document.getElementById('t-result').textContent='—';return;}
-    let c=f==='c'?v:f==='f'?(v-32)*5/9:v-273.15;
-    let res=t==='c'?c:t==='f'?c*9/5+32:c+273.15;
-    document.getElementById('t-result').textContent=(Math.round(res*100)/100)+(t==='c'?'°C':t==='f'?'°F':' K');
+const T = {
+  pt: {
+    backLink:   '← Voltar ao NameForge',
+    title:      '🌡️ Conversor de Temperatura',
+    subtitle:   'Converta Celsius, Fahrenheit e Kelvin instantaneamente. Ideal para receitas americanas e previsão do tempo internacional.',
+    labelFrom:  'De', labelTo: 'Para', labelVal: 'Temperatura',
+    tableTitle: '📌 Referências rápidas',
+    thSit:      'Situação',
+    trR0: 'Ponto em que °C = °F',
+    trR1: 'Ponto de congelamento da água',
+    trR2: 'Temperatura ambiente agradável',
+    trR3: 'Temperatura corporal humana',
+    trR4: 'Ponto de ebulição da água',
+    trR5: 'Forno médio (culinária)',
+    trR6: 'Forno alto (culinária)',
+    howTitle:   '📖 Como usar?',
+    howP1:      'Selecione a unidade de origem, a unidade de destino e digite o valor. O resultado aparece automaticamente.',
+    howP2Bold:  'Exemplo prático:',
+    howP2Text:  'Uma receita americana pede forno a 350°F. Selecione °F → °C, digite 350 e o resultado será 176.67°C — ajuste seu forno para 180°C.',
+    howP3Bold:  'Dica:',
+    howP3Text:  'Para converter mentalmente °F para °C, subtraia 32 e divida por 1.8.',
+    otherTitle: '🔧 Outras ferramentas',
+    linkNames:  '✨ Gerador de Nomes', linkWeight: '⚖️ Peso', linkTemp: '🌡️ Temperatura',
+    linkKitchen:'🍳 Medidas de Cozinha', linkCloth: '👕 Tamanho de Roupa', linkBtc: '₿ Bitcoin',
+    footerAbout:'Sobre', footerContact:'Contato', footerTerms:'Termos', footerPriv:'Privacidade'
+  },
+  en: {
+    backLink:   '← Back to NameForge',
+    title:      '🌡️ Temperature Converter',
+    subtitle:   'Convert Celsius, Fahrenheit and Kelvin instantly. Perfect for American recipes and international weather forecasts.',
+    labelFrom:  'From', labelTo: 'To', labelVal: 'Temperature',
+    tableTitle: '📌 Quick References',
+    thSit:      'Situation',
+    trR0: 'Point where °C = °F',
+    trR1: 'Water freezing point',
+    trR2: 'Comfortable room temperature',
+    trR3: 'Human body temperature',
+    trR4: 'Water boiling point',
+    trR5: 'Medium oven (cooking)',
+    trR6: 'High oven (cooking)',
+    howTitle:   '📖 How to use?',
+    howP1:      'Select the source unit, the target unit, and type the value. The result appears automatically.',
+    howP2Bold:  'Practical example:',
+    howP2Text:  'An American recipe calls for a 350°F oven. Select °F → °C, type 350 and the result will be 176.67°C — set your oven to 180°C.',
+    howP3Bold:  'Tip:',
+    howP3Text:  'To mentally convert °F to °C, subtract 32 and divide by 1.8.',
+    otherTitle: '🔧 Other tools',
+    linkNames:  '✨ Name Generator', linkWeight: '⚖️ Weight', linkTemp: '🌡️ Temperature',
+    linkKitchen:'🍳 Kitchen Measures', linkCloth: '👕 Clothing Size', linkBtc: '₿ Bitcoin',
+    footerAbout:'About', footerContact:'Contact', footerTerms:'Terms', footerPriv:'Privacy'
+  }
+};
+
+function getLang() {
+  const param = new URLSearchParams(window.location.search).get('lang');
+  if (param === 'pt' || param === 'en') { localStorage.setItem('siteLang', param); return param; }
+  const saved = localStorage.getItem('siteLang');
+  if (saved === 'pt' || saved === 'en') return saved;
+  return 'pt';
 }
+
+function applyLang(l) {
+  const t = T[l];
+  const q = id => document.getElementById(id);
+  const lp = '?lang=' + l;
+
+  q('back-link').textContent     = t.backLink;
+  q('back-link').href            = 'index.html' + lp;
+  q('page-title').textContent    = t.title;
+  q('page-subtitle').textContent = t.subtitle;
+  q('label-from').textContent    = t.labelFrom;
+  q('label-to').textContent      = t.labelTo;
+  q('label-val').textContent     = t.labelVal;
+  q('table-title').textContent   = t.tableTitle;
+  q('th-situation').textContent  = t.thSit;
+  q('tr-r0').textContent = t.trR0; q('tr-r1').textContent = t.trR1;
+  q('tr-r2').textContent = t.trR2; q('tr-r3').textContent = t.trR3;
+  q('tr-r4').textContent = t.trR4; q('tr-r5').textContent = t.trR5;
+  q('tr-r6').textContent = t.trR6;
+  q('how-title').textContent  = t.howTitle;
+  q('how-p1').textContent     = t.howP1;
+  q('how-p2-bold').textContent = t.howP2Bold;
+  q('how-p2-text').textContent = t.howP2Text;
+  q('how-p3-bold').textContent = t.howP3Bold;
+  q('how-p3-text').textContent = t.howP3Text;
+  q('other-title').textContent = t.otherTitle;
+
+  q('link-names').textContent   = t.linkNames;   q('link-names').href   = 'index.html' + lp;
+  q('link-weight').textContent  = t.linkWeight;  q('link-weight').href  = 'conversor-peso.html' + lp;
+  q('link-temp').textContent    = t.linkTemp;    q('link-temp').href    = 'conversor-temperatura.html' + lp;
+  q('link-kitchen').textContent = t.linkKitchen; q('link-kitchen').href = 'conversor-cozinha.html' + lp;
+  q('link-cloth').textContent   = t.linkCloth;   q('link-cloth').href   = 'conversor-roupas.html' + lp;
+  q('link-btc').textContent     = t.linkBtc;     q('link-btc').href     = 'bitcoin.html' + lp;
+
+  q('footer-about').textContent   = t.footerAbout;
+  q('footer-contact').textContent = t.footerContact;
+  q('footer-terms').textContent   = t.footerTerms;
+  q('footer-priv').textContent    = t.footerPriv;
+
+  document.documentElement.lang = l;
+}
+
+function convertTemp(){
+  const f = document.getElementById('t-from').value;
+  const t = document.getElementById('t-to').value;
+  let v = parseFloat(document.getElementById('t-val').value);
+  if(isNaN(v)){ document.getElementById('t-result').textContent='—'; return; }
+  let c = f==='c'?v : f==='f'?(v-32)*5/9 : v-273.15;
+  let res = t==='c'?c : t==='f'?c*9/5+32 : c+273.15;
+  document.getElementById('t-result').textContent = (Math.round(res*100)/100) + (t==='c'?'°C':t==='f'?'°F':' K');
+}
+
+const lang = getLang();
+applyLang(lang);
 convertTemp();
 </script>
 </body>
