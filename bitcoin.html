@@ -29,17 +29,12 @@
         .back-link { display:inline-block; margin-bottom:24px; font-weight:500; }
         .subtitle { color:var(--muted); margin-bottom:24px; font-size:.95rem; }
 
-        /* COIN SELECTOR */
-        .coin-tabs { display:flex; align-items:center; gap:10px; margin-bottom:24px; }
-        .coin-tab { padding:10px 24px; border-radius:50px; border:1.5px solid rgba(247,147,26,.3); background:none; color:var(--muted); cursor:pointer; font-family:'DM Sans',sans-serif; font-size:.9rem; font-weight:600; transition:all .2s; }
-        .coin-tab.btc-active { background:rgba(247,147,26,.15); border-color:var(--btc); color:var(--btc); }
-        .coin-tab.eth-active { background:rgba(98,126,234,.15); border-color:var(--eth); color:var(--eth); }
-        
-        /* SETA ESTILO GOOGLE TRADUTOR */
-        .swap-btn { background:var(--surface2); border:1px solid rgba(232,199,122,0.2); color:var(--accent); width:40px; height:40px; border-radius:50%; cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:1.2rem; transition:all 0.2s; }
-        .swap-btn:hover { background:var(--accent); color:var(--bg); }
+        /* TABS (VOLTARAM AO ORIGINAL) */
+        .coin-tabs { display:flex; gap:10px; margin-bottom:24px; }
+        .coin-tab { padding:10px 24px; border-radius:50px; border:1.5px solid rgba(255,255,255,.1); background:none; color:var(--muted); cursor:pointer; font-family:'DM Sans',sans-serif; font-size:.9rem; font-weight:600; transition:all .2s; }
+        .coin-tab.active.btc-active { background:rgba(247,147,26,.15); border-color:var(--btc); color:var(--btc); }
+        .coin-tab.active.eth-active { background:rgba(98,126,234,.15); border-color:var(--eth); color:var(--eth); }
 
-        /* PRICE BOX */
         .price-box { border-radius:18px; padding:32px 24px; text-align:center; margin-bottom:20px; }
         .price-box.btc-theme { background:linear-gradient(135deg,rgba(247,147,26,.12),rgba(247,147,26,.04)); border:1.5px solid rgba(247,147,26,.35); }
         .price-box.eth-theme { background:linear-gradient(135deg,rgba(98,126,234,.12),rgba(98,126,234,.04)); border:1.5px solid rgba(98,126,234,.35); }
@@ -52,30 +47,29 @@
         .change-up { color:#4caf50; font-weight:700; }
         .change-down { color:#f44336; font-weight:700; }
         .refresh-btn { background:none; border:1px solid rgba(247,147,26,.3); color:var(--btc); padding:7px 18px; border-radius:50px; cursor:pointer; font-size:.8rem; transition:all .2s; margin-top:8px; }
-        .refresh-btn:hover { background:rgba(247,147,26,.1); }
         .refresh-btn.eth-btn { border-color:rgba(98,126,234,.3); color:var(--eth); }
-        .refresh-btn.eth-btn:hover { background:rgba(98,126,234,.1); }
         .auto-note { color:var(--muted); font-size:.75rem; margin-top:8px; opacity:.7; }
 
-        /* CALCULATOR */
+        /* CALCULADORA COM SETA DE ALTERNÂNCIA */
         .calc-box { background:var(--surface2); border-radius:var(--radius); padding:24px; margin-bottom:20px; }
-        .calc-label { font-size:.78rem; color:var(--muted); text-transform:uppercase; letter-spacing:.08em; margin-bottom:6px; display:block; }
-        input[type=number] { width:100%; padding:12px 16px; background:var(--bg); border:1.5px solid rgba(255,255,255,.08); color:var(--text); border-radius:10px; font-family:'DM Sans',sans-serif; font-size:.95rem; outline:none; transition:border-color .2s; }
-        input[type=number]:focus { border-color:var(--btc); }
+        .calc-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; }
+        .calc-label { font-size:.78rem; color:var(--muted); text-transform:uppercase; letter-spacing:.08em; }
+        .swap-calc { background:rgba(232,199,122,.1); border:1px solid var(--accent); color:var(--accent); width:32px; height:32px; border-radius:50%; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all .2s; }
+        .swap-calc:hover { background:var(--accent); color:var(--bg); }
+        
+        input[type=number] { width:100%; padding:12px 16px; background:var(--bg); border:1.5px solid rgba(255,255,255,.08); color:var(--text); border-radius:10px; font-family:'DM Sans',sans-serif; font-size:.95rem; outline:none; }
         .result-row { display:flex; gap:12px; margin-top:14px; }
         .result-card { flex:1; background:var(--bg); border-radius:10px; padding:14px; text-align:center; }
         .result-card .val { font-family:'Playfair Display',serif; font-size:1.15rem; color:var(--btc); }
+        .result-card.eth-res .val { color:var(--eth); }
         .result-card .cur { color:var(--muted); font-size:.75rem; margin-top:3px; }
         .status { text-align:center; color:var(--muted); font-size:.75rem; margin-top:12px; }
 
-        .tools-nav { display:flex; flex-wrap:wrap; gap:10px; margin:32px 0 0; }
-        .tool-link { background:var(--surface2); border:1px solid rgba(232,199,122,.15); color:var(--text); padding:8px 16px; border-radius:50px; font-size:.85rem; text-decoration:none; transition:all .2s; }
-        .tool-link:hover { border-color:var(--accent); color:var(--accent); text-decoration:none; }
-        .tool-link.active { border-color:var(--accent); color:var(--accent); background:rgba(232,199,122,.08); }
+        .tools-nav { display:flex; flex-wrap:wrap; gap:10px; margin-top:32px; }
+        .tool-link { background:var(--surface2); border:1px solid rgba(232,199,122,.15); color:var(--text); padding:8px 16px; border-radius:50px; font-size:.85rem; text-decoration:none; }
+        .tool-link.active { border-color:var(--accent); color:var(--accent); }
         footer { text-align:center; padding:40px 20px; color:var(--muted); font-size:.85rem; }
         footer a { color:var(--muted); margin:0 8px; }
-        footer a:hover { color:var(--accent); }
-        .ad-slot { background:var(--surface2); border:1px dashed rgba(255,255,255,.08); border-radius:var(--radius); min-height:90px; display:flex; align-items:center; justify-content:center; color:var(--muted); font-size:.75rem; margin:20px 0; }
         @media(max-width:600px){ .container{padding:24px 16px;margin:16px} .result-row{flex-direction:column} }
     </style>
 </head>
@@ -85,57 +79,221 @@
     <h1 id="page-title">₿ Criptomoedas em Tempo Real</h1>
     <p class="subtitle" id="page-subtitle">Acompanhe o preço do Bitcoin e Ethereum em reais e dólares. Atualização automática a cada 60 segundos.</p>
 
-    <div class="ad-slot">Anúncio</div>
-
     <div class="coin-tabs">
-        <button class="coin-tab btc-active" id="btn-btc" onclick="setCoin('btc')">₿ Bitcoin (BTC)</button>
-        <button class="swap-btn" onclick="toggleCoin()" title="Alternar Moeda">⇄</button>
-        <button class="coin-tab" id="btn-eth" onclick="setCoin('eth')">Ξ Ethereum (ETH)</button>
+        <button class="coin-tab active btc-active" id="btn-btc" onclick="setCoin('btc')">Bitcoin (BTC)</button>
+        <button class="coin-tab" id="btn-eth" onclick="setCoin('eth')">Ethereum (ETH)</button>
     </div>
 
-    <div class="price-box btc-theme" id="box-btc">
+    <div id="box-btc" class="price-box btc-theme">
         <span class="coin-icon">₿</span>
-        <div class="price-label" id="btc-label">Preço atual do Bitcoin</div>
-        <div class="price-value btc-color" id="btc-brl">Carregando...</div>
+        <div class="price-label" id="label-btc-now">Preço atual do Bitcoin</div>
+        <div class="price-value btc-color" id="btc-brl">...</div>
         <div class="price-sub" id="btc-usd"></div>
         <div class="price-sub" id="btc-change"></div>
         <button class="refresh-btn" onclick="fetchPrices()" id="btn-refresh-btc">🔄 Atualizar</button>
-        <div class="auto-note" id="auto-note-btc">⏱ Atualização automática a cada 60 segundos</div>
+        <div class="auto-note" id="note-btc">⏱ Atualização automática a cada 60 segundos</div>
     </div>
 
-    <div class="price-box eth-theme" id="box-eth" style="display:none">
+    <div id="box-eth" class="price-box eth-theme" style="display:none">
         <span class="coin-icon">Ξ</span>
-        <div class="price-label" id="eth-label">Preço atual do Ethereum</div>
-        <div class="price-value eth-color" id="eth-brl">Carregando...</div>
+        <div class="price-label" id="label-eth-now">Preço atual do Ethereum</div>
+        <div class="price-value eth-color" id="eth-brl">...</div>
         <div class="price-sub" id="eth-usd"></div>
         <div class="price-sub" id="eth-change"></div>
         <button class="refresh-btn eth-btn" onclick="fetchPrices()" id="btn-refresh-eth">🔄 Atualizar</button>
-        <div class="auto-note" id="auto-note-eth">⏱ Atualização automática a cada 60 segundos</div>
+        <div class="auto-note" id="note-eth">⏱ Atualização automática a cada 60 segundos</div>
     </div>
 
     <div class="calc-box">
-        <label class="calc-label" id="calc-title">Calculadora BTC</label>
-        <label class="calc-label" id="calc-input-label">Quantidade de moeda</label>
-        <input type="number" id="coin-input" placeholder="Ex: 0.5" oninput="calcCoin()" step="0.0001" min="0" />
+        <div class="calc-header">
+            <label class="calc-label" id="calc-title">Calculadora BTC</label>
+            <button class="swap-calc" onclick="toggleCalcMode()" title="Inverter Conversão">⇄</button>
+        </div>
+        <label class="calc-label" id="input-helper">Quantidade de moeda</label>
+        <input type="number" id="coin-input" placeholder="0.00" oninput="calcCoin()" step="any">
+        
         <div class="result-row">
-            <div class="result-card">
-                <div class="calc-label">BRL</div>
-                <div class="val" id="res-brl">—</div>
-                <div class="cur" id="res-brl-label">Reais</div>
+            <div class="result-card" id="card-1">
+                <div class="calc-label" id="res-label-1">BRL</div>
+                <div class="val" id="res-1">—</div>
+                <div class="cur" id="res-cur-1">Reais</div>
             </div>
-            <div class="result-card">
-                <div class="calc-label">USD</div>
-                <div class="val" id="res-usd">—</div>
-                <div class="cur" id="res-usd-label">Dólares</div>
+            <div class="result-card" id="card-2">
+                <div class="calc-label" id="res-label-2">USD</div>
+                <div class="val" id="res-2">—</div>
+                <div class="cur" id="res-cur-2">Dólares</div>
             </div>
         </div>
     </div>
 
-    <div class="status" id="status">Última atualização: —</div>
+    <div class="status" id="status">...</div>
 
-    <h2 id="title-what-btc">📖 O que é o Bitcoin?</h2>
+    <h2 id="h2-what-btc">📖 O que é o Bitcoin?</h2>
     <p id="p-what-btc">O Bitcoin (BTC) é a primeira e mais conhecida criptomoeda do mundo, criada em 2009. Funciona de forma descentralizada, sem banco central ou governo controlando sua emissão.</p>
-    <p id="p-source">O preço exibido aqui vem diretamente da API da <strong>CoinGecko</strong>, uma das fontes mais confiáveis do mercado, atualizada a cada 60 segundos automaticamente.</p>
+    <p id="p-source">O preço exibido aqui vem diretamente da API da <strong>CoinGecko</strong>, atualizada a cada 60 segundos.</p>
 
-    <h2 id="title-what-eth">📖 O que é o Ethereum?</h2>
-    <p id="p-what-eth">O Ethereum (ETH) é a segunda maior criptomoeda por capitalização de mercado. Além de moeda, é uma plataforma para
+    <div class="tools-nav">
+        <a href="index.html" class="tool-link" id="link-names">✨ Gerador</a>
+        <a href="conversor-peso.html" class="tool-link" id="link-weight">⚖️ Peso</a>
+        <a href="conversor-temperatura.html" class="tool-link" id="link-temp">🌡️ Temp</a>
+        <a href="conversor-cozinha.html" class="tool-link" id="link-kitchen">🍳 Cozinha</a>
+        <a href="conversor-roupas.html" class="tool-link" id="link-cloth">👕 Roupa</a>
+        <a href="bitcoin.html" class="tool-link active" id="link-btc">₿ Bitcoin</a>
+    </div>
+</div>
+
+<footer>
+    <p>&copy; 2026 NameForge</p>
+    <p style="margin-top:8px">
+        <a href="about.html" id="f-about">Sobre</a>
+        <a href="contact.html" id="f-contact">Contato</a>
+        <a href="terms.html" id="f-terms">Termos</a>
+        <a href="privacidade.html" id="f-priv">Privacidade</a>
+    </p>
+</footer>
+
+<script>
+// DICIONÁRIO E LÓGICA DE IDIOMA
+const T = {
+  pt: {
+    back: '← Voltar ao NameForge', title: '₿ Criptomoedas em Tempo Real', subtitle: 'Acompanhe o preço do Bitcoin e Ethereum em reais e dólares. Atualização automática a cada 60 segundos.',
+    labelBtc: 'Preço atual do Bitcoin', labelEth: 'Preço atual do Ethereum', refresh: '🔄 Atualizar', note: '⏱ Atualização automática a cada 60 segundos',
+    calcBtc: 'Calculadora BTC', calcEth: 'Calculadora ETH', calcBrl: 'Calculadora Reais',
+    inputCoin: 'Quantidade de moeda', inputBrl: 'Valor em Reais (R$)', resBrl: 'Reais', resUsd: 'Dólares', resBtc: 'Bitcoin', resEth: 'Ethereum',
+    whatBtc: '📖 O que é o Bitcoin?', pBtc: 'O Bitcoin (BTC) é a primeira e mais conhecida criptomoeda do mundo, criada em 2009. Funciona de forma descentralizada, sem banco central ou governo controlando sua emissão.',
+    pSource: 'O preço exibido aqui vem diretamente da API da <strong>CoinGecko</strong>, atualizada a cada 60 segundos.',
+    lNames: '✨ Gerador', lWeight: '⚖️ Peso', lTemp: '🌡️ Temp', lKitchen: '🍳 Cozinha', lCloth: '👕 Roupa', lBtc: '₿ Bitcoin',
+    fAbout: 'Sobre', fContact: 'Contato', fTerms: 'Termos', fPriv: 'Privacidade',
+    loading: 'Atualizando...', last: 'Última atualização: ', err: 'Erro ao carregar.'
+  },
+  en: {
+    back: '← Back to NameForge', title: '₿ Real-Time Cryptocurrencies', subtitle: 'Track Bitcoin and Ethereum prices in Reais and Dollars. Automatic update every 60 seconds.',
+    labelBtc: 'Current Bitcoin Price', labelEth: 'Current Ethereum Price', refresh: '🔄 Refresh', note: '⏱ Automatic update every 60 seconds',
+    calcBtc: 'BTC Calculator', calcEth: 'ETH Calculator', calcBrl: 'BRL Calculator',
+    inputCoin: 'Amount of coin', inputBrl: 'Amount in Reais (BRL)', resBrl: 'Reais', resUsd: 'Dollars', resBtc: 'Bitcoin', resEth: 'Ethereum',
+    whatBtc: '📖 What is Bitcoin?', pBtc: 'Bitcoin (BTC) is the first and most well-known cryptocurrency in the world, created in 2009. It works in a decentralized way, without a central bank controlling its issuance.',
+    pSource: 'The price displayed here comes directly from the <strong>CoinGecko</strong> API, updated every 60 seconds.',
+    lNames: '✨ Generator', lWeight: '⚖️ Weight', lTemp: '🌡️ Temp', lKitchen: '🍳 Kitchen', lCloth: '👕 Clothing', lBtc: '₿ Bitcoin',
+    fAbout: 'About', fContact: 'Contact', fTerms: 'Terms', fPriv: 'Privacy',
+    loading: 'Updating...', last: 'Last update: ', err: 'Loading error.'
+  }
+};
+
+let currentCoin = 'btc';
+let isBrlInput = false; // Controla se estamos convertendo de Moeda -> BRL ou BRL -> Moeda
+let pBTC_BRL=0, pBTC_USD=0, pETH_BRL=0, pETH_USD=0;
+
+function getLang() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const lang = urlParams.get('lang') || localStorage.getItem('siteLang') || 'pt';
+    localStorage.setItem('siteLang', lang);
+    return lang;
+}
+
+function applyLang() {
+    const l = getLang();
+    const t = T[l];
+    const lp = '?lang=' + l;
+
+    document.getElementById('back-link').textContent = t.back;
+    document.getElementById('back-link').href = 'index.html' + lp;
+    document.getElementById('page-title').textContent = t.title;
+    document.getElementById('page-subtitle').textContent = t.subtitle;
+    document.getElementById('label-btc-now').textContent = t.labelBtc;
+    document.getElementById('label-eth-now').textContent = t.labelEth;
+    document.getElementById('btn-refresh-btc').textContent = t.refresh;
+    document.getElementById('btn-refresh-eth').textContent = t.refresh;
+    document.getElementById('note-btc').textContent = t.note;
+    document.getElementById('note-eth').textContent = t.note;
+    document.getElementById('h2-what-btc').textContent = t.whatBtc;
+    document.getElementById('p-what-btc').textContent = t.pBtc;
+    document.getElementById('p-source').innerHTML = t.pSource;
+    document.getElementById('f-about').textContent = t.fAbout;
+    document.getElementById('f-contact').textContent = t.fContact;
+    document.getElementById('f-terms').textContent = t.fTerms;
+    document.getElementById('f-priv').textContent = t.fPriv;
+    
+    // Links nav
+    document.getElementById('link-names').href = 'index.html' + lp;
+    document.getElementById('link-weight').href = 'conversor-peso.html' + lp;
+    document.getElementById('link-temp').href = 'conversor-temperatura.html' + lp;
+    document.getElementById('link-kitchen').href = 'conversor-cozinha.html' + lp;
+    document.getElementById('link-cloth').href = 'conversor-roupas.html' + lp;
+    document.getElementById('link-btc').href = 'bitcoin.html' + lp;
+
+    updateCalcUI();
+}
+
+function updateCalcUI() {
+    const l = getLang();
+    const t = T[l];
+    
+    if (!isBrlInput) {
+        document.getElementById('calc-title').textContent = currentCoin === 'btc' ? t.calcBtc : t.calcEth;
+        document.getElementById('input-helper').textContent = t.inputCoin;
+        document.getElementById('res-label-1').textContent = 'BRL';
+        document.getElementById('res-cur-1').textContent = t.resBrl;
+        document.getElementById('res-label-2').textContent = 'USD';
+        document.getElementById('res-cur-2').textContent = t.resUsd;
+    } else {
+        document.getElementById('calc-title').textContent = t.calcBrl;
+        document.getElementById('input-helper').textContent = t.inputBrl;
+        document.getElementById('res-label-1').textContent = currentCoin.toUpperCase();
+        document.getElementById('res-cur-1').textContent = currentCoin === 'btc' ? t.resBtc : t.resEth;
+        document.getElementById('res-label-2').textContent = 'USD';
+        document.getElementById('res-cur-2').textContent = t.resUsd;
+    }
+    calcCoin();
+}
+
+function toggleCalcMode() {
+    isBrlInput = !isBrlInput;
+    document.getElementById('coin-input').value = "";
+    updateCalcUI();
+}
+
+function setCoin(coin) {
+    currentCoin = coin;
+    document.getElementById('box-btc').style.display = coin === 'btc' ? 'block' : 'none';
+    document.getElementById('box-eth').style.display = coin === 'eth' ? 'block' : 'none';
+    document.getElementById('btn-btc').classList.toggle('active', coin === 'btc');
+    document.getElementById('btn-eth').classList.toggle('active', coin === 'eth');
+    
+    // Ajusta cores dos resultados
+    const card1 = document.getElementById('card-1');
+    card1.className = coin === 'eth' ? 'result-card eth-res' : 'result-card';
+    
+    updateCalcUI();
+}
+
+async function fetchPrices() {
+    const l = getLang();
+    document.getElementById('status').textContent = T[l].loading;
+    try {
+        const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=brl,usd&include_24hr_change=true');
+        const d = await res.json();
+        
+        pBTC_BRL = d.bitcoin.brl; pBTC_USD = d.bitcoin.usd;
+        pETH_BRL = d.ethereum.brl; pETH_USD = d.ethereum.usd;
+
+        document.getElementById('btc-brl').textContent = 'R$ ' + pBTC_BRL.toLocaleString('pt-BR');
+        document.getElementById('btc-usd').textContent = 'USD $ ' + pBTC_USD.toLocaleString('en-US');
+        const btcC = d.bitcoin.usd_24h_change;
+        document.getElementById('btc-change').innerHTML = `<span class="${btcC >= 0 ? 'change-up' : 'change-down'}">${btcC >= 0 ? '+' : ''}${btcC.toFixed(2)}% (24h)</span>`;
+
+        document.getElementById('eth-brl').textContent = 'R$ ' + pETH_BRL.toLocaleString('pt-BR');
+        document.getElementById('eth-usd').textContent = 'USD $ ' + pETH_USD.toLocaleString('en-US');
+        const ethC = d.ethereum.usd_24h_change;
+        document.getElementById('eth-change').innerHTML = `<span class="${ethC >= 0 ? 'change-up' : 'change-down'}">${ethC >= 0 ? '+' : ''}${ethC.toFixed(2)}% (24h)</span>`;
+
+        document.getElementById('status').textContent = T[l].last + new Date().toLocaleTimeString();
+        calcCoin();
+    } catch (e) {
+        document.getElementById('status').textContent = T[l].err;
+    }
+}
+
+function calcCoin() {
+    const val = parseFloat(document.getElementById('coin-input').value) || 0;
+    const res1 = document.getElementById('res-1');
+    const res2 = document.getElementById('res-2');
