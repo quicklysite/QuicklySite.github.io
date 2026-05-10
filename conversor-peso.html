@@ -85,10 +85,10 @@
 <body>
 
 <div class="container">
-    <a href="index.html" class="back-link">← Voltar ao NameForge</a>
+    <a href="index.html" class="back-link" id="back-link">← Voltar ao NameForge</a>
 
-    <h1>⚖️ Conversor de Peso</h1>
-    <p class="subtitle">Converta quilogramas, libras, onças e gramas instantaneamente entre os sistemas brasileiro e internacional.</p>
+    <h1 id="page-title">⚖️ Conversor de Peso</h1>
+    <p class="subtitle" id="page-subtitle">Converta quilogramas, libras, onças e gramas instantaneamente entre os sistemas brasileiro e internacional.</p>
 
     <!-- AD -->
     <div class="ad-slot">Anúncio</div>
@@ -97,7 +97,7 @@
     <div class="conv-card">
         <div class="conv-row">
             <div>
-                <label>De</label>
+                <label id="label-from">De</label>
                 <select id="w-from" onchange="convertWeight()">
                     <option value="kg">Quilograma (kg)</option>
                     <option value="lb">Libra (lb)</option>
@@ -106,7 +106,7 @@
                 </select>
             </div>
             <div>
-                <label>Para</label>
+                <label id="label-to">Para</label>
                 <select id="w-to" onchange="convertWeight()">
                     <option value="lb">Libra (lb)</option>
                     <option value="kg">Quilograma (kg)</option>
@@ -115,13 +115,13 @@
                 </select>
             </div>
         </div>
-        <label>Valor</label>
+        <label id="label-val">Valor</label>
         <input type="number" id="w-val" value="1" oninput="convertWeight()" />
         <div class="result-box" id="w-result">—</div>
     </div>
 
     <!-- TABELA DE REFERÊNCIA -->
-    <h2>📌 Tabela de referência rápida</h2>
+    <h2 id="table-title">📌 Tabela de referência rápida</h2>
     <div class="conv-card">
         <table>
             <tr><th>kg</th><th>lb (libras)</th><th>oz (onças)</th><th>g (gramas)</th></tr>
@@ -133,46 +133,163 @@
         </table>
     </div>
 
-    <!-- EXPLICAÇÃO -->
-    <h2>📖 Como usar este conversor?</h2>
-    <p>Selecione a unidade de origem e a unidade de destino, depois digite o valor que deseja converter. O resultado aparece automaticamente.</p>
-    <p>Este conversor é útil para receitas americanas (que usam libras e onças), compras em sites internacionais, academias e qualquer situação que envolva diferentes sistemas de medida.</p>
-    <p><strong>Exemplo prático:</strong> Uma receita americana pede "2 lbs de farinha". Selecione lb → kg e digite 2. O resultado será 0.9072 kg, ou seja, aproximadamente 907 gramas.</p>
+    <h2 id="how-title">📖 Como usar este conversor?</h2>
+    <p id="how-p1">Selecione a unidade de origem e a unidade de destino, depois digite o valor que deseja converter. O resultado aparece automaticamente.</p>
+    <p id="how-p2">Este conversor é útil para receitas americanas (que usam libras e onças), compras em sites internacionais, academias e qualquer situação que envolva diferentes sistemas de medida.</p>
+    <p id="how-p3"><strong>Exemplo prático:</strong> Uma receita americana pede "2 lbs de farinha". Selecione lb → kg e digite 2. O resultado será 0.9072 kg, ou seja, aproximadamente 907 gramas.</p>
 
     <!-- AD -->
     <div class="ad-slot">Anúncio</div>
 
-    <!-- OUTRAS FERRAMENTAS -->
-    <h2>🔧 Outras ferramentas</h2>
+    <h2 id="other-title">🔧 Outras ferramentas</h2>
     <div class="tools-nav">
-        <a href="index.html" class="tool-link">✨ Gerador de Nomes</a>
-        <a href="conversor-peso.html" class="tool-link active">⚖️ Peso</a>
-        <a href="conversor-temperatura.html" class="tool-link">🌡️ Temperatura</a>
-        <a href="conversor-cozinha.html" class="tool-link">🍳 Medidas de Cozinha</a>
-        <a href="conversor-roupas.html" class="tool-link">👕 Tamanho de Roupa</a>
-        <a href="bitcoin.html" class="tool-link">₿ Bitcoin</a>
+        <a href="index.html" class="tool-link" id="link-names">✨ Gerador de Nomes</a>
+        <a href="conversor-peso.html" class="tool-link active" id="link-weight">⚖️ Peso</a>
+        <a href="conversor-temperatura.html" class="tool-link" id="link-temp">🌡️ Temperatura</a>
+        <a href="conversor-cozinha.html" class="tool-link" id="link-kitchen">🍳 Medidas de Cozinha</a>
+        <a href="conversor-roupas.html" class="tool-link" id="link-cloth">👕 Tamanho de Roupa</a>
+        <a href="bitcoin.html" class="tool-link" id="link-btc">₿ Bitcoin</a>
     </div>
 </div>
 
 <footer>
     <p>&copy; 2026 NameForge</p>
     <p style="margin-top:8px">
-        <a href="about.html">Sobre</a>
-        <a href="contact.html">Contato</a>
-        <a href="terms.html">Termos</a>
-        <a href="privacidade.html">Privacidade</a>
+        <a href="about.html" id="footer-about">Sobre</a>
+        <a href="contact.html" id="footer-contact">Contato</a>
+        <a href="terms.html" id="footer-terms">Termos</a>
+        <a href="privacidade.html" id="footer-priv">Privacidade</a>
     </p>
 </footer>
 
 <script>
+// ── TRADUÇÕES ──
+const T = {
+  pt: {
+    backLink:    '← Voltar ao NameForge',
+    title:       '⚖️ Conversor de Peso',
+    subtitle:    'Converta quilogramas, libras, onças e gramas instantaneamente entre os sistemas brasileiro e internacional.',
+    labelFrom:   'De',
+    labelTo:     'Para',
+    labelVal:    'Valor',
+    optKg:       'Quilograma (kg)',
+    optLb:       'Libra (lb)',
+    optOz:       'Onça (oz)',
+    optG:        'Grama (g)',
+    tableTitle:  '📌 Tabela de referência rápida',
+    howTitle:    '📖 Como usar este conversor?',
+    howP1:       'Selecione a unidade de origem e a unidade de destino, depois digite o valor que deseja converter. O resultado aparece automaticamente.',
+    howP2:       'Este conversor é útil para receitas americanas (que usam libras e onças), compras em sites internacionais, academias e qualquer situação que envolva diferentes sistemas de medida.',
+    howP3:       'Exemplo prático: Uma receita americana pede "2 lbs de farinha". Selecione lb → kg e digite 2. O resultado será 0.9072 kg, ou seja, aproximadamente 907 gramas.',
+    otherTitle:  '🔧 Outras ferramentas',
+    linkNames:   '✨ Gerador de Nomes',
+    linkWeight:  '⚖️ Peso',
+    linkTemp:    '🌡️ Temperatura',
+    linkKitchen: '🍳 Medidas de Cozinha',
+    linkCloth:   '👕 Tamanho de Roupa',
+    linkBtc:     '₿ Bitcoin',
+    footerAbout: 'Sobre', footerContact: 'Contato', footerTerms: 'Termos', footerPriv: 'Privacidade'
+  },
+  en: {
+    backLink:    '← Back to NameForge',
+    title:       '⚖️ Weight Converter',
+    subtitle:    'Convert kilograms, pounds, ounces and grams instantly between Brazilian and international systems.',
+    labelFrom:   'From',
+    labelTo:     'To',
+    labelVal:    'Value',
+    optKg:       'Kilogram (kg)',
+    optLb:       'Pound (lb)',
+    optOz:       'Ounce (oz)',
+    optG:        'Gram (g)',
+    tableTitle:  '📌 Quick Reference Table',
+    howTitle:    '📖 How to use this converter?',
+    howP1:       'Select the source unit and the target unit, then type the value you want to convert. The result appears automatically.',
+    howP2:       'This converter is useful for American recipes (which use pounds and ounces), shopping on international websites, gyms, and any situation involving different measurement systems.',
+    howP3:       'Practical example: An American recipe calls for "2 lbs of flour". Select lb → kg and type 2. The result will be 0.9072 kg, approximately 907 grams.',
+    otherTitle:  '🔧 Other tools',
+    linkNames:   '✨ Name Generator',
+    linkWeight:  '⚖️ Weight',
+    linkTemp:    '🌡️ Temperature',
+    linkKitchen: '🍳 Kitchen Measures',
+    linkCloth:   '👕 Clothing Size',
+    linkBtc:     '₿ Bitcoin',
+    footerAbout: 'About', footerContact: 'Contact', footerTerms: 'Terms', footerPriv: 'Privacy'
+  }
+};
+
+// ── DETECTA IDIOMA ──
+// Prioridade: ?lang= na URL > localStorage > padrão pt
+function getLang() {
+  const param = new URLSearchParams(window.location.search).get('lang');
+  if (param === 'pt' || param === 'en') {
+    localStorage.setItem('siteLang', param);
+    return param;
+  }
+  const saved = localStorage.getItem('siteLang');
+  if (saved === 'pt' || saved === 'en') return saved;
+  return 'pt';
+}
+
+// ── APLICA TRADUÇÕES ──
+function applyLang(l) {
+  const t = T[l];
+  const q = id => document.getElementById(id);
+  const langParam = '?lang=' + l;
+
+  q('back-link').textContent    = t.backLink;
+  q('back-link').href           = 'index.html' + langParam;
+  q('page-title').textContent   = t.title;
+  q('page-subtitle').textContent= t.subtitle;
+  q('label-from').textContent   = t.labelFrom;
+  q('label-to').textContent     = t.labelTo;
+  q('label-val').textContent    = t.labelVal;
+
+  // Options selects
+  const fromSel = document.getElementById('w-from');
+  const toSel   = document.getElementById('w-to');
+  const opts    = [t.optKg, t.optLb, t.optOz, t.optG];
+  const vals    = ['kg','lb','oz','g'];
+  [fromSel, toSel].forEach(sel => {
+    Array.from(sel.options).forEach((opt, i) => { opt.text = opts[vals.indexOf(opt.value)]; });
+  });
+
+  q('table-title').textContent  = t.tableTitle;
+  q('how-title').textContent    = t.howTitle;
+  q('how-p1').textContent       = t.howP1;
+  q('how-p2').textContent       = t.howP2;
+  q('how-p3').innerHTML         = '<strong>' + (l==='pt'?'Exemplo prático:':'Practical example:') + '</strong> ' + t.howP3.replace(/^Exemplo prático: |^Practical example: /,'');
+  q('other-title').textContent  = t.otherTitle;
+
+  // Links das outras ferramentas com ?lang=
+  q('link-names').textContent   = t.linkNames;   q('link-names').href   = 'index.html'              + langParam;
+  q('link-weight').textContent  = t.linkWeight;  q('link-weight').href  = 'conversor-peso.html'     + langParam;
+  q('link-temp').textContent    = t.linkTemp;    q('link-temp').href    = 'conversor-temperatura.html' + langParam;
+  q('link-kitchen').textContent = t.linkKitchen; q('link-kitchen').href = 'conversor-cozinha.html'  + langParam;
+  q('link-cloth').textContent   = t.linkCloth;   q('link-cloth').href   = 'conversor-roupas.html'   + langParam;
+  q('link-btc').textContent     = t.linkBtc;     q('link-btc').href     = 'bitcoin.html'            + langParam;
+
+  // Footer
+  q('footer-about').textContent   = t.footerAbout;
+  q('footer-contact').textContent = t.footerContact;
+  q('footer-terms').textContent   = t.footerTerms;
+  q('footer-priv').textContent    = t.footerPriv;
+
+  document.documentElement.lang = l;
+}
+
+// ── CONVERSOR ──
 const toKg = {kg:1, lb:0.453592, oz:0.0283495, g:0.001};
 function convertWeight(){
-    const f = document.getElementById('w-from').value;
-    const t = document.getElementById('w-to').value;
-    const v = parseFloat(document.getElementById('w-val').value) || 0;
-    const result = Math.round(v * toKg[f] / toKg[t] * 10000) / 10000;
-    document.getElementById('w-result').textContent = result + ' ' + t;
+  const f = document.getElementById('w-from').value;
+  const t = document.getElementById('w-to').value;
+  const v = parseFloat(document.getElementById('w-val').value) || 0;
+  const result = Math.round(v * toKg[f] / toKg[t] * 10000) / 10000;
+  document.getElementById('w-result').textContent = result + ' ' + t;
 }
+
+// ── INIT ──
+const lang = getLang();
+applyLang(lang);
 convertWeight();
 </script>
 </body>
