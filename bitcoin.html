@@ -44,16 +44,43 @@
         .btn-back:hover { background: var(--surface2); }
 
         .price-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px; margin-bottom: 30px;
-        }
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    margin-bottom: 40px;
+}
 
-        .card {
-            background: var(--surface); padding: 25px; border-radius: 16px;
-            border: 1px solid var(--surface2); text-align: center;
-        }
-        .card h2 { font-size: 0.9rem; color: var(--text-dim); text-transform: uppercase; margin-bottom: 15px; }
-        .price { font-size: 2rem; font-weight: 700; color: var(--text); display: block; margin-bottom: 5px; }
+.card {
+    background: var(--surface);
+    padding: 30px;
+    border-radius: 20px;
+    border: 1px solid var(--surface2);
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3); /* Dá profundidade ao quadro */
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent);
+}
+
+.card h2 { 
+    font-size: 1rem; 
+    color: var(--accent); 
+    text-transform: uppercase; 
+    letter-spacing: 2px;
+    margin-bottom: 20px; 
+}
+
+.price { 
+    font-size: 2.2rem; 
+    font-weight: 700; 
+    color: var(--text); 
+    display: block; 
+    margin-bottom: 10px; 
+}
+
 
         /* Calculadora Estilo Google Tradutor */
         .calc-container {
@@ -111,6 +138,19 @@
 
 <div class="container">
     <a href="index.html" id="link-back" class="btn-back">← Voltar</a>
+     <div class="price-grid">
+    <div class="card">
+        <h2 id="txt-btc-card">Bitcoin (BTC)</h2>
+        <span class="price" id="btc-price">...</span>
+        <div id="btc-change" style="font-weight: 500; font-size: 1.1rem;">--</div>
+    </div>
+
+    <div class="card">
+        <h2 id="txt-eth-card">Ethereum (ETH)</h2>
+        <span class="price" id="eth-price">...</span>
+        <div id="eth-change" style="font-weight: 500; font-size: 1.1rem;">--</div>
+    </div>
+</div>
 
     <header>
         <h1 id="txt-title">Cotação Cripto</h1>
@@ -243,18 +283,21 @@ function updateUI() {
     const btc = prices.btc;
     const eth = prices.eth;
 
+    // Preenche o preço grande no meio do quadro
     document.getElementById('btc-price').textContent = currentLang === 'pt' ? `R$ ${btc.brl.toLocaleString('pt-BR')}` : `$ ${btc.usd.toLocaleString('en-US')}`;
     document.getElementById('eth-price').textContent = currentLang === 'pt' ? `R$ ${eth.brl.toLocaleString('pt-BR')}` : `$ ${eth.usd.toLocaleString('en-US')}`;
 
     const b1 = btc.ch >= 0 ? '#4cd964' : '#ff3b30';
     const e1 = eth.ch >= 0 ? '#4cd964' : '#ff3b30';
 
-    document.getElementById('btc-change').innerHTML = `<span style="color:${b1}; font-size: 0.85rem;">${btc.ch.toFixed(2)}% (24h)</span>`;
-    document.getElementById('eth-change').innerHTML = `<span style="color:${e1}; font-size: 0.85rem;">${eth.ch.toFixed(2)}% (24h)</span>`;
+    // Preenche a porcentagem no rodapé do quadro
+    document.getElementById('btc-change').innerHTML = `<span style="color:${b1}">${btc.ch >= 0 ? '▲' : '▼'} ${btc.ch.toFixed(2)}% (24h)</span>`;
+    document.getElementById('eth-change').innerHTML = `<span style="color:${e1}">${eth.ch >= 0 ? '▲' : '▼'} ${eth.ch.toFixed(2)}% (24h)</span>`;
     
     document.getElementById('status').textContent = T[currentLang].status + new Date().toLocaleTimeString();
     updateCalc();
 }
+
 
 function updateCalc() {
     const qty = parseFloat(document.getElementById('input-qty').value) || 0;
