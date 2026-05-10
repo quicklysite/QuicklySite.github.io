@@ -55,63 +55,63 @@
 </head>
 <body>
 <div class="container">
-    <a href="index.html" class="back-link">← Voltar ao NameForge</a>
-    <h1>🍳 Medidas de Cozinha</h1>
-    <p class="subtitle">Converta xícaras, colheres, mililitros e fl oz entre os padrões brasileiro e americano.</p>
+    <a href="index.html" class="back-link" id="back-link">← Voltar ao NameForge</a>
+    <h1 id="page-title">🍳 Medidas de Cozinha</h1>
+    <p class="subtitle" id="page-subtitle">Converta xícaras, colheres, mililitros e fl oz entre os padrões brasileiro e americano.</p>
 
     <div class="ad-slot">Anúncio</div>
 
     <div class="conv-card">
         <div class="conv-row">
             <div>
-                <label>De</label>
+                <label id="label-from">De</label>
                 <select id="k-from" onchange="convertKitchen()">
-                    <option value="cup_br">Xícara BR (200ml)</option>
-                    <option value="cup_us">Xícara US (240ml)</option>
-                    <option value="tbsp">Colher de sopa (15ml)</option>
-                    <option value="tsp">Colher de chá (5ml)</option>
-                    <option value="ml">Mililitro (ml)</option>
-                    <option value="floz">Fl oz (30ml)</option>
+                    <option value="cup_br" id="opt-cupbr">Xícara BR (200ml)</option>
+                    <option value="cup_us" id="opt-cupus">Xícara US (240ml)</option>
+                    <option value="tbsp" id="opt-tbsp">Colher de sopa (15ml)</option>
+                    <option value="tsp" id="opt-tsp">Colher de chá (5ml)</option>
+                    <option value="ml" id="opt-ml">Mililitro (ml)</option>
+                    <option value="floz" id="opt-floz">Fl oz (30ml)</option>
                 </select>
             </div>
             <div>
-                <label>Para</label>
+                <label id="label-to">Para</label>
                 <select id="k-to" onchange="convertKitchen()">
-                    <option value="ml">Mililitro (ml)</option>
-                    <option value="cup_br">Xícara BR (200ml)</option>
-                    <option value="cup_us">Xícara US (240ml)</option>
-                    <option value="tbsp">Colher de sopa (15ml)</option>
-                    <option value="tsp">Colher de chá (5ml)</option>
-                    <option value="floz">Fl oz (30ml)</option>
+                    <option value="ml" id="opt-ml2">Mililitro (ml)</option>
+                    <option value="cup_br" id="opt-cupbr2">Xícara BR (200ml)</option>
+                    <option value="cup_us" id="opt-cupus2">Xícara US (240ml)</option>
+                    <option value="tbsp" id="opt-tbsp2">Colher de sopa (15ml)</option>
+                    <option value="tsp" id="opt-tsp2">Colher de chá (5ml)</option>
+                    <option value="floz" id="opt-floz2">Fl oz (30ml)</option>
                 </select>
             </div>
         </div>
-        <label>Quantidade</label>
+        <label id="label-val">Quantidade</label>
         <input type="number" id="k-val" value="1" oninput="convertKitchen()" />
         <div class="result-box" id="k-result">—</div>
         <div class="warning-box" id="k-warning">
-            ⚠️ <strong>Atenção:</strong> A xícara brasileira tem 200ml. A xícara americana (cup) tem 240ml. Verifique qual padrão sua receita usa.
+            ⚠️ <strong id="warn-bold">Atenção:</strong> <span id="warn-text">A xícara brasileira tem 200ml. A xícara americana (cup) tem 240ml. Verifique qual padrão sua receita usa.</span>
         </div>
     </div>
 
-    <h2>📌 Tabela de equivalência</h2>
+    <h2 id="table-title">📌 Tabela de equivalência</h2>
     <div class="conv-card">
         <table>
-            <tr><th>Medida</th><th>ml</th><th>Equivale a</th></tr>
-            <tr><td>1 xícara BR</td><td>200ml</td><td>≈ 13 colheres de sopa</td></tr>
-            <tr><td>1 xícara US (cup)</td><td>240ml</td><td>16 colheres de sopa</td></tr>
-            <tr><td>½ xícara BR</td><td>100ml</td><td>≈ 6.5 colheres de sopa</td></tr>
-            <tr><td>½ xícara US</td><td>120ml</td><td>8 colheres de sopa</td></tr>
-            <tr><td>1 colher de sopa</td><td>15ml</td><td>3 colheres de chá</td></tr>
-            <tr><td>1 colher de chá</td><td>5ml</td><td>—</td></tr>
-            <tr><td>1 fl oz</td><td>30ml</td><td>2 colheres de sopa</td></tr>
+            <tr><th id="th-measure">Medida</th><th>ml</th><th id="th-equals">Equivale a</th></tr>
+            <tr><td id="td-r1a">1 xícara BR</td><td>200ml</td><td id="td-r1b">≈ 13 colheres de sopa</td></tr>
+            <tr><td id="td-r2a">1 xícara US (cup)</td><td>240ml</td><td id="td-r2b">16 colheres de sopa</td></tr>
+            <tr><td id="td-r3a">½ xícara BR</td><td>100ml</td><td id="td-r3b">≈ 6.5 colheres de sopa</td></tr>
+            <tr><td id="td-r4a">½ xícara US</td><td>120ml</td><td id="td-r4b">8 colheres de sopa</td></tr>
+            <tr><td id="td-r5a">1 colher de sopa</td><td>15ml</td><td id="td-r5b">3 colheres de chá</td></tr>
+            <tr><td id="td-r6a">1 colher de chá</td><td>5ml</td><td>—</td></tr>
+            <tr><td id="td-r7a">1 fl oz</td><td>30ml</td><td id="td-r7b">2 colheres de sopa</td></tr>
         </table>
     </div>
 
-    <h2>🧀 Receita: Pão de Queijo (para estrangeiros)</h2>
+    <h2 id="recipe1-title">🧀 Receita: Pão de Queijo (para estrangeiros)</h2>
     <div class="recipe-box">
-        <div class="recipe-title">Ingredientes (usando medidas americanas)</div>
-        <ul>
+        <div class="recipe-title" id="recipe1-subtitle">Ingredientes (usando medidas americanas)</div>
+        <ul id="recipe1-list">
             <li>2 cups of tapioca starch (480ml)</li>
             <li>1 cup of milk (240ml)</li>
             <li>½ cup of oil (120ml)</li>
@@ -119,13 +119,13 @@
             <li>1½ cups of grated cheese (360ml)</li>
             <li>1 tsp salt</li>
         </ul>
-        <p style="margin-top:12px">Mix all ingredients, roll into small balls and bake at 375°F (190°C) for 20 minutes. Crispy outside, chewy inside!</p>
+        <p style="margin-top:12px" id="recipe1-note">Mix all ingredients, roll into small balls and bake at 375°F (190°C) for 20 minutes. Crispy outside, chewy inside!</p>
     </div>
 
-    <h2>🥐 Receita: Buttermilk Pancakes (adaptada para o Brasil)</h2>
+    <h2 id="recipe2-title">🥐 Receita: Buttermilk Pancakes (adaptada para o Brasil)</h2>
     <div class="recipe-box">
-        <div class="recipe-title">Ingredientes (usando medidas brasileiras)</div>
-        <ul>
+        <div class="recipe-title" id="recipe2-subtitle">Ingredientes (usando medidas brasileiras)</div>
+        <ul id="recipe2-list">
             <li>2 xícaras BR de farinha de trigo (400ml)</li>
             <li>1 xícara BR de iogurte natural (200ml)</li>
             <li>2 colheres de sopa de manteiga derretida</li>
@@ -133,46 +133,175 @@
             <li>1 colher de chá de fermento em pó</li>
             <li>Pitada de sal</li>
         </ul>
-        <p style="margin-top:12px">Misture tudo, frite em frigideira antiaderente em fogo médio. Rende aproximadamente 8 panquecas.</p>
+        <p style="margin-top:12px" id="recipe2-note">Misture tudo, frite em frigideira antiaderente em fogo médio. Rende aproximadamente 8 panquecas.</p>
     </div>
 
     <div class="ad-slot">Anúncio</div>
 
-    <h2>🔧 Outras ferramentas</h2>
+    <h2 id="other-title">🔧 Outras ferramentas</h2>
     <div class="tools-nav">
-        <a href="index.html" class="tool-link">✨ Gerador de Nomes</a>
-        <a href="conversor-peso.html" class="tool-link">⚖️ Peso</a>
-        <a href="conversor-temperatura.html" class="tool-link">🌡️ Temperatura</a>
-        <a href="conversor-cozinha.html" class="tool-link active">🍳 Medidas de Cozinha</a>
-        <a href="conversor-roupas.html" class="tool-link">👕 Tamanho de Roupa</a>
-        <a href="bitcoin.html" class="tool-link">₿ Bitcoin</a>
+        <a href="index.html" class="tool-link" id="link-names">✨ Gerador de Nomes</a>
+        <a href="conversor-peso.html" class="tool-link" id="link-weight">⚖️ Peso</a>
+        <a href="conversor-temperatura.html" class="tool-link" id="link-temp">🌡️ Temperatura</a>
+        <a href="conversor-cozinha.html" class="tool-link active" id="link-kitchen">🍳 Medidas de Cozinha</a>
+        <a href="conversor-roupas.html" class="tool-link" id="link-cloth">👕 Tamanho de Roupa</a>
+        <a href="bitcoin.html" class="tool-link" id="link-btc">₿ Bitcoin</a>
     </div>
 </div>
 <footer>
     <p>&copy; 2026 NameForge</p>
     <p style="margin-top:8px">
-        <a href="about.html">Sobre</a>
-        <a href="contact.html">Contato</a>
-        <a href="terms.html">Termos</a>
-        <a href="privacidade.html">Privacidade</a>
+        <a href="about.html" id="footer-about">Sobre</a>
+        <a href="contact.html" id="footer-contact">Contato</a>
+        <a href="terms.html" id="footer-terms">Termos</a>
+        <a href="privacidade.html" id="footer-priv">Privacidade</a>
     </p>
 </footer>
 <script>
-const kMl={cup_br:200,cup_us:240,tbsp:15,tsp:5,ml:1,floz:30};
-const kLb={cup_br:'xícara(s) BR',cup_us:'xícara(s) US',tbsp:'col. sopa',tsp:'col. chá',ml:'ml',floz:'fl oz'};
-function convertKitchen(){
-    const f=document.getElementById('k-from').value;
-    const t=document.getElementById('k-to').value;
-    const v=parseFloat(document.getElementById('k-val').value)||0;
-    const result=Math.round(v*kMl[f]/kMl[t]*10000)/10000;
-    document.getElementById('k-result').textContent=result+' '+kLb[t];
-    const warn=document.getElementById('k-warning');
-    if(f==='cup_br'||t==='cup_br'||f==='cup_us'||t==='cup_us'){
-        warn.classList.add('show');
-    } else {
-        warn.classList.remove('show');
-    }
+const T = {
+  pt: {
+    backLink:'← Voltar ao NameForge', title:'🍳 Medidas de Cozinha',
+    subtitle:'Converta xícaras, colheres, mililitros e fl oz entre os padrões brasileiro e americano.',
+    labelFrom:'De', labelTo:'Para', labelVal:'Quantidade',
+    optCupBr:'Xícara BR (200ml)', optCupUs:'Xícara US (240ml)',
+    optTbsp:'Colher de sopa (15ml)', optTsp:'Colher de chá (5ml)',
+    optMl:'Mililitro (ml)', optFloz:'Fl oz (30ml)',
+    warnBold:'Atenção:', warnText:'A xícara brasileira tem 200ml. A xícara americana (cup) tem 240ml. Verifique qual padrão sua receita usa.',
+    tableTitle:'📌 Tabela de equivalência', thMeasure:'Medida', thEquals:'Equivale a',
+    tdR1a:'1 xícara BR', tdR1b:'≈ 13 colheres de sopa',
+    tdR2a:'1 xícara US (cup)', tdR2b:'16 colheres de sopa',
+    tdR3a:'½ xícara BR', tdR3b:'≈ 6.5 colheres de sopa',
+    tdR4a:'½ xícara US', tdR4b:'8 colheres de sopa',
+    tdR5a:'1 colher de sopa', tdR5b:'3 colheres de chá',
+    tdR6a:'1 colher de chá', tdR7a:'1 fl oz', tdR7b:'2 colheres de sopa',
+    recipe1Title:'🧀 Receita: Pão de Queijo (para estrangeiros)',
+    recipe1Sub:'Ingredientes (usando medidas americanas)',
+    recipe1Items:['2 cups of tapioca starch (480ml)','1 cup of milk (240ml)','½ cup of oil (120ml)','2 eggs','1½ cups of grated cheese (360ml)','1 tsp salt'],
+    recipe1Note:'Mix all ingredients, roll into small balls and bake at 375°F (190°C) for 20 minutes. Crispy outside, chewy inside!',
+    recipe2Title:'🥐 Receita: Buttermilk Pancakes (adaptada para o Brasil)',
+    recipe2Sub:'Ingredientes (usando medidas brasileiras)',
+    recipe2Items:['2 xícaras BR de farinha de trigo (400ml)','1 xícara BR de iogurte natural (200ml)','2 colheres de sopa de manteiga derretida','1 ovo','1 colher de chá de fermento em pó','Pitada de sal'],
+    recipe2Note:'Misture tudo, frite em frigideira antiaderente em fogo médio. Rende aproximadamente 8 panquecas.',
+    otherTitle:'🔧 Outras ferramentas',
+    linkNames:'✨ Gerador de Nomes', linkWeight:'⚖️ Peso', linkTemp:'🌡️ Temperatura',
+    linkKitchen:'🍳 Medidas de Cozinha', linkCloth:'👕 Tamanho de Roupa', linkBtc:'₿ Bitcoin',
+    footerAbout:'Sobre', footerContact:'Contato', footerTerms:'Termos', footerPriv:'Privacidade',
+    unitLabels:{cup_br:'xícara(s) BR',cup_us:'xícara(s) US',tbsp:'col. sopa',tsp:'col. chá',ml:'ml',floz:'fl oz'}
+  },
+  en: {
+    backLink:'← Back to NameForge', title:'🍳 Kitchen Measures',
+    subtitle:'Convert cups, spoons, milliliters and fl oz between Brazilian and American standards.',
+    labelFrom:'From', labelTo:'To', labelVal:'Amount',
+    optCupBr:'BR Cup (200ml)', optCupUs:'US Cup (240ml)',
+    optTbsp:'Tablespoon (15ml)', optTsp:'Teaspoon (5ml)',
+    optMl:'Milliliter (ml)', optFloz:'Fl oz (30ml)',
+    warnBold:'Note:', warnText:'The Brazilian cup is 200ml. The US cup is 240ml. Check which standard your recipe uses.',
+    tableTitle:'📌 Equivalence Table', thMeasure:'Measure', thEquals:'Equals',
+    tdR1a:'1 BR cup', tdR1b:'≈ 13 tablespoons',
+    tdR2a:'1 US cup', tdR2b:'16 tablespoons',
+    tdR3a:'½ BR cup', tdR3b:'≈ 6.5 tablespoons',
+    tdR4a:'½ US cup', tdR4b:'8 tablespoons',
+    tdR5a:'1 tablespoon', tdR5b:'3 teaspoons',
+    tdR6a:'1 teaspoon', tdR7a:'1 fl oz', tdR7b:'2 tablespoons',
+    recipe1Title:'🧀 Recipe: Pão de Queijo / Brazilian Cheese Bread',
+    recipe1Sub:'Ingredients (using American measures)',
+    recipe1Items:['2 cups of tapioca starch (480ml)','1 cup of milk (240ml)','½ cup of oil (120ml)','2 eggs','1½ cups of grated cheese (360ml)','1 tsp salt'],
+    recipe1Note:'Mix all ingredients, roll into small balls and bake at 375°F (190°C) for 20 minutes. Crispy outside, chewy inside!',
+    recipe2Title:'🥐 Recipe: Buttermilk Pancakes (adapted for Brazil)',
+    recipe2Sub:'Ingredients (using Brazilian measures)',
+    recipe2Items:['2 BR cups of flour (400ml)','1 BR cup of plain yogurt (200ml)','2 tablespoons of melted butter','1 egg','1 teaspoon of baking powder','Pinch of salt'],
+    recipe2Note:'Mix everything, cook on a non-stick pan over medium heat. Makes approximately 8 pancakes.',
+    otherTitle:'🔧 Other tools',
+    linkNames:'✨ Name Generator', linkWeight:'⚖️ Weight', linkTemp:'🌡️ Temperature',
+    linkKitchen:'🍳 Kitchen Measures', linkCloth:'👕 Clothing Size', linkBtc:'₿ Bitcoin',
+    footerAbout:'About', footerContact:'Contact', footerTerms:'Terms', footerPriv:'Privacy',
+    unitLabels:{cup_br:'BR cup(s)',cup_us:'US cup(s)',tbsp:'tbsp',tsp:'tsp',ml:'ml',floz:'fl oz'}
+  }
+};
+
+function getLang() {
+  const param = new URLSearchParams(window.location.search).get('lang');
+  if (param === 'pt' || param === 'en') { localStorage.setItem('siteLang', param); return param; }
+  const saved = localStorage.getItem('siteLang');
+  if (saved === 'pt' || saved === 'en') return saved;
+  return 'pt';
 }
+
+function applyLang(l) {
+  const t = T[l];
+  const q = id => document.getElementById(id);
+  const lp = '?lang=' + l;
+
+  q('back-link').textContent = t.backLink; q('back-link').href = 'index.html' + lp;
+  q('page-title').textContent = t.title;
+  q('page-subtitle').textContent = t.subtitle;
+  q('label-from').textContent = t.labelFrom;
+  q('label-to').textContent = t.labelTo;
+  q('label-val').textContent = t.labelVal;
+
+  // Opções dos selects
+  const optMap = {
+    'opt-cupbr': t.optCupBr, 'opt-cupus': t.optCupUs,
+    'opt-tbsp': t.optTbsp, 'opt-tsp': t.optTsp,
+    'opt-ml': t.optMl, 'opt-floz': t.optFloz,
+    'opt-cupbr2': t.optCupBr, 'opt-cupus2': t.optCupUs,
+    'opt-tbsp2': t.optTbsp, 'opt-tsp2': t.optTsp,
+    'opt-ml2': t.optMl, 'opt-floz2': t.optFloz
+  };
+  for (const [id, val] of Object.entries(optMap)) { const el = q(id); if(el) el.textContent = val; }
+
+  q('warn-bold').textContent = t.warnBold; q('warn-text').textContent = t.warnText;
+  q('table-title').textContent = t.tableTitle;
+  q('th-measure').textContent = t.thMeasure; q('th-equals').textContent = t.thEquals;
+  q('td-r1a').textContent = t.tdR1a; q('td-r1b').textContent = t.tdR1b;
+  q('td-r2a').textContent = t.tdR2a; q('td-r2b').textContent = t.tdR2b;
+  q('td-r3a').textContent = t.tdR3a; q('td-r3b').textContent = t.tdR3b;
+  q('td-r4a').textContent = t.tdR4a; q('td-r4b').textContent = t.tdR4b;
+  q('td-r5a').textContent = t.tdR5a; q('td-r5b').textContent = t.tdR5b;
+  q('td-r6a').textContent = t.tdR6a; q('td-r7a').textContent = t.tdR7a; q('td-r7b').textContent = t.tdR7b;
+
+  q('recipe1-title').textContent = t.recipe1Title;
+  q('recipe1-subtitle').textContent = t.recipe1Sub;
+  q('recipe1-list').innerHTML = t.recipe1Items.map(i => `<li>${i}</li>`).join('');
+  q('recipe1-note').textContent = t.recipe1Note;
+  q('recipe2-title').textContent = t.recipe2Title;
+  q('recipe2-subtitle').textContent = t.recipe2Sub;
+  q('recipe2-list').innerHTML = t.recipe2Items.map(i => `<li>${i}</li>`).join('');
+  q('recipe2-note').textContent = t.recipe2Note;
+
+  q('other-title').textContent = t.otherTitle;
+  q('link-names').textContent = t.linkNames;   q('link-names').href   = 'index.html' + lp;
+  q('link-weight').textContent = t.linkWeight; q('link-weight').href  = 'conversor-peso.html' + lp;
+  q('link-temp').textContent = t.linkTemp;     q('link-temp').href    = 'conversor-temperatura.html' + lp;
+  q('link-kitchen').textContent = t.linkKitchen; q('link-kitchen').href = 'conversor-cozinha.html' + lp;
+  q('link-cloth').textContent = t.linkCloth;   q('link-cloth').href   = 'conversor-roupas.html' + lp;
+  q('link-btc').textContent = t.linkBtc;       q('link-btc').href     = 'bitcoin.html' + lp;
+
+  q('footer-about').textContent = t.footerAbout; q('footer-contact').textContent = t.footerContact;
+  q('footer-terms').textContent = t.footerTerms; q('footer-priv').textContent    = t.footerPriv;
+
+  document.documentElement.lang = l;
+}
+
+const kMl = {cup_br:200, cup_us:240, tbsp:15, tsp:5, ml:1, floz:30};
+function convertKitchen(){
+  const lang = getLang();
+  const f = document.getElementById('k-from').value;
+  const t = document.getElementById('k-to').value;
+  const v = parseFloat(document.getElementById('k-val').value) || 0;
+  const result = Math.round(v * kMl[f] / kMl[t] * 10000) / 10000;
+  const labels = T[lang].unitLabels;
+  document.getElementById('k-result').textContent = result + ' ' + labels[t];
+  const warn = document.getElementById('k-warning');
+  if(f==='cup_br'||t==='cup_br'||f==='cup_us'||t==='cup_us'){
+    warn.classList.add('show');
+  } else {
+    warn.classList.remove('show');
+  }
+}
+
+const lang = getLang();
+applyLang(lang);
 convertKitchen();
 </script>
 </body>
