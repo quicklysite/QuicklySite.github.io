@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bitcoin em Tempo Real BTC BRL USD – NameForge</title>
+    <meta name="description" content="Acompanhe o preço do Bitcoin em tempo real em reais e dólares. Calculadora BTC para BRL e USD. Atualização automática a cada 60 segundos.">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3FEPS5KJLN"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-3FEPS5KJLN');
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8800851624013593" crossorigin="anonymous"></script>
+    <style>
+        :root { --bg:#0d0d0f; --surface:#16161a; --surface2:#1e1e24; --accent:#e8c77a; --text:#f0ede6; --muted:#888; --radius:14px; --btc:#f7931a; --eth:#627eea; }
+        * { box-sizing:border-box; margin:0; padding:0; }
+        body { background:var(--bg); color:var(--text); font-family:'DM Sans',sans-serif; line-height:1.6; }
+        .container { max-width:800px; margin:40px auto; padding:40px; background:var(--surface); border-radius:var(--radius); box-shadow:0 10px 30px rgba(0,0,0,.5); }
+        h1 { font-family:'Playfair Display',serif; color:var(--accent); font-size:2rem; margin-bottom:8px; }
+        h2 { color:var(--accent); font-family:'Playfair Display',serif; margin:28px 0 12px; font-size:1.2rem; }
+        p { color:var(--text); opacity:.9; margin-bottom:15px; }
+        a { color:var(--accent); text-decoration:none; }
+        a:hover { text-decoration:underline; }
+        .back-link { display:inline-block; margin-bottom:24px; font-weight:500; }
+        .subtitle { color:var(--muted); margin-bottom:24px; font-size:.95rem; }
+
+        /* COIN SELECTOR */
+        .coin-tabs { display:flex; gap:10px; margin-bottom:24px; }
+        .coin-tab { padding:10px 24px; border-radius:50px; border:1.5px solid rgba(247,147,26,.3); background:none; color:var(--muted); cursor:pointer; font-family:'DM Sans',sans-serif; font-size:.9rem; font-weight:600; transition:all .2s; }
+        .coin-tab.btc-active { background:rgba(247,147,26,.15); border-color:var(--btc); color:var(--btc); }
+        .coin-tab.eth-active { background:rgba(98,126,234,.15); border-color:var(--eth); color:var(--eth); }
+
+        /* PRICE BOX */
+        .price-box { border-radius:18px; padding:32px 24px; text-align:center; margin-bottom:20px; }
+        .price-box.btc-theme { background:linear-gradient(135deg,rgba(247,147,26,.12),rgba(247,147,26,.04)); border:1.5px solid rgba(247,147,26,.35); }
+        .price-box.eth-theme { background:linear-gradient(135deg,rgba(98,126,234,.12),rgba(98,126,234,.04)); border:1.5px solid rgba(98,126,234,.35); }
+        .coin-icon { font-size:3.5rem; margin-bottom:10px; display:block; }
+        .price-label { color:var(--muted); font-size:.78rem; text-transform:uppercase; letter-spacing:.1em; margin-bottom:8px; }
+        .price-value { font-family:'Playfair Display',serif; font-size:2.4rem; font-weight:900; line-height:1; margin-bottom:6px; }
+        .price-value.btc-color { color:var(--btc); }
+        .price-value.eth-color { color:var(--eth); }
+        .price-sub { color:var(--muted); font-size:.88rem; margin-bottom:10px; }
+        .change-up { color:#4caf50; font-weight:700; }
+        .change-down { color:#f44336; font-weight:700; }
+        .refresh-btn { background:none; border:1px solid rgba(247,147,26,.3); color:var(--btc); padding:7px 18px; border-radius:50px; cursor:pointer; font-size:.8rem; transition:all .2s; margin-top:8px; }
+        .refresh-btn:hover { background:rgba(247,147,26,.1); }
+        .refresh-btn.eth-btn { border-color:rgba(98,126,234,.3); color:var(--eth); }
+        .refresh-btn.eth-btn:hover { background:rgba(98,126,234,.1); }
+        .auto-note { color:var(--muted); font-size:.75rem; margin-top:8px; opacity:.7; }
+
+        /* CALCULATOR */
+        .calc-box { background:var(--surface2); border-radius:var(--radius); padding:24px; margin-bottom:20px; }
+        .calc-label { font-size:.78rem; color:var(--muted); text-transform:uppercase; letter-spacing:.08em; margin-bottom:6px; display:block; }
+        input[type=number] { width:100%; padding:12px 16px; background:var(--bg); border:1.5px solid rgba(255,255,255,.08); color:var(--text); border-radius:10px; font-family:'DM Sans',sans-serif; font-size:.95rem; outline:none; transition:border-color .2s; }
+        input[type=number]:focus { border-color:var(--btc); }
+        .result-row { display:flex; gap:12px; margin-top:14px; }
+        .result-card { flex:1; background:var(--bg); border-radius:10px; padding:14px; text-align:center; }
+        .result-card .val { font-family:'Playfair Display',serif; font-size:1.15rem; color:var(--btc); }
+        .result-card .cur { color:var(--muted); font-size:.75rem; margin-top:3px; }
+        .status { text-align:center; color:var(--muted); font-size:.75rem; margin-top:12px; }
+
+        .tools-nav { display:flex; flex-wrap:wrap; gap:10px; margin:32px 0 0; }
+        .tool-link { background:var(--surface2); border:1px solid rgba(232,199,122,.15); color:var(--text); padding:8px 16px; border-radius:50px; font-size:.85rem; text-decoration:none; transition:all .2s; }
+        .tool-link:hover { border-color:var(--accent); color:var(--accent); text-decoration:none; }
+        .tool-link.active { border-color:var(--accent); color:var(--accent); background:rgba(232,199,122,.08); }
+        footer { text-align:center; padding:40px 20px; color:var(--muted); font-size:.85rem; }
+        footer a { color:var(--muted); margin:0 8px; }
+        footer a:hover { color:var(--accent); }
+        .ad-slot { background:var(--surface2); border:1px dashed rgba(255,255,255,.08); border-radius:var(--radius); min-height:90px; display:flex; align-items:center; justify-content:center; color:var(--muted); font-size:.75rem; margin:20px 0; }
+        @media(max-width:600px){ .container{padding:24px 16px;margin:16px} .result-row{flex-direction:column} }
+    </style>
+</head>
+<body>
+<div class="container">
+    <a href="index.html" class="back-link">← Voltar ao NameForge</a>
+    <h1>₿ Criptomoedas em Tempo Real</h1>
+    <p class="subtitle">Acompanhe o preço do Bitcoin e Ethereum em reais e dólares. Atualização automática a cada 60 segundos.</p>
+
+    <div class="ad-slot">Anúncio</div>
+
+    <!-- COIN SELECTOR -->
+    <div class="coin-tabs">
+        <button class="coin-tab btc-active" id="btn-btc" onclick="setCoin('btc')">₿ Bitcoin (BTC)</button>
+        <button class="coin-tab" id="btn-eth" onclick="setCoin('eth')">Ξ Ethereum (ETH)</button>
+    </div>
+
+    <!-- PRICE BOX BTC -->
+    <div class="price-box btc-theme" id="box-btc">
+        <span class="coin-icon">₿</span>
+        <div class="price-label">Preço atual do Bitcoin</div>
+        <div class="price-value btc-color" id="btc-brl">Carregando...</div>
+        <div class="price-sub" id="btc-usd"></div>
+        <div class="price-sub" id="btc-change"></div>
+        <button class="refresh-btn" onclick="fetchPrices()">🔄 Atualizar</button>
+        <div class="auto-note">⏱ Atualização automática a cada 60 segundos</div>
+    </div>
+
+    <!-- PRICE BOX ETH -->
+    <div class="price-box eth-theme" id="box-eth" style="display:none">
+        <span class="coin-icon">Ξ</span>
+        <div class="price-label">Preço atual do Ethereum</div>
+        <div class="price-value eth-color" id="eth-brl">Carregando...</div>
+        <div class="price-sub" id="eth-usd"></div>
+        <div class="price-sub" id="eth-change"></div>
+        <button class="refresh-btn eth-btn" onclick="fetchPrices()">🔄 Atualizar</button>
+        <div class="auto-note">⏱ Atualização automática a cada 60 segundos</div>
+    </div>
+
+    <!-- CALCULATOR -->
+    <div class="calc-box">
+        <label class="calc-label" id="calc-title">Calculadora BTC</label>
+        <label class="calc-label">Quantidade de moeda</label>
+        <input type="number" id="coin-input" placeholder="Ex: 0.5" oninput="calcCoin()" step="0.0001" min="0" />
+        <div class="result-row">
+            <div class="result-card">
+                <div class="calc-label">BRL</div>
+                <div class="val" id="res-brl">—</div>
+                <div class="cur">Reais</div>
+            </div>
+            <div class="result-card">
+                <div class="calc-label">USD</div>
+                <div class="val" id="res-usd">—</div>
+                <div class="cur">Dólares</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="status" id="status">Última atualização: —</div>
+
+    <h2>📖 O que é o Bitcoin?</h2>
+    <p>O Bitcoin (BTC) é a primeira e mais conhecida criptomoeda do mundo, criada em 2009. Funciona de forma descentralizada, sem banco central ou governo controlando sua emissão.</p>
+    <p>O preço exibido aqui vem diretamente da API da <strong>CoinGecko</strong>, uma das fontes mais confiáveis do mercado, atualizada a cada 60 segundos automaticamente.</p>
+
+    <h2>📖 O que é o Ethereum?</h2>
+    <p>O Ethereum (ETH) é a segunda maior criptomoeda por capitalização de mercado. Além de moeda, é uma plataforma para contratos inteligentes e aplicações descentralizadas.</p>
+
+    <div class="ad-slot">Anúncio</div>
+
+    <h2>🔧 Outras ferramentas</h2>
+    <div class="tools-nav">
+        <a href="index.html" class="tool-link">✨ Gerador de Nomes</a>
+        <a href="conversor-peso.html" class="tool-link">⚖️ Peso</a>
+        <a href="conversor-temperatura.html" class="tool-link">🌡️ Temperatura</a>
+        <a href="conversor-cozinha.html" class="tool-link">🍳 Medidas de Cozinha</a>
+        <a href="conversor-roupas.html" class="tool-link">👕 Tamanho de Roupa</a>
+        <a href="bitcoin.html" class="tool-link active">₿ Bitcoin</a>
+    </div>
+</div>
+<footer>
+    <p>&copy; 2026 NameForge</p>
+    <p style="margin-top:8px">
+        <a href="about.html">Sobre</a>
+        <a href="contact.html">Contato</a>
+        <a href="terms.html">Termos</a>
+        <a href="privacidade.html">Privacidade</a>
+    </p>
+</footer>
+<script>
+let priceBTC_BRL=0, priceBTC_USD=0;
+let priceETH_BRL=0, priceETH_USD=0;
+let currentCoin='btc';
+
+function setCoin(coin){
+    currentCoin=coin;
+    document.getElementById('box-btc').style.display=coin==='btc'?'block':'none';
+    document.getElementById('box-eth').style.display=coin==='eth'?'block':'none';
+    document.getElementById('btn-btc').className='coin-tab'+(coin==='btc'?' btc-active':'');
+    document.getElementById('btn-eth').className='coin-tab'+(coin==='eth'?' eth-active':'');
+    document.getElementById('calc-title').textContent='Calculadora '+(coin==='btc'?'BTC':'ETH');
+    document.getElementById('coin-input').value='';
+    document.getElementById('res-brl').textContent='—';
+    document.getElementById('res-usd').textContent='—';
+}
+
+async function fetchPrices(){
+    document.getElementById('status').textContent='Atualizando...';
+    try {
+        const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=brl,usd&include_24hr_change=true');
+        const d = await res.json();
+        priceBTC_BRL=d.bitcoin.brl; priceBTC_USD=d.bitcoin.usd;
+        priceETH_BRL=d.ethereum.brl; priceETH_USD=d.ethereum.usd;
+        const btcChange=d.bitcoin.usd_24h_change;
+        const ethChange=d.ethereum.usd_24h_change;
+        document.getElementById('btc-brl').textContent='R$ '+priceBTC_BRL.toLocaleString('pt-BR');
+        document.getElementById('btc-usd').textContent='USD '+priceBTC_USD.toLocaleString('en-US',{style:'currency',currency:'USD'});
+        document.getElementById('btc-change').innerHTML='<span class="'+(btcChange>=0?'change-up':'change-down')+'">'+(btcChange>=0?'+':'')+btcChange.toFixed(2)+'% (24h)</span>';
+        document.getElementById('eth-brl').textContent='R$ '+priceETH_BRL.toLocaleString('pt-BR');
+        document.getElementById('eth-usd').textContent='USD '+priceETH_USD.toLocaleString('en-US',{style:'currency',currency:'USD'});
+        document.getElementById('eth-change').innerHTML='<span class="'+(ethChange>=0?'change-up':'change-down')+'">'+(ethChange>=0?'+':'')+ethChange.toFixed(2)+'% (24h)</span>';
+        const now=new Date();
+        document.getElementById('status').textContent='Última atualização: '+now.toLocaleTimeString('pt-BR');
+        calcCoin();
+    } catch(e){
+        document.getElementById('status').textContent='Erro ao carregar. Tente novamente.';
+    }
+}
+
+function calcCoin(){
+    const v=parseFloat(document.getElementById('coin-input').value)||0;
+    const brl=currentCoin==='btc'?priceBTC_BRL:priceETH_BRL;
+    const usd=currentCoin==='btc'?priceBTC_USD:priceETH_USD;
+    document.getElementById('res-brl').textContent=brl>0?'R$ '+(v*brl).toLocaleString('pt-BR',{maximumFractionDigits:2}):'—';
+    document.getElementById('res-usd').textContent=usd>0?'$ '+(v*usd).toLocaleString('en-US',{maximumFractionDigits:2}):'—';
+}
+
+fetchPrices();
+setInterval(fetchPrices, 60000);
+</script>
+</body>
+</html>
