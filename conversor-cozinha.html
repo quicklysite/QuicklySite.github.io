@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversor de Medidas de Cozinha – xícara colher ml – NameForge</title>
+    <meta name="description" content="Converta medidas culinárias: xícara brasileira, xícara americana, colher de sopa, colher de chá, ml e fl oz. Inclui receitas de exemplo.">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3FEPS5KJLN"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-3FEPS5KJLN');
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8800851624013593" crossorigin="anonymous"></script>
+    <style>
+        :root { --bg:#0d0d0f; --surface:#16161a; --surface2:#1e1e24; --accent:#e8c77a; --text:#f0ede6; --muted:#888; --radius:14px; }
+        * { box-sizing:border-box; margin:0; padding:0; }
+        body { background:var(--bg); color:var(--text); font-family:'DM Sans',sans-serif; line-height:1.6; }
+        .container { max-width:800px; margin:40px auto; padding:40px; background:var(--surface); border-radius:var(--radius); box-shadow:0 10px 30px rgba(0,0,0,.5); }
+        h1 { font-family:'Playfair Display',serif; color:var(--accent); font-size:2rem; margin-bottom:8px; }
+        h2 { color:var(--accent); font-family:'Playfair Display',serif; margin:28px 0 12px; font-size:1.2rem; }
+        p { color:var(--text); opacity:.9; margin-bottom:15px; }
+        a { color:var(--accent); text-decoration:none; }
+        a:hover { text-decoration:underline; }
+        .back-link { display:inline-block; margin-bottom:24px; font-weight:500; }
+        .subtitle { color:var(--muted); margin-bottom:32px; font-size:.95rem; }
+        .conv-card { background:var(--surface2); border-radius:var(--radius); padding:28px; margin-bottom:20px; }
+        .conv-row { display:flex; gap:14px; margin-bottom:16px; }
+        .conv-row>* { flex:1; }
+        label { font-size:.78rem; color:var(--muted); text-transform:uppercase; letter-spacing:.08em; margin-bottom:6px; display:block; }
+        select, input[type=number] { width:100%; padding:12px 16px; background:var(--bg); border:1.5px solid rgba(255,255,255,.08); color:var(--text); border-radius:10px; font-family:'DM Sans',sans-serif; font-size:.95rem; outline:none; transition:border-color .2s; appearance:none; }
+        select:focus, input:focus { border-color:var(--accent); }
+        .result-box { background:rgba(232,199,122,.07); border:1.5px solid rgba(232,199,122,.25); border-radius:12px; padding:18px; text-align:center; font-family:'Playfair Display',serif; font-size:1.8rem; color:var(--accent); margin-top:16px; }
+        .warning-box { background:rgba(232,199,122,.1); border-left:3px solid var(--accent); border-radius:8px; padding:12px 16px; margin-top:14px; font-size:.88rem; color:var(--text); display:none; }
+        .warning-box.show { display:block; }
+        table { width:100%; border-collapse:collapse; margin-top:12px; font-size:.9rem; }
+        th { background:rgba(232,199,122,.1); color:var(--accent); padding:10px 14px; text-align:left; }
+        td { padding:10px 14px; border-bottom:1px solid rgba(255,255,255,.05); }
+        tr:hover td { background:rgba(232,199,122,.04); }
+        .recipe-box { background:var(--surface2); border-radius:var(--radius); padding:24px; margin-bottom:20px; border-left:3px solid var(--accent); }
+        .recipe-title { font-family:'Playfair Display',serif; color:var(--accent); font-size:1.1rem; margin-bottom:12px; }
+        .recipe-box li { margin-bottom:6px; opacity:.9; }
+        .tools-nav { display:flex; flex-wrap:wrap; gap:10px; margin:32px 0 0; }
+        .tool-link { background:var(--surface2); border:1px solid rgba(232,199,122,.15); color:var(--text); padding:8px 16px; border-radius:50px; font-size:.85rem; text-decoration:none; transition:all .2s; }
+        .tool-link:hover { border-color:var(--accent); color:var(--accent); text-decoration:none; }
+        .tool-link.active { border-color:var(--accent); color:var(--accent); background:rgba(232,199,122,.08); }
+        footer { text-align:center; padding:40px 20px; color:var(--muted); font-size:.85rem; }
+        footer a { color:var(--muted); margin:0 8px; }
+        footer a:hover { color:var(--accent); }
+        .ad-slot { background:var(--surface2); border:1px dashed rgba(255,255,255,.08); border-radius:var(--radius); min-height:90px; display:flex; align-items:center; justify-content:center; color:var(--muted); font-size:.75rem; margin:20px 0; }
+        @media(max-width:600px){ .conv-row{flex-direction:column} .container{padding:24px 16px;margin:16px} }
+    </style>
+</head>
+<body>
+<div class="container">
+    <a href="index.html" class="back-link">← Voltar ao NameForge</a>
+    <h1>🍳 Medidas de Cozinha</h1>
+    <p class="subtitle">Converta xícaras, colheres, mililitros e fl oz entre os padrões brasileiro e americano.</p>
+
+    <div class="ad-slot">Anúncio</div>
+
+    <div class="conv-card">
+        <div class="conv-row">
+            <div>
+                <label>De</label>
+                <select id="k-from" onchange="convertKitchen()">
+                    <option value="cup_br">Xícara BR (200ml)</option>
+                    <option value="cup_us">Xícara US (240ml)</option>
+                    <option value="tbsp">Colher de sopa (15ml)</option>
+                    <option value="tsp">Colher de chá (5ml)</option>
+                    <option value="ml">Mililitro (ml)</option>
+                    <option value="floz">Fl oz (30ml)</option>
+                </select>
+            </div>
+            <div>
+                <label>Para</label>
+                <select id="k-to" onchange="convertKitchen()">
+                    <option value="ml">Mililitro (ml)</option>
+                    <option value="cup_br">Xícara BR (200ml)</option>
+                    <option value="cup_us">Xícara US (240ml)</option>
+                    <option value="tbsp">Colher de sopa (15ml)</option>
+                    <option value="tsp">Colher de chá (5ml)</option>
+                    <option value="floz">Fl oz (30ml)</option>
+                </select>
+            </div>
+        </div>
+        <label>Quantidade</label>
+        <input type="number" id="k-val" value="1" oninput="convertKitchen()" />
+        <div class="result-box" id="k-result">—</div>
+        <div class="warning-box" id="k-warning">
+            ⚠️ <strong>Atenção:</strong> A xícara brasileira tem 200ml. A xícara americana (cup) tem 240ml. Verifique qual padrão sua receita usa.
+        </div>
+    </div>
+
+    <h2>📌 Tabela de equivalência</h2>
+    <div class="conv-card">
+        <table>
+            <tr><th>Medida</th><th>ml</th><th>Equivale a</th></tr>
+            <tr><td>1 xícara BR</td><td>200ml</td><td>≈ 13 colheres de sopa</td></tr>
+            <tr><td>1 xícara US (cup)</td><td>240ml</td><td>16 colheres de sopa</td></tr>
+            <tr><td>½ xícara BR</td><td>100ml</td><td>≈ 6.5 colheres de sopa</td></tr>
+            <tr><td>½ xícara US</td><td>120ml</td><td>8 colheres de sopa</td></tr>
+            <tr><td>1 colher de sopa</td><td>15ml</td><td>3 colheres de chá</td></tr>
+            <tr><td>1 colher de chá</td><td>5ml</td><td>—</td></tr>
+            <tr><td>1 fl oz</td><td>30ml</td><td>2 colheres de sopa</td></tr>
+        </table>
+    </div>
+
+    <h2>🧀 Receita: Pão de Queijo (para estrangeiros)</h2>
+    <div class="recipe-box">
+        <div class="recipe-title">Ingredientes (usando medidas americanas)</div>
+        <ul>
+            <li>2 cups of tapioca starch (480ml)</li>
+            <li>1 cup of milk (240ml)</li>
+            <li>½ cup of oil (120ml)</li>
+            <li>2 eggs</li>
+            <li>1½ cups of grated cheese (360ml)</li>
+            <li>1 tsp salt</li>
+        </ul>
+        <p style="margin-top:12px">Mix all ingredients, roll into small balls and bake at 375°F (190°C) for 20 minutes. Crispy outside, chewy inside!</p>
+    </div>
+
+    <h2>🥐 Receita: Buttermilk Pancakes (adaptada para o Brasil)</h2>
+    <div class="recipe-box">
+        <div class="recipe-title">Ingredientes (usando medidas brasileiras)</div>
+        <ul>
+            <li>2 xícaras BR de farinha de trigo (400ml)</li>
+            <li>1 xícara BR de iogurte natural (200ml)</li>
+            <li>2 colheres de sopa de manteiga derretida</li>
+            <li>1 ovo</li>
+            <li>1 colher de chá de fermento em pó</li>
+            <li>Pitada de sal</li>
+        </ul>
+        <p style="margin-top:12px">Misture tudo, frite em frigideira antiaderente em fogo médio. Rende aproximadamente 8 panquecas.</p>
+    </div>
+
+    <div class="ad-slot">Anúncio</div>
+
+    <h2>🔧 Outras ferramentas</h2>
+    <div class="tools-nav">
+        <a href="index.html" class="tool-link">✨ Gerador de Nomes</a>
+        <a href="conversor-peso.html" class="tool-link">⚖️ Peso</a>
+        <a href="conversor-temperatura.html" class="tool-link">🌡️ Temperatura</a>
+        <a href="conversor-cozinha.html" class="tool-link active">🍳 Medidas de Cozinha</a>
+        <a href="conversor-roupas.html" class="tool-link">👕 Tamanho de Roupa</a>
+        <a href="bitcoin.html" class="tool-link">₿ Bitcoin</a>
+    </div>
+</div>
+<footer>
+    <p>&copy; 2026 NameForge</p>
+    <p style="margin-top:8px">
+        <a href="about.html">Sobre</a>
+        <a href="contact.html">Contato</a>
+        <a href="terms.html">Termos</a>
+        <a href="privacidade.html">Privacidade</a>
+    </p>
+</footer>
+<script>
+const kMl={cup_br:200,cup_us:240,tbsp:15,tsp:5,ml:1,floz:30};
+const kLb={cup_br:'xícara(s) BR',cup_us:'xícara(s) US',tbsp:'col. sopa',tsp:'col. chá',ml:'ml',floz:'fl oz'};
+function convertKitchen(){
+    const f=document.getElementById('k-from').value;
+    const t=document.getElementById('k-to').value;
+    const v=parseFloat(document.getElementById('k-val').value)||0;
+    const result=Math.round(v*kMl[f]/kMl[t]*10000)/10000;
+    document.getElementById('k-result').textContent=result+' '+kLb[t];
+    const warn=document.getElementById('k-warning');
+    if(f==='cup_br'||t==='cup_br'||f==='cup_us'||t==='cup_us'){
+        warn.classList.add('show');
+    } else {
+        warn.classList.remove('show');
+    }
+}
+convertKitchen();
+</script>
+</body>
+</html>
