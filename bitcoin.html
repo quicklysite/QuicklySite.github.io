@@ -17,6 +17,16 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8800851624013593" crossorigin="anonymous"></script>
 
     <style>
+        /* Accordion ⚠️ */
+.accordion { border:1.5px solid #c0392b; border-radius:var(--radius); margin:24px 0; overflow:hidden; }
+.accordion-header { display:flex; align-items:center; justify-content:space-between; padding:16px 20px; cursor:pointer; user-select:none; }
+.accordion-header span { color:var(--text); font-weight:600; font-size:.95rem; }
+.accordion-arrow { width:32px; height:32px; border:2px solid #c0392b; border-radius:8px; display:flex; align-items:center; justify-content:center; color:#c0392b; font-size:1.1rem; font-weight:900; transition:transform .3s; flex-shrink:0; }
+.accordion-arrow.open { transform:rotate(180deg); }
+.accordion-body { max-height:0; overflow:hidden; transition:max-height .4s ease; padding:0 20px; }
+.accordion-body.open { max-height:800px; padding:0 20px 20px; }
+.accordion-body p { font-size:.9rem; margin-bottom:10px; opacity:.85; }
+.accordion-body h4 { color:var(--accent); font-size:.85rem; text-transform:uppercase; letter-spacing:.06em; margin:14px 0 6px; }
         :root { --bg:#0d0d0f; --surface:#16161a; --surface2:#1e1e24; --accent:#e8c77a; --text:#f0ede6; --muted:#888; --radius:14px; --btc:#f7931a; --eth:#627eea; }
         * { box-sizing:border-box; margin:0; padding:0; }
         body { background:var(--bg); color:var(--text); font-family:'DM Sans',sans-serif; line-height:1.6; }
@@ -69,6 +79,11 @@
         footer { text-align:center; padding:40px 20px; color:var(--muted); font-size:.85rem; }
         footer a { color:var(--muted); margin:0 8px; }
         @media(max-width:600px){ .container{padding:24px 16px;margin:16px} .result-row{flex-direction:column} }
+        /* Toggle calculadora */
+.calc-toggle { display:flex; background:var(--bg); border-radius:10px; padding:4px; margin-bottom:16px; }
+.calc-toggle-btn { flex:1; padding:9px 12px; border:none; background:transparent; color:var(--muted); cursor:pointer; border-radius:8px; font-family:'DM Sans',sans-serif; font-size:.82rem; font-weight:600; transition:all .2s; text-align:center; }
+.calc-toggle-btn.active-btc { background:rgba(247,147,26,.2); color:var(--btc); }
+.calc-toggle-btn.active-eth { background:rgba(98,126,234,.2); color:var(--eth); }
     </style>
 </head>
 <body>
@@ -103,34 +118,47 @@
     </div>
 
         <div class="calc-box">
-        <label class="calc-label" id="calc-title">Calculadora BTC</label>
-        
-        <div style="display: flex; flex-direction: column; align-items: center; gap: 10px;">
-            <div style="width: 100%;">
-                <label class="calc-label" id="input-label" style="display:block; margin-bottom:5px;">Quantidade de moeda</label>
-                <input type="number" id="coin-input" placeholder="0.00" oninput="calcCoin()" step="any">
-            </div>
-
-            <button class="swap-btn" onclick="toggleSwap()" title="Inverter">⇅</button>
-
-            <div class="result-row" style="width: 100%; margin-top: 0;">
-                <div class="result-card" id="card-res-1">
-                    <div class="calc-label" id="label-res-1">BRL</div>
-                    <div class="val" id="res-val-1">—</div>
-                    <div class="cur" id="cur-res-1">Reais</div>
-                </div>
-                <div class="result-card" id="card-res-2">
-                    <div class="calc-label" id="label-res-2">USD</div>
-                    <div class="val" id="res-val-2">—</div>
-                    <div class="cur" id="cur-res-2">Dólares</div>
-                </div>
-            </div>
+    <label class="calc-label" id="calc-title">Calculadora BTC</label>
+    <div class="calc-toggle" id="calc-toggle">
+        <button class="calc-toggle-btn active-btc" id="toggle-to-fiat" onclick="setSwap(false)">₿ BTC → R$ / $</button>
+        <button class="calc-toggle-btn" id="toggle-to-coin" onclick="setSwap(true)">R$ → ₿ BTC</button>
+    </div>
+    <div style="width:100%">
+        <label class="calc-label" id="input-label" style="display:block;margin-bottom:5px;">Quantidade de moeda</label>
+        <input type="number" id="coin-input" placeholder="0.00" oninput="calcCoin()" step="any">
+    </div>
+    <div class="result-row" style="margin-top:14px">
+        <div class="result-card" id="card-res-1">
+            <div class="calc-label" id="label-res-1">BRL</div>
+            <div class="val" id="res-val-1">—</div>
+            <div class="cur" id="cur-res-1">Reais</div>
         </div>
+        <div class="result-card" id="card-res-2">
+            <div class="calc-label" id="label-res-2">USD</div>
+            <div class="val" id="res-val-2">—</div>
+            <div class="cur" id="cur-res-2">Dólares</div>
+        </div>
+    </div>
+</div>
         
 </div>
 
     <div class="status" id="status">...</div>
-
+<!-- ACCORDION ⚠️ -->
+<div class="accordion" id="accordion-info">
+    <div class="accordion-header" onclick="toggleAccordion()">
+        <span id="accordion-title">⚠️ Como usar, obter e lucrar com Bitcoin</span>
+        <div class="accordion-arrow" id="accordion-arrow">&#8964;</div>
+    </div>
+    <div class="accordion-body" id="accordion-body">
+        <h4 id="acc-h1">Como obter</h4>
+        <p id="acc-p1">Compre em corretoras como Binance, Mercado Bitcoin ou Coinbase. Basta criar uma conta, verificar identidade e fazer um depósito via Pix ou transferência.</p>
+        <h4 id="acc-h2">Usos práticos</h4>
+        <p id="acc-p2">Use para pagamentos internacionais, transferências sem intermediários, proteção contra inflação ou como reserva de valor de longo prazo.</p>
+        <h4 id="acc-h3">Como gerar renda</h4>
+        <p id="acc-p3">Estratégias comuns: DCA (compra periódica independente do preço), staking em corretoras, ou simplesmente segurar e vender em alta. Nunca invista mais do que pode perder.</p>
+    </div>
+</div>
     <h2 id="title-what">📖 O que é o Bitcoin?</h2>
     <p id="p-what">O Bitcoin (BTC) é a primeira e mais conhecida criptomoeda do mundo, criada em 2009. Funciona de forma descentralizada, sem banco central ou governo controlando sua emissão.</p>
     <p id="p-source">O preço exibido aqui vem diretamente da API da <strong>CoinGecko</strong>, atualizada a cada 60 segundos.</p>
@@ -181,7 +209,7 @@ const T = {
     whatEth:'📖 What is Ethereum?', pEth:'Ethereum (ETH) is the second largest cryptocurrency by market cap. It is a platform for smart contracts and decentralized applications.',
     pSource:'The price displayed here comes directly from the <strong>CoinGecko</strong> API, updated every 60 seconds.',
     lNames:'✨ Generator', lWeight:'⚖️ Weight', lTemp:'🌡️ Temp', lKitchen:'🍳 Kitchen', lCloth:'👕 Clothing', lBtc:'₿ Bitcoin',
-    fAbout:'About', fContact:'Contato', fTerms:'Terms', fPriv:'Privacy',
+    fAbout:'About', fContact:'Contact', fTerms:'Terms', fPriv:'Privacy',
     loading:'Updating...', last:'Last update: ', err:'Loading error.'
   }
 };
@@ -228,10 +256,58 @@ function applyLang(l) {
   q('f-priv').textContent = t.fPriv;
 
   document.documentElement.lang = l;
+  q('toggle-to-fiat').textContent = currentCoin === 'btc' ? '₿ BTC → R$ / $' : 'Ξ ETH → R$ / $';
+q('toggle-to-coin').textContent = currentCoin === 'btc'
+    ? (l==='pt' ? 'R$ → ₿ BTC' : 'R$ → ₿ BTC')
+    : (l==='pt' ? 'R$ → Ξ ETH' : 'R$ → Ξ ETH');  
+    // Accordion — varia por idioma e moeda
+const isBtc = currentCoin === 'btc';
+const accTitles = {
+  pt: { btc:'⚠️ Como usar, obter e lucrar com Bitcoin', eth:'⚠️ Como usar, obter e lucrar com Ethereum' },
+  en: { btc:'⚠️ How to use, get and earn with Bitcoin', eth:'⚠️ How to use, get and earn with Ethereum' }
+};
+const accContent = {
+  pt: {
+    h1:'Como obter', h2:'Usos práticos', h3:'Como gerar renda',
+    btc: { p1:'Compre em corretoras como Binance, Mercado Bitcoin ou Coinbase. Basta criar conta, verificar identidade e depositar via Pix.',
+           p2:'Pagamentos internacionais, transferências sem intermediários e proteção contra inflação.',
+           p3:'DCA (compra periódica), staking em corretoras ou segurar para vender em alta. Nunca invista mais do que pode perder.' },
+    eth: { p1:'Compre nas mesmas corretoras: Binance, Mercado Bitcoin, Coinbase. O processo é idêntico ao Bitcoin.',
+           p2:'Ethereum é usado para pagar taxas em apps descentralizados (DeFi), NFTs e contratos inteligentes.',
+           p3:'Staking de ETH rende entre 3–5% ao ano em corretoras. Também pode participar de protocolos DeFi para rendimentos maiores.' }
+  },
+  en: {
+    h1:'How to get it', h2:'Practical uses', h3:'How to earn',
+    btc: { p1:'Buy on exchanges like Binance, Coinbase or Kraken. Create an account, verify your identity and deposit via bank transfer.',
+           p2:'International payments, transfers without intermediaries and hedge against inflation.',
+           p3:'DCA (periodic buying), staking on exchanges or holding to sell at highs. Never invest more than you can afford to lose.' },
+    eth: { p1:'Buy on the same exchanges: Binance, Coinbase, Kraken. The process is identical to Bitcoin.',
+           p2:'Ethereum is used to pay fees in decentralized apps (DeFi), NFTs and smart contracts.',
+           p3:'ETH staking yields 3–5% per year on exchanges. You can also join DeFi protocols for higher returns.' }
+  }
+};
+const ac = accContent[l][isBtc ? 'btc' : 'eth'];
+q('accordion-title').textContent = accTitles[l][isBtc ? 'btc' : 'eth'];
+q('acc-h1').textContent = accContent[l].h1;
+q('acc-h2').textContent = accContent[l].h2;
+q('acc-h3').textContent = accContent[l].h3;
+q('acc-p1').textContent = ac.p1;
+q('acc-p2').textContent = ac.p2;
+q('acc-p3').textContent = ac.p3;
   updateCalcUI();
 }
 
 function updateCalcUI() {
+    const coin = currentCoin;
+const togTo  = q('toggle-to-fiat');
+const togFrom = q('toggle-to-coin');
+const activeClass = coin === 'btc' ? 'active-btc' : 'active-eth';
+togTo.className   = 'calc-toggle-btn' + (!isSwapped ? ' ' + activeClass : '');
+togFrom.className = 'calc-toggle-btn' + (isSwapped  ? ' ' + activeClass : '');
+// Atualiza label do segundo botão
+togFrom.textContent = isSwapped
+    ? (coin === 'btc' ? 'R$ → ₿ BTC' : 'R$ → Ξ ETH')
+    : (coin === 'btc' ? 'R$ → ₿ BTC' : 'R$ → Ξ ETH');
     const l = getLang();
     const t = T[l];
     if(!isSwapped) {
@@ -249,22 +325,28 @@ function updateCalcUI() {
     calcCoin();
 }
 
-function toggleSwap() {
-    isSwapped = !isSwapped;
-    q('coin-input').value = "";
+function setSwap(swapped) {
+    isSwapped = swapped;
+    q('coin-input').value = '';
     updateCalcUI();
-}
 
 function setCoin(coin) {
     currentCoin = coin;
     q('box-btc').style.display = coin === 'btc' ? 'block' : 'none';
     q('box-eth').style.display = coin === 'eth' ? 'block' : 'none';
-    q('btn-btc').classList.toggle('active', coin === 'btc');
-    q('btn-eth').classList.toggle('active', coin === 'eth');
+    q('btn-btc').className = 'coin-tab' + (coin === 'btc' ? ' active btc-active' : '');
+    q('btn-eth').className = 'coin-tab' + (coin === 'eth' ? ' active eth-active' : '');
     q('card-res-1').className = coin === 'eth' ? 'result-card eth-res' : 'result-card';
     applyLang(getLang());
 }
 
+    function toggleAccordion() {
+    const body  = q('accordion-body');
+    const arrow = q('accordion-arrow');
+    body.classList.toggle('open');
+    arrow.classList.toggle('open');
+    }
+    
 async function fetchPrices() {
     const l = getLang();
     q('status').textContent = T[l].loading;
