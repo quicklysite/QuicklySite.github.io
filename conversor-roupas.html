@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversor de Tamanho de Roupa BR US EU – NameForge</title>
+    <meta name="description" content="Converta tamanho de roupas e calçados entre Brasil, EUA e Europa. Ideal para compras no AliExpress, Amazon e Shein.">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3FEPS5KJLN"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-3FEPS5KJLN');
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8800851624013593" crossorigin="anonymous"></script>
+    <style>
+        :root { --bg:#0d0d0f; --surface:#16161a; --surface2:#1e1e24; --accent:#e8c77a; --text:#f0ede6; --muted:#888; --radius:14px; }
+        * { box-sizing:border-box; margin:0; padding:0; }
+        body { background:var(--bg); color:var(--text); font-family:'DM Sans',sans-serif; line-height:1.6; }
+        .container { max-width:800px; margin:40px auto; padding:40px; background:var(--surface); border-radius:var(--radius); box-shadow:0 10px 30px rgba(0,0,0,.5); }
+        h1 { font-family:'Playfair Display',serif; color:var(--accent); font-size:2rem; margin-bottom:8px; }
+        h2 { color:var(--accent); font-family:'Playfair Display',serif; margin:28px 0 12px; font-size:1.2rem; }
+        p { color:var(--text); opacity:.9; margin-bottom:15px; }
+        a { color:var(--accent); text-decoration:none; }
+        a:hover { text-decoration:underline; }
+        .back-link { display:inline-block; margin-bottom:24px; font-weight:500; }
+        .subtitle { color:var(--muted); margin-bottom:32px; font-size:.95rem; }
+        .conv-card { background:var(--surface2); border-radius:var(--radius); padding:28px; margin-bottom:20px; }
+        label { font-size:.78rem; color:var(--muted); text-transform:uppercase; letter-spacing:.08em; margin-bottom:6px; display:block; }
+        select { width:100%; padding:12px 16px; background:var(--bg); border:1.5px solid rgba(255,255,255,.08); color:var(--text); border-radius:10px; font-family:'DM Sans',sans-serif; font-size:.95rem; outline:none; transition:border-color .2s; appearance:none; margin-bottom:16px; }
+        select:focus { border-color:var(--accent); }
+        table { width:100%; border-collapse:collapse; margin-top:12px; font-size:.88rem; }
+        th { background:rgba(232,199,122,.1); color:var(--accent); padding:10px 12px; text-align:left; }
+        td { padding:10px 12px; border-bottom:1px solid rgba(255,255,255,.05); }
+        tr.highlight td { background:rgba(232,199,122,.1); color:var(--accent); font-weight:700; }
+        tr:hover td { background:rgba(232,199,122,.04); }
+        .tabs { display:flex; gap:8px; margin-bottom:20px; background:var(--bg); padding:5px; border-radius:50px; }
+        .tab { flex:1; padding:9px; border:none; background:transparent; color:var(--muted); cursor:pointer; border-radius:50px; font-family:'DM Sans',sans-serif; font-size:.88rem; font-weight:600; transition:all .2s; }
+        .tab.active { background:var(--accent); color:#0d0d0f; }
+        .tools-nav { display:flex; flex-wrap:wrap; gap:10px; margin:32px 0 0; }
+        .tool-link { background:var(--surface2); border:1px solid rgba(232,199,122,.15); color:var(--text); padding:8px 16px; border-radius:50px; font-size:.85rem; text-decoration:none; transition:all .2s; }
+        .tool-link:hover { border-color:var(--accent); color:var(--accent); text-decoration:none; }
+        .tool-link.active { border-color:var(--accent); color:var(--accent); background:rgba(232,199,122,.08); }
+        footer { text-align:center; padding:40px 20px; color:var(--muted); font-size:.85rem; }
+        footer a { color:var(--muted); margin:0 8px; }
+        footer a:hover { color:var(--accent); }
+        .ad-slot { background:var(--surface2); border:1px dashed rgba(255,255,255,.08); border-radius:var(--radius); min-height:90px; display:flex; align-items:center; justify-content:center; color:var(--muted); font-size:.75rem; margin:20px 0; }
+        @media(max-width:600px){ .container{padding:24px 16px;margin:16px} }
+    </style>
+</head>
+<body>
+<div class="container">
+    <a href="index.html" class="back-link">← Voltar ao NameForge</a>
+    <h1>👕 Tamanho de Roupa</h1>
+    <p class="subtitle">Converta tamanhos de roupas e calçados entre Brasil, EUA e Europa. Ideal para compras no AliExpress, Amazon e Shein.</p>
+
+    <div class="ad-slot">Anúncio</div>
+
+    <div class="conv-card">
+        <div class="tabs">
+            <button class="tab active" onclick="setTab('top',this)">Camisas / Tops</button>
+            <button class="tab" onclick="setTab('pants',this)">Calças</button>
+            <button class="tab" onclick="setTab('shoes',this)">Calçados</button>
+        </div>
+
+        <!-- CAMISAS -->
+        <div id="tab-top">
+            <label>Selecione seu tamanho BR</label>
+            <select id="top-sel" onchange="hlRow('top')">
+                <option value="">-- Escolha --</option>
+                <option value="0">PP</option><option value="1">P</option>
+                <option value="2">M</option><option value="3">G</option>
+                <option value="4">GG</option><option value="5">GGG / XGG</option>
+                <option value="6">GGGG / 3XL</option>
+            </select>
+            <table>
+                <tr><th>BR</th><th>US / INT</th><th>EU</th></tr>
+                <tr id="tt0"><td>PP</td><td>XS (0-2)</td><td>32/34</td></tr>
+                <tr id="tt1"><td>P</td><td>S (4-6)</td><td>36/38</td></tr>
+                <tr id="tt2"><td>M</td><td>M (8-10)</td><td>40/42</td></tr>
+                <tr id="tt3"><td>G</td><td>L (12-14)</td><td>44/46</td></tr>
+                <tr id="tt4"><td>GG</td><td>XL (16-18)</td><td>48/50</td></tr>
+                <tr id="tt5"><td>GGG / XGG</td><td>XXL (20-22)</td><td>52/54</td></tr>
+                <tr id="tt6"><td>GGGG / 3XL</td><td>3XL (24-26)</td><td>56/58</td></tr>
+            </table>
+        </div>
+
+        <!-- CALÇAS -->
+        <div id="tab-pants" style="display:none">
+            <label>Selecione seu número BR (cintura)</label>
+            <select id="pants-sel" onchange="hlRow('pants')">
+                <option value="">-- Escolha --</option>
+                <option value="0">36 (70cm)</option><option value="1">38 (74cm)</option>
+                <option value="2">40 (78cm)</option><option value="3">42 (82cm)</option>
+                <option value="4">44 (86cm)</option><option value="5">46 (90cm)</option>
+                <option value="6">48 (94cm)</option><option value="7">50 (98cm)</option>
+            </select>
+            <table>
+                <tr><th>BR</th><th>US (Waist)</th><th>EU</th><th>INT</th></tr>
+                <tr id="tp0"><td>36 (70cm)</td><td>W27</td><td>36</td><td>XS</td></tr>
+                <tr id="tp1"><td>38 (74cm)</td><td>W29</td><td>38</td><td>S</td></tr>
+                <tr id="tp2"><td>40 (78cm)</td><td>W31</td><td>40</td><td>M</td></tr>
+                <tr id="tp3"><td>42 (82cm)</td><td>W32</td><td>42</td><td>M</td></tr>
+                <tr id="tp4"><td>44 (86cm)</td><td>W34</td><td>44</td><td>L</td></tr>
+                <tr id="tp5"><td>46 (90cm)</td><td>W36</td><td>46</td><td>L</td></tr>
+                <tr id="tp6"><td>48 (94cm)</td><td>W37</td><td>48</td><td>XL</td></tr>
+                <tr id="tp7"><td>50 (98cm)</td><td>W39</td><td>50</td><td>XXL</td></tr>
+            </table>
+        </div>
+
+        <!-- CALÇADOS -->
+        <div id="tab-shoes" style="display:none">
+            <label>Selecione seu número BR</label>
+            <select id="shoes-sel" onchange="hlRow('shoes')">
+                <option value="">-- Escolha --</option>
+                <option value="0">34</option><option value="1">35</option><option value="2">36</option>
+                <option value="3">37</option><option value="4">38</option><option value="5">39</option>
+                <option value="6">40</option><option value="7">41</option><option value="8">42</option>
+                <option value="9">43</option><option value="10">44</option>
+            </select>
+            <table>
+                <tr><th>BR</th><th>US ♀</th><th>US ♂</th><th>EU</th><th>UK</th></tr>
+                <tr id="ts0"><td>34</td><td>4</td><td>3</td><td>34</td><td>2</td></tr>
+                <tr id="ts1"><td>35</td><td>5</td><td>4</td><td>35</td><td>3</td></tr>
+                <tr id="ts2"><td>36</td><td>6</td><td>4.5</td><td>36</td><td>3.5</td></tr>
+                <tr id="ts3"><td>37</td><td>6.5</td><td>5</td><td>37</td><td>4</td></tr>
+                <tr id="ts4"><td>38</td><td>7.5</td><td>6</td><td>38</td><td>5</td></tr>
+                <tr id="ts5"><td>39</td><td>8.5</td><td>7</td><td>39</td><td>6</td></tr>
+                <tr id="ts6"><td>40</td><td>9</td><td>7.5</td><td>40</td><td>6.5</td></tr>
+                <tr id="ts7"><td>41</td><td>10</td><td>8</td><td>41</td><td>7</td></tr>
+                <tr id="ts8"><td>42</td><td>11</td><td>9</td><td>42</td><td>8</td></tr>
+                <tr id="ts9"><td>43</td><td>11.5</td><td>9.5</td><td>43</td><td>9</td></tr>
+                <tr id="ts10"><td>44</td><td>12.5</td><td>10.5</td><td>44</td><td>10</td></tr>
+            </table>
+        </div>
+    </div>
+
+    <h2>📖 Como usar?</h2>
+    <p>Selecione a categoria (Camisas, Calças ou Calçados), escolha seu tamanho brasileiro no menu e a linha correspondente será destacada na tabela com os equivalentes internacionais.</p>
+    <p><strong>Exemplo:</strong> Se você usa tamanho M no Brasil e vai comprar uma camiseta em site americano, o equivalente é "M (8-10)" nos EUA e 40/42 na Europa.</p>
+    <p><strong>Importante:</strong> Os tamanhos são aproximados e podem variar por marca. Sempre confira a tabela de medidas específica do vendedor quando disponível.</p>
+
+    <div class="ad-slot">Anúncio</div>
+
+    <h2>🔧 Outras ferramentas</h2>
+    <div class="tools-nav">
+        <a href="index.html" class="tool-link">✨ Gerador de Nomes</a>
+        <a href="conversor-peso.html" class="tool-link">⚖️ Peso</a>
+        <a href="conversor-temperatura.html" class="tool-link">🌡️ Temperatura</a>
+        <a href="conversor-cozinha.html" class="tool-link">🍳 Medidas de Cozinha</a>
+        <a href="conversor-roupas.html" class="tool-link active">👕 Tamanho de Roupa</a>
+        <a href="bitcoin.html" class="tool-link">₿ Bitcoin</a>
+    </div>
+</div>
+<footer>
+    <p>&copy; 2026 NameForge</p>
+    <p style="margin-top:8px">
+        <a href="about.html">Sobre</a>
+        <a href="contact.html">Contato</a>
+        <a href="terms.html">Termos</a>
+        <a href="privacidade.html">Privacidade</a>
+    </p>
+</footer>
+<script>
+let currentTab='top';
+function setTab(tab,btn){
+    currentTab=tab;
+    document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+    btn.classList.add('active');
+    ['top','pants','shoes'].forEach(t=>{
+        document.getElementById('tab-'+t).style.display=t===tab?'block':'none';
+    });
+}
+function hlRow(type){
+    const prefMap={top:'tt',pants:'tp',shoes:'ts'};
+    const selMap={top:'top-sel',pants:'pants-sel',shoes:'shoes-sel'};
+    const p=prefMap[type];
+    const val=document.getElementById(selMap[type]).value;
+    document.querySelectorAll('[id^="'+p+'"]').forEach(r=>r.classList.remove('highlight'));
+    if(val!==''){const row=document.getElementById(p+val);if(row)row.classList.add('highlight');}
+}
+</script>
+</body>
+</html>
