@@ -102,27 +102,32 @@
         <div class="auto-note" id="note-eth">⏱ Atualização automática a cada 60 segundos</div>
     </div>
 
-    <div class="calc-box">
-        <div class="calc-header">
-            <label class="calc-label" id="calc-title">Calculadora BTC</label>
-            <button class="swap-btn" onclick="toggleSwap()" title="Inverter">⇄</button>
-        </div>
-        <label class="calc-label" id="input-label">Quantidade de moeda</label>
-        <input type="number" id="coin-input" placeholder="0.00" oninput="calcCoin()" step="any">
+        <div class="calc-box">
+        <label class="calc-label" id="calc-title">Calculadora BTC</label>
         
-        <div class="result-row">
-            <div class="result-card" id="card-res-1">
-                <div class="calc-label" id="label-res-1">BRL</div>
-                <div class="val" id="res-val-1">—</div>
-                <div class="cur" id="cur-res-1">Reais</div>
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 10px;">
+            <div style="width: 100%;">
+                <label class="calc-label" id="input-label" style="display:block; margin-bottom:5px;">Quantidade de moeda</label>
+                <input type="number" id="coin-input" placeholder="0.00" oninput="calcCoin()" step="any">
             </div>
-            <div class="result-card" id="card-res-2">
-                <div class="calc-label" id="label-res-2">USD</div>
-                <div class="val" id="res-val-2">—</div>
-                <div class="cur" id="cur-res-2">Dólares</div>
+
+            <button class="swap-btn" onclick="toggleSwap()" title="Inverter">⇅</button>
+
+            <div class="result-row" style="width: 100%; margin-top: 0;">
+                <div class="result-card" id="card-res-1">
+                    <div class="calc-label" id="label-res-1">BRL</div>
+                    <div class="val" id="res-val-1">—</div>
+                    <div class="cur" id="cur-res-1">Reais</div>
+                </div>
+                <div class="result-card" id="card-res-2">
+                    <div class="calc-label" id="label-res-2">USD</div>
+                    <div class="val" id="res-val-2">—</div>
+                    <div class="cur" id="cur-res-2">Dólares</div>
+                </div>
             </div>
         </div>
-    </div>
+        
+</div>
 
     <div class="status" id="status">...</div>
 
