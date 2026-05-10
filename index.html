@@ -791,10 +791,14 @@ btcBack:'Back', nlBtc:'Bitcoin'
   let lang = 'pt';
 
   function setLang(l) {
-    lang = l;
-    document.getElementById('lang-overlay').style.display = 'none';
-    applyTranslations();
-  }
+  lang = l;
+
+  localStorage.setItem('siteLang', l);
+
+  document.getElementById('lang-overlay').style.display = 'none';
+
+  applyTranslations();
+}
 
   function applyTranslations() {
     const t = T[lang];
