@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversor de Peso kg lb oz – NameForge</title>
+    <meta name="description" content="Converta quilogramas, libras e onças instantaneamente. Conversor de peso gratuito entre os sistemas brasileiro e americano.">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3FEPS5KJLN"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-3FEPS5KJLN');
+    </script>
+    <!-- ADSENSE -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8800851624013593" crossorigin="anonymous"></script>
+    <style>
+        :root {
+            --bg: #0d0d0f;
+            --surface: #16161a;
+            --surface2: #1e1e24;
+            --accent: #e8c77a;
+            --text: #f0ede6;
+            --muted: #888;
+            --radius: 14px;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; line-height: 1.6; }
+        .container { max-width: 800px; margin: 40px auto; padding: 40px; background: var(--surface); border-radius: var(--radius); box-shadow: 0 10px 30px rgba(0,0,0,.5); }
+        h1 { font-family: 'Playfair Display', serif; color: var(--accent); font-size: 2rem; margin-bottom: 8px; }
+        h2 { color: var(--accent); font-family: 'Playfair Display', serif; margin: 28px 0 12px; font-size: 1.2rem; }
+        p { color: var(--text); opacity: .9; margin-bottom: 15px; }
+        a { color: var(--accent); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .back-link { display: inline-block; margin-bottom: 24px; font-weight: 500; }
+        .subtitle { color: var(--muted); margin-bottom: 32px; font-size: .95rem; }
+
+        /* CONVERSOR */
+        .conv-card { background: var(--surface2); border-radius: var(--radius); padding: 28px; margin-bottom: 20px; }
+        .conv-row { display: flex; gap: 14px; margin-bottom: 16px; }
+        .conv-row > * { flex: 1; }
+        label { font-size: .78rem; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 6px; display: block; }
+        select, input[type=number] {
+            width: 100%; padding: 12px 16px;
+            background: var(--bg); border: 1.5px solid rgba(255,255,255,.08);
+            color: var(--text); border-radius: 10px;
+            font-family: 'DM Sans', sans-serif; font-size: .95rem;
+            outline: none; transition: border-color .2s; appearance: none;
+        }
+        select:focus, input:focus { border-color: var(--accent); }
+        .result-box {
+            background: rgba(232,199,122,.07); border: 1.5px solid rgba(232,199,122,.25);
+            border-radius: 12px; padding: 18px; text-align: center;
+            font-family: 'Playfair Display', serif; font-size: 1.8rem;
+            color: var(--accent); margin-top: 16px;
+        }
+
+        /* TABELA */
+        table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: .9rem; }
+        th { background: rgba(232,199,122,.1); color: var(--accent); padding: 10px 14px; text-align: left; }
+        td { padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,.05); }
+        tr:hover td { background: rgba(232,199,122,.04); }
+
+        /* NAV FERRAMENTAS */
+        .tools-nav { display: flex; flex-wrap: wrap; gap: 10px; margin: 32px 0 0; }
+        .tool-link {
+            background: var(--surface2); border: 1px solid rgba(232,199,122,.15);
+            color: var(--text); padding: 8px 16px; border-radius: 50px;
+            font-size: .85rem; text-decoration: none; transition: all .2s;
+        }
+        .tool-link:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
+        .tool-link.active { border-color: var(--accent); color: var(--accent); background: rgba(232,199,122,.08); }
+
+        footer { text-align: center; padding: 40px 20px; color: var(--muted); font-size: .85rem; }
+        footer a { color: var(--muted); margin: 0 8px; }
+        footer a:hover { color: var(--accent); }
+
+        .ad-slot { background: var(--surface2); border: 1px dashed rgba(255,255,255,.08); border-radius: var(--radius); min-height: 90px; display: flex; align-items: center; justify-content: center; color: var(--muted); font-size: .75rem; margin: 20px 0; }
+
+        @media(max-width:600px){ .conv-row { flex-direction: column; } .container { padding: 24px 16px; margin: 16px; } }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <a href="index.html" class="back-link">← Voltar ao NameForge</a>
+
+    <h1>⚖️ Conversor de Peso</h1>
+    <p class="subtitle">Converta quilogramas, libras, onças e gramas instantaneamente entre os sistemas brasileiro e internacional.</p>
+
+    <!-- AD -->
+    <div class="ad-slot">Anúncio</div>
+
+    <!-- CONVERSOR -->
+    <div class="conv-card">
+        <div class="conv-row">
+            <div>
+                <label>De</label>
+                <select id="w-from" onchange="convertWeight()">
+                    <option value="kg">Quilograma (kg)</option>
+                    <option value="lb">Libra (lb)</option>
+                    <option value="oz">Onça (oz)</option>
+                    <option value="g">Grama (g)</option>
+                </select>
+            </div>
+            <div>
+                <label>Para</label>
+                <select id="w-to" onchange="convertWeight()">
+                    <option value="lb">Libra (lb)</option>
+                    <option value="kg">Quilograma (kg)</option>
+                    <option value="oz">Onça (oz)</option>
+                    <option value="g">Grama (g)</option>
+                </select>
+            </div>
+        </div>
+        <label>Valor</label>
+        <input type="number" id="w-val" value="1" oninput="convertWeight()" />
+        <div class="result-box" id="w-result">—</div>
+    </div>
+
+    <!-- TABELA DE REFERÊNCIA -->
+    <h2>📌 Tabela de referência rápida</h2>
+    <div class="conv-card">
+        <table>
+            <tr><th>kg</th><th>lb (libras)</th><th>oz (onças)</th><th>g (gramas)</th></tr>
+            <tr><td>1 kg</td><td>2.205 lb</td><td>35.274 oz</td><td>1000 g</td></tr>
+            <tr><td>0.5 kg</td><td>1.102 lb</td><td>17.637 oz</td><td>500 g</td></tr>
+            <tr><td>0.453 kg</td><td>1 lb</td><td>16 oz</td><td>453 g</td></tr>
+            <tr><td>0.1 kg</td><td>0.220 lb</td><td>3.527 oz</td><td>100 g</td></tr>
+            <tr><td>5 kg</td><td>11.023 lb</td><td>176.37 oz</td><td>5000 g</td></tr>
+        </table>
+    </div>
+
+    <!-- EXPLICAÇÃO -->
+    <h2>📖 Como usar este conversor?</h2>
+    <p>Selecione a unidade de origem e a unidade de destino, depois digite o valor que deseja converter. O resultado aparece automaticamente.</p>
+    <p>Este conversor é útil para receitas americanas (que usam libras e onças), compras em sites internacionais, academias e qualquer situação que envolva diferentes sistemas de medida.</p>
+    <p><strong>Exemplo prático:</strong> Uma receita americana pede "2 lbs de farinha". Selecione lb → kg e digite 2. O resultado será 0.9072 kg, ou seja, aproximadamente 907 gramas.</p>
+
+    <!-- AD -->
+    <div class="ad-slot">Anúncio</div>
+
+    <!-- OUTRAS FERRAMENTAS -->
+    <h2>🔧 Outras ferramentas</h2>
+    <div class="tools-nav">
+        <a href="index.html" class="tool-link">✨ Gerador de Nomes</a>
+        <a href="conversor-peso.html" class="tool-link active">⚖️ Peso</a>
+        <a href="conversor-temperatura.html" class="tool-link">🌡️ Temperatura</a>
+        <a href="conversor-cozinha.html" class="tool-link">🍳 Medidas de Cozinha</a>
+        <a href="conversor-roupas.html" class="tool-link">👕 Tamanho de Roupa</a>
+        <a href="bitcoin.html" class="tool-link">₿ Bitcoin</a>
+    </div>
+</div>
+
+<footer>
+    <p>&copy; 2026 NameForge</p>
+    <p style="margin-top:8px">
+        <a href="about.html">Sobre</a>
+        <a href="contact.html">Contato</a>
+        <a href="terms.html">Termos</a>
+        <a href="privacidade.html">Privacidade</a>
+    </p>
+</footer>
+
+<script>
+const toKg = {kg:1, lb:0.453592, oz:0.0283495, g:0.001};
+function convertWeight(){
+    const f = document.getElementById('w-from').value;
+    const t = document.getElementById('w-to').value;
+    const v = parseFloat(document.getElementById('w-val').value) || 0;
+    const result = Math.round(v * toKg[f] / toKg[t] * 10000) / 10000;
+    document.getElementById('w-result').textContent = result + ' ' + t;
+}
+convertWeight();
+</script>
+</body>
+</html>
