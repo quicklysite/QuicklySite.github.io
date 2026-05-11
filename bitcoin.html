@@ -188,6 +188,13 @@
 .calc-toggle-btn { flex:1; padding:9px 12px; border:none; background:transparent; color:var(--muted); cursor:pointer; border-radius:8px; font-family:'DM Sans',sans-serif; font-size:.82rem; font-weight:600; transition:all .2s; text-align:center; }
 .calc-toggle-btn.active-btc { background:rgba(247,147,26,.2); color:var(--btc); }
 .calc-toggle-btn.active-eth { background:rgba(98,126,234,.2); color:var(--eth); }
+      /* BLOCO CONTEÚDO CRYPTO */
+.content-block { margin:28px 0; }
+.content-block h2 { margin-bottom:14px; }
+.content-block h3 { color:var(--accent); font-family:'Playfair Display',serif; font-size:1rem; margin:20px 0 8px; }
+.content-block p { margin-bottom:12px; line-height:1.8; opacity:.88; font-size:.93rem; }
+.content-block strong { color:var(--accent); font-weight:600; }
+.content-divider { border:none; border-top:1px solid rgba(255,255,255,.06); margin:28px 0; }  
     </style>
 </head>
 <body>
@@ -263,10 +270,45 @@
         <p id="acc-p3">Estratégias comuns: DCA (compra periódica independente do preço), staking em corretoras, ou simplesmente segurar e vender em alta. Nunca invista mais do que pode perder.</p>
     </div>
 </div>
-    <h2 id="title-what">📖 O que é o Bitcoin?</h2>
-    <p id="p-what">O Bitcoin (BTC) é a primeira e mais conhecida criptomoeda do mundo, criada em 2009. Funciona de forma descentralizada, sem banco central ou governo controlando sua emissão.</p>
-    <p id="p-source">O preço exibido aqui vem diretamente da API da <strong>CoinGecko</strong>, atualizada a cada 60 segundos.</p>
+    <div class="content-block" id="content-block-crypto">
 
+    <h2 id="title-what">📖 O que é o Bitcoin?</h2>
+
+    <p id="cb-btc-p1">O <strong>Bitcoin (BTC)</strong> é a primeira criptomoeda do mundo, criada em 2009 por uma pessoa — ou grupo — sob o pseudônimo de <strong>Satoshi Nakamoto</strong>. Ninguém sabe até hoje quem é. O que se sabe é que ele criou um sistema capaz de transferir valor entre duas pessoas, em qualquer lugar do mundo, sem precisar de banco, governo ou intermediário.</p>
+
+    <h3 id="cb-btc-h2">💡 Como funciona na prática?</h3>
+    <p id="cb-btc-p2">O Bitcoin funciona como dinheiro digital, mas descentralizado. Imagine enviar R$ 500 para alguém no Japão sem pagar taxa bancária e sem esperar dias úteis. Com Bitcoin, isso leva minutos. As transações são registradas em um sistema público chamado <strong>blockchain</strong> — uma espécie de livro contábil gigante que ninguém pode apagar ou falsificar.</p>
+
+    <h3 id="cb-btc-h3">🏦 Qual a diferença para o dinheiro físico?</h3>
+    <p id="cb-btc-p3">O real, o dólar e qualquer moeda tradicional são controlados por governos e bancos centrais — eles podem imprimir mais a qualquer momento, o que causa inflação. O Bitcoin tem um limite fixo e imutável: <strong>nunca existirão mais de 21 milhões de Bitcoins</strong>. Não há presidente, banco ou lei que mude isso. É essa escassez programada que muitos comparam ao ouro.</p>
+
+    <h3 id="cb-btc-h4">🪙 Os "centavos" do Bitcoin — o Satoshi</h3>
+    <p id="cb-btc-p4">Você não precisa comprar 1 Bitcoin inteiro para ter Bitcoin. A menor unidade é chamada de <strong>Satoshi (sat)</strong> — 1 Bitcoin equivale a <strong>100 milhões de Satoshis</strong>. Isso significa que você pode comprar R$ 50 em Bitcoin e já ter uma fração real da moeda. Nas corretoras brasileiras, qualquer valor acima de R$ 1 já permite comprar.</p>
+
+    <h3 id="cb-btc-h5">📈 Para que as pessoas usam Bitcoin?</h3>
+    <p id="cb-btc-p5">Existem três usos principais: <strong>reserva de valor</strong> (guardar como se fosse ouro digital, esperando valorizar), <strong>transferências internacionais</strong> (enviar dinheiro para fora sem taxas abusivas de câmbio) e <strong>especulação</strong> (comprar e vender aproveitando as variações de preço). Uma parcela menor usa para pagamentos do dia a dia em países com moedas instáveis.</p>
+
+    <hr class="content-divider">
+
+    <h2 id="title-what-eth">📖 O que é o Ethereum?</h2>
+
+    <p id="cb-eth-p1">O <strong>Ethereum (ETH)</strong> foi criado em 2015 por <strong>Vitalik Buterin</strong>, um programador russo-canadense que tinha menos de 20 anos na época. Se o Bitcoin foi criado para ser dinheiro digital, o Ethereum foi criado para ser algo maior: uma <strong>plataforma programável</strong>. Pense nele como um computador mundial que ninguém controla.</p>
+
+    <h3 id="cb-eth-h2">💡 O que são contratos inteligentes?</h3>
+    <p id="cb-eth-p2">A grande inovação do Ethereum são os <strong>contratos inteligentes</strong> (smart contracts): programas que executam automaticamente quando certas condições são cumpridas, sem precisar de advogado, banco ou juiz. Exemplo: "se o comprador depositar o valor, libere automaticamente o produto". Isso elimina intermediários de transações complexas.</p>
+
+    <h3 id="cb-eth-h3">🌐 DeFi, NFTs e muito mais</h3>
+    <p id="cb-eth-p3">Sobre o Ethereum foram construídas aplicações inteiras: o <strong>DeFi</strong> (finanças descentralizadas) permite emprestar, tomar emprestado e investir sem banco. Os <strong>NFTs</strong> (tokens não fungíveis) usaram o Ethereum para criar propriedade digital verificável. Boa parte dos jogos blockchain e metaversos também rodam sobre ele.</p>
+
+    <h3 id="cb-eth-h4">⛽ O que é "gas" no Ethereum?</h3>
+    <p id="cb-eth-p4">Cada operação na rede Ethereum consome uma taxa chamada <strong>gas</strong>, paga em ETH. É como a "gasolina" que move a rede. Quanto mais congestionada a rede, mais caro o gas. Por isso o preço do ETH influencia diretamente o custo de usar aplicativos descentralizados.</p>
+
+    <h3 id="cb-eth-h5">🔄 Diferença entre Bitcoin e Ethereum em resumo</h3>
+    <p id="cb-eth-p5"><strong>Bitcoin</strong> é ouro digital — escasso, simples e focado em ser reserva de valor. <strong>Ethereum</strong> é uma plataforma programável — mais flexível, mais versátil, com mais casos de uso. Os dois coexistem e têm perfis de investidores diferentes. Bitcoin atrai quem quer proteção de longo prazo. Ethereum atrai quem acredita no futuro das aplicações descentralizadas.</p>
+
+    <p id="p-source" style="margin-top:20px; font-size:.82rem; opacity:.6;">O preço exibido aqui vem diretamente da API da <strong>CoinGecko</strong>, atualizada a cada 60 segundos.</p>
+
+</div>
     <div class="tools-nav">
         <a href="index.html" class="tool-link" id="link-names">✨ Gerador</a>
         <a href="conversor-peso.html" class="tool-link" id="link-weight">⚖️ Peso</a>
@@ -296,8 +338,27 @@ const T = {
     calcBtc:'Calculadora BTC', calcEth:'Calculadora ETH', calcBrl:'Calculadora Reais',
     inputCoin:'Quantidade de moeda', inputBrl:'Valor em Reais (R$)',
     resBrl:'Reais', resUsd:'Dólares', resBtc:'Bitcoin', resEth:'Ethereum',
-    whatBtc:'📖 O que é o Bitcoin?', pBtc:'O Bitcoin (BTC) é a primeira e mais conhecida criptomoeda do mundo, criada em 2009. Funciona de forma descentralizada, sem banco central ou governo controlando sua emissão.',
-    whatEth:'📖 O que é o Ethereum?', pEth:'O Ethereum (ETH) é a segunda maior criptomoeda do mercado. É uma plataforma para contratos inteligentes e aplicações descentralizadas.',
+    whatBtc:'📖 O que é o Bitcoin?',
+whatEth:'📖 O que é o Ethereum?',
+cbBtcP1:'O Bitcoin (BTC) é a primeira criptomoeda do mundo, criada em 2009 por uma pessoa — ou grupo — sob o pseudônimo de Satoshi Nakamoto. Ninguém sabe até hoje quem é. O que se sabe é que ele criou um sistema capaz de transferir valor entre duas pessoas, em qualquer lugar do mundo, sem precisar de banco, governo ou intermediário.',
+cbBtcH2:'💡 Como funciona na prática?',
+cbBtcP2:'O Bitcoin funciona como dinheiro digital descentralizado. Imagine enviar R$ 500 para alguém no Japão sem pagar taxa bancária e sem esperar dias úteis. Com Bitcoin, isso leva minutos. As transações são registradas em um sistema público chamado blockchain — uma espécie de livro contábil gigante que ninguém pode apagar ou falsificar.',
+cbBtcH3:'🏦 Qual a diferença para o dinheiro físico?',
+cbBtcP3:'O real, o dólar e qualquer moeda tradicional são controlados por governos e bancos centrais — eles podem imprimir mais a qualquer momento, o que causa inflação. O Bitcoin tem um limite fixo e imutável: nunca existirão mais de 21 milhões de Bitcoins. Não há presidente, banco ou lei que mude isso. É essa escassez programada que muitos comparam ao ouro.',
+cbBtcH4:'🪙 Os "centavos" do Bitcoin — o Satoshi',
+cbBtcP4:'Você não precisa comprar 1 Bitcoin inteiro. A menor unidade é chamada de Satoshi (sat) — 1 Bitcoin equivale a 100 milhões de Satoshis. Isso significa que você pode comprar R$ 50 em Bitcoin e já ter uma fração real da moeda. Nas corretoras brasileiras, qualquer valor acima de R$ 1 já permite comprar.',
+cbBtcH5:'📈 Para que as pessoas usam Bitcoin?',
+cbBtcP5:'Existem três usos principais: reserva de valor (guardar como ouro digital), transferências internacionais (enviar dinheiro para fora sem taxas abusivas) e especulação (comprar e vender aproveitando as variações de preço).',
+titleWhatEth:'📖 O que é o Ethereum?',
+cbEthP1:'O Ethereum (ETH) foi criado em 2015 por Vitalik Buterin, um programador russo-canadense com menos de 20 anos na época. Se o Bitcoin foi criado para ser dinheiro digital, o Ethereum foi criado para ser uma plataforma programável — como um computador mundial que ninguém controla.',
+cbEthH2:'💡 O que são contratos inteligentes?',
+cbEthP2:'A grande inovação do Ethereum são os contratos inteligentes: programas que executam automaticamente quando certas condições são cumpridas, sem precisar de advogado, banco ou juiz. Isso elimina intermediários de transações complexas.',
+cbEthH3:'🌐 DeFi, NFTs e muito mais',
+cbEthP3:'Sobre o Ethereum foram construídas aplicações inteiras: o DeFi (finanças descentralizadas) permite emprestar e investir sem banco. Os NFTs usaram o Ethereum para criar propriedade digital verificável. Boa parte dos jogos blockchain e metaversos também rodam sobre ele.',
+cbEthH4:'⛽ O que é "gas" no Ethereum?',
+cbEthP4:'Cada operação na rede Ethereum consome uma taxa chamada gas, paga em ETH. É como a gasolina que move a rede. Quanto mais congestionada a rede, mais caro o gas — por isso o preço do ETH influencia diretamente o custo de usar apps descentralizados.',
+cbEthH5:'🔄 Diferença entre Bitcoin e Ethereum em resumo',
+cbEthP5:'Bitcoin é ouro digital — escasso, simples e focado em reserva de valor. Ethereum é uma plataforma programável — mais flexível, com mais casos de uso. Os dois coexistem. Bitcoin atrai quem quer proteção de longo prazo. Ethereum atrai quem acredita no futuro das aplicações descentralizadas.',
     pSource:'O preço exibido aqui vem diretamente da API da <strong>CoinGecko</strong>, atualizada a cada 60 segundos.',
     lNames:'✨ Gerador', lWeight:'⚖️ Peso', lTemp:'🌡️ Temp', lKitchen:'🍳 Cozinha', lCloth:'👕 Roupa', lBtc:'₿ Bitcoin',
     fAbout:'Sobre', fContact:'Contato', fTerms:'Termos', fPriv:'Privacidade',
@@ -309,8 +370,27 @@ const T = {
     calcBtc:'BTC Calculator', calcEth:'ETH Calculator', calcBrl:'BRL Calculator',
     inputCoin:'Amount of coin', inputBrl:'Amount in Reais (BRL)',
     resBrl:'Reais', resUsd:'Dollars', resBtc:'Bitcoin', resEth:'Ethereum',
-    whatBtc:'📖 What is Bitcoin?', pBtc:'Bitcoin (BTC) is the first and most well-known cryptocurrency in the world, created in 2009. It works in a decentralized way, without a central bank controlling its issuance.',
-    whatEth:'📖 What is Ethereum?', pEth:'Ethereum (ETH) is the second largest cryptocurrency by market cap. It is a platform for smart contracts and decentralized applications.',
+    whatBtc:'📖 What is Bitcoin?',
+whatEth:'📖 What is Ethereum?',
+cbBtcP1:'Bitcoin (BTC) is the world\'s first cryptocurrency, created in 2009 by a person — or group — under the pseudonym Satoshi Nakamoto. Nobody knows who they are to this day. What is known is that they built a system capable of transferring value between two people, anywhere in the world, without needing a bank, government, or intermediary.',
+cbBtcH2:'💡 How does it work in practice?',
+cbBtcP2:'Bitcoin works like digital cash, but decentralized. Imagine sending $100 to someone in Japan without bank fees and without waiting business days. With Bitcoin, it takes minutes. Transactions are recorded on a public system called the blockchain — a kind of giant ledger that nobody can erase or falsify.',
+cbBtcH3:'🏦 How is it different from physical money?',
+cbBtcP3:'The real, the dollar, and any traditional currency are controlled by governments and central banks — they can print more at any time, which causes inflation. Bitcoin has a fixed, unchangeable limit: there will never be more than 21 million Bitcoins. No president, bank, or law can change that. This programmed scarcity is what many compare to gold.',
+cbBtcH4:'🪙 Bitcoin "cents" — the Satoshi',
+cbBtcP4:'You don\'t need to buy a whole Bitcoin. The smallest unit is called a Satoshi (sat) — 1 Bitcoin equals 100 million Satoshis. This means you can buy $10 worth of Bitcoin and already own a real fraction of the currency. On most exchanges, any amount allows you to buy.',
+cbBtcH5:'📈 What do people use Bitcoin for?',
+cbBtcP5:'There are three main uses: store of value (holding it like digital gold, expecting appreciation), international transfers (sending money abroad without abusive exchange fees), and speculation (buying and selling to profit from price swings).',
+titleWhatEth:'📖 What is Ethereum?',
+cbEthP1:'Ethereum (ETH) was created in 2015 by Vitalik Buterin, a Russian-Canadian programmer who was under 20 years old at the time. If Bitcoin was created to be digital money, Ethereum was created to be something bigger: a programmable platform — like a worldwide computer that nobody controls.',
+cbEthH2:'💡 What are smart contracts?',
+cbEthP2:'Ethereum\'s major innovation is smart contracts: programs that execute automatically when certain conditions are met, without needing a lawyer, bank, or judge. Example: "if the buyer deposits the amount, automatically release the product." This eliminates intermediaries from complex transactions.',
+cbEthH3:'🌐 DeFi, NFTs and more',
+cbEthP3:'Entire applications have been built on Ethereum: DeFi (decentralized finance) allows lending, borrowing, and investing without a bank. NFTs used Ethereum to create verifiable digital ownership. Most blockchain games and metaverses also run on top of it.',
+cbEthH4:'⛽ What is "gas" in Ethereum?',
+cbEthP4:'Every operation on the Ethereum network consumes a fee called gas, paid in ETH. It\'s like the fuel that powers the network. The more congested the network, the more expensive the gas — which is why ETH\'s price directly affects the cost of using decentralized apps.',
+cbEthH5:'🔄 Bitcoin vs Ethereum in summary',
+cbEthP5:'Bitcoin is digital gold — scarce, simple, and focused on being a store of value. Ethereum is a programmable platform — more flexible, more versatile, with more use cases. Both coexist. Bitcoin attracts those who want long-term protection. Ethereum attracts those who believe in the future of decentralized applications.',
     pSource:'The price displayed here comes directly from the <strong>CoinGecko</strong> API, updated every 60 seconds.',
     lNames:'✨ Generator', lWeight:'⚖️ Weight', lTemp:'🌡️ Temp', lKitchen:'🍳 Kitchen', lCloth:'👕 Clothing', lBtc:'₿ Bitcoin',
     fAbout:'About', fContact:'Contact', fTerms:'Terms', fPriv:'Privacy',
@@ -343,8 +423,18 @@ function applyLang(l) {
   q('btn-refresh-eth').textContent = t.refresh;
   q('note-btc').textContent = t.note;
   q('note-eth').textContent = t.note;
-  q('title-what').textContent = currentCoin === 'btc' ? t.whatBtc : t.whatEth;
-  q('p-what').textContent = currentCoin === 'btc' ? t.pBtc : t.pEth;
+  q('title-what').textContent    = t.whatBtc;
+  q('title-what-eth').textContent = t.titleWhatEth;
+  q('cb-btc-p1').textContent = t.cbBtcP1;
+  q('cb-btc-h2').textContent = t.cbBtcH2; q('cb-btc-p2').textContent = t.cbBtcP2;
+  q('cb-btc-h3').textContent = t.cbBtcH3; q('cb-btc-p3').textContent = t.cbBtcP3;
+  q('cb-btc-h4').textContent = t.cbBtcH4; q('cb-btc-p4').textContent = t.cbBtcP4;
+  q('cb-btc-h5').textContent = t.cbBtcH5; q('cb-btc-p5').textContent = t.cbBtcP5;
+  q('cb-eth-p1').textContent = t.cbEthP1;
+  q('cb-eth-h2').textContent = t.cbEthH2; q('cb-eth-p2').textContent = t.cbEthP2;
+  q('cb-eth-h3').textContent = t.cbEthH3; q('cb-eth-p3').textContent = t.cbEthP3;
+  q('cb-eth-h4').textContent = t.cbEthH4; q('cb-eth-p4').textContent = t.cbEthP4;
+  q('cb-eth-h5').textContent = t.cbEthH5; q('cb-eth-p5').textContent = t.cbEthP5;
   q('p-source').innerHTML = t.pSource;
 
   q('link-names').textContent = t.lNames;   q('link-names').href = 'index.html' + lp;
