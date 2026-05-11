@@ -135,6 +135,20 @@
         footer a:hover { color:var(--accent); }
         .ad-slot { background:var(--surface2); border:1px dashed rgba(255,255,255,.08); border-radius:var(--radius); min-height:90px; display:flex; align-items:center; justify-content:center; color:var(--muted); font-size:.75rem; margin:20px 0; }
         @media(max-width:600px){ .conv-row{flex-direction:column} .container{padding:24px 16px;margin:16px} }
+        /* ACCORDION RECEITAS */
+.accordion { border:1.5px solid #c4a45a; border-radius:var(--radius); margin:20px 0; overflow:hidden; }
+.accordion-header { display:flex; align-items:center; justify-content:space-between; padding:16px 20px; cursor:pointer; user-select:none; }
+.accordion-header span { color:var(--text); font-weight:600; font-size:.95rem; }
+.accordion-arrow { width:32px; height:32px; border:2px solid #c4a45a; border-radius:8px; display:flex; align-items:center; justify-content:center; color:#c4a45a; font-size:1.1rem; font-weight:900; transition:transform .3s; flex-shrink:0; }
+.accordion-arrow.open { transform:rotate(180deg); }
+.accordion-body { max-height:0; overflow:hidden; transition:max-height .4s ease; padding:0 20px; }
+.accordion-body.open { max-height:1200px; padding:0 20px 20px; }
+.accordion-body p { font-size:.9rem; margin-bottom:10px; opacity:.85; }
+/* BLOCO CONTEÚDO */
+.content-block { margin:28px 0; }
+.content-block h2 { margin-bottom:14px; }
+.content-block p { margin-bottom:14px; line-height:1.8; opacity:.88; }
+.content-block strong { color:var(--accent); font-weight:600; }
     </style>
 </head>
 <body>
@@ -142,6 +156,42 @@
     <a href="index.html" class="back-link" id="back-link">← Voltar ao NameForge</a>
     <h1 id="page-title">🍳 Medidas de Cozinha</h1>
     <p class="subtitle" id="page-subtitle">Converta xícaras, colheres, mililitros e fl oz entre os padrões brasileiro e americano.</p>
+
+    <!-- ACCORDION RECEITAS -->
+    <div class="accordion" id="accordion-recipes">
+        <div class="accordion-header" onclick="toggleRecipes()">
+            <span id="recipes-title">🍳 Receitas de Exemplo</span>
+            <div class="accordion-arrow" id="recipes-arrow">&#8964;</div>
+        </div>
+        <div class="accordion-body" id="recipes-body">
+            <h2 id="recipe1-title">🧀 Receita: Pão de Queijo (para estrangeiros)</h2>
+            <div class="recipe-box">
+                <div class="recipe-title" id="recipe1-subtitle">Ingredientes (usando medidas americanas)</div>
+                <ul id="recipe1-list">
+                    <li>2 cups of tapioca starch (480ml)</li>
+                    <li>1 cup of milk (240ml)</li>
+                    <li>½ cup of oil (120ml)</li>
+                    <li>2 eggs</li>
+                    <li>1½ cups of grated cheese (360ml)</li>
+                    <li>1 tsp salt</li>
+                </ul>
+                <p style="margin-top:12px" id="recipe1-note">Mix all ingredients, roll into small balls and bake at 375°F (190°C) for 20 minutes. Crispy outside, chewy inside!</p>
+            </div>
+            <h2 id="recipe2-title">🥐 Receita: Buttermilk Pancakes (adaptada para o Brasil)</h2>
+            <div class="recipe-box">
+                <div class="recipe-title" id="recipe2-subtitle">Ingredientes (usando medidas brasileiras)</div>
+                <ul id="recipe2-list">
+                    <li>2 xícaras BR de farinha de trigo (400ml)</li>
+                    <li>1 xícara BR de iogurte natural (200ml)</li>
+                    <li>2 colheres de sopa de manteiga derretida</li>
+                    <li>1 ovo</li>
+                    <li>1 colher de chá de fermento em pó</li>
+                    <li>Pitada de sal</li>
+                </ul>
+                <p style="margin-top:12px" id="recipe2-note">Misture tudo, frite em frigideira antiaderente em fogo médio. Rende aproximadamente 8 panquecas.</p>
+            </div>
+        </div>
+    </div>
 
     <div class="ad-slot">Anúncio</div>
 
@@ -192,33 +242,20 @@
         </table>
     </div>
 
-    <h2 id="recipe1-title">🧀 Receita: Pão de Queijo (para estrangeiros)</h2>
-    <div class="recipe-box">
-        <div class="recipe-title" id="recipe1-subtitle">Ingredientes (usando medidas americanas)</div>
-        <ul id="recipe1-list">
-            <li>2 cups of tapioca starch (480ml)</li>
-            <li>1 cup of milk (240ml)</li>
-            <li>½ cup of oil (120ml)</li>
-            <li>2 eggs</li>
-            <li>1½ cups of grated cheese (360ml)</li>
-            <li>1 tsp salt</li>
-        </ul>
-        <p style="margin-top:12px" id="recipe1-note">Mix all ingredients, roll into small balls and bake at 375°F (190°C) for 20 minutes. Crispy outside, chewy inside!</p>
+    <!-- ANÚNCIO ENTRE TABELA E TEXTO -->
+    <div class="ad-slot">Anúncio</div>
+
+    <!-- BLOCO DE CONTEÚDO SEO -->
+    <div class="content-block">
+        <h2 id="content-title">Medidas de Cozinha: o guia para quem cozinha com receitas de todo o mundo</h2>
+        <p id="content-p1">Às vezes você está no TikTok ou no Instagram, assiste àquele vídeo irresistível de uma receita americana incrível — bolo de red velvet, cookie gigante, cheesecake perfeito — e na hora de tentar fazer em casa bate aquela dúvida: <strong>"1 cup é quanto aqui no Brasil?"</strong> É exatamente para esse momento que este conversor existe. Simples, direto e sem enrolação.</p>
+        <p id="content-p2">A principal armadilha das receitas internacionais está na xícara. A xícara brasileira padrão tem <strong>200ml</strong>, mas a xícara americana — chamada de "cup" — tem <strong>240ml</strong>. São apenas 40ml de diferença, mas em uma receita de bolo isso pode ser o suficiente para mudar a textura completamente. Se a receita pede "2 cups de farinha" e você usa xícaras brasileiras, está colocando 80ml a menos do que deveria.</p>
+        <p id="content-p3">As colheres também mudam dependendo do país. No Brasil, a colher de sopa padrão tem 15ml e a de chá tem 5ml — e esses valores são os mesmos que nos Estados Unidos, então aqui você pode respirar aliviado. Já o "fl oz" (fluid ounce) que aparece em embalagens americanas equivale a 30ml. Uma garrafa de 16 fl oz de suco, por exemplo, contém 480ml — quase meio litro.</p>
+        <p id="content-p4">Para quem cozinha com frequência usando referências de fora, vale memorizar três conversões essenciais: 1 cup = 240ml, 1 tablespoon (tbsp) = 15ml e 1 teaspoon (tsp) = 5ml. Com esses três valores na cabeça, você já consegue adaptar a maioria das receitas americanas sem precisar de calculadora — mas quando a precisão importa, o conversor acima faz isso em um segundo.</p>
+        <p id="content-p5">As receitas de exemplo nesta página mostram exatamente essa lógica na prática: o Pão de Queijo adaptado para medidas americanas e os Buttermilk Pancakes adaptados para medidas brasileiras. São pontes entre dois mundos culinários, e provam que com as conversões certas qualquer receita do mundo pode ser feita na sua cozinha.</p>
     </div>
 
-    <h2 id="recipe2-title">🥐 Receita: Buttermilk Pancakes (adaptada para o Brasil)</h2>
-    <div class="recipe-box">
-        <div class="recipe-title" id="recipe2-subtitle">Ingredientes (usando medidas brasileiras)</div>
-        <ul id="recipe2-list">
-            <li>2 xícaras BR de farinha de trigo (400ml)</li>
-            <li>1 xícara BR de iogurte natural (200ml)</li>
-            <li>2 colheres de sopa de manteiga derretida</li>
-            <li>1 ovo</li>
-            <li>1 colher de chá de fermento em pó</li>
-            <li>Pitada de sal</li>
-        </ul>
-        <p style="margin-top:12px" id="recipe2-note">Misture tudo, frite em frigideira antiaderente em fogo médio. Rende aproximadamente 8 panquecas.</p>
-    </div>
+    <div class="ad-slot">Anúncio</div>
 
     <div class="ad-slot">Anúncio</div>
 
@@ -269,6 +306,13 @@ const T = {
     otherTitle:'🔧 Outras ferramentas',
     linkNames:'✨ Gerador de Nomes', linkWeight:'⚖️ Peso', linkTemp:'🌡️ Temperatura',
     linkKitchen:'🍳 Medidas de Cozinha', linkCloth:'👕 Tamanho de Roupa', linkBtc:'₿ Bitcoin',
+      recipesTitle: '🍳 Receitas de Exemplo',
+contentTitle: 'Medidas de Cozinha: o guia para quem cozinha com receitas de todo o mundo',
+contentP1: 'Às vezes você está no TikTok ou no Instagram, assiste àquele vídeo irresistível de uma receita americana incrível — bolo de red velvet, cookie gigante, cheesecake perfeito — e na hora de tentar fazer em casa bate aquela dúvida: "1 cup é quanto aqui no Brasil?" É exatamente para esse momento que este conversor existe. Simples, direto e sem enrolação.',
+contentP2: 'A principal armadilha das receitas internacionais está na xícara. A xícara brasileira padrão tem 200ml, mas a xícara americana — chamada de "cup" — tem 240ml. São apenas 40ml de diferença, mas em uma receita de bolo isso pode ser o suficiente para mudar a textura completamente.',
+contentP3: 'As colheres também mudam dependendo do país. No Brasil, a colher de sopa padrão tem 15ml e a de chá tem 5ml — os mesmos valores dos EUA. Já o fl oz (fluid ounce) que aparece em embalagens americanas equivale a 30ml. Uma garrafa de 16 fl oz contém 480ml — quase meio litro.',
+contentP4: 'Para quem cozinha com frequência usando referências de fora, vale memorizar três conversões essenciais: 1 cup = 240ml, 1 tablespoon = 15ml e 1 teaspoon = 5ml. Com esses três valores você já adapta a maioria das receitas americanas sem precisar de calculadora.',
+contentP5: 'As receitas de exemplo nesta página mostram essa lógica na prática: o Pão de Queijo adaptado para medidas americanas e os Buttermilk Pancakes adaptados para medidas brasileiras. Com as conversões certas, qualquer receita do mundo pode ser feita na sua cozinha.',
     footerAbout:'Sobre', footerContact:'Contato', footerTerms:'Termos', footerPriv:'Privacidade',
     unitLabels:{cup_br:'xícara(s) BR',cup_us:'xícara(s) US',tbsp:'col. sopa',tsp:'col. chá',ml:'ml',floz:'fl oz'}
   },
@@ -298,11 +342,24 @@ const T = {
     otherTitle:'🔧 Other tools',
     linkNames:'✨ Name Generator', linkWeight:'⚖️ Weight', linkTemp:'🌡️ Temperature',
     linkKitchen:'🍳 Kitchen Measures', linkCloth:'👕 Clothing Size', linkBtc:'₿ Bitcoin',
+    recipesTitle: '🍳 Example Recipes',
+contentTitle: 'Kitchen Measures: the guide for cooking with recipes from around the world',
+contentP1: 'Sometimes you\'re scrolling through TikTok or Instagram and come across an irresistible recipe — but it\'s in a different language with different measurements. "How much is 1 cup in Brazil?" That\'s exactly the moment this converter was made for. Simple, direct, no fuss.',
+contentP2: 'The biggest trap in international recipes is the cup. The Brazilian standard cup holds 200ml, but the American "cup" holds 240ml. That\'s only 40ml of difference, but in a cake recipe it can completely change the texture. If a recipe calls for 2 cups of flour and you use Brazilian cups, you\'re adding 80ml less than needed.',
+contentP3: 'Spoons are consistent between countries — a tablespoon is 15ml and a teaspoon is 5ml in both Brazil and the US. The fl oz (fluid ounce) found on American packaging equals 30ml. A 16 fl oz bottle of juice contains 480ml — almost half a liter.',
+contentP4: 'If you cook often with international references, memorize three key conversions: 1 cup = 240ml, 1 tablespoon = 15ml, 1 teaspoon = 5ml. With those three values you can adapt most American recipes without a calculator — but when precision matters, the converter above does it in a second.',
+contentP5: 'The example recipes on this page show this logic in practice: Brazilian Cheese Bread adapted to American measures, and Buttermilk Pancakes adapted to Brazilian measures. With the right conversions, any recipe in the world can be made in your kitchen.',  
     footerAbout:'About', footerContact:'Contact', footerTerms:'Terms', footerPriv:'Privacy',
     unitLabels:{cup_br:'BR cup(s)',cup_us:'US cup(s)',tbsp:'tbsp',tsp:'tsp',ml:'ml',floz:'fl oz'}
   }
 };
-
+function toggleRecipes() {
+    const body  = document.getElementById('recipes-body');
+    const arrow = document.getElementById('recipes-arrow');
+    if (!body || !arrow) return;
+    body.classList.toggle('open');
+    arrow.classList.toggle('open');
+}
 function getLang() {
   const param = new URLSearchParams(window.location.search).get('lang');
   if (param === 'pt' || param === 'en') { localStorage.setItem('siteLang', param); return param; }
@@ -335,6 +392,13 @@ function applyLang(l) {
   for (const [id, val] of Object.entries(optMap)) { const el = q(id); if(el) el.textContent = val; }
 
   q('warn-bold').textContent = t.warnBold; q('warn-text').textContent = t.warnText;
+   q('recipes-title').textContent = t.recipesTitle;
+q('content-title').textContent = t.contentTitle;
+q('content-p1').textContent    = t.contentP1;
+q('content-p2').textContent    = t.contentP2;
+q('content-p3').textContent    = t.contentP3;
+q('content-p4').textContent    = t.contentP4;
+q('content-p5').textContent    = t.contentP5; 
   q('table-title').textContent = t.tableTitle;
   q('th-measure').textContent = t.thMeasure; q('th-equals').textContent = t.thEquals;
   q('td-r1a').textContent = t.tdR1a; q('td-r1b').textContent = t.tdR1b;
