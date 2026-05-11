@@ -130,6 +130,20 @@
         footer a:hover { color:var(--accent); }
         .ad-slot { background:var(--surface2); border:1px dashed rgba(255,255,255,.08); border-radius:var(--radius); min-height:90px; display:flex; align-items:center; justify-content:center; color:var(--muted); font-size:.75rem; margin:20px 0; }
         @media(max-width:600px){ .conv-row{flex-direction:column} .container{padding:24px 16px;margin:16px} }
+        /* ACCORDION */
+.accordion { border:1.5px solid #c4a45a; border-radius:var(--radius); margin:20px 0; overflow:hidden; }
+.accordion-header { display:flex; align-items:center; justify-content:space-between; padding:16px 20px; cursor:pointer; user-select:none; }
+.accordion-header span { color:var(--text); font-weight:600; font-size:.95rem; }
+.accordion-arrow { width:32px; height:32px; border:2px solid #c4a45a; border-radius:8px; display:flex; align-items:center; justify-content:center; color:#c4a45a; font-size:1.1rem; font-weight:900; transition:transform .3s; flex-shrink:0; }
+.accordion-arrow.open { transform:rotate(180deg); }
+.accordion-body { max-height:0; overflow:hidden; transition:max-height .4s ease; padding:0 20px; }
+.accordion-body.open { max-height:600px; padding:0 20px 20px; }
+.accordion-body p { font-size:.9rem; margin-bottom:10px; opacity:.85; }
+/* CONTEÚDO SEO */
+.content-block { margin:28px 0; }
+.content-block h2 { margin-bottom:14px; }
+.content-block p { margin-bottom:14px; line-height:1.8; opacity:.88; }
+.content-block strong { color:var(--accent); font-weight:600; }
     </style>
 </head>
 <body>
@@ -137,7 +151,21 @@
     <a href="index.html" class="back-link" id="back-link">← Voltar ao NameForge</a>
     <h1 id="page-title">🌡️ Conversor de Temperatura</h1>
     <p class="subtitle" id="page-subtitle">Converta Celsius, Fahrenheit e Kelvin instantaneamente. Ideal para receitas americanas e previsão do tempo internacional.</p>
+    <!-- ACCORDION COMO USAR -->
+    <div class="accordion" id="accordion-how">
+        <div class="accordion-header" onclick="toggleHow()">
+            <span id="how-title">📖 Como usar?</span>
+            <div class="accordion-arrow" id="how-arrow">&#8964;</div>
+        </div>
+        <div class="accordion-body" id="how-body">
+            <p id="how-p1">Selecione a unidade de origem, a unidade de destino e digite o valor. O resultado aparece automaticamente.</p>
+            <p id="how-p2"><strong id="how-p2-bold">Exemplo prático:</strong> <span id="how-p2-text">Uma receita americana pede forno a 350°F. Selecione °F → °C, digite 350 e o resultado será 176.67°C — ajuste seu forno para 180°C.</span></p>
+            <p id="how-p3"><strong id="how-p3-bold">Dica:</strong> <span id="how-p3-text">Para converter mentalmente °F para °C, subtraia 32 e divida por 1.8.</span></p>
+        </div>
+    </div>
+
     <div class="ad-slot">Anúncio</div>
+
     <div class="conv-card">
         <div class="conv-row">
             <div>
@@ -161,6 +189,7 @@
         <input type="number" id="t-val" value="25" oninput="convertTemp()" />
         <div class="result-box" id="t-result">—</div>
     </div>
+
     <h2 id="table-title">📌 Referências rápidas</h2>
     <div class="conv-card">
         <table>
@@ -174,10 +203,20 @@
             <tr><td>200°C</td><td>392°F</td><td>473 K</td><td id="tr-r6">Forno alto (culinária)</td></tr>
         </table>
     </div>
-    <h2 id="how-title">📖 Como usar?</h2>
-    <p id="how-p1">Selecione a unidade de origem, a unidade de destino e digite o valor. O resultado aparece automaticamente.</p>
-    <p id="how-p2"><strong id="how-p2-bold">Exemplo prático:</strong> <span id="how-p2-text">Uma receita americana pede forno a 350°F. Selecione °F → °C, digite 350 e o resultado será 176.67°C — ajuste seu forno para 180°C.</span></p>
-    <p id="how-p3"><strong id="how-p3-bold">Dica:</strong> <span id="how-p3-text">Para converter mentalmente °F para °C, subtraia 32 e divida por 1.8.</span></p>
+
+    <!-- ANÚNCIO ENTRE TABELA E TEXTO -->
+    <div class="ad-slot">Anúncio</div>
+
+    <!-- BLOCO DE CONTEÚDO SEO -->
+    <div class="content-block">
+        <h2 id="content-title">Temperatura: a escala que separa o mundo em dois</h2>
+        <p id="content-p1">Você já viu aquela previsão do tempo em um site americano dizendo "86°F" e ficou sem saber se vai precisar de casaco ou protetor solar? Ou tentou fazer uma receita gringa e travou no "pré-aqueça o forno a 375°F"? Esse é o tipo de situação cotidiana que acontece com qualquer brasileiro que consome conteúdo internacional — e que este conversor resolve em segundos.</p>
+        <p id="content-p2">O mundo está dividido em dois grandes sistemas de temperatura. A maioria dos países usa <strong>Celsius (°C)</strong> — incluindo o Brasil, toda a Europa, a Ásia e a América Latina. Os <strong>Estados Unidos</strong> são a grande exceção: lá o padrão é <strong>Fahrenheit (°F)</strong>, e isso aparece em tudo: receitas, termostatos, previsões do tempo, embalagens de alimentos e até nas instruções de aparelhos eletrônicos.</p>
+        <p id="content-p3">A fórmula oficial para converter <strong>°F para °C</strong> é: subtraia 32 e divida por 1,8. Parece simples, mas fazer isso de cabeça com qualquer número é trabalhoso. Para o dia a dia, existe um atalho rápido: subtraia 30 e divida por 2. Não é exato, mas é rápido — 70°F vira 20°C com esse método, quando o valor real é 21,1°C. Serve bem para situações cotidianas onde a precisão não é crítica.</p>
+        <p id="content-p4">Para culinária, o impacto é mais sério. A diferença entre um forno a <strong>180°C</strong> e um a <strong>200°C</strong> pode ser a diferença entre um bolo perfeito e um ressecado. Receitas americanas costumam indicar temperaturas em Fahrenheit — 325°F, 350°F, 375°F e 400°F são as mais comuns, equivalentes a aproximadamente 160°C, 177°C, 190°C e 200°C no sistema métrico. A tabela de referências nesta página já traz os valores mais usados para você consultar sem precisar calcular.</p>
+        <p id="content-p5">Já o <strong>Kelvin (K)</strong> é a escala científica absoluta — usada em física, química e engenharia. Diferente de Celsius e Fahrenheit, Kelvin não tem graus negativos: o zero absoluto (0 K) é o ponto mais frio teoricamente possível no universo, equivalente a -273,15°C. No cotidiano você raramente vai precisar de Kelvin, mas ele está aqui para quem trabalha com ciência ou simplesmente tem curiosidade.</p>
+    </div>
+
     <div class="ad-slot">Anúncio</div>
     <h2 id="other-title">🔧 Outras ferramentas</h2>
     <div class="tools-nav">
@@ -223,6 +262,12 @@ const T = {
     otherTitle: '🔧 Outras ferramentas',
     linkNames:  '✨ Gerador de Nomes', linkWeight: '⚖️ Peso', linkTemp: '🌡️ Temperatura',
     linkKitchen:'🍳 Medidas de Cozinha', linkCloth: '👕 Tamanho de Roupa', linkBtc: '₿ Bitcoin',
+    contentTitle: 'Temperatura: a escala que separa o mundo em dois',
+contentP1: 'Você já viu aquela previsão do tempo em um site americano dizendo "86°F" e ficou sem saber se vai precisar de casaco ou protetor solar? Ou tentou fazer uma receita gringa e travou no "pré-aqueça o forno a 375°F"? Esse é o tipo de situação cotidiana que acontece com qualquer brasileiro que consome conteúdo internacional — e que este conversor resolve em segundos.',
+contentP2: 'O mundo está dividido em dois grandes sistemas de temperatura. A maioria dos países usa Celsius (°C) — incluindo o Brasil, toda a Europa, a Ásia e a América Latina. Os Estados Unidos são a grande exceção: lá o padrão é Fahrenheit (°F), e isso aparece em tudo: receitas, termostatos, previsões do tempo e embalagens de alimentos.',
+contentP3: 'A fórmula oficial para converter °F para °C é: subtraia 32 e divida por 1,8. Para o dia a dia, existe um atalho rápido: subtraia 30 e divida por 2. Não é exato, mas é rápido — 70°F vira aproximadamente 20°C com esse método. Serve bem para situações onde a precisão não é crítica.',
+contentP4: 'Para culinária, o impacto é mais sério. A diferença entre um forno a 180°C e um a 200°C pode ser a diferença entre um bolo perfeito e um ressecado. Receitas americanas costumam indicar 325°F, 350°F, 375°F e 400°F — equivalentes a aproximadamente 160°C, 177°C, 190°C e 200°C. A tabela nesta página já traz os valores mais usados.',
+contentP5: 'Já o Kelvin (K) é a escala científica absoluta — usada em física, química e engenharia. O zero absoluto (0 K) é o ponto mais frio teoricamente possível no universo, equivalente a -273,15°C. No cotidiano você raramente vai precisar de Kelvin, mas ele está aqui para quem trabalha com ciência ou tem curiosidade.',  
     footerAbout:'Sobre', footerContact:'Contato', footerTerms:'Termos', footerPriv:'Privacidade'
   },
   en: {
@@ -248,10 +293,22 @@ const T = {
     otherTitle: '🔧 Other tools',
     linkNames:  '✨ Name Generator', linkWeight: '⚖️ Weight', linkTemp: '🌡️ Temperature',
     linkKitchen:'🍳 Kitchen Measures', linkCloth: '👕 Clothing Size', linkBtc: '₿ Bitcoin',
+    contentTitle: 'Temperature: the scale that divides the world in two',
+contentP1: 'Have you ever seen an American weather forecast showing "86°F" and had no idea whether to grab a jacket or sunscreen? Or tried following a recipe that said "preheat oven to 375°F" and just stared at your oven dial? This is the kind of everyday situation that happens to anyone consuming international content — and this converter solves it in seconds.',
+contentP2: 'The world is split into two major temperature systems. Most countries use Celsius (°C) — including Brazil, all of Europe, Asia, and Latin America. The United States is the big exception: everything there uses Fahrenheit (°F) — recipes, thermostats, weather forecasts, food packaging, and even electronic device instructions.',
+contentP3: 'The official formula to convert °F to °C is: subtract 32 and divide by 1.8. For everyday use, there\'s a quick shortcut: subtract 30 and divide by 2. It\'s not exact, but it\'s fast — 70°F becomes roughly 20°C with this method. It works well for situations where perfect precision isn\'t critical.',
+contentP4: 'For cooking, the impact is more serious. The difference between a 180°C oven and a 200°C oven can mean the difference between a perfect cake and a dry one. American recipes commonly call for 325°F, 350°F, 375°F and 400°F — equivalent to approximately 160°C, 177°C, 190°C and 200°C. The reference table on this page already shows the most common values.',
+contentP5: 'Kelvin (K) is the absolute scientific scale — used in physics, chemistry, and engineering. Absolute zero (0 K) is the theoretically coldest possible point in the universe, equivalent to -273.15°C. In everyday life you\'ll rarely need Kelvin, but it\'s here for anyone working in science or simply curious.',  
     footerAbout:'About', footerContact:'Contact', footerTerms:'Terms', footerPriv:'Privacy'
   }
 };
-
+function toggleHow() {
+    const body  = document.getElementById('how-body');
+    const arrow = document.getElementById('how-arrow');
+    if (!body || !arrow) return;
+    body.classList.toggle('open');
+    arrow.classList.toggle('open');
+}
 function getLang() {
   const param = new URLSearchParams(window.location.search).get('lang');
   if (param === 'pt' || param === 'en') { localStorage.setItem('siteLang', param); return param; }
@@ -278,6 +335,12 @@ function applyLang(l) {
   q('tr-r2').textContent = t.trR2; q('tr-r3').textContent = t.trR3;
   q('tr-r4').textContent = t.trR4; q('tr-r5').textContent = t.trR5;
   q('tr-r6').textContent = t.trR6;
+  q('content-title').textContent = t.contentTitle;
+  q('content-p1').textContent    = t.contentP1;
+  q('content-p2').textContent    = t.contentP2;
+  q('content-p3').textContent    = t.contentP3;
+  q('content-p4').textContent    = t.contentP4;
+  q('content-p5').textContent    = t.contentP5;  
   q('how-title').textContent  = t.howTitle;
   q('how-p1').textContent     = t.howP1;
   q('how-p2-bold').textContent = t.howP2Bold;
