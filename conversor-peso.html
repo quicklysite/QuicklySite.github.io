@@ -305,6 +305,12 @@ const T = {
     linkKitchen: '🍳 Medidas de Cozinha',
     linkCloth:   '👕 Tamanho de Roupa',
     linkBtc:     '₿ Bitcoin',
+    contentTitle: 'Conversor de Peso: kg, libras, onças e gramas',
+contentP1: 'O conversor de peso do NameForge foi criado para quem precisa alternar entre o sistema métrico — usado no Brasil e na maioria do mundo — e o sistema imperial, comum nos Estados Unidos e no Reino Unido. A conversão mais buscada é entre quilogramas e libras, e a fórmula é simples: multiplique o valor em kg por 2,2046 para obter libras, ou multiplique libras por 0,4536 para obter kg.',
+contentP2: 'Na prática, essa conversão aparece em situações muito comuns. Quem acompanha treinos e dietas com referências americanas frequentemente encontra valores em libras — um plano de musculação pode indicar "135 lbs no supino", o que equivale a aproximadamente 61 kg. Quem compra suplementos importados ou equipamentos esportivos em sites americanos também precisa dessa conversão para entender embalagens e limites de carga.',
+contentP3: 'Outra situação frequente é o limite de bagagem em voos internacionais. Companhias aéreas americanas costumam indicar o limite em libras — geralmente 50 lbs para despacho, equivalente a 22,7 kg. Saber converter rapidamente evita surpresas no check-in. Para viagens, a regra rápida é: divida o peso em libras por 2,2 para ter uma estimativa em kg sem precisar de calculadora.',
+contentP4: 'As onças (oz) aparecem com mais frequência em receitas culinárias americanas e em embalagens de produtos importados. 1 onça equivale a 28,35 gramas — por isso uma embalagem de 16 oz corresponde a 453 gramas, ou seja, aproximadamente meio quilo. Já as gramas são a unidade mais precisa do sistema métrico para receitas e é a referência padrão em todo o território brasileiro.',
+contentP5: 'Para usar o conversor acima: selecione a unidade de origem no primeiro campo, a unidade de destino no segundo e digite o valor. O resultado aparece instantaneamente. A tabela de referência rápida mostra as conversões mais comuns já calculadas, útil para consulta rápida sem precisar digitar nada.',  
     footerAbout: 'Sobre', footerContact: 'Contato', footerTerms: 'Termos', footerPriv: 'Privacidade'
   },
   en: {
@@ -330,6 +336,12 @@ const T = {
     linkKitchen: '🍳 Kitchen Measures',
     linkCloth:   '👕 Clothing Size',
     linkBtc:     '₿ Bitcoin',
+      contentTitle: 'Weight Converter: kg, pounds, ounces and grams',
+contentP1: 'The NameForge weight converter was built for anyone who needs to switch between the metric system — used in Brazil and most of the world — and the imperial system, common in the United States and the United Kingdom. The most searched conversion is between kilograms and pounds: multiply kg by 2.2046 to get pounds, or multiply pounds by 0.4536 to get kg.',
+contentP2: 'In practice, this conversion comes up in very common situations. Anyone following American workout or diet plans often encounters values in pounds — a strength training plan might say "135 lbs on the bench press", which equals approximately 61 kg. Buying imported supplements or sports equipment on American websites also requires this conversion to understand packaging and load limits.',
+contentP3: 'Another frequent situation is checked baggage limits on international flights. American airlines usually state their limits in pounds — typically 50 lbs for checked bags, equivalent to 22.7 kg. Converting quickly avoids surprises at check-in. A quick rule for travel: divide the weight in pounds by 2.2 for a rough kg estimate without a calculator.',
+contentP4: 'Ounces (oz) appear most often in American cooking recipes and on imported product packaging. 1 ounce equals 28.35 grams — so a 16 oz package corresponds to 453 grams, roughly half a kilogram. Grams are the most precise metric unit for recipes and the standard reference throughout Brazil.',
+contentP5: 'To use the converter above: select the source unit in the first field, the target unit in the second, and type the value. The result appears instantly. The quick reference table shows the most common conversions already calculated, useful for a fast lookup without typing anything.',
     footerAbout: 'About', footerContact: 'Contact', footerTerms: 'Terms', footerPriv: 'Privacy'
   }
 };
@@ -378,6 +390,12 @@ function applyLang(l) {
   });
 
   q('table-title').textContent  = t.tableTitle;
+  q('content-title').textContent = t.contentTitle;
+  q('content-p1').textContent    = t.contentP1;
+  q('content-p2').textContent    = t.contentP2;
+  q('content-p3').textContent    = t.contentP3;
+  q('content-p4').textContent    = t.contentP4;
+  q('content-p5').textContent    = t.contentP5; 
   q('how-title').textContent    = t.howTitle;
   q('how-p1').textContent       = t.howP1;
   q('how-p2').textContent       = t.howP2;
