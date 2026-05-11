@@ -164,6 +164,10 @@
         .ad-slot { background: var(--surface2); border: 1px dashed rgba(255,255,255,.08); border-radius: var(--radius); min-height: 90px; display: flex; align-items: center; justify-content: center; color: var(--muted); font-size: .75rem; margin: 20px 0; }
 
         @media(max-width:600px){ .conv-row { flex-direction: column; } .container { padding: 24px 16px; margin: 16px; } }
+        .content-block { margin: 28px 0; }
+.content-block h2 { margin-bottom: 14px; }
+.content-block p { margin-bottom: 14px; line-height: 1.8; opacity: .88; }
+.content-block strong { color: var(--accent); font-weight: 600; }
     </style>
 </head>
 <body>
@@ -203,7 +207,19 @@
         <input type="number" id="w-val" value="1" oninput="convertWeight()" />
         <div class="result-box" id="w-result">—</div>
     </div>
+<div class="content-block">
+  <h2 id="content-title">Conversor de Peso: kg, libras, onças e gramas</h2>
 
+  <p id="content-p1">O conversor de peso do NameForge foi criado para quem precisa alternar entre o sistema métrico — usado no Brasil e na maioria do mundo — e o sistema imperial, comum nos Estados Unidos e no Reino Unido. A conversão mais buscada é entre <strong>quilogramas e libras</strong>, e a fórmula é simples: multiplique o valor em kg por 2,2046 para obter libras, ou multiplique libras por 0,4536 para obter kg.</p>
+
+  <p id="content-p2">Na prática, essa conversão aparece em situações muito comuns. Quem acompanha treinos e dietas com referências americanas frequentemente encontra valores em libras — um plano de musculação pode indicar "135 lbs no supino", o que equivale a aproximadamente 61 kg. Quem compra suplementos importados ou equipamentos esportivos em sites americanos também precisa dessa conversão para entender embalagens e limites de carga.</p>
+
+  <p id="content-p3">Outra situação frequente é o limite de bagagem em voos internacionais. Companhias aéreas americanas costumam indicar o limite em libras — geralmente 50 lbs para despacho, equivalente a 22,7 kg. Saber converter rapidamente evita surpresas no check-in. Para viagens, a regra rápida é: divida o peso em libras por 2,2 para ter uma estimativa em kg sem precisar de calculadora.</p>
+
+  <p id="content-p4">As onças (oz) aparecem com mais frequência em receitas culinárias americanas e em embalagens de produtos importados. 1 onça equivale a 28,35 gramas — por isso uma embalagem de 16 oz corresponde a 453 gramas, ou seja, aproximadamente meio quilo. Já as gramas são a unidade mais precisa do sistema métrico para receitas e é a referência padrão em todo o território brasileiro.</p>
+
+  <p id="content-p5">Para usar o conversor acima: selecione a unidade de origem no primeiro campo, a unidade de destino no segundo e digite o valor. O resultado aparece instantaneamente. A tabela de referência rápida abaixo do conversor mostra as conversões mais comuns já calculadas, útil para consulta rápida sem precisar digitar nada.</p>
+</div>
     <!-- TABELA DE REFERÊNCIA -->
     <h2 id="table-title">📌 Tabela de referência rápida</h2>
     <div class="conv-card">
