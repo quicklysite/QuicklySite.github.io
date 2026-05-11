@@ -347,9 +347,11 @@ function getLang() {
 function toggleHow() {
     const body  = document.getElementById('how-body');
     const arrow = document.getElementById('how-arrow');
+    if (!body || !arrow) return;
     body.classList.toggle('open');
     arrow.classList.toggle('open');
 }
+    
 // ── APLICA TRADUÇÕES ──
 function applyLang(l) {
   const t = T[l];
