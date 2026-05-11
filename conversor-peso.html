@@ -99,14 +99,6 @@
     }
   ]
 }
-.accordion { border:1.5px solid var(--accent2); border-radius:var(--radius); margin:24px 0; overflow:hidden; }
-.accordion-header { display:flex; align-items:center; justify-content:space-between; padding:16px 20px; cursor:pointer; user-select:none; }
-.accordion-header span { color:var(--text); font-weight:600; font-size:.95rem; }
-.accordion-arrow { width:32px; height:32px; border:2px solid var(--accent2); border-radius:8px; display:flex; align-items:center; justify-content:center; color:var(--accent2); font-size:1.1rem; font-weight:900; transition:transform .3s; flex-shrink:0; }
-.accordion-arrow.open { transform:rotate(180deg); }
-.accordion-body { max-height:0; overflow:hidden; transition:max-height .4s ease; padding:0 20px; }
-.accordion-body.open { max-height:600px; padding:0 20px 20px; }
-.accordion-body p { font-size:.9rem; margin-bottom:10px; opacity:.85; }    
 </script>
     <style>
         :root {
@@ -168,6 +160,16 @@
         footer { text-align: center; padding: 40px 20px; color: var(--muted); font-size: .85rem; }
         footer a { color: var(--muted); margin: 0 8px; }
         footer a:hover { color: var(--accent); }
+
+        /* ACCORDION */
+        .accordion { border:1.5px solid var(--accent2,#c4a45a); border-radius:var(--radius); margin:24px 0; overflow:hidden; }
+        .accordion-header { display:flex; align-items:center; justify-content:space-between; padding:16px 20px; cursor:pointer; user-select:none; }
+        .accordion-header span { color:var(--text); font-weight:600; font-size:.95rem; }
+        .accordion-arrow { width:32px; height:32px; border:2px solid var(--accent2,#c4a45a); border-radius:8px; display:flex; align-items:center; justify-content:center; color:var(--accent2,#c4a45a); font-size:1.1rem; font-weight:900; transition:transform .3s; flex-shrink:0; }
+        .accordion-arrow.open { transform:rotate(180deg); }
+        .accordion-body { max-height:0; overflow:hidden; transition:max-height .4s ease; padding:0 20px; }
+        .accordion-body.open { max-height:600px; padding:0 20px 20px; }
+        .accordion-body p { font-size:.9rem; margin-bottom:10px; opacity:.85; }
 
         .ad-slot { background: var(--surface2); border: 1px dashed rgba(255,255,255,.08); border-radius: var(--radius); min-height: 90px; display: flex; align-items: center; justify-content: center; color: var(--muted); font-size: .75rem; margin: 20px 0; }
 
