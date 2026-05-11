@@ -131,6 +131,20 @@
         footer a:hover { color:var(--accent); }
         .ad-slot { background:var(--surface2); border:1px dashed rgba(255,255,255,.08); border-radius:var(--radius); min-height:90px; display:flex; align-items:center; justify-content:center; color:var(--muted); font-size:.75rem; margin:20px 0; }
         @media(max-width:600px){ .container{padding:24px 16px;margin:16px} }
+        /* ACCORDION */
+.accordion { border:1.5px solid #c4a45a; border-radius:var(--radius); margin:20px 0; overflow:hidden; }
+.accordion-header { display:flex; align-items:center; justify-content:space-between; padding:16px 20px; cursor:pointer; user-select:none; }
+.accordion-header span { color:var(--text); font-weight:600; font-size:.95rem; }
+.accordion-arrow { width:32px; height:32px; border:2px solid #c4a45a; border-radius:8px; display:flex; align-items:center; justify-content:center; color:#c4a45a; font-size:1.1rem; font-weight:900; transition:transform .3s; flex-shrink:0; }
+.accordion-arrow.open { transform:rotate(180deg); }
+.accordion-body { max-height:0; overflow:hidden; transition:max-height .4s ease; padding:0 20px; }
+.accordion-body.open { max-height:600px; padding:0 20px 20px; }
+.accordion-body p { font-size:.9rem; margin-bottom:10px; opacity:.85; }
+/* CONTEÚDO SEO */
+.content-block { margin:28px 0; }
+.content-block h2 { margin-bottom:14px; }
+.content-block p { margin-bottom:14px; line-height:1.8; opacity:.88; }
+.content-block strong { color:var(--accent); font-weight:600; }
     </style>
 </head>
 <body>
@@ -138,6 +152,19 @@
     <a href="index.html" class="back-link" id="back-link">← Voltar ao NameForge</a>
     <h1 id="page-title">👕 Tamanho de Roupa</h1>
     <p class="subtitle" id="page-subtitle">Converta tamanhos de roupas e calçados entre Brasil, EUA e Europa. Ideal para compras no AliExpress, Amazon e Shein.</p>
+
+    <!-- ACCORDION COMO USAR -->
+    <div class="accordion" id="accordion-how">
+        <div class="accordion-header" onclick="toggleHow()">
+            <span id="how-title">📖 Como usar?</span>
+            <div class="accordion-arrow" id="how-arrow">&#8964;</div>
+        </div>
+        <div class="accordion-body" id="how-body">
+            <p id="how-p1">Selecione a categoria (Camisas, Calças ou Calçados), escolha seu tamanho brasileiro no menu e a linha correspondente será destacada na tabela com os equivalentes internacionais.</p>
+            <p id="how-p2"><strong id="how-p2-bold">Exemplo:</strong> <span id="how-p2-text">Se você usa tamanho M no Brasil e vai comprar uma camiseta em site americano, o equivalente é "M (8-10)" nos EUA e 40/42 na Europa.</span></p>
+            <p id="how-p3"><strong id="how-p3-bold">Importante:</strong> <span id="how-p3-text">Os tamanhos são aproximados e podem variar por marca. Sempre confira a tabela de medidas específica do vendedor quando disponível.</span></p>
+        </div>
+    </div>
 
     <div class="ad-slot">Anúncio</div>
 
@@ -220,10 +247,18 @@
         </div>
     </div>
 
-    <h2 id="how-title">📖 Como usar?</h2>
-    <p id="how-p1">Selecione a categoria (Camisas, Calças ou Calçados), escolha seu tamanho brasileiro no menu e a linha correspondente será destacada na tabela com os equivalentes internacionais.</p>
-    <p id="how-p2"><strong id="how-p2-bold">Exemplo:</strong> <span id="how-p2-text">Se você usa tamanho M no Brasil e vai comprar uma camiseta em site americano, o equivalente é "M (8-10)" nos EUA e 40/42 na Europa.</span></p>
-    <p id="how-p3"><strong id="how-p3-bold">Importante:</strong> <span id="how-p3-text">Os tamanhos são aproximados e podem variar por marca. Sempre confira a tabela de medidas específica do vendedor quando disponível.</span></p>
+    <!-- ANÚNCIO ENTRE CONVERSOR E TEXTO -->
+    <div class="ad-slot">Anúncio</div>
+
+    <!-- BLOCO DE CONTEÚDO SEO -->
+    <div class="content-block">
+        <h2 id="content-title">Tamanho de Roupa: como comprar certo em sites internacionais</h2>
+        <p id="content-p1">Comprar roupa pela internet nunca foi tão fácil — e tão arriscado ao mesmo tempo. Sites como <strong>AliExpress</strong>, <strong>Shein</strong>, <strong>Shopee</strong>, <strong>Amazon</strong> e <strong>Zara</strong> entregam no Brasil com frequência, mas os tamanhos seguem padrões completamente diferentes do que estamos acostumados. Um simples "M" pode significar coisas muito diferentes dependendo de onde a peça foi fabricada.</p>
+        <p id="content-p2">O problema mais comum acontece no <strong>AliExpress</strong> e na <strong>Shopee</strong>, onde boa parte dos produtos vem da China. O padrão chinês é geralmente menor que o brasileiro — um M chinês costuma equivaler a um P ou até PP no Brasil. Por isso, a recomendação de ouro é sempre subir um ou dois tamanhos ao comprar nessas plataformas, e nunca confiar só na letra: use as medidas em centímetros de busto, cintura e quadril fornecidas pelo vendedor.</p>
+        <p id="content-p3">Na <strong>Shein</strong>, que também segue padrões asiáticos na maior parte do catálogo, o mesmo cuidado se aplica. A plataforma tem uma tabela de medidas própria em cada produto — sempre role a página do item até encontrá-la antes de finalizar a compra. Para calçados no <strong>AliExpress</strong> e <strong>Shopee</strong>, o número EU é geralmente o mais confiável: um 38 brasileiro equivale ao 38 europeu na maioria dos casos.</p>
+        <p id="content-p4">Já em sites americanos como <strong>Amazon US</strong>, <strong>Nike</strong>, <strong>Gap</strong> e <strong>Forever 21</strong>, o sistema é diferente: roupas usam XS, S, M, L, XL e calças seguem o sistema de polegadas (Waist x Inseam). Um tamanho M brasileiro equivale ao M americano para camisas — mas para calças, um 42 brasileiro de cintura corresponde aproximadamente a um W32. Use a tabela de calças desta página para não errar.</p>
+        <p id="content-p5">Para calçados em sites europeus como <strong>Zalando</strong>, <strong>ASOS</strong> ou <strong>Pull&Bear</strong>, o número europeu (EU) é direto: seu 38 brasileiro é um 38 europeu. Para sites americanos e britânicos, use a tabela de calçados acima — ela mostra a conversão para US feminino, US masculino e UK. O conversor nesta página resolve tudo isso em segundos, sem precisar ficar pesquisando tabela por tabela em cada site.</p>
+    </div>
 
     <div class="ad-slot">Anúncio</div>
 
@@ -263,6 +298,12 @@ const T = {
     otherTitle:'🔧 Outras ferramentas',
     linkNames:'✨ Gerador de Nomes', linkWeight:'⚖️ Peso', linkTemp:'🌡️ Temperatura',
     linkKitchen:'🍳 Medidas de Cozinha', linkCloth:'👕 Tamanho de Roupa', linkBtc:'₿ Bitcoin',
+    contentTitle: 'Tamanho de Roupa: como comprar certo em sites internacionais',
+contentP1: 'Comprar roupa pela internet nunca foi tão fácil — e tão arriscado ao mesmo tempo. Sites como AliExpress, Shein, Shopee, Amazon e Zara entregam no Brasil com frequência, mas os tamanhos seguem padrões completamente diferentes do que estamos acostumados. Um simples "M" pode significar coisas muito diferentes dependendo de onde a peça foi fabricada.',
+contentP2: 'O problema mais comum acontece no AliExpress e na Shopee, onde boa parte dos produtos vem da China. O padrão chinês é geralmente menor que o brasileiro — um M chinês costuma equivaler a um P ou até PP no Brasil. Por isso, a recomendação de ouro é sempre subir um ou dois tamanhos, e nunca confiar só na letra: use as medidas em centímetros fornecidas pelo vendedor.',
+contentP3: 'Na Shein, que também segue padrões asiáticos, o mesmo cuidado se aplica. A plataforma tem uma tabela de medidas própria em cada produto — sempre role a página do item até encontrá-la antes de finalizar a compra. Para calçados no AliExpress e Shopee, o número EU é geralmente o mais confiável.',
+contentP4: 'Já em sites americanos como Amazon US, Nike, Gap e Forever 21, roupas usam XS, S, M, L, XL e calças seguem o sistema de polegadas. Um tamanho M brasileiro equivale ao M americano para camisas — mas para calças, um 42 brasileiro corresponde aproximadamente a um W32.',
+contentP5: 'Para calçados em sites europeus como Zalando, ASOS ou Pull&Bear, o número EU é direto: seu 38 brasileiro é um 38 europeu. Para sites americanos e britânicos, use a tabela de calçados acima. O conversor nesta página resolve tudo isso em segundos.', 
     footerAbout:'Sobre', footerContact:'Contato', footerTerms:'Termos', footerPriv:'Privacidade'
   },
   en: {
@@ -280,10 +321,22 @@ const T = {
     otherTitle:'🔧 Other tools',
     linkNames:'✨ Name Generator', linkWeight:'⚖️ Weight', linkTemp:'🌡️ Temperature',
     linkKitchen:'🍳 Kitchen Measures', linkCloth:'👕 Clothing Size', linkBtc:'₿ Bitcoin',
+    contentTitle: 'Clothing Size: how to buy right on international websites',
+contentP1: 'Shopping for clothes online has never been easier — or riskier. Sites like AliExpress, Shein, Shopee, Amazon and Zara ship to Brazil regularly, but their sizes follow completely different standards from what Brazilians are used to. A simple "M" can mean very different things depending on where the piece was made.',
+contentP2: 'The most common problem happens on AliExpress and Shopee, where most products come from China. Chinese sizing tends to run smaller than Brazilian — a Chinese M often equals a Brazilian S or even XS. The golden rule: always go one or two sizes up, and never trust just the letter — use the measurements in centimeters provided by the seller.',
+contentP3: 'On Shein, which also follows Asian sizing for most of its catalog, the same caution applies. The platform includes its own size chart on each product page — always scroll down to find it before completing your purchase. For shoes on AliExpress and Shopee, the EU number is usually the most reliable reference.',
+contentP4: 'On American sites like Amazon US, Nike, Gap and Forever 21, clothes use XS, S, M, L, XL and pants follow the inches system (Waist x Inseam). A Brazilian M equals an American M for shirts — but for pants, a Brazilian size 42 waist corresponds to approximately W32.',
+contentP5: 'For shoes on European sites like Zalando, ASOS or Pull&Bear, the EU number is straightforward: your Brazilian 38 is a European 38. For American and British sites, use the shoe table above. The converter on this page handles all of this in seconds.',  
     footerAbout:'About', footerContact:'Contact', footerTerms:'Terms', footerPriv:'Privacy'
   }
 };
-
+function toggleHow() {
+    const body  = document.getElementById('how-body');
+    const arrow = document.getElementById('how-arrow');
+    if (!body || !arrow) return;
+    body.classList.toggle('open');
+    arrow.classList.toggle('open');
+}
 function getLang() {
   const param = new URLSearchParams(window.location.search).get('lang');
   if (param === 'pt' || param === 'en') { localStorage.setItem('siteLang', param); return param; }
@@ -299,6 +352,12 @@ function applyLang(l) {
 
   q('back-link').textContent     = t.backLink;  q('back-link').href = 'index.html' + lp;
   q('page-title').textContent    = t.title;
+  q('content-title').textContent = t.contentTitle;
+  q('content-p1').textContent    = t.contentP1;
+  q('content-p2').textContent    = t.contentP2;
+  q('content-p3').textContent    = t.contentP3;
+  q('content-p4').textContent    = t.contentP4;
+  q('content-p5').textContent    = t.contentP5;  
   q('page-subtitle').textContent = t.subtitle;
   q('tab-btn-top').textContent   = t.tabTop;
   q('tab-btn-pants').textContent = t.tabPants;
