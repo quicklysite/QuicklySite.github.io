@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://quicklysite.github.io/sitemap.xml
