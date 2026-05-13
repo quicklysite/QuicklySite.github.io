@@ -380,9 +380,9 @@ body{
       <div class="lyrics-header">
         <h2>Lyrics</h2>
 
-        <button class="copy-btn">
-          Copy Lyrics
-        </button>
+        <button class="copy-btn" onclick="copyLyrics()">
+  Copy Lyrics
+</button>
       </div>
 
       <div class="lyrics-box" id="lyrics-box">
@@ -521,7 +521,24 @@ lyricsData.lyrics || 'Lyrics not found.';
   }
 
 }
+function copyLyrics(){
 
+  const lyrics =
+  document.getElementById('lyrics-box')
+  .innerText;
+
+  navigator.clipboard.writeText(lyrics);
+
+  const btn =
+  document.querySelector('.copy-btn');
+
+  btn.innerText = 'Copied!';
+
+  setTimeout(()=>{
+    btn.innerText = 'Copy Lyrics';
+  },2000);
+
+}
 function msToMinutes(ms){
 
   const minutes =
