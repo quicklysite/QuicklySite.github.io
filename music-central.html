@@ -414,7 +414,7 @@ This panel is already prepared for:
 
 <script>
 
-function simulateProcessing(){
+async function simulateProcessing(){
 
   const processing =
   document.getElementById('processing');
@@ -425,9 +425,76 @@ function simulateProcessing(){
     behavior:'smooth'
   });
 
+  const song =
+  document.querySelectorAll('input')[0].value;
+
+  const artist =
+  document.querySelectorAll('input')[1].value;
+
+  if(!song || !artist){
+    alert('Fill song and artist fields.');
+    return;
+  }
+
+  try{
+
+    const response =
+    await fetch(
+      `https://itunes.apple.com/search?term=${artist}+${song}&limit=1`
+    );
+
+    const data =
+    await response.json();
+
+    if(!data.results.length){
+      alert('Song not found.');
+      return;
+    }
+
+    const track =
+    data.results[0];
+
+    document.querySelector('.album-cover')
+    .src = track.artworkUrl100.replace(
+      '100x100',
+      '600x600'
+    );
+
+    document.querySelectorAll('.meta-value')[0]
+    .innerText = track.artistName;
+
+    document.querySelectorAll('.meta-value')[1]
+    .innerText = track.collectionName;
+
+    document.querySelectorAll('.meta-value')[2]
+    .innerText =
+    msToMinutes(track.trackTimeMillis);
+
+    document.querySelectorAll('.meta-value')[4]
+    .innerText = track.primaryGenreName;
+
+  }
+
+  catch(error){
+
+    console.log(error);
+
+    alert('API connection error.');
+
+  }
+
 }
 
-</script>
+function msToMinutes(ms){
+
+  const minutes =
+  Math.floor(ms / 60000);
+
+  const seconds =
+  ((ms % 60000) / 1000)
+  .toFixed(0);
+
+  return `${minutes}:${seconds < 10 ? '0' : ''}${
 
 </body>
 </html>
