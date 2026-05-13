@@ -495,8 +495,11 @@ function msToMinutes(ms){
   ((ms % 60000) / 1000)
   .toFixed(0);
 
-  return `${minutes}:${seconds < 10 ? '0' : ''}${
-<script>
+  return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+
+}
+
 </script>
+
 </body>
 </html>
