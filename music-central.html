@@ -252,6 +252,7 @@ body{
   border:1px solid rgba(255,255,255,0.05);
   transition:0.25s;
   cursor:pointer;
+  line-height:1.7;
 }
 
 .related-item:hover{
@@ -400,20 +401,24 @@ Lyrics will appear here...
     <div class="related-grid">
 
       <div class="related-item">
-        Similar Song Placeholder
-      </div>
+  <strong>Nightcall</strong><br>
+  Kavinsky
+</div>
 
-      <div class="related-item">
-        Similar Song Placeholder
-      </div>
+<div class="related-item">
+  <strong>After Dark</strong><br>
+  Mr.Kitty
+</div>
 
-      <div class="related-item">
-        Similar Song Placeholder
-      </div>
+<div class="related-item">
+  <strong>Blinding Lights</strong><br>
+  The Weeknd
+</div>
 
-      <div class="related-item">
-        Similar Song Placeholder
-      </div>
+<div class="related-item">
+  <strong>Resonance</strong><br>
+  HOME
+</div>
 
     </div>
 
@@ -540,6 +545,25 @@ function copyLyrics(){
   },2000);
 
 }
+document.querySelectorAll('.related-item')
+.forEach(item=>{
+
+  item.addEventListener('click',()=>{
+
+    const lines =
+    item.innerText.split('\n');
+
+    document.querySelectorAll('input')[0]
+    .value = lines[0];
+
+    document.querySelectorAll('input')[1]
+    .value = lines[1];
+
+    simulateProcessing();
+
+  });
+
+});  
 function msToMinutes(ms){
 
   const minutes =
