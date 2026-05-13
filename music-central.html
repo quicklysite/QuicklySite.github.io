@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- SEO / META PLACEHOLDERS -->
+
+<!-- CANONICAL PLACEHOLDER -->
+
+<!-- ADSENSE PLACEHOLDER -->
+
+<!-- ANALYTICS PLACEHOLDER -->
+
+<title>Music Central Online</title>
+
+<style>
+
+:root{
+  --bg:#0f0f12;
+  --panel:#17171c;
+  --gold:#c6a972;
+  --gold-soft:#9f8657;
+  --text:#f5f5f5;
+  --muted:#9b9b9b;
+  --border:rgba(255,255,255,0.06);
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:Arial, sans-serif;
+  min-height:100vh;
+}
+
+.container{
+  width:100%;
+  max-width:1200px;
+  margin:auto;
+  padding:40px 20px 80px;
+}
+
+.hero{
+  text-align:center;
+  margin-bottom:40px;
+}
+
+.hero h1{
+  font-size:3rem;
+  color:var(--gold);
+  margin-bottom:12px;
+  letter-spacing:1px;
+}
+
+.hero p{
+  color:var(--muted);
+  font-size:1.05rem;
+  max-width:700px;
+  margin:auto;
+  line-height:1.7;
+}
+
+.search-card{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:22px;
+  padding:28px;
+  margin-bottom:35px;
+  box-shadow:0 0 30px rgba(0,0,0,0.35);
+}
+
+.search-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px;
+}
+
+.input-group{
+  display:flex;
+  flex-direction:column;
+}
+
+.input-group label{
+  margin-bottom:8px;
+  color:var(--gold);
+  font-size:0.95rem;
+}
+
+.input-group input{
+  background:#111115;
+  border:1px solid rgba(255,255,255,0.08);
+  color:white;
+  padding:14px;
+  border-radius:14px;
+  outline:none;
+  font-size:1rem;
+}
+
+.analyze-btn{
+  width:100%;
+  margin-top:24px;
+  border:none;
+  background:linear-gradient(135deg,var(--gold),var(--gold-soft));
+  color:black;
+  padding:16px;
+  border-radius:16px;
+  font-weight:bold;
+  font-size:1rem;
+  cursor:pointer;
+  transition:0.25s;
+}
+
+.analyze-btn:hover{
+  transform:translateY(-2px);
+}
+
+.processing-card{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:22px;
+  padding:28px;
+  margin-bottom:35px;
+  display:none;
+}
+
+.processing-line{
+  margin-bottom:14px;
+  color:var(--muted);
+}
+
+.loading-bar{
+  width:100%;
+  height:12px;
+  background:#101014;
+  border-radius:20px;
+  overflow:hidden;
+  margin-top:20px;
+}
+
+.loading-fill{
+  width:0%;
+  height:100%;
+  background:linear-gradient(90deg,var(--gold),#fff0c9);
+  animation:loadingAnim 4s infinite;
+}
+
+@keyframes loadingAnim{
+  0%{width:0%}
+  50%{width:75%}
+  100%{width:100%}
+}
+
+.results-grid{
+  display:grid;
+  grid-template-columns:350px 1fr;
+  gap:25px;
+}
+
+.info-card,
+.lyrics-card{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:22px;
+  padding:25px;
+}
+
+.album-cover{
+  width:100%;
+  border-radius:18px;
+  margin-bottom:20px;
+}
+
+.meta-item{
+  margin-bottom:16px;
+}
+
+.meta-title{
+  color:var(--gold);
+  margin-bottom:5px;
+  font-size:0.9rem;
+}
+
+.meta-value{
+  color:var(--text);
+}
+
+.lyrics-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:20px;
+}
+
+.copy-btn{
+  background:var(--gold);
+  color:black;
+  border:none;
+  padding:10px 16px;
+  border-radius:12px;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+.lyrics-box{
+  max-height:650px;
+  overflow-y:auto;
+  line-height:1.9;
+  color:#d8d8d8;
+  white-space:pre-wrap;
+}
+
+.extra-card{
+  margin-top:30px;
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:22px;
+  padding:25px;
+}
+
+.extra-card h2{
+  color:var(--gold);
+  margin-bottom:20px;
+}
+
+.related-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:18px;
+}
+
+.related-item{
+  background:#111115;
+  border-radius:16px;
+  padding:18px;
+  border:1px solid rgba(255,255,255,0.05);
+}
+
+@media(max-width:900px){
+
+.results-grid{
+  grid-template-columns:1fr;
+}
+
+.search-grid{
+  grid-template-columns:1fr;
+}
+
+.hero h1{
+  font-size:2.2rem;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <section class="hero">
+    <h1>Music Central Online</h1>
+
+    <p>
+      Explore lyrics, discover BPM, analyze music metadata,
+      copy full lyrics instantly and dive into a modern
+      music exploration experience.
+    </p>
+  </section>
+
+  <section class="search-card">
+
+    <div class="search-grid">
+
+      <div class="input-group">
+        <label>Song Name</label>
+        <input type="text" placeholder="Enter song name">
+      </div>
+
+      <div class="input-group">
+        <label>Artist</label>
+        <input type="text" placeholder="Enter artist name">
+      </div>
+
+    </div>
+
+    <button class="analyze-btn" onclick="simulateProcessing()">
+      Analyze Music
+    </button>
+
+  </section>
+
+  <section class="processing-card" id="processing">
+
+    <div class="processing-line">
+      Connecting to music databases...
+    </div>
+
+    <div class="processing-line">
+      Searching lyrics...
+    </div>
+
+    <div class="processing-line">
+      Analyzing metadata...
+    </div>
+
+    <div class="processing-line">
+      Preparing results...
+    </div>
+
+    <div class="loading-bar">
+      <div class="loading-fill"></div>
+    </div>
+
+  </section>
+
+  <section class="results-grid">
+
+    <div class="info-card">
+
+      <img
+      class="album-cover"
+      src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?q=80&w=1200&auto=format&fit=crop"
+      alt="Album Cover">
+
+      <div class="meta-item">
+        <div class="meta-title">Artist</div>
+        <div class="meta-value">Placeholder Artist</div>
+      </div>
+
+      <div class="meta-item">
+        <div class="meta-title">Album</div>
+        <div class="meta-value">Placeholder Album</div>
+      </div>
+
+      <div class="meta-item">
+        <div class="meta-title">Duration</div>
+        <div class="meta-value">03:42</div>
+      </div>
+
+      <div class="meta-item">
+        <div class="meta-title">BPM</div>
+        <div class="meta-value">128 BPM</div>
+      </div>
+
+      <div class="meta-item">
+        <div class="meta-title">Genre</div>
+        <div class="meta-value">Electronic</div>
+      </div>
+
+    </div>
+
+    <div class="lyrics-card">
+
+      <div class="lyrics-header">
+        <h2>Lyrics</h2>
+
+        <button class="copy-btn">
+          Copy Lyrics
+        </button>
+      </div>
+
+      <div class="lyrics-box">
+Placeholder lyrics area.
+
+Full lyrics will appear here after API integration.
+
+This panel is already prepared for:
+- copy button
+- download button
+- translations
+- karaoke mode
+- synced lyrics
+- scroll animations
+      </div>
+
+    </div>
+
+  </section>
+
+  <section class="extra-card">
+
+    <h2>Related Songs</h2>
+
+    <div class="related-grid">
+
+      <div class="related-item">
+        Similar Song Placeholder
+      </div>
+
+      <div class="related-item">
+        Similar Song Placeholder
+      </div>
+
+      <div class="related-item">
+        Similar Song Placeholder
+      </div>
+
+      <div class="related-item">
+        Similar Song Placeholder
+      </div>
+
+    </div>
+
+  </section>
+
+</div>
+
+<script>
+
+function simulateProcessing(){
+
+  const processing =
+  document.getElementById('processing');
+
+  processing.style.display = 'block';
+
+  processing.scrollIntoView({
+    behavior:'smooth'
+  });
+
+}
+
+</script>
+
+</body>
+</html>
