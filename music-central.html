@@ -488,7 +488,8 @@ document.querySelector('.analyze-btn');
 analyzeBtn.disabled = true;
 
 analyzeBtn.style.opacity = '0.6';
-
+analyzeBtn.innerText =
+'Analyzing...';
   processing.style.display = 'block';
 
   processing.scrollIntoView({
@@ -578,17 +579,28 @@ lyricsData.lyrics || 'Lyrics not found.';
 
 document.querySelector('.results-grid')
 .style.transform = 'translateY(0)';
+    setTimeout(()=>{
+
+  document.querySelector('.results-grid')
+  .scrollIntoView({
+    behavior:'smooth',
+    block:'start'
+  });
+
+},400);
     analyzeBtn.disabled = false;
 
 analyzeBtn.style.opacity = '1';
-
+analyzeBtn.innerText =
+'Analyze Music';
   }
 
   catch(error){
     analyzeBtn.disabled = false;
 
 analyzeBtn.style.opacity = '1';
-
+analyzeBtn.innerText =
+'Analyze Music';
     console.log(error);
 
     alert('API connection error.');
