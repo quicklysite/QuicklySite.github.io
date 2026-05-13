@@ -303,12 +303,12 @@ body{
 
       <div class="input-group">
         <label>Song Name</label>
-        <input type="text" placeholder="Enter song name">
+        <input type="text" id="input-song" placeholder="Enter song name">
       </div>
 
       <div class="input-group">
         <label>Artist</label>
-        <input type="text" placeholder="Enter artist name">
+        <input type="text" id="input-artist" placeholder="Enter artist name">
       </div>
 
     </div>
@@ -393,41 +393,13 @@ body{
     <div class="lyrics-card">
 
       <div class="lyrics-header">
-        <h2>Lyrics</h2>
-
-        <button class="copy-btn" onclick="copyLyrics()">
-  Copy Lyrics
-</button>
-        <button
-  class="copy-btn"
-  onclick="downloadLyrics()">
-   <button
-  class="copy-btn"
-  onclick="clearMusic()"
-  style="margin-left:10px">
-
-  <button class="copy-btn" onclick="copyLyrics()">
-  Copy Lyrics
-</button>
-
-<button
-  class="copy-btn"
-  onclick="downloadLyrics()"
-  style="margin-left:10px">
-
-  Download TXT
-
-</button>
-
-<button
-  class="copy-btn"
-  onclick="clearMusic()"
-  style="margin-left:10px">
-
-  Clear
-
-</button>
-      </div>
+    <h2>Lyrics</h2>
+    <div style="display:flex; gap:10px; flex-wrap:wrap;">
+        <button class="copy-btn" onclick="copyLyrics()" id="btn-copy">Copy Lyrics</button>
+        <button class="copy-btn" onclick="downloadLyrics()">Download TXT</button>
+        <button class="copy-btn" onclick="clearMusic()">Clear</button>
+    </div>
+</div>
 
       <div class="lyrics-box" id="lyrics-box">
 Lyrics will appear here...
@@ -515,10 +487,10 @@ document.getElementById('step4')
 },2100);
 
   const song =
-  document.querySelectorAll('input')[0].value;
+  document.getElementById('input-song')
 
   const artist =
-  document.querySelectorAll('input')[1].value;
+  document.getElementById('input-artist')
 
   if(!song || !artist){
     alert('Fill song and artist fields.');
@@ -656,7 +628,7 @@ function copyLyrics(){
   navigator.clipboard.writeText(lyrics);
 
   const btn =
-  document.querySelector('.copy-btn');
+  const btn = document.getElementById('btn-copy');
 
   btn.innerText = 'Copied!';
 
