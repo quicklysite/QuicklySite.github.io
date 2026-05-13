@@ -376,7 +376,18 @@ body{
         <div class="meta-title">Genre</div>
         <div class="meta-value">Electronic</div>
       </div>
+      <div class="meta-item">
+  <div class="meta-label">Preview</div>
 
+  <audio id="music-preview"
+    controls
+    style="
+      width:100%;
+      margin-top:10px;
+      border-radius:12px;
+    ">
+  </audio>
+</div>
     </div>
 
     <div class="lyrics-card">
@@ -513,6 +524,8 @@ document.getElementById('step4')
 
     document.querySelectorAll('.meta-value')[4]
     .innerText = track.primaryGenreName;
+    document.getElementById('music-preview')
+.src = track.previewUrl || '';
     const lyricsResponse =
 await fetch(
   `https://api.lyrics.ovh/v1/${artist}/${song}`
