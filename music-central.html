@@ -447,21 +447,10 @@ body{
 
   <section class="processing-card" id="processing">
 
-    <div class="processing-line" id="step1">
-  ⏳ Connecting to music databases...
-</div>
-
-<div class="processing-line" id="step2" style="opacity:0.3">
-  🎵 Searching lyrics...
-</div>
-
-<div class="processing-line" id="step3" style="opacity:0.3">
-  📀 Analyzing metadata...
-</div>
-
-<div class="processing-line" id="step4" style="opacity:0.3">
-  🚀 Preparing results...
-</div>
+    <div class="processing-line" id="step1">⏳ Connecting to music databases...</div>
+<div class="processing-line" id="step2">🎵 Searching lyrics...</div>
+<div class="processing-line" id="step3">📀 Analyzing metadata...</div>
+<div class="processing-line" id="step4">🚀 Preparing results...</div>
 
     <div class="loading-bar">
       <div class="loading-fill"></div>
@@ -614,11 +603,8 @@ async function simulateProcessing(){
   });
 
   try{
-    const [itunesRes, lyricsRes] = await Promise.all([
-      fetch(`https://itunes.apple.com/search?term=${encodeURIComponent(artist)}+${encodeURIComponent(song)}&limit=1`),
-      fetch(`https://api.lyrics.ovh/v1/${encodeURIComponent(artist)}/${encodeURIComponent(song)}`)
-    ]);
-
+    // iTunes fetch primeiro
+    const itunesRes = await fetch(`https://itunes.apple.com/search?term=${encodeURIComponent(artist)}+${encodeURIComponent(song)}&limit=1`);
     const itunesData = await itunesRes.json();
 
     if(!itunesData.results.length){
@@ -631,7 +617,16 @@ async function simulateProcessing(){
     }
 
     const track = itunesData.results[0];
-    const lyricsData = await lyricsRes.json();
+
+    // Lyrics fetch separado — não bloqueia se falhar
+    let lyricsText = 'Lyrics not available for this track.';
+    try {
+      const lyricsRes = await fetch(`https://api.lyrics.ovh/v1/${encodeURIComponent(track.artistName)}/${encodeURIComponent(track.trackName)}`);
+      const lyricsData = await lyricsRes.json();
+      if(lyricsData.lyrics) lyricsText = lyricsData.lyrics;
+    } catch(e) {
+      lyricsText = 'Lyrics not found. Try searching on Genius.com.';
+    }
 
     // Preenche dados
     document.querySelector('.album-cover').src = track.artworkUrl100.replace('100x100','600x600');
@@ -648,7 +643,7 @@ document.getElementById('meta-genre').innerText    = track.primaryGenreName || '
 document.getElementById('meta-duration').innerText = msToMinutes(track.trackTimeMillis);
 document.getElementById('meta-year').innerText     = track.releaseDate ? track.releaseDate.substring(0,4) : '—';
     document.getElementById('music-preview').src = track.previewUrl || '';
-    document.getElementById('lyrics-box').innerText = lyricsData.lyrics || 'Lyrics not found.';
+    document.getElementById('lyrics-box').innerText = lyricsText;
 
     saveRecent(song, artist);
 
