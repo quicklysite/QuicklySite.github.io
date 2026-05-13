@@ -160,6 +160,9 @@ body{
   display:grid;
   grid-template-columns:350px 1fr;
   gap:25px;
+  opacity:0;
+  transform:translateY(20px);
+  transition:0.5s;
 }
 
 .info-card,
@@ -432,6 +435,12 @@ async function simulateProcessing(){
 
   const processing =
   document.getElementById('processing');
+  const analyzeBtn =
+document.querySelector('.hero-btn');
+
+analyzeBtn.disabled = true;
+
+analyzeBtn.style.opacity = '0.6';
 
   processing.style.display = 'block';
 
@@ -515,10 +524,21 @@ await lyricsResponse.json();
 document.getElementById('lyrics-box')
 .innerText =
 lyricsData.lyrics || 'Lyrics not found.';
+    document.querySelector('.results-grid')
+.style.opacity = '1';
+
+document.querySelector('.results-grid')
+.style.transform = 'translateY(0)';
+    analyzeBtn.disabled = false;
+
+analyzeBtn.style.opacity = '1';
 
   }
 
   catch(error){
+    analyzeBtn.disabled = false;
+
+analyzeBtn.style.opacity = '1';
 
     console.log(error);
 
