@@ -366,19 +366,9 @@ body{
         </button>
       </div>
 
-      <div class="lyrics-box">
-Placeholder lyrics area.
-
-Full lyrics will appear here after API integration.
-
-This panel is already prepared for:
-- copy button
-- download button
-- translations
-- karaoke mode
-- synced lyrics
-- scroll animations
-      </div>
+      <div class="lyrics-box" id="lyrics-box">
+Lyrics will appear here...
+</div>
 
     </div>
 
@@ -472,6 +462,17 @@ async function simulateProcessing(){
 
     document.querySelectorAll('.meta-value')[4]
     .innerText = track.primaryGenreName;
+    const lyricsResponse =
+await fetch(
+  `https://api.lyrics.ovh/v1/${artist}/${song}`
+);
+
+const lyricsData =
+await lyricsResponse.json();
+
+document.getElementById('lyrics-box')
+.innerText =
+lyricsData.lyrics || 'Lyrics not found.';
 
   }
 
