@@ -431,8 +431,10 @@ async function simulateProcessing(){
   processing.style.display = 'block';
 
   processing.scrollIntoView({
-    behavior:'smooth'
-    document.getElementById('step1')
+  behavior:'smooth'
+});
+
+document.getElementById('step1')
 .style.opacity = '1';
 
 setTimeout(()=>{
@@ -449,7 +451,6 @@ setTimeout(()=>{
 document.getElementById('step4')
 .style.opacity = '1';
 },2100);
-  });
 
   const song =
   document.querySelectorAll('input')[0].value;
