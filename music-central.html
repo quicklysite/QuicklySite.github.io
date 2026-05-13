@@ -384,6 +384,27 @@ body{
 }
 .tab-panel { display:none; }
 .tab-panel.active { display:block; }
+  .scroll-top {
+  position:fixed;
+  bottom:28px;
+  right:22px;
+  width:44px;
+  height:44px;
+  background:var(--gold);
+  color:#000;
+  border:none;
+  border-radius:12px;
+  font-size:1.2rem;
+  cursor:pointer;
+  opacity:0;
+  transition:0.3s;
+  z-index:999;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:900;
+}
+.scroll-top.visible { opacity:1; }
 </style>
 </head>
 
@@ -408,6 +429,7 @@ body{
       <div class="input-group">
         <label>Song Name</label>
         <input type="text" id="input-song" placeholder="Enter song name">
+        <button class="scroll-top" id="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
       </div>
 
       <div class="input-group">
@@ -661,11 +683,8 @@ document.getElementById('meta-year').innerText     = track.releaseDate ? track.r
   }
   function clearMusic(){
 
-  document.querySelectorAll('input')[0]
-  .value = '';
-
-  document.querySelectorAll('input')[1]
-  .value = '';
+  document.getElementById('input-song').value = '';
+  document.getElementById('input-artist').value = '';
 
   document.getElementById('lyrics-box')
   .innerText =
@@ -831,6 +850,11 @@ renderRecent();
     }
   );
 
+});
+  window.addEventListener('scroll', () => {
+  const btn = document.getElementById('scroll-top-btn');
+  if(window.scrollY > 400) btn.classList.add('visible');
+  else btn.classList.remove('visible');
 });
 </script>
 
