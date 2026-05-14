@@ -529,19 +529,24 @@ body{
       alt="Album Cover">
 
       <div class="meta-item">
-        <div class="meta-title">Artist</div>
-        <div class="meta-value">Placeholder Artist</div>
-      </div>
+  <div class="meta-title">Artist</div>
+  <div class="meta-value" id="info-artist">Placeholder Artist</div>
+</div>
 
-      <div class="meta-item">
-        <div class="meta-title">Album</div>
-        <div class="meta-value">Placeholder Album</div>
-      </div>
+<div class="meta-item">
+  <div class="meta-title">Album</div>
+  <div class="meta-value" id="info-album">Placeholder Album</div>
+</div>
 
-      <div class="meta-item">
-        <div class="meta-title">Duration</div>
-        <div class="meta-value">03:42</div>
-      </div>
+<div class="meta-item">
+  <div class="meta-title">Duration</div>
+  <div class="meta-value" id="info-duration">03:42</div>
+</div>
+
+<div class="meta-item">
+  <div class="meta-title">Genre</div>
+  <div class="meta-value" id="info-genre">Electronic</div>
+</div>
 
       
 
@@ -707,10 +712,10 @@ async function simulateProcessing(){
 
     // Preenche dados
     document.querySelector('.album-cover').src = track.artworkUrl100.replace('100x100','600x600');
-    document.querySelectorAll('.meta-value')[0].innerText = track.artistName;
-document.querySelectorAll('.meta-value')[1].innerText = track.collectionName || '—';
-document.querySelectorAll('.meta-value')[2].innerText = msToMinutes(track.trackTimeMillis);
-document.querySelectorAll('.meta-value')[4].innerText = track.primaryGenreName || '—';
+    document.getElementById('info-artist').innerText   = track.artistName || '—';
+document.getElementById('info-album').innerText    = track.collectionName || '—';
+document.getElementById('info-duration').innerText = msToMinutes(track.trackTimeMillis);
+document.getElementById('info-genre').innerText    = track.primaryGenreName || '—';
 
 // Preenche tab Metadata
 document.getElementById('meta-track').innerText    = track.trackName || '—';
@@ -720,8 +725,8 @@ document.getElementById('meta-genre').innerText    = track.primaryGenreName || '
 document.getElementById('meta-duration').innerText = msToMinutes(track.trackTimeMillis);
 document.getElementById('meta-year').innerText     = track.releaseDate ? track.releaseDate.substring(0,4) : '—';
     // Related Songs dinâmicos por gênero
-const genre = encodeURIComponent(track.primaryGenreName || 'pop');
-fetch(`https://itunes.apple.com/search?term=${genre}&limit=6&entity=song`)
+const searchTerm = encodeURIComponent((track.artistName || artist) + ' ' + (track.primaryGenreName || ''));
+fetch(`https://itunes.apple.com/search?term=${searchTerm}&limit=8&entity=song`)
   .then(r => r.json())
   .then(data => {
     const grid = document.getElementById('similar-grid');
@@ -822,25 +827,7 @@ function copyLyrics(){
   },2000);
 
 }
-document.querySelectorAll('.related-item')
-.forEach(item=>{
-
-  item.addEventListener('click',()=>{
-
-    const lines =
-    item.innerText.split('\n');
-
-    document.querySelectorAll('input')[0]
-    .value = lines[0];
-
-    document.querySelectorAll('input')[1]
-    .value = lines[1];
-
-    simulateProcessing();
-
-  });
-
-});  
+  
  function saveRecent(song,artist){
 
   let recent =
