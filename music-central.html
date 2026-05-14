@@ -4,10 +4,60 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- SEO / META PLACEHOLDERS -->
+<meta name="description" content="Search any song and instantly get full lyrics, metadata, album cover and audio preview. Music Central Online — your free music analysis tool." />
+<link rel="canonical" href="https://quicklysite.github.io/music-central.html" />
 
 <!-- CANONICAL PLACEHOLDER -->
-
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://quicklysite.github.io/music-central.html#app",
+      "name": "Music Central Online",
+      "url": "https://quicklysite.github.io/music-central.html",
+      "description": "Search any song and instantly get full lyrics, metadata, album cover and audio preview.",
+      "applicationCategory": "MusicApplication",
+      "operatingSystem": "All",
+      "browserRequirements": "Requires JavaScript",
+      "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "publisher": { "@id": "https://quicklysite.github.io/#organization" }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://quicklysite.github.io/music-central.html#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do I find lyrics for a song?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Type the song name and artist in the fields above and click Analyze Music. The lyrics will appear automatically in the Lyrics tab." }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I download the lyrics?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. After searching, click the Download TXT button to save the lyrics as a text file on your device." }
+        },
+        {
+          "@type": "Question",
+          "name": "Is Music Central Online free?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes, completely free. No registration, no limits. Just search and explore." }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://quicklysite.github.io/music-central.html#breadcrumb",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "NameForge", "item": "https://quicklysite.github.io/" },
+        { "@type": "ListItem", "position": 2, "name": "Music Central Online", "item": "https://quicklysite.github.io/music-central.html" }
+      ]
+    }
+  ]
+}
+</script>
 <!-- ADSENSE PLACEHOLDER -->
 
 <!-- ANALYTICS PLACEHOLDER -->
@@ -157,7 +207,7 @@ body{
 }
 
 .results-grid{
-  display:grid;
+  display:none;
   grid-template-columns:350px 1fr;
   gap:25px;
   opacity:0;
@@ -411,7 +461,7 @@ body{
 <body>
 
 <div class="container">
-
+<a href="index.html" class="back-link" id="back-link" style="display:inline-block;margin-bottom:24px;color:#c6a972;text-decoration:none;font-size:0.95rem;">← Back to NameForge</a>
   <section class="hero">
     <h1>Music Central Online</h1>
 
@@ -421,7 +471,19 @@ body{
       music exploration experience.
     </p>
   </section>
-
+<div class="accordion" id="accordion-how" style="margin-bottom:28px;">
+  <div class="accordion-header" onclick="toggleHow()" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px;cursor:pointer;background:#17171c;border-radius:14px;border:1px solid rgba(255,255,255,0.08);">
+    <span style="color:#f5f5f5;font-weight:600;font-size:0.95rem;">📖 How to use Music Central?</span>
+    <div id="how-arrow" style="width:32px;height:32px;border:2px solid #c6a972;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#c6a972;font-size:1.1rem;font-weight:900;transition:transform .3s;">&#8964;</div>
+  </div>
+  <div id="how-body" style="max-height:0;overflow:hidden;transition:max-height .4s ease;background:#17171c;border-radius:0 0 14px 14px;border:1px solid rgba(255,255,255,0.08);border-top:none;">
+    <div style="padding:20px;">
+      <p style="margin-bottom:12px;line-height:1.8;color:#d8d8d8;font-size:0.92rem;">Type the <strong style="color:#c6a972;">song name</strong> and the <strong style="color:#c6a972;">artist name</strong> in the fields, then click <strong style="color:#c6a972;">Analyze Music</strong>. The tool will search databases and return the album cover, metadata and lyrics automatically.</p>
+      <p style="margin-bottom:12px;line-height:1.8;color:#d8d8d8;font-size:0.92rem;">Use the <strong style="color:#c6a972;">Lyrics</strong>, <strong style="color:#c6a972;">Metadata</strong> and <strong style="color:#c6a972;">Similar</strong> tabs to explore different information about the track. You can copy the lyrics to your clipboard or download them as a .txt file.</p>
+      <p style="line-height:1.8;color:#d8d8d8;font-size:0.92rem;"><strong style="color:#c6a972;">Tip:</strong> Press Enter after typing to search without clicking the button. Your recent searches are saved automatically and appear below the results.</p>
+    </div>
+  </div>
+</div>
   <section class="search-card">
 
     <div class="search-grid">
@@ -481,10 +543,7 @@ body{
         <div class="meta-value">03:42</div>
       </div>
 
-      <div class="meta-item">
-        <div class="meta-title">BPM</div>
-        <div class="meta-value">128 BPM</div>
-      </div>
+      
 
       <div class="meta-item">
         <div class="meta-title">Genre</div>
@@ -565,11 +624,31 @@ body{
   </section>
 
 </div>
-
+<div style="margin-top:40px;padding-top:28px;border-top:1px solid rgba(255,255,255,0.06);">
+  <h2 style="color:#c6a972;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:16px;">🔧 Other Tools</h2>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;">
+    <a href="index.html?lang=en" style="background:#17171c;border:1px solid rgba(255,255,255,0.08);color:#c6a972;padding:10px 16px;border-radius:12px;text-decoration:none;font-size:0.88rem;">✨ Name Generator</a>
+    <a href="conversor-peso.html?lang=en" style="background:#17171c;border:1px solid rgba(255,255,255,0.08);color:#c6a972;padding:10px 16px;border-radius:12px;text-decoration:none;font-size:0.88rem;">⚖️ Weight</a>
+    <a href="conversor-temperatura.html?lang=en" style="background:#17171c;border:1px solid rgba(255,255,255,0.08);color:#c6a972;padding:10px 16px;border-radius:12px;text-decoration:none;font-size:0.88rem;">🌡️ Temperature</a>
+    <a href="conversor-cozinha.html?lang=en" style="background:#17171c;border:1px solid rgba(255,255,255,0.08);color:#c6a972;padding:10px 16px;border-radius:12px;text-decoration:none;font-size:0.88rem;">🍳 Kitchen</a>
+    <a href="conversor-roupas.html?lang=en" style="background:#17171c;border:1px solid rgba(255,255,255,0.08);color:#c6a972;padding:10px 16px;border-radius:12px;text-decoration:none;font-size:0.88rem;">👕 Clothing</a>
+  </div>
+</div>
 <button class="scroll-top" id="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
 <script>
-
+function toggleHow(){
+  const body = document.getElementById('how-body');
+  const arrow = document.getElementById('how-arrow');
+  if(!body||!arrow) return;
+  if(body.style.maxHeight === '0px' || body.style.maxHeight === ''){
+    body.style.maxHeight = '400px';
+    arrow.style.transform = 'rotate(180deg)';
+  } else {
+    body.style.maxHeight = '0px';
+    arrow.style.transform = 'rotate(0deg)';
+  }
+}
 async function simulateProcessing(){
   const processing = document.getElementById('processing');
   const analyzeBtn = document.querySelector('.analyze-btn');
@@ -643,6 +722,21 @@ document.getElementById('meta-album').innerText    = track.collectionName || '�
 document.getElementById('meta-genre').innerText    = track.primaryGenreName || '—';
 document.getElementById('meta-duration').innerText = msToMinutes(track.trackTimeMillis);
 document.getElementById('meta-year').innerText     = track.releaseDate ? track.releaseDate.substring(0,4) : '—';
+    // Related Songs dinâmicos por gênero
+const genre = encodeURIComponent(track.primaryGenreName || 'pop');
+fetch(`https://itunes.apple.com/search?term=${genre}&limit=6&entity=song`)
+  .then(r => r.json())
+  .then(data => {
+    const grid = document.getElementById('similar-grid');
+    if(!grid || !data.results) return;
+    const filtered = data.results.filter(t => t.trackName !== track.trackName).slice(0,4);
+    grid.innerHTML = filtered.map(t =>
+      `<div class="related-item" onclick="document.getElementById('input-song').value='${t.trackName.replace(/'/g,"\\'")}';document.getElementById('input-artist').value='${t.artistName.replace(/'/g,"\\'")}';simulateProcessing()">
+        <strong>${t.trackName}</strong><br>${t.artistName}
+      </div>`
+    ).join('');
+  })
+  .catch(() => {});
     document.getElementById('music-preview').src = track.previewUrl || '';
     document.getElementById('lyrics-box').innerText = lyricsText;
 
@@ -652,8 +746,9 @@ document.getElementById('meta-year').innerText     = track.releaseDate ? track.r
     setTimeout(() => {
       document.getElementById('step4').classList.replace('active','done');
       processing.style.display = 'none';
-      document.querySelector('.results-grid').style.opacity = '1';
-      document.querySelector('.results-grid').style.transform = 'translateY(0)';
+      document.querySelector('.results-grid').style.display = 'grid';
+document.querySelector('.results-grid').style.opacity = '1';
+document.querySelector('.results-grid').style.transform = 'translateY(0)';
       setTimeout(() => {
         document.querySelector('.results-grid').scrollIntoView({ behavior:'smooth', block:'start' });
       }, 300);
