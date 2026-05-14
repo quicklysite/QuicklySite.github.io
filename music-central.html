@@ -901,7 +901,10 @@ function msToMinutes(ms){
 
 }
 renderRecent();
-  document.querySelectorAll('input')
+  [
+  document.getElementById('input-song'),
+  document.getElementById('input-artist')
+]
 .forEach(input=>{
 
   input.addEventListener(
