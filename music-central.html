@@ -761,7 +761,12 @@ fetch(`https://itunes.apple.com/search?term=${searchTerm}&limit=8&entity=song`)
   })
   .catch(() => {});
     document.getElementById('music-preview').src = track.previewUrl || '';
-    document.getElementById('lyrics-box').innerText = lyricsText;
+    const lyricsBox = document.getElementById('lyrics-box');
+    if(lyricsIsLink){
+      lyricsBox.innerHTML = `<span style="color:#9b9b9b;font-size:0.9rem;">Lyrics not available here.<br><br><a href="${lyricsText}" target="_blank" style="color:#c6a972;text-decoration:none;font-weight:600;">🔍 Search lyrics on Genius ↗</a></span>`;
+    } else {
+      lyricsBox.innerText = lyricsText;
+    }
 
     saveRecent(song, artist);
 
