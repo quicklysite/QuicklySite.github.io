@@ -315,33 +315,25 @@ body{
 }
 
 @media(max-width:900px){
-.album-cover {
-  max-height: 260px;
-  object-fit: cover;
-}
-.info-card {
-  display: grid;
-  grid-template-columns: 140px 1fr;
-  gap: 16px;
-  align-items: start;
-}
-.album-cover {
-  width: 140px;
-  height: 140px;
-  object-fit: cover;
-}
-.results-grid{
-  grid-template-columns:1fr;
-}
-
-.search-grid{
-  grid-template-columns:1fr;
-}
-
-.hero h1{
-  font-size:2.2rem;
-}
-
+  .results-grid{
+    grid-template-columns:1fr;
+  }
+  .search-grid{
+    grid-template-columns:1fr;
+  }
+  .hero h1{
+    font-size:2.2rem;
+  }
+  .info-card{
+    display:flex;
+    flex-direction:column;
+  }
+  .album-cover{
+    width:100%;
+    max-height:280px;
+    object-fit:cover;
+    border-radius:14px;
+  }
 }
 /* LOADING REFINADO */
 .processing-line {
@@ -642,6 +634,14 @@ body{
     <a href="conversor-roupas.html?lang=en" style="background:#17171c;border:1px solid rgba(255,255,255,0.08);color:#c6a972;padding:10px 16px;border-radius:12px;text-decoration:none;font-size:0.88rem;">👕 Clothing</a>
   </div>
 </div>
+  <div style="margin-top:40px;padding-top:28px;border-top:1px solid rgba(255,255,255,0.06);">
+  <h2 style="color:var(--gold);font-size:1.1rem;margin-bottom:16px;">🎵 What is Music Central Online?</h2>
+  <p style="color:#d8d8d8;line-height:1.8;margin-bottom:14px;font-size:0.92rem;">Music Central Online is a free music exploration tool that lets you search any song and instantly access album artwork, full metadata, audio preview and lyrics — all in one place. Whether you're discovering a new underground artist or revisiting a classic track, the information appears in seconds without any registration or limits.</p>
+  <p style="color:#d8d8d8;line-height:1.8;margin-bottom:14px;font-size:0.92rem;">Unlike traditional lyrics sites, Music Central is built around the full listening experience. You get the album cover, the release year, the genre, a 30-second audio preview and similar tracks from the same artist — making it easy to explore an entire discography from a single search.</p>
+  <p style="color:#d8d8d8;line-height:1.8;margin-bottom:14px;font-size:0.92rem;">The tool uses a hybrid database system: iTunes for mainstream and well-known releases, and MusicBrainz as a deep fallback for independent, underground and non-English artists that major platforms often miss. This means bands like Pain, Rammstein or obscure black metal acts are just as searchable as Kanye West or Taylor Swift.</p>
+  <p style="color:#d8d8d8;line-height:1.8;margin-bottom:14px;font-size:0.92rem;">When lyrics are available, they appear directly in the Lyrics tab. When they aren't, a direct link to Genius opens the search automatically — so you're never left with a dead end. The Similar tab also loads real tracks from the same genre and artist, giving you a starting point to keep exploring.</p>
+  <p style="color:#d8d8d8;line-height:1.8;font-size:0.92rem;">Your recent searches are saved locally on your device and appear below the results, so you can jump back to any track instantly. Everything runs in your browser — no servers, no data collection, no ads interrupting the experience.</p>
+  </div>
 <button class="scroll-top" id="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
 <script>
