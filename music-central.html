@@ -681,16 +681,39 @@ async function simulateProcessing(){
     const itunesRes = await fetch(`https://itunes.apple.com/search?term=${encodeURIComponent(song)}+${encodeURIComponent(artist)}&limit=1&entity=song&country=US&lang=en_us`);
     const itunesData = await itunesRes.json();
 
-    if(!itunesData.results.length){
+    let track = null;
+
+    if(itunesData.results && itunesData.results.length > 0){
+      track = itunesData.results[0];
+      track._source = 'itunes';
+    } else {
+      const mbRes = await fetch(`https://musicbrainz.org/ws/2/recording/?query=recording:${encodeURIComponent(song)}+artist:${encodeURIComponent(artist)}&fmt=json&limit=1`);
+      const mbData = await mbRes.json();
+      if(mbData.recordings && mbData.recordings.length > 0){
+        const r = mbData.recordings[0];
+        const rel = r.releases && r.releases[0];
+        track = {
+          trackName:        r.title || song,
+          artistName:       r['artist-credit'] ? r['artist-credit'].map(a=>a.name).join(', ') : artist,
+          collectionName:   rel ? rel.title : '—',
+          primaryGenreName: '—',
+          trackTimeMillis:  r.length || 0,
+          releaseDate:      rel && rel.date ? rel.date : '—',
+          artworkUrl100:    '',
+          previewUrl:       '',
+          _source:          'musicbrainz'
+        };
+      }
+    }
+
+    if(!track){
       processing.style.display = 'none';
       analyzeBtn.disabled = false;
       analyzeBtn.style.opacity = '1';
       analyzeBtn.innerText = 'Analyze Music';
-      alert('Song not found.');
+      alert('Song not found in any database.');
       return;
     }
-
-    const track = itunesData.results[0];
 
     // Lyrics fetch separado — não bloqueia se falhar
     let lyricsText = 'Lyrics not available for this track.';
