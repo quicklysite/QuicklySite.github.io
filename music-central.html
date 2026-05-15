@@ -733,8 +733,14 @@ async function simulateProcessing(){
 
     // Preenche dados
     document.querySelector('.album-cover').src = track.artworkUrl100.replace('100x100','600x600');
-    document.getElementById('info-artist').innerText   = track.artistName || '—';
-document.getElementById('info-album').innerText    = track.collectionName || '—';
+    const artistName = track.artistName || '—';
+const albumName = track.collectionName || '—';
+document.getElementById('info-artist').innerHTML = artistName !== '—'
+  ? `<span style="cursor:pointer;text-decoration:underline;text-underline-offset:3px;" onclick="document.getElementById('input-song').value='';document.getElementById('input-artist').value='${artistName.replace(/'/g,"\\'")}';simulateProcessing()">${artistName}</span>`
+  : '—';
+document.getElementById('info-album').innerHTML = albumName !== '—'
+  ? `<span style="cursor:pointer;text-decoration:underline;text-underline-offset:3px;" onclick="document.getElementById('input-song').value='${albumName.replace(/'/g,"\\'")}';document.getElementById('input-artist').value='${artistName.replace(/'/g,"\\'")}';simulateProcessing()">${albumName}</span>`
+  : '—';
 document.getElementById('info-duration').innerText = msToMinutes(track.trackTimeMillis);
 document.getElementById('info-genre').innerText    = track.primaryGenreName || '—';
 
