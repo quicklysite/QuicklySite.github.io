@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta name="description" content="Search any song and instantly get full lyrics, metadata, album cover and audio preview. Music Central Online — your free music analysis tool." />
+<meta name="description" content="Explore any song in depth: album art, full metadata, audio preview, lyrics and related tracks. Free music exploration tool — mainstream and underground artists." />
 <link rel="canonical" href="https://quicklysite.github.io/music-central.html" />
 
 <!-- CANONICAL PLACEHOLDER -->
@@ -17,7 +17,7 @@
       "@id": "https://quicklysite.github.io/music-central.html#app",
       "name": "Music Central Online",
       "url": "https://quicklysite.github.io/music-central.html",
-      "description": "Search any song and instantly get full lyrics, metadata, album cover and audio preview.",
+      "description": "Explore any song in depth: album art, metadata, audio preview, lyrics and similar tracks. Music Central is a music exploration tool for discovering underground and mainstream artists.",
       "applicationCategory": "MusicApplication",
       "operatingSystem": "All",
       "browserRequirements": "Requires JavaScript",
@@ -315,7 +315,21 @@ body{
 }
 
 @media(max-width:900px){
-
+.album-cover {
+  max-height: 260px;
+  object-fit: cover;
+}
+.info-card {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 16px;
+  align-items: start;
+}
+.album-cover {
+  width: 140px;
+  height: 140px;
+  object-fit: cover;
+}
 .results-grid{
   grid-template-columns:1fr;
 }
@@ -757,9 +771,11 @@ fetch(`https://itunes.apple.com/search?term=${searchTerm}&limit=8&entity=song`)
   .then(r => r.json())
   .then(data => {
     const grid = document.getElementById('similar-grid');
+const gridExt = document.getElementById('related-grid');
     if(!grid || !data.results) return;
     const filtered = data.results.filter(t => t.trackName !== track.trackName).slice(0,4);
     grid.innerHTML = filtered.map(t =>
+      if(gridExt) gridExt.innerHTML = grid.innerHTML;
       `<div class="related-item" onclick="document.getElementById('input-song').value='${t.trackName.replace(/'/g,"\\'")}';document.getElementById('input-artist').value='${t.artistName.replace(/'/g,"\\'")}';simulateProcessing()">
         <strong>${t.trackName}</strong><br>${t.artistName}
       </div>`
