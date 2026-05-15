@@ -341,10 +341,15 @@ body{
 }
 .related-genre{
 
-  font-size:0.78rem;
+  margin-top:8px;
+
+  font-size:0.76rem;
+
   color:#c6a972;
-  opacity:0.75;
-  margin-top:4px;
+
+  opacity:0.78;
+
+  letter-spacing:0.03em;
 
 }
 @media(max-width:900px){
@@ -849,9 +854,15 @@ const gridExt = document.getElementById('related-grid');
     if(!grid || !data.results) return;
     const filtered = data.results.filter(t => t.trackName !== track.trackName).slice(0,4);
     const html = filtered.map(t =>
-      `<div class="related-item" onclick="document.getElementById('input-song').value='${t.trackName.replace(/'/g,"\\'")}';document.getElementById('input-artist').value='${t.artistName.replace(/'/g,"\\'")}';simulateProcessing()">
-        <strong>${t.trackName}</strong><br>${t.artistName}
-      </div>`
+      <strong>${t.trackName}</strong>
+
+<br>
+
+${t.artistName}
+
+<div class="related-genre">
+  ${t.primaryGenreName || 'Unknown Genre'}
+</div>
     ).join('');
     grid.innerHTML = html;
     if(gridExt) gridExt.innerHTML = html;
