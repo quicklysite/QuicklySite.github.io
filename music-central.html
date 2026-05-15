@@ -83,6 +83,7 @@
 }
 
 body{
+  overflow-x:hidden;
   background:var(--bg);
   color:var(--text);
   font-family:Arial, sans-serif;
@@ -90,6 +91,7 @@ body{
 }
 
 .container{
+  overflow-x:hidden;
   width:100%;
   max-width:1200px;
   margin:auto;
@@ -325,6 +327,8 @@ body{
 }
 
 .related-item{
+  overflow:hidden;
+  word-break:break-word;
   background:#111115;
   border-radius:16px;
   padding:18px;
@@ -889,19 +893,29 @@ fetch(`https://itunes.apple.com/search?term=${searchTerm}&limit=8&entity=song`)
 const gridExt = document.getElementById('related-grid');
     if(!grid || !data.results) return;
     const filtered = data.results.filter(t => t.trackName !== track.trackName).slice(0,4);
-    const html = filtered.map(t =>
-      `<div class="related-item">`
-      <strong>${t.trackName}</strong>
+    const html = filtered.map(t => `
+  <div
+    class="related-item"
+    onclick="
+      document.getElementById('input-song').value='${(t.trackName || '').replace(/'/g,"\\'")}';
+      document.getElementById('input-artist').value='${(t.artistName || '').replace(/'/g,"\\'")}';
+      simulateProcessing();
+    ">
 
-<br>
+    <strong>${t.trackName || 'Unknown Track'}</strong>
 
-${t.artistName}
+    <br>
 
-<div class="related-genre">
-  ${t.primaryGenreName || 'Unknown Genre'}
-</div>
-    ).join('');
+    ${t.artistName || 'Unknown Artist'}
+
+    <div class="related-genre">
+      ${t.primaryGenreName || 'Unknown Genre'}
+    </div>
+
+  </div>
+`).join('');
     grid.innerHTML = html;
+    gridExt.innerHTML = html;
     if(gridExt) gridExt.innerHTML = html;
   })
   .catch(() => {});
