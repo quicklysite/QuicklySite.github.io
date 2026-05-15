@@ -678,7 +678,7 @@ async function simulateProcessing(){
 
   try{
     // iTunes fetch primeiro
-    const itunesRes = await fetch(`https://itunes.apple.com/search?term=${encodeURIComponent(artist)}+${encodeURIComponent(song)}&limit=1`);
+    const itunesRes = await fetch(`https://itunes.apple.com/search?term=${encodeURIComponent(song)}+${encodeURIComponent(artist)}&limit=1&entity=song&country=US&lang=en_us`);
     const itunesData = await itunesRes.json();
 
     if(!itunesData.results.length){
