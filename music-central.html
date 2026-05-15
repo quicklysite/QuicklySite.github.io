@@ -716,13 +716,19 @@ async function simulateProcessing(){
     }
 
     // Lyrics fetch separado — não bloqueia se falhar
-    let lyricsText = 'Lyrics not available for this track.';
+    let lyricsText = '';
+    let lyricsIsLink = false;
     try {
       const lyricsRes = await fetch(`https://api.lyrics.ovh/v1/${encodeURIComponent(track.artistName)}/${encodeURIComponent(track.trackName)}`);
       const lyricsData = await lyricsRes.json();
-      if(lyricsData.lyrics) lyricsText = lyricsData.lyrics;
+      if(lyricsData.lyrics){
+        lyricsText = lyricsData.lyrics;
+      } else {
+        throw new Error('no lyrics');
+      }
     } catch(e) {
-      lyricsText = 'Lyrics not found. Try searching on Genius.com.';
+      lyricsIsLink = true;
+      lyricsText = `https://genius.com/search?q=${encodeURIComponent(track.trackName)}+${encodeURIComponent(track.artistName)}`;
     }
 
     // Preenche dados
