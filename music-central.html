@@ -652,8 +652,7 @@ body{
     <div class="meta-item"><div class="meta-title">Genre</div><div class="meta-value" id="meta-genre">—</div></div>
     <div class="meta-item"><div class="meta-title">Duration</div><div class="meta-value" id="meta-duration">—</div></div>
     <div class="meta-item"><div class="meta-title">Release Year</div><div class="meta-value" id="meta-year">—</div></div>
-  </div>
-      <div class="meta-item">
+    <div class="meta-item">
 
   <span class="meta-label">
     Explicit
@@ -667,20 +666,14 @@ body{
 
   </span>
 
-      </div>
+    </div>
+  </div>
+      
       <div class="meta-item">
   <span class="meta-label">
     BPM
   </span>
-
-  <span
-    class="meta-value"
-    id="meta-bpm">
-
-    -- BPM
-
-  </span>
-      </div>
+</div>
 <div class="meta-item">
   <span class="meta-label">BPM</span>
   <span class="meta-value" id="meta-bpm">
@@ -847,18 +840,20 @@ document.getElementById('info-genre').innerText    = track.primaryGenreName || '
 document.getElementById('meta-track').innerText    = track.trackName || '—';
 document.getElementById('meta-artist').innerText   = track.artistName || '—';
 document.getElementById('meta-album').innerText    = track.collectionName || '—';
-    document.getElementById('meta-release')
+document.getElementById('meta-release')
 .innerText =
+
+track.releaseDate
+? new Date(track.releaseDate)
+  .getFullYear()
+: '----';
+
 document.getElementById('meta-explicit')
 .innerText =
 
 track.trackExplicitness === 'explicit'
 ? 'Yes'
-: 'No';
-track.releaseDate
-? new Date(track.releaseDate)
-  .getFullYear()
-: '----';
+: 'No';    
 document.getElementById('meta-genre').innerText    = track.primaryGenreName || '—';
     const genreBpmMap = {
 
@@ -895,6 +890,7 @@ const gridExt = document.getElementById('related-grid');
     if(!grid || !data.results) return;
     const filtered = data.results.filter(t => t.trackName !== track.trackName).slice(0,4);
     const html = filtered.map(t =>
+      `<div class="related-item">`
       <strong>${t.trackName}</strong>
 
 <br>
