@@ -774,12 +774,13 @@ fetch(`https://itunes.apple.com/search?term=${searchTerm}&limit=8&entity=song`)
 const gridExt = document.getElementById('related-grid');
     if(!grid || !data.results) return;
     const filtered = data.results.filter(t => t.trackName !== track.trackName).slice(0,4);
-    grid.innerHTML = filtered.map(t =>
-      if(gridExt) gridExt.innerHTML = grid.innerHTML;
+    const html = filtered.map(t =>
       `<div class="related-item" onclick="document.getElementById('input-song').value='${t.trackName.replace(/'/g,"\\'")}';document.getElementById('input-artist').value='${t.artistName.replace(/'/g,"\\'")}';simulateProcessing()">
         <strong>${t.trackName}</strong><br>${t.artistName}
       </div>`
     ).join('');
+    grid.innerHTML = html;
+    if(gridExt) gridExt.innerHTML = html;
   })
   .catch(() => {});
     document.getElementById('music-preview').src = track.previewUrl || '';
