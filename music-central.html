@@ -356,6 +356,7 @@ body{
   letter-spacing:0.03em;
 
 }
+  /* ✦ NEXT: mobile fixes aqui */
 @media(max-width:900px){
   .results-grid{
     grid-template-columns:1fr;
@@ -512,7 +513,7 @@ body{
 <a href="index.html" class="back-link" id="back-link" style="display:inline-block;margin-bottom:24px;color:#c6a972;text-decoration:none;font-size:0.95rem;">← Back to NameForge</a>
   <section class="hero">
     <h1>Music Central Online</h1>
-
+<!-- ✦ NEXT: SEO text padding fix aqui -->
     <p>
       Explore lyrics, discover BPM, analyze music metadata,
       copy full lyrics instantly and dive into a modern
@@ -914,6 +915,7 @@ const gridExt = document.getElementById('related-grid');
 
   </div>
 `).join('');
+    // ✦ NEXT: album-cover null fix aqui
     grid.innerHTML = html;
     gridExt.innerHTML = html;
     if(gridExt) gridExt.innerHTML = html;
