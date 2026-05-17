@@ -540,11 +540,7 @@ async function searchArtistTracks(artist){
 
       <div
         class="related-item"
-        onclick="
-          document.getElementById('input-song').value='${(track.trackName || '').replace(/'/g,"\\'")}';
-          document.getElementById('input-artist').value='${(track.artistName || '').replace(/'/g,"\\'")}';
-          simulateProcessing();
-        ">
+        onclick='loadTrackData(${JSON.stringify(track).replace(/'/g,"&apos;")})'>
 
         <strong>
           ${track.trackName || 'Unknown'}
@@ -738,6 +734,95 @@ async function searchAlbumTracks(album,artist,collectionId=null){
 
     document.getElementById('related-section')
     .scrollIntoView({
+      behavior:'smooth'
+    });
+
+  }
+
+  catch(error){
+
+    console.log(error);
+
+  }
+
+} 
+function loadTrackData(track){
+
+  try{
+
+    /*
+    ==========================
+    BASIC INFO
+    ==========================
+    */
+
+    document.getElementById('song-title').innerText =
+    track.trackName || 'Unknown';
+
+    document.getElementById('info-artist').innerHTML =
+    track.artistName || '—';
+
+    document.getElementById('info-album').innerHTML =
+    track.collectionName || '—';
+
+    document.getElementById('info-duration').innerText =
+    msToMinutes(track.trackTimeMillis);
+
+    document.getElementById('info-genre').innerText =
+    track.primaryGenreName || '—';
+
+    /*
+    ==========================
+    COVER
+    ==========================
+    */
+
+    if(track.artworkUrl100){
+
+      document.getElementById('album-cover').src =
+      track.artworkUrl100.replace(
+        '100x100',
+        '600x600'
+      );
+
+    }
+
+    /*
+    ==========================
+    AUDIO PREVIEW
+    ==========================
+    */
+
+    const audio =
+    document.getElementById('audio-preview');
+
+    if(track.previewUrl){
+
+      audio.src =
+      track.previewUrl;
+
+    }
+
+    /*
+    ==========================
+    INPUT UPDATE
+    ==========================
+    */
+
+    document.getElementById('input-song').value =
+    track.trackName || '';
+
+    document.getElementById('input-artist').value =
+    track.artistName || '';
+
+    /*
+    ==========================
+    SCROLL TOP
+    ==========================
+    */
+
+    window.scrollTo({
+      top:0,
       behavior:'smooth'
     });
 
