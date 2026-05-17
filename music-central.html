@@ -168,6 +168,11 @@ body{ background:var(--bg); color:var(--text); font-family:Arial,sans-serif; min
   .hero p{ font-size:0.95rem; }
   .related-grid{ grid-template-columns:1fr 1fr; }
 }
+.related-item.active-track{
+  border-color:rgba(198,169,114,0.8);
+  background:#1e1a10;
+  box-shadow:0 0 14px rgba(198,169,114,0.2);
+}  
 </style>
 </head>
 <body>
@@ -701,7 +706,7 @@ async function searchAlbumTracks(album,artist,collectionId=null){
     */
 
     const html = tracks.map(track =>
-  `<div class="related-item" onclick='loadTrackData(${JSON.stringify(track).replace(/'/g,"&apos;")})'>
+  `<div class="related-item" onclick='loadTrackData(${JSON.stringify(track).replace(/'/g,"&apos;")}, event)'>
     <strong>${(track.trackNumber||'?').toString().padStart(2,'0')}. ${track.trackName||'Unknown'}</strong>
     <br><span style="color:#9b9b9b;font-size:0.85rem;">${msToMinutes(track.trackTimeMillis)}</span>
   </div>`
@@ -727,8 +732,10 @@ async function searchAlbumTracks(album,artist,collectionId=null){
   }
 
 } 
-function loadTrackData(track){
+function loadTrackData(track, event){
   try{
+    document.querySelectorAll('.related-item').forEach(el=>el.classList.remove('active-track'));
+event.currentTarget.classList.add('active-track');
     // Cover
     document.querySelector('.album-cover').src = track.artworkUrl100
       ? track.artworkUrl100.replace('100x100bb','600x600bb')
