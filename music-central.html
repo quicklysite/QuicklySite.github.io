@@ -747,93 +747,57 @@ async function searchAlbumTracks(album,artist,collectionId=null){
 
 } 
 function loadTrackData(track){
-
   try{
+    // Cover
+    document.querySelector('.album-cover').src = track.artworkUrl100
+      ? track.artworkUrl100.replace('100x100bb','600x600bb')
+      : 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?q=80&w=600&auto=format&fit=crop';
 
-    /*
-    ==========================
-    BASIC INFO
-    ==========================
-    */
+    // Info card
+    const artistName = track.artistName || '—';
+    const albumName  = track.collectionName || '—';
+    document.getElementById('info-artist').innerHTML = artistName !== '—'
+      ? `<span style="cursor:pointer;text-decoration:underline;text-underline-offset:3px;" onclick="searchArtistTracks('${artistName.replace(/'/g,"\\'")}')">${artistName}</span>`
+      : '—';
+    document.getElementById('info-album').innerHTML = albumName !== '—'
+      ? `<span style="cursor:pointer;text-decoration:underline;text-underline-offset:3px;" onclick="searchAlbumTracks('${albumName.replace(/'/g,"\\'")}','${artistName.replace(/'/g,"\\'")}',${track.collectionId||'null'})">${albumName}</span>`
+      : '—';
+    document.getElementById('info-duration').innerText = msToMinutes(track.trackTimeMillis);
+    document.getElementById('info-genre').innerText    = track.primaryGenreName || '—';
 
-    document.getElementById('song-title').innerText =
-    track.trackName || 'Unknown';
+    // Tab Metadata
+    document.getElementById('meta-track').innerText    = track.trackName || '—';
+    document.getElementById('meta-artist').innerText   = track.artistName || '—';
+    document.getElementById('meta-album').innerText    = track.collectionName || '—';
+    document.getElementById('meta-genre').innerText    = track.primaryGenreName || '—';
+    document.getElementById('meta-duration').innerText = msToMinutes(track.trackTimeMillis);
+    document.getElementById('meta-year').innerText     = track.releaseDate ? track.releaseDate.substring(0,4) : '—';
+    document.getElementById('meta-bpm').innerText      = genreBpmMap[track.primaryGenreName] || '—';
+    document.getElementById('meta-explicit').innerText = track.trackExplicitness === 'explicit' ? 'Yes' : 'No';
 
-    document.getElementById('info-artist').innerHTML =
-    track.artistName || '—';
+    // Preview
+    document.getElementById('music-preview').src = track.previewUrl || '';
 
-    document.getElementById('info-album').innerHTML =
-    track.collectionName || '—';
+    // Lyrics
+    const lyricsBox = document.getElementById('lyrics-box');
+    lyricsBox.innerHTML = `<span style="color:#9b9b9b;font-size:0.9rem;">Lyrics not available here.<br><br><a href="https://genius.com/search?q=${encodeURIComponent((track.trackName||'')+'+'+(track.artistName||''))}" target="_blank" style="color:#c6a972;text-decoration:none;font-weight:600;">🔍 Search lyrics on Genius ↗</a></span>`;
 
-    document.getElementById('info-duration').innerText =
-    msToMinutes(track.trackTimeMillis);
+    // Inputs
+    document.getElementById('input-song').value   = track.trackName || '';
+    document.getElementById('input-artist').value = track.artistName || '';
 
-    document.getElementById('info-genre').innerText =
-    track.primaryGenreName || '—';
+    // Mostrar results se estiver escondido
+    const rg = document.querySelector('.results-grid');
+    rg.style.display  = 'grid';
+    rg.style.opacity  = '1';
+    rg.style.transform = 'translateY(0)';
 
-    /*
-    ==========================
-    COVER
-    ==========================
-    */
+    // Scroll para o topo dos results
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 
-    if(track.artworkUrl100){
-
-      document.getElementById('album-cover').src =
-      track.artworkUrl100.replace(
-        '100x100',
-        '600x600'
-      );
-
-    }
-
-    /*
-    ==========================
-    AUDIO PREVIEW
-    ==========================
-    */
-
-    const audio =
-    document.getElementById('audio-preview');
-
-    if(track.previewUrl){
-
-      audio.src =
-      track.previewUrl;
-
-    }
-
-    /*
-    ==========================
-    INPUT UPDATE
-    ==========================
-    */
-
-    document.getElementById('input-song').value =
-    track.trackName || '';
-
-    document.getElementById('input-artist').value =
-    track.artistName || '';
-
-    /*
-    ==========================
-    SCROLL TOP
-    ==========================
-    */
-
-    window.scrollTo({
-      top:0,
-      behavior:'smooth'
-    });
-
-  }
-
-  catch(error){
-
+  }catch(error){
     console.log(error);
-
   }
-
 }  
 // ── UTILS ──
 function msToMinutes(ms){
