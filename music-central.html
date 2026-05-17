@@ -448,12 +448,12 @@ async function simulateProcessing(){
     const artistName=track.artistName||'—';
     const albumName=track.collectionName||'—';
     document.getElementById('info-artist').innerHTML = artistName!=='—'
-  ? `<span style="cursor:pointer;text-decoration:underline;text-underline-offset:3px;" onclick="searchArtistTracks('${artistName.replace(/'/g,"\\'")}')">${artistName}</span>`
-  : '—';
+      ? `<span style="cursor:pointer;text-decoration:underline;text-underline-offset:3px;" onclick="searchArtistTracks('${artistName.replace(/'/g,"\\'")}')">${artistName}</span><br><span style="font-size:0.75rem;color:var(--gold-soft);opacity:0.8;">🎤 See discography</span>`
+      : '—';
 
   document.getElementById('info-album').innerHTML = albumName!=='—'
-  ? `<span style="cursor:pointer;text-decoration:underline;text-underline-offset:3px;"onclick="searchAlbumTracks('${albumName.replace(/'/g,"\\'")}','${artistName.replace(/'/g,"\\'")}',${track.collectionId || 'null'})">${albumName}</span>`
-  : '—';
+      ? `<span style="cursor:pointer;text-decoration:underline;text-underline-offset:3px;" onclick="searchAlbumTracks('${albumName.replace(/'/g,"\\'")}','${artistName.replace(/'/g,"\\'")}',${track.collectionId||'null'})">${albumName}</span><br><span style="font-size:0.75rem;color:var(--gold-soft);opacity:0.8;">💿 See tracklist</span>`
+      : '—';
     document.getElementById('info-duration').innerText = msToMinutes(track.trackTimeMillis);
     document.getElementById('info-genre').innerText    = track.primaryGenreName||'—';
 
