@@ -209,6 +209,20 @@ body{ background:var(--bg); color:var(--text); font-family:Arial,sans-serif; min
   text-align:center;
   line-height:1.6;
 }
+  .track-title-display{
+  font-size:1.15rem;
+  font-weight:700;
+  color:var(--text);
+  line-height:1.4;
+  margin-bottom:20px;
+  padding-bottom:16px;
+  border-bottom:1px solid var(--border);
+  min-height:24px;
+  }
+  .processing-line.done-step1{ opacity:0.45; color:#7ec8e3; }
+.processing-line.done-step2{ opacity:0.45; color:#a8e6a3; }
+.processing-line.done-step3{ opacity:0.45; color:#f0c27f; }
+.processing-line.done-step4{ opacity:0.45; color:var(--gold); }
 </style>
 </head>
 <body>
@@ -265,6 +279,7 @@ body{ background:var(--bg); color:var(--text); font-family:Arial,sans-serif; min
 
     <div class="info-card">
       <img class="album-cover" src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?q=80&w=600&auto=format&fit=crop" alt="Album Cover">
+      <div class="track-title-display" id="track-title-display">—</div>
       <div class="meta-item">
         <div class="meta-title">Artist</div>
         <div class="meta-value" id="info-artist">—</div>
@@ -427,7 +442,11 @@ async function simulateProcessing(){
   const steps=['step1','step2','step3','step4'];
   steps.forEach((id,i)=>{
     setTimeout(()=>{
-      if(i>0) document.getElementById(steps[i-1]).classList.replace('active','done');
+      if(i>0){
+        const prev=document.getElementById(steps[i-1]);
+        prev.classList.remove('active','done');
+        prev.classList.add('done','done-'+steps[i-1]);
+      }
       document.getElementById(id).classList.add('active');
     },i*800);
   });
@@ -503,7 +522,7 @@ async function simulateProcessing(){
       : '—';
     document.getElementById('info-duration').innerText = msToMinutes(track.trackTimeMillis);
     document.getElementById('info-genre').innerText    = track.primaryGenreName||'—';
-
+    document.getElementById('track-title-display').innerText = track.trackName||'—';
     // Tab Metadata
     document.getElementById('meta-track').innerText    = track.trackName||'—';
     document.getElementById('meta-artist').innerText   = track.artistName||'—';
@@ -551,7 +570,9 @@ async function simulateProcessing(){
     saveRecent(song,artist);
 
     setTimeout(()=>{
-      document.getElementById('step4').classList.replace('active','done');
+      const s4=document.getElementById('step4');
+      s4.classList.remove('active','done');
+      s4.classList.add('done','done-step4');
       processing.style.display='none';
       const rg=document.querySelector('.results-grid');
       rg.style.display='grid';
@@ -799,7 +820,7 @@ event.currentTarget.classList.add('active-track');
       : '—';
     document.getElementById('info-duration').innerText = msToMinutes(track.trackTimeMillis);
     document.getElementById('info-genre').innerText    = track.primaryGenreName || '—';
-
+    document.getElementById('track-title-display').innerText = track.trackName || '—';
     // Tab Metadata
     document.getElementById('meta-track').innerText    = track.trackName || '—';
     document.getElementById('meta-artist').innerText   = track.artistName || '—';
