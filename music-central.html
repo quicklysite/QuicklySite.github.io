@@ -700,31 +700,12 @@ async function searchAlbumTracks(album,artist,collectionId=null){
     ==========================
     */
 
-    const html =
-    tracks.map(track => `
-
-      <div
-        class="related-item"
-        onclick="
-          document.getElementById('input-song').value='${(track.trackName || '').replace(/'/g,"\\'")}';
-          document.getElementById('input-artist').value='${(track.artistName || '').replace(/'/g,"\\'")}';
-          simulateProcessing();
-        ">
-
-        <strong>
-          ${(track.trackNumber || '?')
-            .toString()
-            .padStart(2,'0')}.
-          ${track.trackName || 'Unknown'}
-        </strong>
-
-        <br>
-
-        ${msToMinutes(track.trackTimeMillis)}
-
-      </div>
-
-    `).join('');
+    const html = tracks.map(track =>
+  `<div class="related-item" onclick='loadTrackData(${JSON.stringify(track).replace(/'/g,"&apos;")})'>
+    <strong>${(track.trackNumber||'?').toString().padStart(2,'0')}. ${track.trackName||'Unknown'}</strong>
+    <br><span style="color:#9b9b9b;font-size:0.85rem;">${msToMinutes(track.trackTimeMillis)}</span>
+  </div>`
+).join('');
 
     document.getElementById('related-grid')
     .innerHTML = html;
