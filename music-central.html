@@ -3,11 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <meta name="description" content="Explore any song in depth: album art, full metadata, audio preview, lyrics and related tracks. Free music exploration tool — mainstream and underground artists." />
 <link rel="canonical" href="https://quicklysite.github.io/music-central.html" />
-
-<!-- CANONICAL PLACEHOLDER -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -59,13 +56,9 @@
 }
 </script>
 <!-- ADSENSE PLACEHOLDER -->
-
 <!-- ANALYTICS PLACEHOLDER -->
-
 <title>Music Central Online</title>
-
 <style>
-
 :root{
   --bg:#0f0f12;
   --panel:#17171c;
@@ -75,1032 +68,543 @@
   --muted:#9b9b9b;
   --border:rgba(255,255,255,0.06);
 }
-
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
-
-body{
-  overflow-x:hidden;
-  background:var(--bg);
-  color:var(--text);
-  font-family:Arial, sans-serif;
-  min-height:100vh;
-}
-
-.container{
-  overflow-x:hidden;
-  width:100%;
-  max-width:1200px;
-  margin:auto;
-  padding:40px 20px 80px;
-}
-
-.hero{
-  text-align:center;
-  margin-bottom:40px;
-}
-
-.hero h1{
-  font-size:3rem;
-  color:var(--gold);
-  margin-bottom:12px;
-  letter-spacing:1px;
-}
-
-.hero p{
-  color:var(--muted);
-  font-size:1.05rem;
-  max-width:700px;
-  margin:auto;
-  line-height:1.7;
-}
-
-.search-card{
-  background:var(--panel);
-  border:1px solid var(--border);
-  border-radius:22px;
-  padding:28px;
-  margin-bottom:35px;
-  box-shadow:0 0 30px rgba(0,0,0,0.35);
-}
-
-.search-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:18px;
-}
-
-.input-group{
-  display:flex;
-  flex-direction:column;
-}
-
-.input-group label{
-  margin-bottom:8px;
-  color:var(--gold);
-  font-size:0.95rem;
-}
-
-.input-group input{
-  background:#111115;
-  border:1px solid rgba(255,255,255,0.08);
-  color:white;
-  padding:14px;
-  border-radius:14px;
-  outline:none;
-  font-size:1rem;
-}
-
-.analyze-btn{
-  width:100%;
-  margin-top:24px;
-  border:none;
-  background:linear-gradient(135deg,var(--gold),var(--gold-soft));
-  color:black;
-  padding:16px;
-  border-radius:16px;
-  font-weight:bold;
-  font-size:1rem;
-  cursor:pointer;
-  transition:0.25s;
-}
-
-.analyze-btn:hover{
-  transform:translateY(-2px);
-}
-
-.processing-card{
-  background:var(--panel);
-  border:1px solid var(--border);
-  border-radius:22px;
-  padding:28px;
-  margin-bottom:35px;
-  display:none;
-}
-
-.processing-line{
-  margin-bottom:14px;
-  color:var(--muted);
-}
-
-.loading-bar{
-  width:100%;
-  height:12px;
-  background:#101014;
-  border-radius:20px;
-  overflow:hidden;
-  margin-top:20px;
-}
-
-.loading-fill{
-  width:0%;
-  height:100%;
-  background:linear-gradient(90deg,var(--gold),#fff0c9);
-  animation:loadingAnim 4s infinite;
-}
-
-@keyframes loadingAnim{
-  0%{width:0%}
-  50%{width:75%}
-  100%{width:100%}
-}
-
-.results-grid{
-  display:none;
-  grid-template-columns:350px 1fr;
-  gap:25px;
-  opacity:0;
-  transform:translateY(20px);
-  transition:0.5s;
-}
-
-.info-card,
-.lyrics-card{
-  background:var(--panel);
-  border:1px solid var(--border);
-  border-radius:22px;
-  padding:25px;
-}
-
-.album-cover{
-  width:100%;
-  border-radius:18px;
-  margin-bottom:20px;
-  transition:0.4s;
-  box-shadow:0 0 30px rgba(198,169,114,0.15);
-}
-
-.album-cover:hover{
-  transform:scale(1.02);
-  box-shadow:0 0 45px rgba(198,169,114,0.35);
-}
-.meta-item{
-  margin-bottom:16px;
-}
-
-.meta-title{
-  color:var(--gold);
-  margin-bottom:5px;
-  font-size:0.9rem;
-}
-
-.meta-value{
-  color:var(--text);
-}
-
-.lyrics-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:20px;
-}
-
-.copy-btn{
-  background:var(--gold);
-  color:black;
-  border:none;
-  padding:10px 16px;
-  border-radius:12px;
-  cursor:pointer;
-  font-weight:bold;
-  transition:0.25s;
-}
-  .copy-btn:hover{
-  transform:translateY(-2px);
-  opacity:0.92;
-  }
-
-.lyrics-box{
-  white-space:pre-wrap;
-  line-height:1.9;
-  font-size:0.98rem;
-
-  padding:22px;
-
-  border-radius:18px;
-
-  background:
-  linear-gradient(
-    180deg,
-    rgba(255,255,255,0.03),
-    rgba(255,255,255,0.015)
-  );
-
-  border:
-  1px solid rgba(198,169,114,0.14);
-
-  color:#f5f5f5;
-
-  overflow-y:auto;
-
-  max-height:520px;
-
-  scrollbar-width:thin;
-
-  box-shadow:
-  inset 0 0 25px rgba(0,0,0,0.35);
-
-  backdrop-filter:blur(10px);
-
-}
-
-.extra-card{
-  margin-top:30px;
-  background:var(--panel);
-  border:1px solid var(--border);
-  border-radius:22px;
-  padding:25px;
-}
-
-.extra-card h2{
-  color:var(--gold);
-  margin-bottom:20px;
-}
-
-.related-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-  gap:18px;
-}
-
-.related-item{
-  overflow:hidden;
-  word-break:break-word;
-  background:#111115;
-  border-radius:16px;
-  padding:18px;
-  border:1px solid rgba(255,255,255,0.05);
-  transition:0.25s;
-  cursor:pointer;
-  line-height:1.7;
-}
-
-.related-item:hover{
-  transform:translateY(-4px);
-  border-color:rgba(198,169,114,0.4);
-  box-shadow:0 0 20px rgba(198,169,114,0.15);
-}
-.related-genre{
-
-  margin-top:8px;
-
-  font-size:0.76rem;
-
-  color:#c6a972;
-
-  opacity:0.78;
-
-  letter-spacing:0.03em;
-
-}
-  /* ✦ NEXT: mobile fixes aqui */
+*{ margin:0; padding:0; box-sizing:border-box; }
+body{ background:var(--bg); color:var(--text); font-family:Arial,sans-serif; min-height:100vh; }
+.container{ width:100%; max-width:1200px; margin:auto; padding:40px 20px 80px; }
+.back-link{ display:inline-block; margin-bottom:24px; color:var(--gold); text-decoration:none; font-size:0.95rem; }
+.back-link:hover{ opacity:0.8; }
+.hero{ text-align:center; margin-bottom:40px; }
+.hero h1{ font-size:3rem; color:var(--gold); margin-bottom:12px; letter-spacing:1px; }
+.hero p{ color:var(--muted); font-size:1.05rem; max-width:700px; margin:auto; line-height:1.7; }
+/* ACCORDION */
+.accordion-how{ margin-bottom:28px; border:1px solid rgba(255,255,255,0.08); border-radius:14px; overflow:hidden; }
+.accordion-how-header{ display:flex; align-items:center; justify-content:space-between; padding:16px 20px; cursor:pointer; background:var(--panel); }
+.accordion-how-header span{ color:var(--text); font-weight:600; font-size:0.95rem; }
+.accordion-how-arrow{ width:32px; height:32px; border:2px solid var(--gold); border-radius:8px; display:flex; align-items:center; justify-content:center; color:var(--gold); font-size:1.1rem; font-weight:900; transition:transform .3s; flex-shrink:0; }
+.accordion-how-body{ max-height:0; overflow:hidden; transition:max-height .4s ease; background:var(--panel); border-top:1px solid rgba(255,255,255,0.06); }
+.accordion-how-body.open{ max-height:500px; }
+.accordion-how-body-inner{ padding:20px; }
+.accordion-how-body-inner p{ margin-bottom:12px; line-height:1.8; color:#d8d8d8; font-size:0.92rem; }
+.accordion-how-body-inner p:last-child{ margin-bottom:0; }
+/* SEARCH */
+.search-card{ background:var(--panel); border:1px solid var(--border); border-radius:22px; padding:28px; margin-bottom:35px; box-shadow:0 0 30px rgba(0,0,0,0.35); }
+.search-grid{ display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+.input-group{ display:flex; flex-direction:column; }
+.input-group label{ margin-bottom:8px; color:var(--gold); font-size:0.95rem; }
+.input-group input{ background:#111115; border:1px solid rgba(255,255,255,0.08); color:white; padding:14px; border-radius:14px; outline:none; font-size:1rem; width:100%; }
+.analyze-btn{ width:100%; margin-top:24px; border:none; background:linear-gradient(135deg,var(--gold),var(--gold-soft)); color:black; padding:16px; border-radius:16px; font-weight:bold; font-size:1rem; cursor:pointer; transition:0.25s; }
+.analyze-btn:hover{ transform:translateY(-2px); }
+/* PROCESSING */
+.processing-card{ background:var(--panel); border:1px solid var(--border); border-radius:22px; padding:28px; margin-bottom:35px; display:none; }
+.processing-line{ margin-bottom:14px; color:var(--muted); opacity:0; transform:translateX(-8px); transition:opacity 0.4s ease,transform 0.4s ease; }
+.processing-line.active{ opacity:1; transform:translateX(0); color:var(--text); }
+.processing-line.done{ opacity:0.45; color:var(--gold-soft); }
+.loading-bar{ width:100%; height:12px; background:#101014; border-radius:20px; overflow:hidden; margin-top:20px; }
+.loading-fill{ width:0%; height:100%; background:linear-gradient(90deg,var(--gold),#fff0c9); animation:loadingAnim 4s infinite; }
+@keyframes loadingAnim{ 0%{width:0%} 50%{width:75%} 100%{width:100%} }
+/* RESULTS */
+.results-grid{ display:none; grid-template-columns:350px 1fr; gap:25px; opacity:0; transform:translateY(20px); transition:0.5s; }
+.info-card,.lyrics-card{ background:var(--panel); border:1px solid var(--border); border-radius:22px; padding:25px; }
+.album-cover{ width:100%; border-radius:18px; margin-bottom:20px; transition:0.4s; box-shadow:0 0 30px rgba(198,169,114,0.15); }
+.album-cover:hover{ transform:scale(1.02); box-shadow:0 0 45px rgba(198,169,114,0.35); }
+.meta-item{ margin-bottom:16px; }
+.meta-title,.meta-label{ color:var(--gold); margin-bottom:5px; font-size:0.9rem; display:block; }
+.meta-value{ color:var(--text); }
+/* TABS */
+.tabs-bar{ display:flex; gap:8px; margin-bottom:22px; border-bottom:1px solid var(--border); padding-bottom:12px; flex-wrap:wrap; }
+.tab-btn{ background:transparent; border:1px solid var(--border); color:var(--muted); padding:8px 18px; border-radius:20px; cursor:pointer; font-size:0.88rem; transition:0.2s; }
+.tab-btn.active{ background:var(--gold); color:#000; border-color:var(--gold); font-weight:700; }
+.tab-panel{ display:none; }
+.tab-panel.active{ display:block; }
+/* LYRICS */
+.lyrics-header{ display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; flex-wrap:wrap; gap:8px; }
+.copy-btn{ background:var(--gold); color:black; border:none; padding:10px 16px; border-radius:12px; cursor:pointer; font-weight:bold; transition:0.25s; font-size:0.88rem; }
+.copy-btn:hover{ transform:translateY(-2px); opacity:0.92; }
+.lyrics-box{ white-space:pre-wrap; line-height:1.9; font-size:0.98rem; padding:22px; border-radius:18px; background:linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.015)); border:1px solid rgba(198,169,114,0.14); color:#f5f5f5; overflow-y:auto; max-height:520px; scrollbar-width:thin; box-shadow:inset 0 0 25px rgba(0,0,0,0.35); }
+/* EXTRA */
+.extra-card{ margin-top:30px; background:var(--panel); border:1px solid var(--border); border-radius:22px; padding:25px; }
+.extra-card h2{ color:var(--gold); margin-bottom:20px; }
+.related-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:18px; }
+.related-item{ background:#111115; border-radius:16px; padding:18px; border:1px solid rgba(255,255,255,0.05); transition:0.25s; cursor:pointer; line-height:1.7; }
+.related-item:hover{ transform:translateY(-4px); border-color:rgba(198,169,114,0.4); box-shadow:0 0 20px rgba(198,169,114,0.15); }
+/* RECENT */
+.recent-section{ margin-top:40px; border-top:1px solid var(--border); padding-top:28px; }
+.recent-section h2{ color:var(--gold); margin-bottom:16px; font-size:1rem; text-transform:uppercase; letter-spacing:0.08em; }
+.recent-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; }
+.recent-item{ background:#111115; border-radius:14px; padding:14px 16px; border:1px solid rgba(255,255,255,0.05); cursor:pointer; transition:0.25s; display:flex; flex-direction:column; gap:4px; }
+.recent-item:hover{ border-color:rgba(198,169,114,0.4); transform:translateY(-3px); box-shadow:0 0 16px rgba(198,169,114,0.1); }
+.recent-item .r-song{ color:var(--text); font-weight:600; font-size:0.88rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.recent-item .r-artist{ color:var(--muted); font-size:0.80rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.recent-empty{ color:var(--muted); font-size:0.85rem; opacity:0.6; }
+/* SEO BLOCK */
+.seo-block{ margin-top:40px; padding:32px; background:var(--panel); border:1px solid var(--border); border-radius:22px; }
+.seo-block h2{ color:var(--gold); font-size:1.1rem; margin-bottom:16px; }
+.seo-block p{ color:#d8d8d8; line-height:1.8; margin-bottom:14px; font-size:0.92rem; }
+.seo-block p:last-child{ margin-bottom:0; }
+/* OTHER TOOLS */
+.other-tools{ margin-top:40px; padding-top:28px; border-top:1px solid rgba(255,255,255,0.06); }
+.other-tools h2{ color:var(--gold); font-size:0.85rem; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:16px; }
+.other-tools-grid{ display:flex; flex-wrap:wrap; gap:10px; }
+.tool-link-ext{ background:var(--panel); border:1px solid rgba(255,255,255,0.08); color:var(--gold); padding:10px 16px; border-radius:12px; text-decoration:none; font-size:0.88rem; transition:0.2s; }
+.tool-link-ext:hover{ border-color:var(--gold); }
+/* SCROLL TOP */
+.scroll-top{ position:fixed; bottom:28px; right:22px; width:44px; height:44px; background:var(--gold); color:#000; border:none; border-radius:12px; font-size:1.2rem; cursor:pointer; opacity:0; transition:0.3s; z-index:999; display:flex; align-items:center; justify-content:center; font-weight:900; }
+.scroll-top.visible{ opacity:1; }
+/* MOBILE */
 @media(max-width:900px){
-  .results-grid{
-    grid-template-columns:1fr;
-  }
-  .search-grid{
-    grid-template-columns:1fr;
-  }
-  .hero h1{
-    font-size:2.2rem;
-  }
-  .info-card{
-    display:flex;
-    flex-direction:column;
-  }
-  .album-cover{
-    width:100%;
-    max-height:280px;
-    object-fit:cover;
-    border-radius:14px;
-  }
+  .results-grid{ grid-template-columns:1fr; }
+  .search-grid{ grid-template-columns:1fr; }
+  .hero h1{ font-size:2.2rem; }
+  .album-cover{ max-height:300px; object-fit:cover; }
 }
-/* LOADING REFINADO */
-.processing-line {
-  margin-bottom:14px;
-  color:var(--muted);
-  opacity:0;
-  transform:translateX(-8px);
-  transition: opacity 0.4s ease, transform 0.4s ease;
-}
-.processing-line.active {
-  opacity:1;
-  transform:translateX(0);
-  color:var(--text);
-}
-.processing-line.done {
-  opacity:0.45;
-  color:var(--gold-soft);
-}
-
-/* HISTÓRICO REFINADO */
-.recent-section {
-  margin-top:40px;
-  border-top:1px solid var(--border);
-  padding-top:28px;
-}
-.recent-section h2 {
-  color:var(--gold);
-  margin-bottom:16px;
-  font-size:1rem;
-  text-transform:uppercase;
-  letter-spacing:0.08em;
-}
-.recent-grid {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
-  gap:12px;
-}
-.recent-item {
-  background:#111115;
-  border-radius:14px;
-  padding:14px 16px;
-  border:1px solid rgba(255,255,255,0.05);
-  cursor:pointer;
-  transition:0.25s;
-  display:flex;
-  flex-direction:column;
-  gap:4px;
-}
-.recent-item:hover {
-  border-color:rgba(198,169,114,0.4);
-  transform:translateY(-3px);
-  box-shadow:0 0 16px rgba(198,169,114,0.1);
-}
-.recent-item .r-song {
-  color:var(--text);
-  font-weight:600;
-  font-size:0.88rem;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
-}
-.recent-item .r-artist {
-  color:var(--muted);
-  font-size:0.80rem;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
-}
-.recent-empty {
-  color:var(--muted);
-  font-size:0.85rem;
-  opacity:0.6;
-}
-
 @media(max-width:600px){
-  .recent-grid {
-    grid-template-columns:1fr 1fr;
-  }
+  .recent-grid{ grid-template-columns:1fr 1fr; }
+  .container{ padding:24px 16px 80px; }
+  .seo-block{ padding:20px 16px; }
+  .search-card{ padding:20px 16px; }
+  .info-card,.lyrics-card{ padding:18px 14px; }
+  .extra-card{ padding:18px 14px; }
+  .hero h1{ font-size:1.8rem; }
+  .hero p{ font-size:0.95rem; }
+  .related-grid{ grid-template-columns:1fr 1fr; }
 }
-  /* TABS INTERNAS */
-.tabs-bar {
-  display:flex;
-  gap:8px;
-  margin-bottom:22px;
-  border-bottom:1px solid var(--border);
-  padding-bottom:12px;
-  flex-wrap:wrap;
-}
-.tab-btn {
-  background:transparent;
-  border:1px solid var(--border);
-  color:var(--muted);
-  padding:8px 18px;
-  border-radius:20px;
-  cursor:pointer;
-  font-size:0.88rem;
-  transition:0.2s;
-}
-.tab-btn.active {
-  background:var(--gold);
-  color:#000;
-  border-color:var(--gold);
-  font-weight:700;
-}
-.tab-panel { display:none; }
-.tab-panel.active { display:block; }
-  .scroll-top {
-  position:fixed;
-  bottom:28px;
-  right:22px;
-  width:44px;
-  height:44px;
-  background:var(--gold);
-  color:#000;
-  border:none;
-  border-radius:12px;
-  font-size:1.2rem;
-  cursor:pointer;
-  opacity:0;
-  transition:0.3s;
-  z-index:999;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-weight:900;
-}
-.scroll-top.visible { opacity:1; }
 </style>
 </head>
-
 <body>
-
 <div class="container">
-<a href="index.html" class="back-link" id="back-link" style="display:inline-block;margin-bottom:24px;color:#c6a972;text-decoration:none;font-size:0.95rem;">← Back to NameForge</a>
+
+  <a href="index.html" class="back-link">← Back to NameForge</a>
+
   <section class="hero">
     <h1>Music Central Online</h1>
-<!-- ✦ NEXT: SEO text padding fix aqui -->
-    <p>
-      Explore lyrics, discover BPM, analyze music metadata,
-      copy full lyrics instantly and dive into a modern
-      music exploration experience.
-    </p>
+    <p>Explore lyrics, discover BPM, analyze music metadata, copy full lyrics instantly and dive into a modern music exploration experience.</p>
   </section>
-<div class="accordion" id="accordion-how" style="margin-bottom:28px;">
-  <div class="accordion-header" onclick="toggleHow()" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px;cursor:pointer;background:#17171c;border-radius:14px;border:1px solid rgba(255,255,255,0.08);">
-    <span style="color:#f5f5f5;font-weight:600;font-size:0.95rem;">📖 How to use Music Central?</span>
-    <div id="how-arrow" style="width:32px;height:32px;border:2px solid #c6a972;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#c6a972;font-size:1.1rem;font-weight:900;transition:transform .3s;">&#8964;</div>
-  </div>
-  <div id="how-body" style="max-height:0;overflow:hidden;transition:max-height .4s ease;background:#17171c;border-radius:0 0 14px 14px;border:1px solid rgba(255,255,255,0.08);border-top:none;">
-    <div style="padding:20px;">
-      <p style="margin-bottom:12px;line-height:1.8;color:#d8d8d8;font-size:0.92rem;">Type the <strong style="color:#c6a972;">song name</strong> and the <strong style="color:#c6a972;">artist name</strong> in the fields, then click <strong style="color:#c6a972;">Analyze Music</strong>. The tool will search databases and return the album cover, metadata and lyrics automatically.</p>
-      <p style="margin-bottom:12px;line-height:1.8;color:#d8d8d8;font-size:0.92rem;">Use the <strong style="color:#c6a972;">Lyrics</strong>, <strong style="color:#c6a972;">Metadata</strong> and <strong style="color:#c6a972;">Similar</strong> tabs to explore different information about the track. You can copy the lyrics to your clipboard or download them as a .txt file.</p>
-      <p style="line-height:1.8;color:#d8d8d8;font-size:0.92rem;"><strong style="color:#c6a972;">Tip:</strong> Press Enter after typing to search without clicking the button. Your recent searches are saved automatically and appear below the results.</p>
+
+  <!-- ACCORDION HOW TO USE -->
+  <div class="accordion-how">
+    <div class="accordion-how-header" onclick="toggleHow()">
+      <span>📖 How to use Music Central?</span>
+      <div class="accordion-how-arrow" id="how-arrow">&#8964;</div>
+    </div>
+    <div class="accordion-how-body" id="how-body">
+      <div class="accordion-how-body-inner">
+        <p>Type the <strong style="color:#c6a972;">song name</strong> and the <strong style="color:#c6a972;">artist name</strong> in the fields, then click <strong style="color:#c6a972;">Analyze Music</strong>. The tool searches multiple databases and returns the album cover, metadata, audio preview and lyrics automatically.</p>
+        <p>Use the <strong style="color:#c6a972;">Lyrics</strong>, <strong style="color:#c6a972;">Metadata</strong> and <strong style="color:#c6a972;">Similar</strong> tabs to explore different information about the track. Copy lyrics to clipboard or download as a .txt file.</p>
+        <p><strong style="color:#c6a972;">Tip:</strong> Click on the artist name or album to search for more tracks. Your recent searches are saved automatically below the results.</p>
+      </div>
     </div>
   </div>
-</div>
+
+  <!-- SEARCH -->
   <section class="search-card">
-
     <div class="search-grid">
-
       <div class="input-group">
         <label>Song Name</label>
         <input type="text" id="input-song" placeholder="Enter song name">
       </div>
-
       <div class="input-group">
         <label>Artist</label>
         <input type="text" id="input-artist" placeholder="Enter artist name">
       </div>
-
     </div>
-
-    <button class="analyze-btn" onclick="simulateProcessing()">
-      Analyze Music
-    </button>
-
+    <button class="analyze-btn" onclick="simulateProcessing()">Analyze Music</button>
   </section>
 
+  <!-- PROCESSING -->
   <section class="processing-card" id="processing">
-
     <div class="processing-line" id="step1">⏳ Connecting to music databases...</div>
-<div class="processing-line" id="step2">🎵 Searching lyrics...</div>
-<div class="processing-line" id="step3">📀 Analyzing metadata...</div>
-<div class="processing-line" id="step4">🚀 Preparing results...</div>
-
-    <div class="loading-bar">
-      <div class="loading-fill"></div>
-    </div>
-
+    <div class="processing-line" id="step2">🎵 Searching lyrics...</div>
+    <div class="processing-line" id="step3">📀 Analyzing metadata...</div>
+    <div class="processing-line" id="step4">🚀 Preparing results...</div>
+    <div class="loading-bar"><div class="loading-fill"></div></div>
   </section>
 
+  <!-- RESULTS -->
   <section class="results-grid">
 
     <div class="info-card">
-
-      <img
-      class="album-cover"
-      src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?q=80&w=1200&auto=format&fit=crop"
-      alt="Album Cover">
-
+      <img class="album-cover" src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?q=80&w=600&auto=format&fit=crop" alt="Album Cover">
       <div class="meta-item">
-  <div class="meta-title">Artist</div>
-  <div class="meta-value" id="info-artist">Placeholder Artist</div>
-</div>
-
-<div class="meta-item">
-  <div class="meta-title">Album</div>
-  <div class="meta-value" id="info-album">Placeholder Album</div>
-</div>
-
-<div class="meta-item">
-  <div class="meta-title">Duration</div>
-  <div class="meta-value" id="info-duration">03:42</div>
-</div>
-
-<div class="meta-item">
-  <div class="meta-title">Genre</div>
-  <div class="meta-value" id="info-genre">Electronic</div>
-</div>
-<div class="meta-item">
-
-  <span class="meta-label">
-    Release
-  </span>
-
-  <span
-    class="meta-value"
-    id="meta-release">
-
-    ----
-
-  </span>
-
-</div>
-      
-
-    
+        <div class="meta-title">Artist</div>
+        <div class="meta-value" id="info-artist">—</div>
+      </div>
       <div class="meta-item">
-  <div class="meta-label">Preview</div>
-
-  <audio id="music-preview"
-    controls
-    style="
-      width:100%;
-      margin-top:10px;
-      border-radius:12px;
-    ">
-  </audio>
-</div>
+        <div class="meta-title">Album</div>
+        <div class="meta-value" id="info-album">—</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-title">Duration</div>
+        <div class="meta-value" id="info-duration">—</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-title">Genre</div>
+        <div class="meta-value" id="info-genre">—</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-title">Preview</div>
+        <audio id="music-preview" controls style="width:100%;margin-top:10px;border-radius:12px;"></audio>
+      </div>
     </div>
 
     <div class="lyrics-card">
+      <div class="tabs-bar">
+        <button class="tab-btn active" onclick="switchTab('lyrics',this)">🎵 Lyrics</button>
+        <button class="tab-btn" onclick="switchTab('metadata',this)">💿 Metadata</button>
+        <button class="tab-btn" onclick="switchTab('similar',this)">🔀 Similar</button>
+      </div>
 
-  <div class="tabs-bar">
-    <button class="tab-btn active" onclick="switchTab('lyrics',this)">🎵 Lyrics</button>
-    <button class="tab-btn" onclick="switchTab('metadata',this)">💿 Metadata</button>
-    <button class="tab-btn" onclick="switchTab('similar',this)">🔀 Similar</button>
-  </div>
+      <!-- TAB LYRICS -->
+      <div class="tab-panel active" id="tab-lyrics">
+        <div class="lyrics-header">
+          <h2>Lyrics</h2>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <button class="copy-btn" onclick="copyLyrics()" id="btn-copy">Copy Lyrics</button>
+            <button class="copy-btn" onclick="downloadLyrics()">Download TXT</button>
+            <button class="copy-btn" onclick="clearMusic()">Clear</button>
+          </div>
+        </div>
+        <div class="lyrics-box" id="lyrics-box">Lyrics will appear here...</div>
+      </div>
 
-  <!-- TAB: LYRICS -->
-  <div class="tab-panel active" id="tab-lyrics">
-    <div class="lyrics-header" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; flex-wrap:wrap; gap:8px;">
-      <h2>Lyrics</h2>
-      <div style="display:flex; gap:10px; flex-wrap:wrap;">
-        <button class="copy-btn" onclick="copyLyrics()" id="btn-copy">Copy Lyrics</button>
-        <button class="copy-btn" onclick="downloadLyrics()">Download TXT</button>
-        <button class="copy-btn" onclick="clearMusic()">Clear</button>
+      <!-- TAB METADATA -->
+      <div class="tab-panel" id="tab-metadata">
+        <div class="meta-item"><div class="meta-title">Track</div><div class="meta-value" id="meta-track">—</div></div>
+        <div class="meta-item"><div class="meta-title">Artist</div><div class="meta-value" id="meta-artist">—</div></div>
+        <div class="meta-item"><div class="meta-title">Album</div><div class="meta-value" id="meta-album">—</div></div>
+        <div class="meta-item"><div class="meta-title">Genre</div><div class="meta-value" id="meta-genre">—</div></div>
+        <div class="meta-item"><div class="meta-title">Duration</div><div class="meta-value" id="meta-duration">—</div></div>
+        <div class="meta-item"><div class="meta-title">Release Year</div><div class="meta-value" id="meta-year">—</div></div>
+        <div class="meta-item"><div class="meta-title">BPM (estimated)</div><div class="meta-value" id="meta-bpm">—</div></div>
+        <div class="meta-item"><div class="meta-title">Explicit</div><div class="meta-value" id="meta-explicit">—</div></div>
+      </div>
+
+      <!-- TAB SIMILAR -->
+      <div class="tab-panel" id="tab-similar">
+        <div class="related-grid" id="similar-grid">
+          <p style="color:#9b9b9b;font-size:0.88rem;">Search a song to see related tracks.</p>
+        </div>
       </div>
     </div>
-    <div class="lyrics-box" id="lyrics-box">Lyrics will appear here...</div>
-  </div>
-
-  <!-- TAB: METADATA -->
-  <div class="tab-panel" id="tab-metadata">
-    <div class="meta-item"><div class="meta-title">Track</div><div class="meta-value" id="meta-track">—</div></div>
-    <div class="meta-item"><div class="meta-title">Artist</div><div class="meta-value" id="meta-artist">—</div></div>
-    <div class="meta-item"><div class="meta-title">Album</div><div class="meta-value" id="meta-album">—</div></div>
-    <div class="meta-item"><div class="meta-title">Genre</div><div class="meta-value" id="meta-genre">—</div></div>
-    <div class="meta-item"><div class="meta-title">Duration</div><div class="meta-value" id="meta-duration">—</div></div>
-    <div class="meta-item"><div class="meta-title">Release Year</div><div class="meta-value" id="meta-year">—</div></div>
-    <div class="meta-item">
-
-  <span class="meta-label">
-    Explicit
-  </span>
-
-  <span
-    class="meta-value"
-    id="meta-explicit">
-
-    ----
-
-  </span>
-
-    </div>
-  </div>
-      
-      <div class="meta-item">
-  <span class="meta-label">
-    BPM
-  </span>
-</div>
-<div class="meta-item">
-  <span class="meta-label">BPM</span>
-  <span class="meta-value" id="meta-bpm">
-    -- BPM
-  </span>
-</div>
-  <!-- TAB: SIMILAR -->
-  <div class="tab-panel" id="tab-similar">
-    <div class="related-grid" id="similar-grid">
-      <p style="color:#9b9b9b;font-size:0.88rem;">Search a song to see related tracks.</p>
-    </div>
-  </div>
-
-</div>
 
   </section>
 
+  <!-- EXTRA: RELATED + RECENT -->
   <section class="extra-card" id="related-section">
     <h2>Related Songs</h2>
-    <div class="related-grid" id="related-grid"></div>
-
-    <div class="recent-section" id="recent-section">
+    <div class="related-grid" id="related-grid">
+      <p style="color:#9b9b9b;font-size:0.88rem;">Search a song to discover related tracks.</p>
+    </div>
+    <div class="recent-section">
       <h2>🕘 Recent Searches</h2>
       <div class="recent-grid" id="recent-searches"></div>
     </div>
   </section>
 
-</div>
-</div>
-  <div style="margin-top:40px;padding-top:28px;border-top:1px solid rgba(255,255,255,0.06);">
-  <h2 style="color:var(--gold);font-size:1.1rem;margin-bottom:16px;">🎵 What is Music Central Online?</h2>
-  <p style="color:#d8d8d8;line-height:1.8;margin-bottom:14px;font-size:0.92rem;">Music Central Online is a free music exploration tool that lets you search any song and instantly access album artwork, full metadata, audio preview and lyrics — all in one place. Whether you're discovering a new underground artist or revisiting a classic track, the information appears in seconds without any registration or limits.</p>
-  <p style="color:#d8d8d8;line-height:1.8;margin-bottom:14px;font-size:0.92rem;">Unlike traditional lyrics sites, Music Central is built around the full listening experience. You get the album cover, the release year, the genre, a 30-second audio preview and similar tracks from the same artist — making it easy to explore an entire discography from a single search.</p>
-  <p style="color:#d8d8d8;line-height:1.8;margin-bottom:14px;font-size:0.92rem;">The tool uses a hybrid database system: iTunes for mainstream and well-known releases, and MusicBrainz as a deep fallback for independent, underground and non-English artists that major platforms often miss. This means bands like Pain, Rammstein or obscure black metal acts are just as searchable as Kanye West or Taylor Swift.</p>
-  <p style="color:#d8d8d8;line-height:1.8;margin-bottom:14px;font-size:0.92rem;">When lyrics are available, they appear directly in the Lyrics tab. When they aren't, a direct link to Genius opens the search automatically — so you're never left with a dead end. The Similar tab also loads real tracks from the same genre and artist, giving you a starting point to keep exploring.</p>
-  <p style="color:#d8d8d8;line-height:1.8;font-size:0.92rem;">Your recent searches are saved locally on your device and appear below the results, so you can jump back to any track instantly. Everything runs in your browser — no servers, no data collection, no ads interrupting the experience.</p>
+  <!-- SEO BLOCK -->
+  <div class="seo-block">
+    <h2>🎵 What is Music Central Online?</h2>
+    <p>Music Central Online is a free music exploration tool that lets you search any song and instantly access album artwork, full metadata, audio preview and lyrics — all in one place. Whether you're discovering a new underground artist or revisiting a classic track, the information appears in seconds without any registration or limits.</p>
+    <p>Unlike traditional lyrics sites, Music Central is built around the full listening experience. You get the album cover, the release year, the genre, estimated BPM, a 30-second audio preview and similar tracks from the same artist — making it easy to explore an entire discography from a single search.</p>
+    <p>The tool uses a hybrid database system: iTunes for mainstream and well-known releases, and MusicBrainz as a deep fallback for independent, underground and non-English artists that major platforms often miss. This means bands like Pain, Rammstein or obscure metal acts are just as searchable as Kanye West or Taylor Swift.</p>
+    <p>When lyrics are available, they appear directly in the Lyrics tab. When they aren't, a direct link to Genius opens the search automatically — so you're never left with a dead end. The Similar tab loads real tracks from the same genre and artist, giving you a starting point to keep exploring.</p>
+    <p>Your recent searches are saved locally on your device and appear below the results, so you can jump back to any track instantly. Everything runs in your browser — no servers, no data collection.</p>
   </div>
-  <div style="margin-top:40px;padding-top:28px;border-top:1px solid rgba(255,255,255,0.06);">
-  <h2 style="color:#c6a972;font-size:0.85rem;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:16px;">🔧 Other Tools</h2>
-  <div style="display:flex;flex-wrap:wrap;gap:10px;">
-    <a href="index.html?lang=en" style="background:#17171c;border:1px solid rgba(255,255,255,0.08);color:#c6a972;padding:10px 16px;border-radius:12px;text-decoration:none;font-size:0.88rem;">✨ Name Generator</a>
-    <a href="conversor-peso.html?lang=en" style="background:#17171c;border:1px solid rgba(255,255,255,0.08);color:#c6a972;padding:10px 16px;border-radius:12px;text-decoration:none;font-size:0.88rem;">⚖️ Weight</a>
-    <a href="conversor-temperatura.html?lang=en" style="background:#17171c;border:1px solid rgba(255,255,255,0.08);color:#c6a972;padding:10px 16px;border-radius:12px;text-decoration:none;font-size:0.88rem;">🌡️ Temperature</a>
-    <a href="conversor-cozinha.html?lang=en" style="background:#17171c;border:1px solid rgba(255,255,255,0.08);color:#c6a972;padding:10px 16px;border-radius:12px;text-decoration:none;font-size:0.88rem;">🍳 Kitchen</a>
-    <a href="conversor-roupas.html?lang=en" style="background:#17171c;border:1px solid rgba(255,255,255,0.08);color:#c6a972;padding:10px 16px;border-radius:12px;text-decoration:none;font-size:0.88rem;">👕 Clothing</a>
+
+  <!-- OTHER TOOLS -->
+  <div class="other-tools">
+    <h2>🔧 Other Tools</h2>
+    <div class="other-tools-grid">
+      <a href="index.html?lang=en" class="tool-link-ext">✨ Name Generator</a>
+      <a href="conversor-peso.html?lang=en" class="tool-link-ext">⚖️ Weight</a>
+      <a href="conversor-temperatura.html?lang=en" class="tool-link-ext">🌡️ Temperature</a>
+      <a href="conversor-cozinha.html?lang=en" class="tool-link-ext">🍳 Kitchen</a>
+      <a href="conversor-roupas.html?lang=en" class="tool-link-ext">👕 Clothing</a>
+    </div>
   </div>
+
+</div>
+
 <button class="scroll-top" id="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
 <script>
+// ── ACCORDION ──
 function toggleHow(){
-  const body = document.getElementById('how-body');
+  const body  = document.getElementById('how-body');
   const arrow = document.getElementById('how-arrow');
   if(!body||!arrow) return;
-  if(body.style.maxHeight === '0px' || body.style.maxHeight === ''){
-    body.style.maxHeight = '400px';
-    arrow.style.transform = 'rotate(180deg)';
-  } else {
-    body.style.maxHeight = '0px';
-    arrow.style.transform = 'rotate(0deg)';
-  }
+  body.classList.toggle('open');
+  arrow.style.transform = body.classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)';
 }
+
+// ── TABS ──
+function switchTab(name,btn){
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+name).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ── BPM MAP ──
+const genreBpmMap = {
+  'Pop':'90-120','Rock':'110-140','Metal':'120-180','Hip-Hop/Rap':'85-115',
+  'Electronic':'120-150','Dance':'120-140','Ambient':'60-90',
+  'Classical':'60-100','Jazz':'80-140','Alternative':'100-140'
+};
+
+// ── MAIN FUNCTION ──
 async function simulateProcessing(){
   const processing = document.getElementById('processing');
   const analyzeBtn = document.querySelector('.analyze-btn');
   const song   = document.getElementById('input-song').value.trim();
   const artist = document.getElementById('input-artist').value.trim();
 
-  if(!song || !artist){
-    alert('Fill song and artist fields.');
-    return;
-  }
+  if(!song||!artist){ alert('Fill song and artist fields.'); return; }
 
   // Reset steps
-  ['step1','step2','step3','step4'].forEach(id => {
-    const el = document.getElementById(id);
+  ['step1','step2','step3','step4'].forEach(id=>{
+    const el=document.getElementById(id);
     el.classList.remove('active','done');
   });
 
-  // UI: start loading
-  analyzeBtn.disabled = true;
-  analyzeBtn.style.opacity = '0.6';
-  analyzeBtn.innerText = 'Analyzing...';
-  processing.style.display = 'block';
-  processing.scrollIntoView({ behavior:'smooth' });
+  analyzeBtn.disabled=true;
+  analyzeBtn.style.opacity='0.6';
+  analyzeBtn.innerText='Analyzing...';
+  processing.style.display='block';
+  processing.scrollIntoView({behavior:'smooth'});
 
-  // Steps aparecem com animação
-  const steps = ['step1','step2','step3','step4'];
-  steps.forEach((id, i) => {
-    setTimeout(() => {
-      if(i > 0) document.getElementById(steps[i-1]).classList.replace('active','done');
+  const steps=['step1','step2','step3','step4'];
+  steps.forEach((id,i)=>{
+    setTimeout(()=>{
+      if(i>0) document.getElementById(steps[i-1]).classList.replace('active','done');
       document.getElementById(id).classList.add('active');
-    }, i * 800);
+    },i*800);
   });
 
   try{
-    // iTunes fetch primeiro
+    // iTunes first
     const itunesRes = await fetch(`https://itunes.apple.com/search?term=${encodeURIComponent(song)}+${encodeURIComponent(artist)}&limit=1&entity=song&country=US&lang=en_us`);
     const itunesData = await itunesRes.json();
 
     let track = null;
 
-    if(itunesData.results && itunesData.results.length > 0){
+    if(itunesData.results && itunesData.results.length>0){
       track = itunesData.results[0];
       track._source = 'itunes';
     } else {
+      // MusicBrainz fallback
       const mbRes = await fetch(`https://musicbrainz.org/ws/2/recording/?query=recording:${encodeURIComponent(song)}+artist:${encodeURIComponent(artist)}&fmt=json&limit=1`);
       const mbData = await mbRes.json();
-      if(mbData.recordings && mbData.recordings.length > 0){
-        const r = mbData.recordings[0];
-        const rel = r.releases && r.releases[0];
-        track = {
-          trackName:        r.title || song,
-          artistName:       r['artist-credit'] ? r['artist-credit'].map(a=>a.name).join(', ') : artist,
-          collectionName:   rel ? rel.title : '—',
+      if(mbData.recordings && mbData.recordings.length>0){
+        const r=mbData.recordings[0];
+        const rel=r.releases&&r.releases[0];
+        track={
+          trackName:        r.title||song,
+          artistName:       r['artist-credit']?r['artist-credit'].map(a=>a.name).join(', '):artist,
+          collectionName:   rel?rel.title:'—',
           primaryGenreName: '—',
-          trackTimeMillis:  r.length || 0,
-          releaseDate:      rel && rel.date ? rel.date : '—',
+          trackTimeMillis:  r.length||0,
+          releaseDate:      rel&&rel.date?rel.date:'—',
           artworkUrl100:    '',
           previewUrl:       '',
+          trackExplicitness:'',
           _source:          'musicbrainz'
         };
       }
     }
 
     if(!track){
-      processing.style.display = 'none';
-      analyzeBtn.disabled = false;
-      analyzeBtn.style.opacity = '1';
-      analyzeBtn.innerText = 'Analyze Music';
+      processing.style.display='none';
+      analyzeBtn.disabled=false;
+      analyzeBtn.style.opacity='1';
+      analyzeBtn.innerText='Analyze Music';
       alert('Song not found in any database.');
       return;
     }
 
-    // Lyrics fetch separado — não bloqueia se falhar
-    let lyricsText = '';
-    let lyricsIsLink = false;
-    try {
-      const lyricsRes = await fetch(`https://api.lyrics.ovh/v1/${encodeURIComponent(track.artistName)}/${encodeURIComponent(track.trackName)}`);
-      const lyricsData = await lyricsRes.json();
-      if(lyricsData.lyrics){
-        lyricsText = lyricsData.lyrics;
-      } else {
-        throw new Error('no lyrics');
-      }
-    } catch(e) {
-      lyricsIsLink = true;
-      lyricsText = `https://genius.com/search?q=${encodeURIComponent(track.trackName)}+${encodeURIComponent(track.artistName)}`;
+    // Lyrics
+    let lyricsIsLink=false;
+    let lyricsContent='';
+    try{
+      const lyricsRes=await fetch(`https://api.lyrics.ovh/v1/${encodeURIComponent(track.artistName)}/${encodeURIComponent(track.trackName)}`);
+      const lyricsData=await lyricsRes.json();
+      if(lyricsData.lyrics){ lyricsContent=lyricsData.lyrics; }
+      else{ throw new Error('no lyrics'); }
+    }catch(e){
+      lyricsIsLink=true;
+      lyricsContent=`https://genius.com/search?q=${encodeURIComponent(track.trackName)}+${encodeURIComponent(track.artistName)}`;
     }
 
-    // Preenche dados
-    document.querySelector('.album-cover').src = track.artworkUrl100.replace('100x100','600x600');
-    const artistName = track.artistName || '—';
-const albumName = track.collectionName || '—';
-document.getElementById('info-artist').innerHTML = artistName !== '—'
-  ? `<span style="cursor:pointer;text-decoration:underline;text-underline-offset:3px;" onclick="document.getElementById('input-song').value='';document.getElementById('input-artist').value='${artistName.replace(/'/g,"\\'")}';simulateProcessing()">${artistName}</span>`
-  : '—';
-document.getElementById('info-album').innerHTML = albumName !== '—'
-  ? `<span style="cursor:pointer;text-decoration:underline;text-underline-offset:3px;" onclick="document.getElementById('input-song').value='${albumName.replace(/'/g,"\\'")}';document.getElementById('input-artist').value='${artistName.replace(/'/g,"\\'")}';simulateProcessing()">${albumName}</span>`
-  : '—';
-document.getElementById('info-duration').innerText = msToMinutes(track.trackTimeMillis);
-document.getElementById('info-genre').innerText    = track.primaryGenreName || '—';
+    // Album cover
+    document.querySelector('.album-cover').src = track.artworkUrl100
+      ? track.artworkUrl100.replace('100x100bb','600x600bb')
+      : 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?q=80&w=600&auto=format&fit=crop';
 
-// Preenche tab Metadata
-document.getElementById('meta-track').innerText    = track.trackName || '—';
-document.getElementById('meta-artist').innerText   = track.artistName || '—';
-document.getElementById('meta-album').innerText    = track.collectionName || '—';
-document.getElementById('meta-release')
-.innerText =
+    // Info card
+    const artistName=track.artistName||'—';
+    const albumName=track.collectionName||'—';
+    document.getElementById('info-artist').innerHTML = artistName!=='—'
+      ? `<span style="cursor:pointer;text-decoration:underline;text-underline-offset:3px;" onclick="document.getElementById('input-song').value='';document.getElementById('input-artist').value='${artistName.replace(/'/g,"\\'")}';simulateProcessing()">${artistName}</span>`
+      : '—';
+    document.getElementById('info-album').innerHTML = albumName!=='—'
+      ? `<span style="cursor:pointer;text-decoration:underline;text-underline-offset:3px;" onclick="document.getElementById('input-song').value='${albumName.replace(/'/g,"\\'")}';document.getElementById('input-artist').value='${artistName.replace(/'/g,"\\'")}';simulateProcessing()">${albumName}</span>`
+      : '—';
+    document.getElementById('info-duration').innerText = msToMinutes(track.trackTimeMillis);
+    document.getElementById('info-genre').innerText    = track.primaryGenreName||'—';
 
-track.releaseDate
-? new Date(track.releaseDate)
-  .getFullYear()
-: '----';
+    // Tab Metadata
+    document.getElementById('meta-track').innerText    = track.trackName||'—';
+    document.getElementById('meta-artist').innerText   = track.artistName||'—';
+    document.getElementById('meta-album').innerText    = track.collectionName||'—';
+    document.getElementById('meta-genre').innerText    = track.primaryGenreName||'—';
+    document.getElementById('meta-duration').innerText = msToMinutes(track.trackTimeMillis);
+    document.getElementById('meta-year').innerText     = track.releaseDate?track.releaseDate.substring(0,4):'—';
+    document.getElementById('meta-bpm').innerText      = genreBpmMap[track.primaryGenreName]||'—';
+    document.getElementById('meta-explicit').innerText = track.trackExplicitness==='explicit'?'Yes':'No';
 
-document.getElementById('meta-explicit')
-.innerText =
+    // Preview
+    document.getElementById('music-preview').src = track.previewUrl||'';
 
-track.trackExplicitness === 'explicit'
-? 'Yes'
-: 'No';    
-document.getElementById('meta-genre').innerText    = track.primaryGenreName || '—';
-    const genreBpmMap = {
-
-  Pop: '90-120',
-  Rock: '110-140',
-  Metal: '120-180',
-  Hip-Hop: '85-115',
-  Rap: '85-115',
-  Electronic: '120-150',
-  Dance: '120-140',
-  Ambient: '60-90',
-  Classical: '60-100',
-  Jazz: '80-140'
-
-};
-
-const simulatedBpm =
-genreBpmMap[
-  track.primaryGenreName
-] || '95-135';
-
-document.getElementById('meta-bpm')
-.innerText =
-simulatedBpm + ' BPM';
-document.getElementById('meta-duration').innerText = msToMinutes(track.trackTimeMillis);
-document.getElementById('meta-year').innerText     = track.releaseDate ? track.releaseDate.substring(0,4) : '—';
-    // Related Songs dinâmicos por gênero
-const searchTerm = encodeURIComponent((track.artistName || artist) + ' ' + (track.primaryGenreName || ''));
-fetch(`https://itunes.apple.com/search?term=${searchTerm}&limit=8&entity=song`)
-  .then(r => r.json())
-  .then(data => {
-    const grid = document.getElementById('similar-grid');
-const gridExt = document.getElementById('related-grid');
-    if(!grid || !data.results) return;
-    const filtered = data.results.filter(t => t.trackName !== track.trackName).slice(0,4);
-    const html = filtered.map(t => `
-  <div
-    class="related-item"
-    onclick="
-      document.getElementById('input-song').value='${(t.trackName || '').replace(/'/g,"\\'")}';
-      document.getElementById('input-artist').value='${(t.artistName || '').replace(/'/g,"\\'")}';
-      simulateProcessing();
-    ">
-
-    <strong>${t.trackName || 'Unknown Track'}</strong>
-
-    <br>
-
-    ${t.artistName || 'Unknown Artist'}
-
-    <div class="related-genre">
-      ${t.primaryGenreName || 'Unknown Genre'}
-    </div>
-
-  </div>
-`).join('');
-    // ✦ NEXT: album-cover null fix aqui
-    grid.innerHTML = html;
-    gridExt.innerHTML = html;
-    if(gridExt) gridExt.innerHTML = html;
-  })
-  .catch(() => {});
-    document.getElementById('music-preview').src = track.previewUrl || '';
-    const lyricsBox = document.getElementById('lyrics-box');
+    // Lyrics
+    const lyricsBox=document.getElementById('lyrics-box');
     if(lyricsIsLink){
-      lyricsBox.innerHTML = `<span style="color:#9b9b9b;font-size:0.9rem;">Lyrics not available here.<br><br><a href="${lyricsText}" target="_blank" style="color:#c6a972;text-decoration:none;font-weight:600;">🔍 Search lyrics on Genius ↗</a></span>`;
-    } else {
-      lyricsBox.innerText = lyricsText;
+      lyricsBox.innerHTML=`<span style="color:#9b9b9b;font-size:0.9rem;">Lyrics not available here.<br><br><a href="${lyricsContent}" target="_blank" style="color:#c6a972;text-decoration:none;font-weight:600;">🔍 Search lyrics on Genius ↗</a></span>`;
+    }else{
+      lyricsBox.innerText=lyricsContent;
     }
 
-    saveRecent(song, artist);
+    // Related Songs
+    if(track.artistName && track.primaryGenreName!=='—'){
+      const searchTerm=encodeURIComponent(track.artistName+' '+(track.primaryGenreName||''));
+      fetch(`https://itunes.apple.com/search?term=${searchTerm}&limit=8&entity=song`)
+        .then(r=>r.json())
+        .then(data=>{
+          const grid=document.getElementById('similar-grid');
+          const gridExt=document.getElementById('related-grid');
+          if(!data.results) return;
+          const filtered=data.results.filter(t=>t.trackName.toLowerCase()!==track.trackName.toLowerCase()).slice(0,4);
+          if(filtered.length){
+            const html=filtered.map(t=>
+              `<div class="related-item" onclick="document.getElementById('input-song').value='${t.trackName.replace(/'/g,"\\'")}';document.getElementById('input-artist').value='${t.artistName.replace(/'/g,"\\'")}';simulateProcessing()">
+                <strong>${t.trackName}</strong><br><span style="color:#9b9b9b;font-size:0.85rem;">${t.artistName}</span>
+              </div>`
+            ).join('');
+            if(grid) grid.innerHTML=html;
+            if(gridExt) gridExt.innerHTML=html;
+          }
+        })
+        .catch(()=>{});
+    }
 
-    // Esconde loading, mostra resultado
-    setTimeout(() => {
+    saveRecent(song,artist);
+
+    setTimeout(()=>{
       document.getElementById('step4').classList.replace('active','done');
-      processing.style.display = 'none';
-      document.querySelector('.results-grid').style.display = 'grid';
-document.querySelector('.results-grid').style.opacity = '1';
-document.querySelector('.results-grid').style.transform = 'translateY(0)';
-      setTimeout(() => {
-        document.querySelector('.results-grid').scrollIntoView({ behavior:'smooth', block:'start' });
-      }, 300);
-    }, 3400);
+      processing.style.display='none';
+      const rg=document.querySelector('.results-grid');
+      rg.style.display='grid';
+      rg.style.opacity='1';
+      rg.style.transform='translateY(0)';
+      setTimeout(()=>{ rg.scrollIntoView({behavior:'smooth',block:'start'}); },300);
+    },3400);
 
-  } catch(error){
+  }catch(error){
     console.log(error);
-    processing.style.display = 'none';
-    alert('API connection error.');
-  } finally {
-    setTimeout(() => {
-      analyzeBtn.disabled = false;
-      analyzeBtn.style.opacity = '1';
-      analyzeBtn.innerText = 'Analyze Music';
-    }, 3400);
+    processing.style.display='none';
+    alert('Connection error. Please try again.');
+  }finally{
+    setTimeout(()=>{
+      analyzeBtn.disabled=false;
+      analyzeBtn.style.opacity='1';
+      analyzeBtn.innerText='Analyze Music';
+    },3400);
   }
 }
-  function switchTab(name, btn){
-  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById('tab-' + name).classList.add('active');
-  btn.classList.add('active');
-  }
-  function clearMusic(){
 
-  document.getElementById('input-song').value = '';
-  document.getElementById('input-artist').value = '';
-
-  document.getElementById('lyrics-box')
-  .innerText =
-  'Lyrics will appear here...';
-
-  document.querySelector('.results-grid')
-  .style.opacity = '0';
-
+// ── UTILS ──
+function msToMinutes(ms){
+  if(!ms) return '—';
+  const m=Math.floor(ms/60000);
+  const s=Math.floor((ms%60000)/1000).toString().padStart(2,'0');
+  return `${m}:${s}`;
 }
- function downloadLyrics(){
 
-  const lyrics =
-  document.getElementById('lyrics-box')
-  .innerText;
+function clearMusic(){
+  document.getElementById('input-song').value='';
+  document.getElementById('input-artist').value='';
+  document.getElementById('lyrics-box').innerText='Lyrics will appear here...';
+  const rg=document.querySelector('.results-grid');
+  rg.style.opacity='0';
+  rg.style.display='none';
+}
 
-  const blob =
-  new Blob([lyrics],{
-    type:'text/plain'
-  });
-
-  const a =
-  document.createElement('a');
-
-  a.href =
-  URL.createObjectURL(blob);
-
-  a.download =
-  'lyrics.txt';
-
-  a.click();
-
-} 
 function copyLyrics(){
-
-  const lyrics =
-  document.getElementById('lyrics-box')
-  .innerText;
-
+  const lyrics=document.getElementById('lyrics-box').innerText;
   navigator.clipboard.writeText(lyrics);
-
-  const btn = document.getElementById('btn-copy');
-
-  btn.innerText = 'Copied!';
-
-  setTimeout(()=>{
-    btn.innerText = 'Copy Lyrics';
-  },2000);
-
+  const btn=document.getElementById('btn-copy');
+  btn.innerText='Copied!';
+  setTimeout(()=>{ btn.innerText='Copy Lyrics'; },2000);
 }
-  
- function saveRecent(song,artist){
 
-  let recent =
-  JSON.parse(
-    localStorage.getItem('recentMusic')
-  ) || [];
+function downloadLyrics(){
+  const lyrics=document.getElementById('lyrics-box').innerText;
+  const blob=new Blob([lyrics],{type:'text/plain'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='lyrics.txt';
+  a.click();
+}
 
-  recent.unshift({
-    song,
-    artist
-  });
-
-  recent = recent.slice(0,6);
-
-  localStorage.setItem(
-    'recentMusic',
-    JSON.stringify(recent)
-  );
-
+function saveRecent(song,artist){
+  let recent=JSON.parse(localStorage.getItem('recentMusic'))||[];
+  recent=recent.filter(i=>!(i.song===song&&i.artist===artist));
+  recent.unshift({song,artist});
+  if(recent.length>6) recent=recent.slice(0,6);
+  localStorage.setItem('recentMusic',JSON.stringify(recent));
   renderRecent();
-
 }
 
 function renderRecent(){
-  const container = document.getElementById('recent-searches');
+  const container=document.getElementById('recent-searches');
   if(!container) return;
-  const recent = JSON.parse(localStorage.getItem('recentMusic')) || [];
-
+  const recent=JSON.parse(localStorage.getItem('recentMusic'))||[];
   if(!recent.length){
-    container.innerHTML = '<span class="recent-empty">No recent searches yet.</span>';
+    container.innerHTML='<span class="recent-empty">No recent searches yet.</span>';
     return;
   }
-
-  container.innerHTML = '';
-  recent.forEach(item => {
-    const div = document.createElement('div');
-    div.className = 'recent-item';
-    div.innerHTML = `<span class="r-song">${item.song}</span><span class="r-artist">${item.artist}</span>`;
-    div.addEventListener('click', () => {
-      document.getElementById('input-song').value = item.song;
-      document.getElementById('input-artist').value = item.artist;
+  container.innerHTML='';
+  recent.forEach(item=>{
+    const div=document.createElement('div');
+    div.className='recent-item';
+    div.innerHTML=`<span class="r-song">${item.song}</span><span class="r-artist">${item.artist}</span>`;
+    div.addEventListener('click',()=>{
+      document.getElementById('input-song').value=item.song;
+      document.getElementById('input-artist').value=item.artist;
       simulateProcessing();
     });
     container.appendChild(div);
   });
 }
 
-function msToMinutes(ms){
-
-  const minutes =
-  Math.floor(ms / 60000);
-
-  const seconds =
-  ((ms % 60000) / 1000)
-  .toFixed(0);
-
-  return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-
-}
-renderRecent();
-  [
-  document.getElementById('input-song'),
-  document.getElementById('input-artist')
-]
-.forEach(input=>{
-
-  input.addEventListener(
-    'keypress',
-    function(e){
-
-      if(e.key === 'Enter'){
-
-        simulateProcessing();
-
-      }
-
-    }
-  );
-
-});
-  window.addEventListener('scroll', () => {
-  const btn = document.getElementById('scroll-top-btn');
-  if(window.scrollY > 400) btn.classList.add('visible');
+// ── SCROLL TOP ──
+window.addEventListener('scroll',()=>{
+  const btn=document.getElementById('scroll-top-btn');
+  if(window.scrollY>400) btn.classList.add('visible');
   else btn.classList.remove('visible');
 });
-</script>
 
+// ── ENTER KEY ──
+document.addEventListener('keydown',(e)=>{
+  if(e.key==='Enter'){
+    const song=document.getElementById('input-song');
+    const artist=document.getElementById('input-artist');
+    if(document.activeElement===song||document.activeElement===artist){
+      simulateProcessing();
+    }
+  }
+});
+
+// ── INIT ──
+renderRecent();
+</script>
 </body>
 </html>
