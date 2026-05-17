@@ -173,6 +173,42 @@ body{ background:var(--bg); color:var(--text); font-family:Arial,sans-serif; min
   background:#1e1a10;
   box-shadow:0 0 14px rgba(198,169,114,0.2);
 }  
+  .extra-card-header{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:20px;
+}
+.extra-card-header h2{
+  margin-bottom:0;
+}
+.extra-card-badge{
+  font-size:0.75rem;
+  background:rgba(198,169,114,0.12);
+  color:var(--gold);
+  border:1px solid rgba(198,169,114,0.25);
+  padding:4px 10px;
+  border-radius:20px;
+  letter-spacing:0.04em;
+}
+  .tab-empty{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:40px 20px;
+  gap:12px;
+  opacity:0.5;
+}
+.tab-empty-icon{
+  font-size:2rem;
+}
+.tab-empty-text{
+  font-size:0.88rem;
+  color:var(--muted);
+  text-align:center;
+  line-height:1.6;
+}
 </style>
 </head>
 <body>
@@ -268,7 +304,12 @@ body{ background:var(--bg); color:var(--text); font-family:Arial,sans-serif; min
             <button class="copy-btn" onclick="clearMusic()">Clear</button>
           </div>
         </div>
-        <div class="lyrics-box" id="lyrics-box">Lyrics will appear here...</div>
+        <div class="lyrics-box" id="lyrics-box">
+          <div class="tab-empty">
+            <div class="tab-empty-icon">🎵</div>
+            <div class="tab-empty-text">Search a song to see<br>its lyrics here</div>
+          </div>
+        </div>
       </div>
 
       <!-- TAB METADATA -->
@@ -286,7 +327,10 @@ body{ background:var(--bg); color:var(--text); font-family:Arial,sans-serif; min
       <!-- TAB SIMILAR -->
       <div class="tab-panel" id="tab-similar">
         <div class="related-grid" id="similar-grid">
-          <p style="color:#9b9b9b;font-size:0.88rem;">Search a song to see related tracks.</p>
+          <div class="tab-empty">
+            <div class="tab-empty-icon">🔀</div>
+            <div class="tab-empty-text">Search a song to discover<br>related tracks</div>
+          </div>
         </div>
       </div>
     </div>
@@ -295,7 +339,10 @@ body{ background:var(--bg); color:var(--text); font-family:Arial,sans-serif; min
 
   <!-- EXTRA: RELATED + RECENT -->
   <section class="extra-card" id="related-section">
-    <h2>Related Songs</h2>
+    <div class="extra-card-header">
+      <h2>Related Songs</h2>
+      <span class="extra-card-badge">Discography Explorer</span>
+    </div>
     <div class="related-grid" id="related-grid">
       <p style="color:#9b9b9b;font-size:0.88rem;">Search a song to discover related tracks.</p>
     </div>
