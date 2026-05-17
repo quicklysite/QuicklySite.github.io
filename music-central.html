@@ -447,7 +447,7 @@ async function simulateProcessing(){
   : '—';
 
   document.getElementById('info-album').innerHTML = albumName!=='—'
-  ? `<span style="cursor:pointer;text-decoration:underline;text-underline-offset:3px;"onclick="searchAlbumTracks('${albumName.replace(/'/g,"\\'")}','${artistName.replace(/'/g,"\\'")}',${collectionId || 'null'})">${albumName}</span>`
+  ? `<span style="cursor:pointer;text-decoration:underline;text-underline-offset:3px;"onclick="searchAlbumTracks('${albumName.replace(/'/g,"\\'")}','${artistName.replace(/'/g,"\\'")}',${track.collectionId || 'null'})">${albumName}</span>`
   : '—';
     document.getElementById('info-duration').innerText = msToMinutes(track.trackTimeMillis);
     document.getElementById('info-genre').innerText    = track.primaryGenreName||'—';
