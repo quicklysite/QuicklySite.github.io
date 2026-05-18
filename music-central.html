@@ -823,10 +823,12 @@ async function searchAlbumTracks(album,artist,collectionId=null){
   }
 
 } 
-function loadTrackData(track, event){
+async function loadTrackData(track, event){
   try{
     document.querySelectorAll('.related-item').forEach(el=>el.classList.remove('active-track'));
-event.currentTarget.classList.add('active-track');
+    if(event && event.currentTarget){
+      event.currentTarget.classList.add('active-track');
+    }
     // Cover
     document.querySelector('.album-cover').src = track.artworkUrl100
       ? track.artworkUrl100.replace('100x100bb','600x600bb')
@@ -844,6 +846,7 @@ event.currentTarget.classList.add('active-track');
     document.getElementById('info-duration').innerText = msToMinutes(track.trackTimeMillis);
     document.getElementById('info-genre').innerText    = track.primaryGenreName || '—';
     document.getElementById('track-title-display').innerText = track.trackName || '—';
+
     // Tab Metadata
     document.getElementById('meta-track').innerText    = track.trackName || '—';
     document.getElementById('meta-artist').innerText   = track.artistName || '—';
@@ -854,30 +857,45 @@ event.currentTarget.classList.add('active-track');
     document.getElementById('meta-bpm').innerText      = genreBpmMap[track.primaryGenreName] || '—';
     document.getElementById('meta-explicit').innerText = track.trackExplicitness === 'explicit' ? 'Yes' : 'No';
 
-    // Preview
+    // Preview Audio
     document.getElementById('music-preview').src = track.previewUrl || '';
 
-    // Lyrics
+    // ── BUSCA REAL DA LETRA (Correção do Bypass) ──
     const lyricsBox = document.getElementById('lyrics-box');
-    lyricsBox.innerHTML = `<span style="color:#9b9b9b;font-size:0.9rem;">Lyrics not available here.<br><br><a href="https://genius.com/search?q=${encodeURIComponent((track.trackName||'')+'+'+(track.artistName||''))}" target="_blank" style="color:#c6a972;text-decoration:none;font-weight:600;">🔍 Search lyrics on Genius ↗</a></span>`;
+    lyricsBox.innerHTML = `<span style="color:#9b9b9b;font-size:0.9rem;">⏳ Connecting to data sync and fetching lyrics...</span>`;
 
-    // Inputs
+    try{
+      const lyricsRes = await fetch(`https://api.lyrics.ovh/v1/${encodeURIComponent(artistName)}/${encodeURIComponent(track.trackName || '')}`);
+      const lyricsData = await lyricsRes.json();
+      if(lyricsData.lyrics){ 
+        lyricsBox.innerText = lyricsData.lyrics; 
+      }else{ 
+        throw new Error('no lyrics'); 
+      }
+    }catch(e){
+      // Fallback para o Genius caso a API falhe ou não tenha a letra
+      const geniusQuery = encodeURIComponent((track.trackName||'')+'+'+(artistName));
+      lyricsBox.innerHTML = `<span style="color:#9b9b9b;font-size:0.9rem;">Lyrics not available here.<br><br><a href="https://genius.com/search?q=${geniusQuery}" target="_blank" style="color:#c6a972;text-decoration:none;font-weight:600;">🔍 Search lyrics on Genius ↗</a></span>`;
+    }
+
+    // Atualiza os inputs do topo caso o usuário queira refazer a busca principal depois
     document.getElementById('input-song').value   = track.trackName || '';
     document.getElementById('input-artist').value = track.artistName || '';
 
-    // Mostrar results se estiver escondido
+    // Garante que o container de resultados está visível
     const rg = document.querySelector('.results-grid');
     rg.style.display  = 'grid';
     rg.style.opacity  = '1';
     rg.style.transform = 'translateY(0)';
 
-    // Scroll para o topo dos results
+    // Move a tela suavemente para o topo dos resultados para o usuário ver os novos metadados/letra
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
   }catch(error){
     console.log(error);
   }
-}  
+}
+  
 // ── UTILS ──
 function msToMinutes(ms){
   if(!ms) return '—';
