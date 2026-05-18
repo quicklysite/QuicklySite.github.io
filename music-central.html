@@ -669,160 +669,123 @@ async function searchArtistTracks(artist){
     grid.innerHTML = `<div class="tab-empty"><div class="tab-empty-icon">⚠️</div><div class="tab-empty-text">Could not load artist info</div></div>`;
   }
 }
-async function searchAlbumTracks(album,artist,collectionId=null){
+async function searchArtistTracks(artist){
+  const grid = document.getElementById('related-grid');
+  const header = document.querySelector('#related-section h2');
+  grid.innerHTML = `<div class="tab-empty"><div class="tab-empty-icon">🔍</div><div class="tab-empty-text">Loading artist discography...</div></div>`;
+  header.innerText = artist;
 
   try{
+    // STEP 1: MusicBrainz — mantém a busca estável por MBID
+    const mbRes = await fetch(`https://musicbrainz.org/ws/2/artist/?query=artist:${encodeURIComponent(artist)}&fmt=json&limit=1`);
+    const mbData = await mbRes.json();
+    const mbid = mbData.artists && mbData.artists[0] ? mbData.artists[0].id : null;
 
-    let tracks = [];
+    // STEP 2: Last.fm — Trocamos 'artist.gettoptracks' por 'artist.gettopalbums' para capturar os álbuns underground
+    const lfParam = mbid ? `mbid=${mbid}` : `artist=${encodeURIComponent(artist)}`;
+    const [infoRes, albumsRes, similarRes] = await Promise.all([
+      fetch(`https://ws.audioscrobbler.com/2.0/?method=artist.getinfo&${lfParam}&api_key=a5d1b6deae8c37ff0b7a612243d004d6&format=json`),
+      fetch(`https://ws.audioscrobbler.com/2.0/?method=artist.gettopalbums&${lfParam}&limit=10&api_key=a5d1b6deae8c37ff0b7a612243d004d6&format=json`),
+      fetch(`https://ws.audioscrobbler.com/2.0/?method=artist.getsimilar&${lfParam}&limit=4&api_key=a5d1b6deae8c37ff0b7a612243d004d6&format=json`)
+    ]);
 
-    /*
-    ==========================
-    ITUNES LOOKUP
-    ==========================
-    */
+    const infoData    = await infoRes.json();
+    const albumsData  = await albumsRes.json();
+    const similarData = await similarRes.json();
 
-    if(collectionId){
+    const bio       = infoData.artist?.bio?.summary?.replace(/<a[^>]*>.*?<\/a>/gi,'').replace(/<[^+]+>/g,'').trim() || '';
+    const topAlbums = albumsData.topalbums?.album || [];
+    const similar   = similarData.similarartists?.artist || [];
 
-      const lookupResponse =
-      await fetch(
-        `https://itunes.apple.com/lookup?id=${collectionId}&entity=song`
-      );
+    // Construção do HTML do zero
+    let html = '';
 
-      const lookupData =
-      await lookupResponse.json();
-
-      if(lookupData.results){
-
-        tracks =
-        lookupData.results
-        .filter(item => item.wrapperType === 'track');
-
-      }
-
+    // Biografia do Artista
+    if(bio){
+      html += `<div style="margin-bottom:20px;padding:16px;background:#111115;border-radius:14px;border:1px solid rgba(255,255,255,0.05);">
+        <div style="color:var(--gold);font-size:0.8rem;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px;">📖 About</div>
+        <p style="font-size:0.88rem;line-height:1.7;color:#d8d8d8;">${bio.substring(0,300)}${bio.length>300?'...':''}</p>
+      </div>`;
     }
 
-    /*
-    ==========================
-    FALLBACK SEARCH
-    ==========================
-    */
+    // Lista de Álbuns com Contagem Numérica e Animação Gradual
+    if(topAlbums.length){
+      html += `<div style="color:var(--gold);font-size:0.8rem;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:12px;font-weight:600;">💿 Albums & Discography</div>`;
+      html += `<div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 25px;">`;
+      
+      html += topAlbums.map((album, index) => {
+        const albumName = album.name || 'Unknown Album';
+        // Captura a imagem gerada pela comunidade do Last.fm (índice 2 geralmente é o tamanho ideal/medium-large)
+        const artwork = album.image?.[2]?.['#text'] || 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?q=80&w=200&auto=format&fit=crop';
+        // Define o atraso baseado na posição do item para criar o efeito cascata gradual
+        const animationDelay = (index * 0.06).toFixed(2);
 
-    if(!tracks.length){
-
-      const searchResponse =
-      await fetch(
-        `https://itunes.apple.com/search?term=${encodeURIComponent(album + ' ' + artist)}&entity=song&limit=30`
-      );
-
-      const searchData =
-      await searchResponse.json();
-
-      if(searchData.results){
-
-        tracks =
-        searchData.results.filter(
-          t => t.collectionName === album
-        );
-
-      }
-
+        return `
+          <div class="related-item" 
+               onclick="searchAlbumTracks('${albumName.replace(/'/g,"\\'")}', '${artist.replace(/'/g,"\\'")}', null)"
+               style="display: flex; align-items: center; gap: 15px; padding: 12px 16px; background: #111115; border: 1px solid rgba(255,255,255,0.04); border-radius: 12px; cursor: pointer; transition: all 0.2s ease;
+                      opacity: 0; transform: translateY(10px); animation: fadeInList 0.4s ease forwards; animation-delay: ${animationDelay}s;">
+            
+            <span style="font-size: 0.9rem; font-weight: bold; color: var(--gold); min-width: 25px; text-align: center;">
+              ${index + 1}
+            </span>
+            
+            <img src="${artwork}" alt="${albumName}" style="width: 48px; height: 48px; border-radius: 6px; object-fit: cover; border: 1px solid rgba(255,255,255,0.05);">
+            
+            <div style="flex: 1; min-width: 0;">
+              <strong style="display: block; font-size: 0.92rem; color: #ffffff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${albumName}</strong>
+              <span style="color: #9b9b9b; font-size: 0.8rem; display: block; margin-top: 2px;">
+                ${album.playcount ? Number(album.playcount).toLocaleString() + ' plays registrados' : 'Discografia Oficial'}
+              </span>
+            </div>
+            
+            <span style="color: rgba(255,255,255,0.15); font-size: 0.85rem;">➔</span>
+          </div>
+        `;
+      }).join('');
+      
+      html += `</div>`;
     }
 
-    /*
-    ==========================
-    MUSICBRAINZ FALLBACK
-    ==========================
-    */
+    // Artistas Semelhantes (Mantido intacto da sua estrutura original)
+    if(similar.length){
+      html += `<div style="color:var(--gold);font-size:0.8rem;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:10px;">🔀 Similar Artists</div>`;
+      html += `<div style="display:flex;flex-wrap:wrap;gap:8px;">`;
+      html += similar.map(a=>
+        `<span onclick="searchArtistTracks('${a.name.replace(/'/g,"\\'")}')" style="cursor:pointer;background:#111115;border:1px solid rgba(255,255,255,0.08);color:var(--gold);padding:8px 14px;border-radius:20px;font-size:0.85rem;transition:0.2s;" onmouseover="this.style.borderColor='rgba(198,169,114,0.6)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)'">${a.name}</span>`
+      ).join('');
+      html += `</div>`;
+    }
 
-    if(!tracks.length){
+    if(!html){
+      html = `<div class="tab-empty"><div class="tab-empty-icon">🎤</div><div class="tab-empty-text">No info found for this artist</div></div>`;
+    }
 
-      const mbResponse =
-      await fetch(
-        `https://musicbrainz.org/ws/2/release/?query=release:${encodeURIComponent(album)}%20AND%20artist:${encodeURIComponent(artist)}&fmt=json`
-      );
-
-      const mbData =
-      await mbResponse.json();
-
-      document.getElementById('related-grid')
-      .innerHTML = `
-
-        <div class="related-item">
-
-          <strong>
-            MusicBrainz Match
-          </strong>
-
-          <br><br>
-
-          Underground release found.
-
-          <br><br>
-
-          Album:
-          ${album}
-
-          <br>
-
-          Artist:
-          ${artist}
-
-        </div>
-
+    // Cria e injeta a animação CSS caso ela ainda não exista na página
+    if (!document.getElementById('list-fade-animation')) {
+      const style = document.createElement('style');
+      style.id = 'list-fade-animation';
+      style.innerHTML = `
+        @keyframes fadeInList {
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
       `;
-
-      document.querySelector('#related-section h2')
-      .innerText = album;
-
-      return;
-
+      document.head.appendChild(style);
     }
 
-    /*
-    ==========================
-    SORT TRACKS
-    ==========================
-    */
+    grid.innerHTML = html;
+    header.innerText = `🎤 ${artist}`;
+    document.getElementById('related-section').scrollIntoView({behavior:'smooth'});
 
-    tracks.sort(
-      (a,b)=>
-      (a.trackNumber||0)-
-      (b.trackNumber||0)
-    );
-
-    /*
-    ==========================
-    RENDER TRACKLIST
-    ==========================
-    */
-
-    const html = tracks.map(track =>
-  `<div class="related-item" onclick='loadTrackData(${JSON.stringify(track).replace(/'/g,"&apos;")}, event)'>
-    <strong>${(track.trackNumber||'?').toString().padStart(2,'0')}. ${track.trackName||'Unknown'}</strong>
-    <br><span style="color:#9b9b9b;font-size:0.85rem;">${msToMinutes(track.trackTimeMillis)}</span>
-  </div>`
-).join('');
-
-    document.getElementById('related-grid')
-    .innerHTML = html;
-
-    document.querySelector('#related-section h2')
-    .innerText = `${album} • Tracklist`;
-
-    document.getElementById('related-section')
-    .scrollIntoView({
-      behavior:'smooth'
-    });
-
-  }
-
-  catch(error){
-
+  }catch(error){
     console.log(error);
-
+    grid.innerHTML = `<div class="tab-empty"><div class="tab-empty-icon">⚠️</div><div class="tab-empty-text">Could not load artist info</div></div>`;
   }
+}
 
-} 
 async function loadTrackData(track, event){
   try{
     document.querySelectorAll('.related-item').forEach(el=>el.classList.remove('active-track'));
