@@ -186,6 +186,15 @@
       padding: 32px 24px 0;
       text-align: center;
     }
+    @media(max-width:600px){
+      header {
+        padding: 48px 20px 0;
+      }
+      header h1 {
+        font-size: clamp(2rem, 10vw, 3rem);
+        padding: 0 60px;
+      }
+    }
 
     header h1 {
       font-family: 'Playfair Display', serif;
@@ -255,7 +264,8 @@ h1 {
 
     .tab {
       flex: 1;
-      padding: 10px 0;
+      padding: 10px 4px;
+      font-size: .82rem;
       border: none;
       background: transparent;
       color: var(--muted);
@@ -521,7 +531,9 @@ h1 {
 }
 .tool-intro-example strong { color: var(--accent); }
     @media (max-width: 500px) {
-      .card { padding: 24px 18px; }
+      .card { padding: 20px 14px; }
+      .results { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+      .name-chip { padding: 12px; font-size: .9rem; }
       /* ── BITCOIN ── */
 .btc-price-box {
   background: linear-gradient(135deg, rgba(247,147,26,.12), rgba(247,147,26,.04));
