@@ -17,8 +17,7 @@
   <link rel="canonical" href="https://quicklysite.github.io/index.html" />
   <meta name="description" content="NameForge: gerador de nomes gratuito, conversores de peso, temperatura, medidas de cozinha, tamanho de roupa e preço de Bitcoin e Ethereum em tempo real. Em português e inglês." />
   <title>NameForge – Gerador de Nomes / Name Generator</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
-
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet" />
   <!-- ADSENSE: substitua pelo seu código real -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8800851624013593"
      crossorigin="anonymous"></script>
@@ -265,7 +264,10 @@ h1 {
     .tab {
       flex: 1;
       padding: 10px 4px;
-      font-size: .82rem;
+      font-size: .78rem;
+      font-family: 'Cinzel', serif;
+      font-weight: 600;
+      letter-spacing: .03em;
       border: none;
       background: transparent;
       color: var(--muted);
@@ -646,7 +648,8 @@ h1 {
     <!-- TABS -->
     <div class="tabs">
       <button class="tab active" onclick="setTab('baby', this)" id="tab-baby">👶 Bebê</button>
-      <button class="tab" onclick="setTab('char', this)" id="tab-char">⚔️ Personagem</button>
+      <button class="tab" onclick="setTab('fantasy', this)" id="tab-fantasy">⚔️ Fantasia</button>
+      <button class="tab" onclick="setTab('fiction', this)" id="tab-fiction">🚀 Ficção</button>
       <button class="tab" onclick="setTab('biz', this)" id="tab-biz">🏢 Empresa</button>
     </div>
 
@@ -677,42 +680,92 @@ h1 {
       </div>
     </div>
 
-    <!-- CHAR PANEL -->
-    <div id="panel-char" style="display:none">
+    <!-- FANTASY PANEL -->
+    <div id="panel-fantasy" style="display:none">
       <div class="row">
         <div class="control-group">
-          <label id="lbl-universe">Universo</label>
-          <select id="char-universe">
-  <option value="fantasy">⚔️ Fantasy / Medieval</option>
-  <option value="sci">🚀 Sci-Fi / Futurista</option>
-  <option value="anime">🌸 Anime / Japonês</option>
-  <option value="dark">🌑 Dark / Gótico</option>
-  <option value="modern">🏙️ Moderno / Urbano</option>
-  <option value="steampunk">⚙️ Steampunk / Vitoriano</option>
-  <option value="cyberpunk">💾 Cyberpunk / Distópico</option>
-  <option value="cosmic">🪐 Cósmico / Planetas / Alien</option>
-  <option value="mythology">🏛️ Mitologia (Nórdica, Grega, Egípcia)</option>
-  <option value="rpg">🎲 RPG de Mesa / D&D</option>
-  <option value="villain">😈 Vilões e Antagonistas</option>
-  <option value="literary">📖 Personagens de Livros / Roteiros</option>
-</select>
+          <label id="lbl-universe-f">Universo</label>
+          <select id="fantasy-universe">
+            <option value="fantasy" id="fu-fantasy">⚔️ Fantasy / Medieval</option>
+            <option value="dark" id="fu-dark">🌑 Dark / Gótico</option>
+            <option value="rpg" id="fu-rpg">🎲 RPG de Mesa / D&D</option>
+            <option value="mythology" id="fu-myth">🏛️ Mitologia</option>
+            <option value="villain" id="fu-villain">😈 Vilões e Antagonistas</option>
+            <option value="literary" id="fu-literary">📖 Personagens de Livros</option>
+            <option value="steampunk" id="fu-steampunk">⚙️ Steampunk / Vitoriano</option>
+          </select>
         </div>
         <div class="control-group">
-          <label id="lbl-gender2">Gênero</label>
-          <select id="char-gender">
-          <option id="char-female" value="f">Feminino</option>
-          <option id="char-male" value="m">Masculino</option>
-          <option id="char-neutral" value="n">Neutro</option>
+          <label id="lbl-gender-f">Gênero</label>
+          <select id="fantasy-gender">
+            <option id="fg-female" value="f">Feminino</option>
+            <option id="fg-male" value="m">Masculino</option>
+            <option id="fg-neutral" value="n">Neutro</option>
           </select>
         </div>
       </div>
       <div class="control-group">
-        <label id="lbl-qty2">Quantidade</label>
-        <input type="number" id="char-qty" value="8" min="1" max="20" />
+        <label id="lbl-qty-f">Quantidade</label>
+        <input type="number" id="fantasy-qty" value="8" min="1" max="20" />
+      </div>
+    </div>
+
+    <!-- FICTION PANEL -->
+    <div id="panel-fiction" style="display:none">
+      <div class="row">
+        <div class="control-group">
+          <label id="lbl-universe-s">Universo</label>
+          <select id="fiction-universe">
+            <option value="sci" id="su-sci">🚀 Sci-Fi / Futurista</option>
+            <option value="cyberpunk" id="su-cyber">💾 Cyberpunk / Distópico</option>
+            <option value="cosmic" id="su-cosmic">🪐 Cósmico / Planetas</option>
+            <option value="anime" id="su-anime">🌸 Anime / Japonês</option>
+            <option value="modern" id="su-modern">🏙️ Moderno / Urbano</option>
+          </select>
+        </div>
+        <div class="control-group">
+          <label id="lbl-gender-s">Gênero</label>
+          <select id="fiction-gender">
+            <option id="sg-female" value="f">Feminino</option>
+            <option id="sg-male" value="m">Masculino</option>
+            <option id="sg-neutral" value="n">Neutro</option>
+          </select>
+        </div>
+      </div>
+      <div class="control-group">
+        <label id="lbl-qty-s">Quantidade</label>
+        <input type="number" id="fiction-qty" value="8" min="1" max="20" />
       </div>
     </div>
 
     <!-- BIZ PANEL -->
+    <div id="panel-biz" style="display:none">
+      <div class="row">
+        <div class="control-group">
+          <label id="lbl-sector">Setor</label>
+          <select id="biz-sector">
+            <option value="tech">Tech / Startup</option>
+            <option value="food">Alimentação / Food</option>
+            <option value="fashion">Moda / Fashion</option>
+            <option value="health">Saúde / Bem-estar</option>
+            <option value="finance">Finanças / Negócios</option>
+            <option value="creative">Criativo / Arte</option>
+          </select>
+        </div>
+        <div class="control-group">
+          <label id="lbl-style">Estilo</label>
+          <select id="biz-style">
+            <option id="style-modern" value="modern">Moderno / Curto</option>
+            <option id="style-classic" value="classic">Clássico / Formal</option>
+            <option id="style-playful" value="playful">Divertido / Jovem</option>
+          </select>
+        </div>
+      </div>
+      <div class="control-group">
+        <label id="lbl-qty3">Quantidade</label>
+        <input type="number" id="biz-qty" value="8" min="1" max="20" />
+      </div>
+    </div>
     <div id="panel-biz" style="display:none">
       <div class="row">
         <div class="control-group">
@@ -764,7 +817,7 @@ h1 {
   const T = {
     pt: {
       tagline: 'Gerador de nomes para bebês, personagens e empresas',
-      tabBaby: '👶 Bebê', tabChar: '⚔️ Personagem', tabBiz: '🏢 Empresa',
+      tabBaby: '👶 Bebê', tabFantasy: '⚔️ Fantasia', tabFiction: '🚀 Ficção', tabBiz: '🏢 Empresa',
       lblGender: 'Gênero', lblOrigin: 'Origem', lblQty: 'Quantidade',
       lblUniverse: 'Universo', lblGender2: 'Gênero',
       lblSector: 'Setor', lblStyle: 'Estilo',
@@ -816,7 +869,7 @@ btcBack:'Voltar', nlBtc:'Bitcoin'
     },
     en: {
       tagline: 'Name generator for babies, characters & businesses',
-      tabBaby: '👶 Baby', tabChar: '⚔️ Character', tabBiz: '🏢 Business',
+      tabBaby: '👶 Baby', tabFantasy: '⚔️ Fantasy', tabFiction: '🚀 Fiction', tabBiz: '🏢 Business',
       lblGender: 'Gender', lblOrigin: 'Origin', lblQty: 'Quantity',
       lblUniverse: 'Universe', lblGender2: 'Gender',
       lblSector: 'Sector', lblStyle: 'Style',
@@ -888,9 +941,10 @@ btcBack:'Back', nlBtc:'Bitcoin'
     if(i1) i1.textContent = t.impactLine1;
     if(i2) i2.textContent = t.impactLine2;
     document.getElementById('tagline').textContent = t.tagline;
-    document.getElementById('tab-baby').textContent = t.tabBaby;
-    document.getElementById('tab-char').textContent = t.tabChar;
-    document.getElementById('tab-biz').textContent = t.tabBiz;
+    document.getElementById('tab-baby').textContent    = t.tabBaby;
+    document.getElementById('tab-fantasy').textContent = t.tabFantasy;
+    document.getElementById('tab-fiction').textContent = t.tabFiction;
+    document.getElementById('tab-biz').textContent     = t.tabBiz;
     document.getElementById('lbl-gender').textContent = t.lblGender;
     document.getElementById('lbl-origin').textContent = t.lblOrigin;
     document.getElementById('lbl-qty').textContent = t.lblQty;
@@ -1317,9 +1371,10 @@ if(lang === 'en'){
     currentTab = tab;
     document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
     btn.classList.add('active');
-    document.getElementById('panel-baby').style.display = tab === 'baby' ? 'block' : 'none';
-    document.getElementById('panel-char').style.display = tab === 'char' ? 'block' : 'none';
-    document.getElementById('panel-biz').style.display  = tab === 'biz'  ? 'block' : 'none';
+    ['baby','fantasy','fiction','biz'].forEach(p => {
+      const el = document.getElementById('panel-'+p);
+      if(el) el.style.display = p === tab ? 'block' : 'none';
+    });
     document.getElementById('results').innerHTML = '';
   }
 
@@ -1345,13 +1400,21 @@ if(lang === 'en'){
       names = pick(pool, qty);
     }
 
-    if (currentTab === 'char') {
-      const universe = document.getElementById('char-universe').value;
-      const gender   = document.getElementById('char-gender').value;
-      const qty      = parseInt(document.getElementById('char-qty').value);
-      const pool     = (NAMES.char[universe] || {})[gender] || NAMES.char[universe]?.n || [];
+    if (currentTab === 'fantasy') {
+      const universe = document.getElementById('fantasy-universe').value;
+      const gender   = document.getElementById('fantasy-gender').value;
+      const qty      = parseInt(document.getElementById('fantasy-qty').value);
+      const pool     = (NAMES.char[universe] || {})[gender] || (NAMES.char[universe] || {}).n || [];
       names = pick(pool, qty);
     }
+
+    if (currentTab === 'fiction') {
+      const universe = document.getElementById('fiction-universe').value;
+      const gender   = document.getElementById('fiction-gender').value;
+      const qty      = parseInt(document.getElementById('fiction-qty').value);
+      const pool     = (NAMES.char[universe] || {})[gender] || (NAMES.char[universe] || {}).n || [];
+      names = pick(pool, qty);
+        }
 
     if (currentTab === 'biz') {
       const sector = document.getElementById('biz-sector').value;
