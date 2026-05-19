@@ -195,15 +195,19 @@
       line-height: 1.1;
     }
 
-    header h1 span { color: var(--accent); }
-
-    header p.tagline {
-      color: var(--muted);
-      margin-top: 10px;
-      font-size: .95rem;
-      font-weight: 300;
-    }
-
+    h1 span {
+  background: linear-gradient(135deg, #f5e6a3 0%, #e8c77a 40%, #c4963a 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+h1 {
+  background: linear-gradient(135deg, #d4c4a0 0%, #f0ede6 50%, #c8b98a 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 18px rgba(232,199,122,0.25));
+}
     /* ── AD SLOT TOP ── */
     .ad-slot {
       position: relative;
@@ -610,7 +614,14 @@
   <h1><span>Name</span>Forge</h1>
   <p class="tagline" id="tagline">Gerador de nomes para bebês, personagens e empresas</p>
 </header>
-
+<div style="text-align:center;padding:8px 20px 24px;max-width:640px;margin:0 auto;">
+  <p id="impact-line1" style="color:var(--muted);font-size:0.95rem;line-height:1.8;margin-bottom:8px;font-style:italic;">
+    De planetas distantes a masmorras medievais. De universos paralelos a dimensões inexploradas.
+  </p>
+  <p id="impact-line2" style="color:var(--accent);font-size:1rem;font-weight:600;line-height:1.6;">
+    Nomes que constroem mundos, criam histórias — e inspiram roteiros cinematográficos.
+  </p>
+</div>
 <!-- AD SLOT TOP -->
 <div class="ad-slot" id="ad-top">
   <!-- AdSense code here -->
@@ -746,6 +757,8 @@
       charFemale:'Feminino',
       charMale:'Masculino',
       charNeutral:'Neutro',
+      impactLine1: 'De planetas distantes a masmorras medievais. De universos paralelos a dimensões inexploradas.',
+      impactLine2: 'Nomes que constroem mundos, criam histórias — e inspiram roteiros cinematográficos.',
       footer: '© 2025 NameForge · Clique em um nome para copiar',
       nsNames:'Gerador de Nomes', nsConv:'Conversores',
       nlNames:'Nomes', nlWeight:'Peso', nlTemp:'Temperatura', nlKitchen:'Medidas de Cozinha', nlClothing:'Tamanho de Roupa',
@@ -796,6 +809,8 @@ btcBack:'Voltar', nlBtc:'Bitcoin'
       charFemale:'Female',
       charMale:'Male',
       charNeutral:'Neutral',
+      impactLine1: 'From distant planets to medieval dungeons. From parallel universes to uncharted dimensions.',
+      impactLine2: 'Names that build worlds, create stories — and inspire cinematic scripts.',
       footer: '© 2025 NameForge · Click a name to copy',
       nsNames:'Name Generator', nsConv:'Converters',
       nlNames:'Names', nlWeight:'Weight', nlTemp:'Temperature', nlKitchen:'Kitchen Measures', nlClothing:'Clothing Size',
@@ -848,6 +863,10 @@ btcBack:'Back', nlBtc:'Bitcoin'
 }
 
   function applyTranslations() {
+    const i1 = document.getElementById('impact-line1');
+    const i2 = document.getElementById('impact-line2');
+    if(i1) i1.textContent = t.impactLine1;
+    if(i2) i2.textContent = t.impactLine2;
     const t = T[lang];
     document.getElementById('tagline').textContent = t.tagline;
     document.getElementById('tab-baby').textContent = t.tabBaby;
