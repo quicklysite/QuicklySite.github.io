@@ -918,6 +918,39 @@ btcBack:'Back', nlBtc:'Bitcoin'
     if(abP1) abP1.innerHTML = tP1;
     if(abP2) abP2.textContent = tP2;
     if(abP3) abP3.textContent = tP3;
+    const seoRpgTitle = document.getElementById('seo-rpg-title');
+const seoLitTitle = document.getElementById('seo-lit-title');
+const seoSciTitle = document.getElementById('seo-sci-title');
+
+if(lang === 'en'){
+  if(seoRpgTitle) seoRpgTitle.textContent = '⚔️ For RPG and D&D Game Masters';
+  const p = document.getElementById('seo-rpg-p1'); if(p) p.innerHTML = 'Creating a Dungeons & Dragons, Pathfinder or any tabletop RPG campaign requires much more than rules and dice — it requires names that sound real within the world you\'re building. An elf named "John" breaks immersion instantly. A warrior named "Aldric Stormveil" creates history before you even roll the dice.';
+  const p2 = document.getElementById('seo-rpg-p2'); if(p2) p2.innerHTML = 'NameForge has specific categories for tabletop RPG characters, villains, heroes, mythological creatures and dark universes — all with names built to sound authentic inside fantasy worlds.';
+  const p3 = document.getElementById('seo-rpg-p3'); if(p3) p3.innerHTML = 'Use the <strong style="color:var(--accent);">⚔️ Character</strong> tab, select the desired universe — Fantasy, RPG, Dark or Mythology — choose the gender and generate as many names as you want instantly.';
+
+  if(seoLitTitle) seoLitTitle.textContent = '📖 For Writers and Book Creators';
+  const l1 = document.getElementById('seo-lit-p1'); if(l1) l1.textContent = 'The biggest creative block for a writer is usually not a lack of ideas — it\'s a lack of a name that makes the character come to life. A nameless protagonist is a draft. With the right name, they become a person. NameForge was designed for this exact moment.';
+  const l2 = document.getElementById('seo-lit-p2'); if(l2) l2.textContent = 'For novels, short stories, epic fantasy, science fiction or cinematic scripts, the tool offers categories ranging from classic literary names to characters from dystopian and Victorian steampunk universes.';
+  const l3 = document.getElementById('seo-lit-p3'); if(l3) l3.innerHTML = 'The <strong style="color:var(--accent);">📖 Book Characters / Scripts</strong> category was specially curated with references from contemporary fantastic literature, including romantasy, space opera and speculative fiction.';
+
+  if(seoSciTitle) seoSciTitle.textContent = '🚀 Sci-Fi, Steampunk and Cyberpunk';
+  const s1 = document.getElementById('seo-sci-p1'); if(s1) s1.textContent = 'Names for science fiction universes need to sound both familiar and alien. A planet called "Earth 2" inspires nothing. But "Kaelindra-7" or "Nebulora" already suggest an entire civilization. NameForge has dedicated categories for futuristic Sci-Fi, cosmic planet names, dystopian cyberpunk universes and the unique Victorian style of Steampunk.';
+  const s2 = document.getElementById('seo-sci-p2'); if(s2) s2.innerHTML = 'For screenwriters, comic book creators, indie game developers or anyone building a universe from scratch — the <strong style="color:var(--accent);">🚀 Sci-Fi</strong>, <strong style="color:var(--accent);">🪐 Cosmic</strong>, <strong style="color:var(--accent);">💾 Cyberpunk</strong> and <strong style="color:var(--accent);">⚙️ Steampunk</strong> categories deliver names that carry the visual and sonic essence of each genre.';
+} else {
+  if(seoRpgTitle) seoRpgTitle.textContent = '⚔️ Para Mestres de RPG e D&D';
+  const p = document.getElementById('seo-rpg-p1'); if(p) p.innerHTML = 'Criar uma campanha de Dungeons & Dragons, Pathfinder ou qualquer RPG de mesa exige muito mais do que regras e dados — exige nomes que soem reais dentro do universo que você está construindo.';
+  const p2 = document.getElementById('seo-rpg-p2'); if(p2) p2.innerHTML = 'O NameForge tem categorias específicas para personagens de RPG de mesa, vilões, heróis, criaturas mitológicas e universos dark.';
+  const p3 = document.getElementById('seo-rpg-p3'); if(p3) p3.innerHTML = 'Use a aba <strong style="color:var(--accent);">⚔️ Personagem</strong>, selecione o universo desejado e gere quantos nomes quiser instantaneamente.';
+
+  if(seoLitTitle) seoLitTitle.textContent = '📖 Para Escritores e Criadores de Livros';
+  const l1 = document.getElementById('seo-lit-p1'); if(l1) l1.textContent = 'O maior bloqueio criativo de um escritor não costuma ser a falta de ideias — é a falta de um nome que faça o personagem ganhar vida.';
+  const l2 = document.getElementById('seo-lit-p2'); if(l2) l2.textContent = 'Para romances, contos, fantasia épica, ficção científica ou roteiros cinematográficos, a ferramenta oferece categorias que vão de nomes literários clássicos a personagens de universos distópicos e steampunk vitorianos.';
+  const l3 = document.getElementById('seo-lit-p3'); if(l3) l3.innerHTML = 'A categoria <strong style="color:var(--accent);">📖 Personagens de Livros / Roteiros</strong> foi especialmente curada com referências da literatura fantástica contemporânea.';
+
+  if(seoSciTitle) seoSciTitle.textContent = '🚀 Sci-Fi, Steampunk e Cyberpunk';
+  const s1 = document.getElementById('seo-sci-p1'); if(s1) s1.textContent = 'Nomes para universos de ficção científica precisam soar ao mesmo tempo familiares e alienígenas. O NameForge tem categorias dedicadas para Sci-Fi futurista, nomes de planetas e seres cósmicos, universos cyberpunk distópicos e o estilo vitoriano único do Steampunk.';
+  const s2 = document.getElementById('seo-sci-p2'); if(s2) s2.innerHTML = 'Para roteiristas, escritores de quadrinhos, criadores de jogos independentes — as categorias <strong style="color:var(--accent);">🚀 Sci-Fi</strong>, <strong style="color:var(--accent);">🪐 Cósmico</strong>, <strong style="color:var(--accent);">💾 Cyberpunk</strong> e <strong style="color:var(--accent);">⚙️ Steampunk</strong> entregam nomes que carregam a essência de cada gênero.';
+}
     document.documentElement.lang = lang;
     translateConverters(t);
     } 
@@ -1589,23 +1622,23 @@ function translateConverters(t){
   </div>
 
   <div style="background:var(--surface);border:1px solid rgba(232,199,122,.12);border-radius:20px;padding:32px;margin-bottom:24px;">
-    <h2 style="color:var(--accent);font-family:'Playfair Display',serif;font-size:1.3rem;margin-bottom:16px;">⚔️ Para Mestres de RPG e D&D</h2>
-    <p style="line-height:1.8;margin-bottom:14px;opacity:.9;">Criar uma campanha de Dungeons & Dragons, Pathfinder ou qualquer RPG de mesa exige muito mais do que regras e dados — exige nomes que soem reais dentro do universo que você está construindo. Um elfo chamado "João" quebra a imersão em segundos. Um guerreiro chamado "Aldric Stormveil" já cria história antes mesmo de rolar o dado.</p>
-    <p style="line-height:1.8;margin-bottom:14px;opacity:.9;">O NameForge tem categorias específicas para personagens de RPG de mesa, vilões, heróis, criaturas mitológicas e universos dark — tudo com nomes construídos para soar autênticos dentro de mundos de fantasia. Seja para o seu personagem jogador, um NPC importante ou o antagonista final da campanha, há centenas de opções para cada perfil.</p>
-    <p style="line-height:1.8;opacity:.9;">Use a aba <strong style="color:var(--accent);">⚔️ Personagem</strong>, selecione o universo desejado — Fantasy, RPG de Mesa, Dark ou Mitologia — escolha o gênero e gere quantos nomes quiser instantaneamente.</p>
+    <h2 id=style="color:var(--accent);font-family:'Playfair Display',serif;font-size:1.3rem;margin-bottom:16px;">⚔️ Para Mestres de RPG e D&D</h2>
+    <p id=style="line-height:1.8;margin-bottom:14px;opacity:.9;">Criar uma campanha de Dungeons & Dragons, Pathfinder ou qualquer RPG de mesa exige muito mais do que regras e dados — exige nomes que soem reais dentro do universo que você está construindo. Um elfo chamado "João" quebra a imersão em segundos. Um guerreiro chamado "Aldric Stormveil" já cria história antes mesmo de rolar o dado.</p>
+    <p id=style="line-height:1.8;margin-bottom:14px;opacity:.9;">O NameForge tem categorias específicas para personagens de RPG de mesa, vilões, heróis, criaturas mitológicas e universos dark — tudo com nomes construídos para soar autênticos dentro de mundos de fantasia. Seja para o seu personagem jogador, um NPC importante ou o antagonista final da campanha, há centenas de opções para cada perfil.</p>
+    <p id=style="line-height:1.8;opacity:.9;">Use a aba <strong style="color:var(--accent);">⚔️ Personagem</strong>, selecione o universo desejado — Fantasy, RPG de Mesa, Dark ou Mitologia — escolha o gênero e gere quantos nomes quiser instantaneamente.</p>
   </div>
 
   <div style="background:var(--surface);border:1px solid rgba(232,199,122,.12);border-radius:20px;padding:32px;margin-bottom:24px;">
-    <h2 style="color:var(--accent);font-family:'Playfair Display',serif;font-size:1.3rem;margin-bottom:16px;">📖 Para Escritores e Criadores de Livros</h2>
-    <p style="line-height:1.8;margin-bottom:14px;opacity:.9;">O maior bloqueio criativo de um escritor não costuma ser a falta de ideias — é a falta de um nome que faça o personagem ganhar vida. Um protagonista sem nome é um rascunho. Com o nome certo, ele se torna uma pessoa. O NameForge foi pensado para esse momento específico: quando você sabe quem o personagem é, mas ainda não sabe como chamá-lo.</p>
-    <p style="line-height:1.8;margin-bottom:14px;opacity:.9;">Para romances, contos, fantasia épica, ficção científica ou roteiros cinematográficos, a ferramenta oferece categorias que vão de nomes literários clássicos a personagens de universos distópicos e steampunk vitorianos. Cada geração traz nomes com personalidade — não apenas sílabas aleatórias juntas.</p>
-    <p style="line-height:1.8;opacity:.9;">A categoria <strong style="color:var(--accent);">📖 Personagens de Livros / Roteiros</strong> foi especialmente curada com referências da literatura fantástica contemporânea, incluindo romantasy, space opera e ficção especulativa.</p>
+    <h2 id=style="color:var(--accent);font-family:'Playfair Display',serif;font-size:1.3rem;margin-bottom:16px;">📖 Para Escritores e Criadores de Livros</h2>
+    <p id=style="line-height:1.8;margin-bottom:14px;opacity:.9;">O maior bloqueio criativo de um escritor não costuma ser a falta de ideias — é a falta de um nome que faça o personagem ganhar vida. Um protagonista sem nome é um rascunho. Com o nome certo, ele se torna uma pessoa. O NameForge foi pensado para esse momento específico: quando você sabe quem o personagem é, mas ainda não sabe como chamá-lo.</p>
+    <p id=style="line-height:1.8;margin-bottom:14px;opacity:.9;">Para romances, contos, fantasia épica, ficção científica ou roteiros cinematográficos, a ferramenta oferece categorias que vão de nomes literários clássicos a personagens de universos distópicos e steampunk vitorianos. Cada geração traz nomes com personalidade — não apenas sílabas aleatórias juntas.</p>
+    <p id=style="line-height:1.8;opacity:.9;">A categoria <strong style="color:var(--accent);">📖 Personagens de Livros / Roteiros</strong> foi especialmente curada com referências da literatura fantástica contemporânea, incluindo romantasy, space opera e ficção especulativa.</p>
   </div>
 
   <div style="background:var(--surface);border:1px solid rgba(232,199,122,.12);border-radius:20px;padding:32px;">
-    <h2 style="color:var(--accent);font-family:'Playfair Display',serif;font-size:1.3rem;margin-bottom:16px;">🚀 Sci-Fi, Steampunk e Cyberpunk</h2>
-    <p style="line-height:1.8;margin-bottom:14px;opacity:.9;">Nomes para universos de ficção científica precisam soar ao mesmo tempo familiares e alienígenas. Um planeta chamado "Terra 2" não inspira nada. Mas "Kaelindra-7" ou "Nebulora" já sugerem toda uma civilização. O NameForge tem categorias dedicadas para Sci-Fi futurista, nomes de planetas e seres cósmicos, universos cyberpunk distópicos e o estilo vitoriano único do Steampunk.</p>
-    <p style="line-height:1.8;opacity:.9;">Para roteiristas, escritores de quadrinhos, criadores de jogos independentes ou qualquer pessoa construindo um universo do zero — as categorias <strong style="color:var(--accent);">🚀 Sci-Fi</strong>, <strong style="color:var(--accent);">🪐 Cósmico</strong>, <strong style="color:var(--accent);">💾 Cyberpunk</strong> e <strong style="color:var(--accent);">⚙️ Steampunk</strong> entregam nomes que carregam a essência visual e sonora de cada gênero.</p>
+    <h2 id=style="color:var(--accent);font-family:'Playfair Display',serif;font-size:1.3rem;margin-bottom:16px;">🚀 Sci-Fi, Steampunk e Cyberpunk</h2>
+    <p id=style="line-height:1.8;margin-bottom:14px;opacity:.9;">Nomes para universos de ficção científica precisam soar ao mesmo tempo familiares e alienígenas. Um planeta chamado "Terra 2" não inspira nada. Mas "Kaelindra-7" ou "Nebulora" já sugerem toda uma civilização. O NameForge tem categorias dedicadas para Sci-Fi futurista, nomes de planetas e seres cósmicos, universos cyberpunk distópicos e o estilo vitoriano único do Steampunk.</p>
+    <p id=style="line-height:1.8;opacity:.9;">Para roteiristas, escritores de quadrinhos, criadores de jogos independentes ou qualquer pessoa construindo um universo do zero — as categorias <strong style="color:var(--accent);">🚀 Sci-Fi</strong>, <strong style="color:var(--accent);">🪐 Cósmico</strong>, <strong style="color:var(--accent);">💾 Cyberpunk</strong> e <strong style="color:var(--accent);">⚙️ Steampunk</strong> entregam nomes que carregam a essência visual e sonora de cada gênero.</p>
   </div>
 
   </section>
