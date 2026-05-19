@@ -671,12 +671,19 @@ h1 {
         <div class="control-group">
           <label id="lbl-universe">Universo</label>
           <select id="char-universe">
-            <option value="fantasy">Fantasy / Medieval</option>
-            <option value="sci">Sci-Fi / Futurista</option>
-            <option value="anime">Anime / Japonês</option>
-            <option value="dark">Dark / Gótico</option>
-            <option value="modern">Moderno / Urbano</option>
-          </select>
+  <option value="fantasy">⚔️ Fantasy / Medieval</option>
+  <option value="sci">🚀 Sci-Fi / Futurista</option>
+  <option value="anime">🌸 Anime / Japonês</option>
+  <option value="dark">🌑 Dark / Gótico</option>
+  <option value="modern">🏙️ Moderno / Urbano</option>
+  <option value="steampunk">⚙️ Steampunk / Vitoriano</option>
+  <option value="cyberpunk">💾 Cyberpunk / Distópico</option>
+  <option value="cosmic">🪐 Cósmico / Planetas / Alien</option>
+  <option value="mythology">🏛️ Mitologia (Nórdica, Grega, Egípcia)</option>
+  <option value="rpg">🎲 RPG de Mesa / D&D</option>
+  <option value="villain">😈 Vilões e Antagonistas</option>
+  <option value="literary">📖 Personagens de Livros / Roteiros</option>
+</select>
         </div>
         <div class="control-group">
           <label id="lbl-gender2">Gênero</label>
@@ -863,11 +870,11 @@ btcBack:'Back', nlBtc:'Bitcoin'
 }
 
   function applyTranslations() {
+    const t = T[lang];
     const i1 = document.getElementById('impact-line1');
     const i2 = document.getElementById('impact-line2');
     if(i1) i1.textContent = t.impactLine1;
     if(i2) i2.textContent = t.impactLine2;
-    const t = T[lang];
     document.getElementById('tagline').textContent = t.tagline;
     document.getElementById('tab-baby').textContent = t.tabBaby;
     document.getElementById('tab-char').textContent = t.tabChar;
@@ -1115,6 +1122,41 @@ btcBack:'Back', nlBtc:'Bitcoin'
         ]
       }
     },
+    steampunk: {
+        f: ['Adaline','Beatrix','Cassandra','Cordelia','Edwina','Eugenia','Evangeline','Flora','Isadora','Lavinia','Leonora','Mathilda','Millicent','Octavia','Ophelia','Penelope','Rosalind','Seraphina','Theodora','Vivienne','Arabella','Augusta','Celestine','Dorothea','Emmeline','Felicity','Gwendolyn','Harriet','Imogen','Josephine'],
+        m: ['Alistair','Archibald','Barnabas','Cornelius','Edmund','Ezekiel','Ferdinand','Fletcher','Gideon','Horatio','Ignatius','Jasper','Lemuel','Leopold','Montague','Mordecai','Nathaniel','Obadiah','Percival','Ptolemy','Reginald','Rupert','Thaddeus','Tobias','Valentine','Wellington','Whitmore','Winston','Zacharias','Aldous'],
+        n: ['Clocksworth','Cogsworth','Copperveil','Emberwick','Forgecroft','Gearhart','Ironvale','Patchwork','Quicksilver','Steamhollow','Tinkerbell','Vaultmere','Wrenwick','Ashforge','Brassworth','Coalgate','Driftwood','Ironmoor','Presswick','Steamveil']
+      },
+      cyberpunk: {
+        f: ['Alias','Axle','Byte','Chrome','Cipher','Cryogen','Echo','Ferrix','Ghost','Glitch','Hex','Ion','Iris','Jax','Kira','Lace','Lyra','Matrix','Neon','Nexus','Nova','Null','Pixel','Proxy','Raze','Render','Rez','Shade','Static','Synth'],
+        m: ['Axon','Blaze','Bolt','Breach','Cobalt','Crash','Dex','Drift','Edge','Flux','Frag','Grid','Hack','Jett','Kade','Kane','Latch','Maxx','Nox','Null','Patch','Punk','Rage','Raze','Rig','Rogue','Splice','Toxic','Vector','Volt'],
+        n: ['Arc','Binary','Bug','Code','Core','Crash','Data','Frag','Glitch','Hash','Hex','Index','Jack','Lag','Link','Loop','Mod','Null','Ping','Root','Rez','Scan','Shift','Splice','Stack','Static','Token','Trace','Virus','Zero']
+      },
+      cosmic: {
+        f: ['Andromeda','Astraea','Aurora','Callista','Celeste','Ceres','Elara','Galaxia','Helios','Hesperia','Hyperion','Io','Iris','Kalinda','Lunara','Lyra','Nebula','Nova','Oriana','Phoebe','Pulsara','Quasar','Solara','Stellara','Tethys','Titan','Vega','Vela','Zephyra','Zenith'],
+        m: ['Altair','Andor','Arcturus','Atlas','Caelum','Castor','Cosmos','Cygnus','Deneb','Draco','Eridanus','Fornax','Helios','Hydrus','Indus','Keid','Leo','Lux','Lyra','Mizar','Norma','Novus','Oberon','Orion','Perseus','Polaris','Rigel','Sirius','Solux','Vega'],
+        n: ['Aphelion','Asteroid','Axiom','Binary','Comet','Corona','Eclipse','Equinox','Event','Galaxy','Gravity','Halo','Horizon','Infinity','Lumen','Nebula','Neutron','Nova','Orbit','Parallax','Perihelion','Phase','Photon','Pulsar','Quasar','Singularity','Solar','Solstice','Void','Zenith']
+      },
+      mythology: {
+        f: ['Aphrodite','Artemis','Astrid','Atena','Bastet','Brigid','Calypso','Circe','Eir','Electra','Epona','Freya','Hecate','Hera','Hestia','Idun','Inanna','Iris','Ishtar','Isis','Kali','Lakshmi','Maat','Medusa','Nefertiti','Persephone','Sif','Skadi','Theia','Valkyrie'],
+        m: ['Anubis','Apollo','Ares','Baldr','Chronos','Dionysus','Fenrir','Hades','Heimdall','Helios','Hercules','Hermes','Horus','Loki','Mars','Mercury','Morrigan','Neptune','Odin','Osiris','Pan','Perseus','Poseidon','Ra','Set','Thor','Tyr','Vidar','Vulcan','Zeus'],
+        n: ['Aether','Chaos','Cosmos','Daemon','Eidolon','Elysium','Empyrean','Erebus','Eternity','Fate','Gaia','Genesis','Kronos','Limbo','Logos','Moira','Nemesis','Nirvana','Nyx','Olympus','Ouroboros','Pneuma','Tartarus','Thanatos','Typhon','Valhalla','Void','Wyrd','Xanadu','Zephyr']
+      },
+      rpg: {
+        f: ['Aasimar','Adara','Alyndra','Aravel','Ashara','Bernadeth','Caelynn','Dara','Elowen','Farideh','Galinndan','Imsa','Ilvara','Jaraxle','Keyleth','Kira','Laezel','Liadon','Lilith','Lyra','Miirym','Mirri','Myrra','Naeris','Naivara','Nissa','Phaedra','Rhogar','Sariel','Tanis'],
+        m: ['Aldaron','Arken','Baldur','Balomir','Belgos','Bruenor','Carric','Darvin','Drizzt','Durnan','Elros','Falco','Garrick','Genn','Hadron','Haeladin','Kavan','Kildrak','Korinn','Malark','Mehen','Merric','Mystan','Nestor','Oryn','Peren','Quarion','Rolen','Soveliss','Thamior'],
+        n: ['Alabyran','Arianrhod','Arveiaturace','Ashardalon','Bahamut','Baphomet','Demogorgon','Elminster','Faerun','Faeryl','Felandaris','Grazzt','Iggwilv','Imryth','Ioun','Kelemvor','Lolth','Mielikki','Moradin','Mystra','Oghma','Orcus','Selune','Shar','Talos','Tiamat','Torm','Tymora','Waukeen','Zehir']
+      },
+      villain: {
+        f: ['Abyss','Belladonna','Celestia','Crimson','Domina','Eclipse','Fury','Gravemere','Hexana','Inferna','Lamia','Maleficent','Morrigan','Nemesis','Noxara','Nyxara','Obsidian','Ominara','Phantasm','Rancor','Ravenna','Seraphex','Shade','Silvermourne','Tenebris','Umbra','Vaeloria','Vexara','Voidheart','Wraith'],
+        m: ['Abysson','Acheron','Bane','Carnage','Damnation','Decay','Dread','Erebus','Grimm','Hex','Inferno','Lucian','Malice','Malkor','Mortis','Nihil','Noxian','Oblivion','Omen','Pestilence','Phantom','Rancor','Ruin','Shadow','Sinister','Specter','Torment','Tyrant','Void','Wrath'],
+        n: ['Annihilation','Apocalypse','Blight','Chaos','Corruption','Curse','Decay','Despair','Destruction','Discord','Doom','Dread','Entropy','Gloom','Grief','Havoc','Malice','Mayhem','Misery','Nihil','Obliteration','Plague','Ruin','Sorrow','Terror','Torment','Vengeance','Void','Woe','Wraith']
+      },
+      literary: {
+        f: ['Adaline','Adaora','Aelin','Alosa','Amarantha','Arabella','Arya','Beatrice','Briseis','Calliope','Caraval','Celaena','Clary','Daenerys','Elain','Elara','Elspeth','Evangeline','Feyre','Galathynius','Hermione','Inej','Juliette','Kestrel','Lazuli','Lena','Lyra','Manon','Mara','Meilin'],
+        m: ['Achilles','Aegon','Aleksander','Alosa','Alwyn','Amos','Aristotle','Atticus','Augustus','Callum','Darrow','Dorian','Endymion','Eugenides','Finnick','Hazel','Iko','Jacks','Jude','Kaz','Kieran','Lazarus','Lio','Lysander','Maxon','Montague','Nikolai','Oberon','Orion','Patroclus'],
+        n: ['Afterthought','Allegory','Aphorism','Archetype','Chronicle','Cipher','Codex','Denouement','Elegy','Enigma','Epitaph','Fable','Folio','Folklore','Fragment','Glossary','Hieroglyph','Hypothesis','Idiom','Index','Koan','Legend','Lexicon','Lore','Manuscript','Metaphor','Myth','Narrative','Oracle','Parable']
+  }
     biz: {
       tech: {
         modern: [
