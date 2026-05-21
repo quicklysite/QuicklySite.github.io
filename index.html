@@ -264,21 +264,17 @@ h1 {
     .tab {
       flex: 1;
       padding: 10px 4px;
-      font-size: .78rem;
-      font-family: 'Cinzel', serif;
-      font-weight: 600;
-      letter-spacing: .03em;
       border: none;
       background: transparent;
       color: var(--muted);
       cursor: pointer;
       border-radius: 50px;
-      font-family: 'DM Sans', sans-serif;
-      font-size: .9rem;
-      font-weight: 500;
+      font-family: 'Cinzel', serif;
+      font-size: .78rem;
+      font-weight: 600;
+      letter-spacing: .03em;
       transition: all .2s;
     }
-
     .tab.active {
       background: var(--accent);
       color: #0d0d0f;
@@ -766,34 +762,7 @@ h1 {
         <input type="number" id="biz-qty" value="8" min="1" max="20" />
       </div>
     </div>
-    <div id="panel-biz" style="display:none">
-      <div class="row">
-        <div class="control-group">
-          <label id="lbl-sector">Setor</label>
-          <select id="biz-sector">
-            <option value="tech">Tech / Startup</option>
-            <option value="food">Alimentação / Food</option>
-            <option value="fashion">Moda / Fashion</option>
-            <option value="health">Saúde / Bem-estar</option>
-            <option value="finance">Finanças / Negócios</option>
-            <option value="creative">Criativo / Arte</option>
-          </select>
-        </div>
-        <div class="control-group">
-          <label id="lbl-style">Estilo</label>
-          <select id="biz-style">
-            <option id="style-modern" value="modern">Moderno / Curto</option>
-            <option id="style-classic" value="classic">Clássico / Formal</option>
-            <option id="style-playful" value="playful">Divertido / Jovem</option>
-          </select>
-        </div>
-      </div>
-      <div class="control-group">
-        <label id="lbl-qty3">Quantidade</label>
-        <input type="number" id="biz-qty" value="8" min="1" max="20" />
-      </div>
-    </div>
-
+    
     <!-- BUTTON -->
     <button class="btn-generate" onclick="generate()" id="btn-gen">✨ Gerar Nomes</button>
 
@@ -948,14 +917,18 @@ btcBack:'Back', nlBtc:'Bitcoin'
     document.getElementById('lbl-gender').textContent = t.lblGender;
     document.getElementById('lbl-origin').textContent = t.lblOrigin;
     document.getElementById('lbl-qty').textContent = t.lblQty;
-    document.getElementById('lbl-universe').textContent = t.lblUniverse;
-    document.getElementById('lbl-gender2').textContent = t.lblGender2;
-    document.getElementById('char-female').textContent = t.charFemale;
-    document.getElementById('char-male').textContent = t.charMale;
-    document.getElementById('char-neutral').textContent = t.charNeutral;
-    document.getElementById('lbl-sector').textContent = t.lblSector;
-    document.getElementById('lbl-style').textContent = t.lblStyle;
-    document.getElementById('lbl-qty2').textContent = t.lblQty;
+    document.getElementById('lbl-universe-f').textContent = t.lblUniverse;
+    document.getElementById('lbl-gender-f').textContent   = t.lblGender2;
+    document.getElementById('lbl-qty-f').textContent      = t.lblQty;
+    document.getElementById('lbl-universe-s').textContent = t.lblUniverse;
+    document.getElementById('lbl-gender-s').textContent   = t.lblGender2;
+    document.getElementById('lbl-qty-s').textContent      = t.lblQty;
+    document.getElementById('fg-female').textContent      = t.charFemale;
+    document.getElementById('fg-male').textContent        = t.charMale;
+    document.getElementById('fg-neutral').textContent     = t.charNeutral;
+    document.getElementById('sg-female').textContent      = t.charFemale;
+    document.getElementById('sg-male').textContent        = t.charMale;
+    document.getElementById('sg-neutral').textContent     = t.charNeutral;
     document.getElementById('lbl-qty3').textContent = t.lblQty;
     document.getElementById('btn-gen').textContent = t.btnGen;
     document.getElementById('opt-f').textContent = t.optF;
