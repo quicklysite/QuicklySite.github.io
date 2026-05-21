@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gerador de Lugares – NameForge</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@700&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0d0d0f;
+  --surface:#16161a;
+  --surface2:#1e1e24;
+  --accent:#e8c77a;
+  --accent2:#c4963a;
+  --text:#f0ede6;
+  --muted:#888;
+  --radius:14px;
+}
+*{ box-sizing:border-box; margin:0; padding:0; }
+body{ background:var(--bg); color:var(--text); font-family:'DM Sans',sans-serif; line-height:1.6; min-height:100vh; }
+.container{ max-width:800px; margin:0 auto; padding:40px 20px 80px; }
+
+/* HEADER */
+.back-link{ display:inline-block; margin-bottom:28px; color:var(--accent); text-decoration:none; font-size:.95rem; font-weight:500; }
+.back-link:hover{ opacity:.8; }
+.hero{ text-align:center; margin-bottom:36px; }
+.hero h1{ font-family:'Playfair Display',serif; font-size:2.4rem; color:var(--accent); margin-bottom:10px; }
+.hero p{ color:var(--muted); font-size:.95rem; max-width:500px; margin:0 auto; line-height:1.7; }
+
+/* PAINEL */
+.panel{ background:var(--surface); border-radius:20px; padding:32px 28px; box-shadow:0 10px 40px rgba(0,0,0,.45); }
+
+/* SELECT GRID */
+.select-grid{ display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:20px; }
+.select-group{ display:flex; flex-direction:column; gap:8px; }
+.select-group label{ font-family:'Cinzel',serif; font-size:.72rem; text-transform:uppercase; letter-spacing:.1em; color:var(--accent2); }
+.select-group select{
+  background:var(--surface2);
+  border:1.5px solid rgba(255,255,255,.07);
+  color:var(--text);
+  padding:12px 14px;
+  border-radius:10px;
+  font-family:'DM Sans',sans-serif;
+  font-size:.9rem;
+  outline:none;
+  cursor:pointer;
+  transition:border-color .2s;
+  appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right 14px center;
+  padding-right:36px;
+}
+.select-group select:focus{ border-color:rgba(232,199,122,.4); }
+
+/* QTY ROW */
+.qty-row{ display:flex; align-items:center; gap:16px; margin-bottom:24px; }
+.qty-row label{ font-family:'Cinzel',serif; font-size:.72rem; text-transform:uppercase; letter-spacing:.1em; color:var(--accent2); white-space:nowrap; }
+.qty-row input{
+  width:80px;
+  background:var(--surface2);
+  border:1.5px solid rgba(255,255,255,.07);
+  color:var(--text);
+  padding:11px 14px;
+  border-radius:10px;
+  font-family:'DM Sans',sans-serif;
+  font-size:.9rem;
+  outline:none;
+  text-align:center;
+}
+
+/* GENERATE BUTTON */
+.generate-btn{
+  width:100%;
+  padding:17px;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  color:#0d0d0f;
+  border:none;
+  border-radius:14px;
+  font-family:'Cinzel',serif;
+  font-size:1rem;
+  font-weight:700;
+  letter-spacing:.06em;
+  cursor:pointer;
+  transition:all .25s;
+  position:relative;
+  overflow:hidden;
+}
+.generate-btn:hover{ transform:translateY(-2px); box-shadow:0 8px 24px rgba(232,199,122,.25); }
+.generate-btn:active{ transform:translateY(0); }
+.generate-btn.loading{ opacity:.7; cursor:not-allowed; }
+
+/* RESULTS */
+.results-section{ margin-top:32px; display:none; }
+.results-label{ font-family:'Cinzel',serif; font-size:.72rem; text-transform:uppercase; letter-spacing:.12em; color:var(--muted); margin-bottom:14px; text-align:center; }
+.results-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
+  gap:12px;
+}
+.name-chip{
+  background:var(--surface2);
+  border:1.5px solid rgba(232,199,122,.12);
+  border-radius:12px;
+  padding:16px 14px;
+  text-align:center;
+  cursor:pointer;
+  transition:all .2s;
+  position:relative;
+}
+.name-chip:hover{
+  border-color:rgba(232,199,122,.45);
+  transform:translateY(-3px);
+  box-shadow:0 6px 20px rgba(232,199,122,.12);
+}
+.name-chip:active{ transform:translateY(-1px); }
+.name-chip .name-text{
+  font-family:'Playfair Display',serif;
+  font-size:1.05rem;
+  color:var(--accent);
+  display:block;
+  margin-bottom:4px;
+}
+.name-chip .name-type{
+  font-size:.72rem;
+  color:var(--muted);
+  text-transform:uppercase;
+  letter-spacing:.06em;
+}
+.name-chip .copy-hint{
+  font-size:.68rem;
+  color:var(--accent2);
+  opacity:0;
+  transition:opacity .2s;
+  margin-top:4px;
+}
+.name-chip:hover .copy-hint{ opacity:1; }
+.name-chip.copied{ border-color:rgba(76,175,80,.5); }
+.name-chip.copied .name-text{ color:#4caf50; }
+
+/* DIVIDER */
+.divider{ border:none; border-top:1px solid rgba(255,255,255,.06); margin:28px 0; }
+
+/* SCROLL TOP */
+.scroll-top{
+  position:fixed; bottom:28px; right:22px;
+  width:44px; height:44px;
+  background:var(--accent); color:#000;
+  border:none; border-radius:12px;
+  font-size:1.2rem; cursor:pointer;
+  opacity:0; transition:.3s; z-index:999;
+  display:flex; align-items:center; justify-content:center; font-weight:900;
+}
+.scroll-top.visible{ opacity:1; }
+
+/* MOBILE */
+@media(max-width:600px){
+  .container{ padding:24px 16px 80px; }
+  .panel{ padding:24px 18px; }
+  .select-grid{ grid-template-columns:1fr; }
+  .hero h1{ font-size:1.9rem; }
+  .results-grid{ grid-template-columns:repeat(auto-fill,minmax(140px,1fr)); }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+  <a href="#" class="back-link" id="back-link">← Voltar ao NameForge</a>
+
+  <div class="hero">
+    <h1 id="hero-title">🗺️ Gerador de Lugares</h1>
+    <p id="hero-sub">Crie nomes únicos para mundos, reinos, planetas e dimensões. Cada configuração gera um som diferente.</p>
+  </div>
+
+  <div class="panel">
+
+    <div class="select-grid">
+
+      <div class="select-group">
+        <label id="lbl-type">Tipo de Lugar</label>
+        <select id="place-type">
+          <option value="planet">🪐 Planeta</option>
+          <option value="kingdom">⚔️ Reino / Império</option>
+          <option value="city">🏰 Cidade / Fortaleza</option>
+          <option value="dungeon">🕯️ Masmorra / Ruína</option>
+          <option value="forest">🌿 Floresta / Território</option>
+          <option value="dimension">🌀 Dimensão / Portal</option>
+          <option value="station">🛸 Estação Espacial / Nave</option>
+          <option value="domain">👁️ Domínio / Plano</option>
+        </select>
+      </div>
+
+      <div class="select-group">
+        <label id="lbl-element">Elemento Dominante</label>
+        <select id="place-element">
+          <option value="fire">🔥 Fogo / Magma</option>
+          <option value="ice">❄️ Gelo / Névoa</option>
+          <option value="shadow">🌑 Sombra / Trevas</option>
+          <option value="arcane">✨ Arcano / Éter</option>
+          <option value="nature">🌿 Natureza / Vida</option>
+          <option value="void">🕳️ Vazio / Caos</option>
+          <option value="storm">⚡ Tempestade / Raio</option>
+          <option value="cosmic">🌌 Cósmico / Astral</option>
+          <option value="metal">⚙️ Metal / Engrenagem</option>
+          <option value="neon">💾 Neon / Dados</option>
+        </select>
+      </div>
+
+      <div class="select-group">
+        <label id="lbl-habitat">Habitat</label>
+        <select id="place-habitat">
+          <option value="volcanic">🌋 Vulcânico / Árido</option>
+          <option value="arctic">🧊 Ártico / Glacial</option>
+          <option value="forest">🌲 Florestal / Úmido</option>
+          <option value="aquatic">🌊 Aquático / Abissal</option>
+          <option value="desert">🏜️ Desértico / Seco</option>
+          <option value="aerial">☁️ Aéreo / Flutuante</option>
+          <option value="urban">🏙️ Urbano / Industrial</option>
+          <option value="cosmic">🌠 Espacial / Nebuloso</option>
+        </select>
+      </div>
+
+      <div class="select-group">
+        <label id="lbl-gravity">Gravidade</label>
+        <select id="place-gravity">
+          <option value="normal">⚖️ Normal</option>
+          <option value="low">🪶 Baixa / Levitação</option>
+          <option value="high">🪨 Alta / Densa</option>
+          <option value="zero">🌐 Zero-G / Flutuante</option>
+          <option value="variable">🔄 Variável / Instável</option>
+        </select>
+      </div>
+
+      <div class="select-group">
+        <label id="lbl-tone">Tom</label>
+        <select id="place-tone">
+          <option value="epic">⚡ Épico / Grandioso</option>
+          <option value="dark">💀 Sombrio / Opressor</option>
+          <option value="ancient">📜 Antigo / Misterioso</option>
+          <option value="hostile">☠️ Hostil / Perigoso</option>
+          <option value="utopian">✨ Utópico / Sereno</option>
+          <option value="decadent">🕯️ Decadente / Ruínas</option>
+          <option value="wild">🐺 Selvagem / Primitivo</option>
+        </select>
+      </div>
+
+      <div class="select-group">
+        <label id="lbl-universe">Universo</label>
+        <select id="place-universe">
+          <option value="fantasy">⚔️ Fantasy / Medieval</option>
+          <option value="scifi">🚀 Sci-Fi / Futurista</option>
+          <option value="steampunk">⚙️ Steampunk</option>
+          <option value="cyberpunk">💾 Cyberpunk</option>
+          <option value="cosmic">🌌 Cósmico / Alien</option>
+          <option value="dark">🌑 Dark / Gótico</option>
+          <option value="mythology">🏛️ Mitológico</option>
+        </select>
+      </div>
+
+    </div>
+
+    <div class="qty-row">
+      <label id="lbl-qty">Quantidade</label>
+      <input type="number" id="place-qty" value="8" min="1" max="20">
+    </div>
+
+    <button class="generate-btn" onclick="generatePlaces()" id="gen-btn">🗺️ Gerar Lugares</button>
+
+  </div>
+
+  <div class="results-section" id="results-section">
+    <hr class="divider">
+    <div class="results-label" id="results-label">Lugares gerados — clique para copiar</div>
+    <div class="results-grid" id="results-grid"></div>
+  </div>
+
+</div>
+
+<button class="scroll-top" id="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+// ── IDIOMA ──
+const T = {
+  pt:{
+    back:'← Voltar ao NameForge',
+    title:'🗺️ Gerador de Lugares',
+    sub:'Crie nomes únicos para mundos, reinos, planetas e dimensões. Cada configuração gera um som diferente.',
+    lblType:'Tipo de Lugar', lblElement:'Elemento Dominante', lblHabitat:'Habitat',
+    lblGravity:'Gravidade', lblTone:'Tom', lblUniverse:'Universo', lblQty:'Quantidade',
+    genBtn:'🗺️ Gerar Lugares',
+    resultsLabel:'Lugares gerados — clique para copiar',
+    copied:'Copiado!',
+    types:{
+      planet:'🪐 Planeta', kingdom:'⚔️ Reino / Império', city:'🏰 Cidade / Fortaleza',
+      dungeon:'🕯️ Masmorra / Ruína', forest:'🌿 Floresta / Território',
+      dimension:'🌀 Dimensão / Portal', station:'🛸 Estação Espacial / Nave', domain:'👁️ Domínio / Plano'
+    },
+    elements:{
+      fire:'🔥 Fogo / Magma', ice:'❄️ Gelo / Névoa', shadow:'🌑 Sombra / Trevas',
+      arcane:'✨ Arcano / Éter', nature:'🌿 Natureza / Vida', void:'🕳️ Vazio / Caos',
+      storm:'⚡ Tempestade / Raio', cosmic:'🌌 Cósmico / Astral', metal:'⚙️ Metal / Engrenagem', neon:'💾 Neon / Dados'
+    },
+    habitats:{
+      volcanic:'🌋 Vulcânico / Árido', arctic:'🧊 Ártico / Glacial', forest:'🌲 Florestal / Úmido',
+      aquatic:'🌊 Aquático / Abissal', desert:'🏜️ Desértico / Seco', aerial:'☁️ Aéreo / Flutuante',
+      urban:'🏙️ Urbano / Industrial', cosmic:'🌠 Espacial / Nebuloso'
+    },
+    gravities:{
+      normal:'⚖️ Normal', low:'🪶 Baixa / Levitação', high:'🪨 Alta / Densa',
+      zero:'🌐 Zero-G / Flutuante', variable:'🔄 Variável / Instável'
+    },
+    tones:{
+      epic:'⚡ Épico / Grandioso', dark:'💀 Sombrio / Opressor', ancient:'📜 Antigo / Misterioso',
+      hostile:'☠️ Hostil / Perigoso', utopian:'✨ Utópico / Sereno', decadent:'🕯️ Decadente / Ruínas', wild:'🐺 Selvagem / Primitivo'
+    },
+    universes:{
+      fantasy:'⚔️ Fantasy / Medieval', scifi:'🚀 Sci-Fi / Futurista', steampunk:'⚙️ Steampunk',
+      cyberpunk:'💾 Cyberpunk', cosmic:'🌌 Cósmico / Alien', dark:'🌑 Dark / Gótico', mythology:'🏛️ Mitológico'
+    }
+  },
+  en:{
+    back:'← Back to NameForge',
+    title:'🗺️ Place Name Generator',
+    sub:'Create unique names for worlds, kingdoms, planets and dimensions. Each setting generates a different sound.',
+    lblType:'Place Type', lblElement:'Dominant Element', lblHabitat:'Habitat',
+    lblGravity:'Gravity', lblTone:'Tone', lblUniverse:'Universe', lblQty:'Quantity',
+    genBtn:'🗺️ Generate Places',
+    resultsLabel:'Generated places — click to copy',
+    copied:'Copied!',
+    types:{
+      planet:'🪐 Planet', kingdom:'⚔️ Kingdom / Empire', city:'🏰 City / Fortress',
+      dungeon:'🕯️ Dungeon / Ruins', forest:'🌿 Forest / Territory',
+      dimension:'🌀 Dimension / Portal', station:'🛸 Space Station / Ship', domain:'👁️ Domain / Plane'
+    },
+    elements:{
+      fire:'🔥 Fire / Magma', ice:'❄️ Ice / Mist', shadow:'🌑 Shadow / Darkness',
+      arcane:'✨ Arcane / Ether', nature:'🌿 Nature / Life', void:'🕳️ Void / Chaos',
+      storm:'⚡ Storm / Lightning', cosmic:'🌌 Cosmic / Astral', metal:'⚙️ Metal / Gear', neon:'💾 Neon / Data'
+    },
+    habitats:{
+      volcanic:'🌋 Volcanic / Arid', arctic:'🧊 Arctic / Glacial', forest:'🌲 Forested / Humid',
+      aquatic:'🌊 Aquatic / Abyssal', desert:'🏜️ Desert / Dry', aerial:'☁️ Aerial / Floating',
+      urban:'🏙️ Urban / Industrial', cosmic:'🌠 Spatial / Nebulous'
+    },
+    gravities:{
+      normal:'⚖️ Normal', low:'🪶 Low / Levitation', high:'🪨 High / Dense',
+      zero:'🌐 Zero-G / Floating', variable:'🔄 Variable / Unstable'
+    },
+    tones:{
+      epic:'⚡ Epic / Grand', dark:'💀 Dark / Oppressive', ancient:'📜 Ancient / Mysterious',
+      hostile:'☠️ Hostile / Dangerous', utopian:'✨ Utopian / Serene', decadent:'🕯️ Decadent / Ruins', wild:'🐺 Wild / Primitive'
+    },
+    universes:{
+      fantasy:'⚔️ Fantasy / Medieval', scifi:'🚀 Sci-Fi / Futuristic', steampunk:'⚙️ Steampunk',
+      cyberpunk:'💾 Cyberpunk', cosmic:'🌌 Cosmic / Alien', dark:'🌑 Dark / Gothic', mythology:'🏛️ Mythological'
+    }
+  }
+};
+
+// ── BANCOS DE PREFIXOS/SUFIXOS POR COMBINAÇÃO ──
+const PARTS = {
+  // Por elemento
+  element:{
+    fire:   { pre:['Kael','Vor','Ignar','Embr','Cind','Flar','Volc','Pyrr','Scor','Braz'], suf:['ion','ax','uum','eth','ar','ix','or','al','ith','yn'] },
+    ice:    { pre:['Aelth','Cryo','Val','Glac','Froz','Sylv','Aur','Whit','Cryst','Fros'], suf:['mar','dorn','heim','ris','el','yn','ir','ara','iel','eth'] },
+    shadow: { pre:['Umbr','Nox','Mal','Shad','Obsc','Tene','Mur','Abys','Gloom','Nigh'], suf:['eth','ys','ara','oth','ix','al','esh','ur','im','on'] },
+    arcane: { pre:['Mystr','Arcn','Lyth','Astr','Mag','Rune','Ench','Esot','Arcl','Myst'], suf:['ia','ael','yn','or','ix','al','em','ara','is','yx'] },
+    nature: { pre:['Sylv','Verd','Lush','Blos','Ferr','Foli','Grow','Emer','Grov','Wild'], suf:['ora','ael','yn','ath','el','ith','ara','wen','iel','dor'] },
+    void:   { pre:['Null','Vorn','Abys','Chao','Entro','Empt','Vac','Noth','Blnk','Vd'], suf:['ex','um','al','ix','ys','ath','or','eth','ux','ax'] },
+    storm:  { pre:['Zyph','Thun','Bolt','Gale','Cycl','Torn','Temp','Furi','Rag','Strk'], suf:['ax','or','ith','yn','ix','ar','em','on','al','ux'] },
+    cosmic: { pre:['Astr','Stel','Cosm','Neb','Galx','Qusr','Pulsr','Astrl','Celst','Lux'], suf:['ion','ara','uum','ix','or','al','yn','ael','ith','eus'] },
+    metal:  { pre:['Ferr','Steel','Coblt','Tit','Irn','Bras','Copp','Aloy','Forg','Smlt'], suf:['ax','or','ix','um','al','yn','ith','ex','ar','on'] },
+    neon:   { pre:['Hex','Byts','Dat','Pixl','Synt','Nod','Kern','Flux','Glch','Cach'], suf:['ex','ix','or','ax','yn','al','ux','em','on','ys'] }
+  },
+  // Sufixos extras por tipo de lugar
+  type:{
+    planet:    ['-Prime','-IV','-VII','-Major','-Minor',''],
+    kingdom:   ['ia','oria','aria','ania','heim','land','ath','or','eon',''],
+    city:      [' Keep',' Hold',' Gate',' Port',' Reach',' Cross',' Mark',''],
+    dungeon:   [' Depths',' Pit',' Lair',' Warren',' Tomb','\'s Maw',''],
+    forest:    [' Grove',' Wilds',' Reach',' Wood',' Thicket',''],
+    dimension: [' Plane',' Realm',' Rift',' Fold',' Layer',''],
+    station:   ['-Alpha','-Omega','-Zero',' Outpost',' Hub',''],
+    domain:    [' Dominion',' Province',' Sovereignty',' Hold','']
+  },
+  // Moduladores por universo
+  universe:{
+    fantasy:   { preBonus:['El','Ald','Dor','Aer','Lynd','Cael'], sufBonus:['dor','ael','orn','ith','yn','ara'] },
+    scifi:     { preBonus:['Prl','Zyx','Krt','Vex','Qzr','Xen'], sufBonus:['-7','-Prime','-IV','x','ix','or'] },
+    steampunk: { preBonus:['Clock','Gear','Smok','Cog','Brass','Steam'], sufBonus:['wick','forge','vale','moor','port','town'] },
+    cyberpunk: { preBonus:['Neon','Grid','Hex','Byte','Syn','Glitch'], sufBonus:['-Net','City','Zone','Scape','Ward','Hub'] },
+    cosmic:    { preBonus:['Nebul','Astr','Qusr','Galx','Cosm','Astrl'], sufBonus:['-uum','-ara','-ion','yx','ael','ora'] },
+    dark:      { preBonus:['Griev','Morn','Blight','Dread','Sorrow','Woe'], sufBonus:['moor','grave','hollow','fen','pit','gloom'] },
+    mythology: { preBonus:['Olymp','Valhll','Elys','Tartl','Asgrd','Aval'], sufBonus:['os','us','um','ar','on','ia'] }
+  }
+};
+
+function pick(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
+
+function capitalize(s){ return s.charAt(0).toUpperCase() + s.slice(1).toLowerCase(); }
+
+function generateName(type, element, universe){
+  const ep = PARTS.element[element];
+  const up = PARTS.universe[universe];
+
+  // 60% chance usar prefixo do elemento, 40% do universo
+  const useUniPre = Math.random() < 0.4 && up.preBonus.length;
+  const pre = useUniPre ? pick(up.preBonus) : pick(ep.pre);
+
+  // 50% chance usar sufixo do universo
+  const useUniSuf = Math.random() < 0.5 && up.sufBonus.length;
+  const mid = useUniSuf ? pick(up.sufBonus) : pick(ep.suf);
+
+  // Sufixo de tipo de lugar (opcional, 50%)
+  const typeSuf = Math.random() < 0.5 ? pick(PARTS.type[type]) : '';
+
+  // Monta o nome
+  let name = capitalize(pre) + mid;
+
+  // Remove duplicatas de letras no meio
+  name = name.replace(/(.)\1{2,}/g, '$1$1');
+
+  return name + typeSuf;
+}
+
+function generatePlaces(){
+  const type     = document.getElementById('place-type').value;
+  const element  = document.getElementById('place-element').value;
+  const universe = document.getElementById('place-universe').value;
+  const qty      = Math.min(Math.max(parseInt(document.getElementById('place-qty').value)||8, 1), 20);
+
+  const lang = getLang();
+  const t = T[lang];
+  const typeLabel = t.types[type].replace(/^[^\s]+ /,'');
+
+  const btn = document.getElementById('gen-btn');
+  btn.classList.add('loading');
+  btn.textContent = '...';
+
+  setTimeout(()=>{
+    const names = new Set();
+    let attempts = 0;
+    while(names.size < qty && attempts < qty * 10){
+      names.add(generateName(type, element, universe));
+      attempts++;
+    }
+
+    const grid = document.getElementById('results-grid');
+    grid.innerHTML = '';
+
+    Array.from(names).forEach(name => {
+      const chip = document.createElement('div');
+      chip.className = 'name-chip';
+      chip.innerHTML = `
+        <span class="name-text">${name}</span>
+        <span class="name-type">${typeLabel}</span>
+        <span class="copy-hint">📋 ${t.copied.replace('!','')}</span>
+      `;
+      chip.addEventListener('click', ()=>{
+        navigator.clipboard.writeText(name).then(()=>{
+          chip.classList.add('copied');
+          setTimeout(()=> chip.classList.remove('copied'), 1500);
+        });
+      });
+      grid.appendChild(chip);
+    });
+
+    document.getElementById('results-label').textContent = t.resultsLabel;
+    const section = document.getElementById('results-section');
+    section.style.display = 'block';
+    section.scrollIntoView({behavior:'smooth', block:'start'});
+
+    btn.classList.remove('loading');
+    btn.textContent = t.genBtn;
+  }, 400);
+}
+
+// ── IDIOMA ──
+function getLang(){
+  const param = new URLSearchParams(window.location.search).get('lang');
+  if(param === 'pt' || param === 'en'){ localStorage.setItem('siteLang', param); return param; }
+  const saved = localStorage.getItem('siteLang');
+  if(saved === 'pt' || saved === 'en') return saved;
+  return 'pt';
+}
+
+function applyLang(l){
+  const t = T[l];
+  const lp = '?lang=' + l;
+  const q = id => document.getElementById(id);
+
+  q('back-link').textContent = t.back;
+  q('hero-title').textContent = t.title;
+  q('hero-sub').textContent = t.sub;
+  q('lbl-type').textContent = t.lblType;
+  q('lbl-element').textContent = t.lblElement;
+  q('lbl-habitat').textContent = t.lblHabitat;
+  q('lbl-gravity').textContent = t.lblGravity;
+  q('lbl-tone').textContent = t.lblTone;
+  q('lbl-universe').textContent = t.lblUniverse;
+  q('lbl-qty').textContent = t.lblQty;
+  q('gen-btn').textContent = t.genBtn;
+
+  // Traduz options dos selects
+  const selects = {
+    'place-type': t.types,
+    'place-element': t.elements,
+    'place-habitat': t.habitats,
+    'place-gravity': t.gravities,
+    'place-tone': t.tones,
+    'place-universe': t.universes
+  };
+  for(const [selId, opts] of Object.entries(selects)){
+    const sel = q(selId);
+    if(!sel) continue;
+    Array.from(sel.options).forEach(opt => {
+      if(opts[opt.value]) opt.text = opts[opt.value];
+    });
+  }
+
+  document.documentElement.lang = l;
+}
+
+// ── SCROLL TOP ──
+window.addEventListener('scroll',()=>{
+  const btn = document.getElementById('scroll-top-btn');
+  if(window.scrollY > 400) btn.classList.add('visible');
+  else btn.classList.remove('visible');
+});
+
+// ── INIT ──
+applyLang(getLang());
+</script>
+</body>
+</html>
