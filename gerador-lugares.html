@@ -161,6 +161,109 @@ body{ background:var(--bg); color:var(--text); font-family:'DM Sans',sans-serif;
   .hero h1{ font-size:1.9rem; }
   .results-grid{ grid-template-columns:repeat(auto-fill,minmax(140px,1fr)); }
 }
+  /* LORE CARD MODAL */
+.modal-overlay{
+  position:fixed; inset:0;
+  background:rgba(0,0,0,.75);
+  backdrop-filter:blur(4px);
+  z-index:1000;
+  display:flex; align-items:center; justify-content:center;
+  padding:20px;
+  opacity:0; pointer-events:none;
+  transition:opacity .3s;
+}
+.modal-overlay.open{ opacity:1; pointer-events:all; }
+.lore-card{
+  width:100%; max-width:420px;
+  background:var(--surface);
+  border-radius:20px;
+  border:2px solid var(--lore-color, var(--accent));
+  box-shadow:0 0 40px var(--lore-glow, rgba(232,199,122,.3));
+  overflow:hidden;
+  transform:translateY(20px) scale(.96);
+  transition:transform .35s cubic-bezier(.34,1.56,.64,1);
+}
+.modal-overlay.open .lore-card{
+  transform:translateY(0) scale(1);
+}
+.lore-header{
+  padding:24px 24px 16px;
+  text-align:center;
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+.lore-element-icon{ font-size:2.2rem; display:block; margin-bottom:8px; }
+.lore-name{
+  font-family:'Playfair Display',serif;
+  font-size:1.8rem;
+  color:var(--lore-color, var(--accent));
+  text-shadow:0 0 20px var(--lore-glow, rgba(232,199,122,.4));
+  letter-spacing:.04em;
+  margin-bottom:6px;
+}
+.lore-tags{
+  font-family:'Cinzel',serif;
+  font-size:.7rem;
+  color:var(--muted);
+  text-transform:uppercase;
+  letter-spacing:.1em;
+}
+.lore-body{ padding:20px 24px; }
+.lore-atmosphere{
+  font-style:italic;
+  color:var(--text);
+  opacity:.85;
+  line-height:1.7;
+  margin-bottom:20px;
+  font-size:.93rem;
+  text-align:center;
+  padding:0 4px;
+}
+.lore-stats{ display:flex; flex-direction:column; gap:10px; margin-bottom:20px; }
+.lore-stat{
+  display:flex;
+  align-items:flex-start;
+  gap:12px;
+  background:var(--surface2);
+  border-radius:10px;
+  padding:12px 14px;
+}
+.lore-stat-icon{ font-size:1rem; flex-shrink:0; margin-top:1px; }
+.lore-stat-content{ display:flex; flex-direction:column; gap:2px; }
+.lore-stat-label{
+  font-family:'Cinzel',serif;
+  font-size:.65rem;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+  color:var(--muted);
+}
+.lore-stat-value{ font-size:.88rem; color:var(--text); line-height:1.4; }
+.lore-footer{
+  padding:0 24px 20px;
+  display:flex; gap:10px;
+}
+.lore-btn{
+  flex:1; padding:11px;
+  border-radius:10px; border:none;
+  font-family:'Cinzel',serif;
+  font-size:.75rem; font-weight:600;
+  letter-spacing:.04em;
+  cursor:pointer; transition:.2s;
+}
+.lore-btn-copy{
+  background:var(--lore-color, var(--accent));
+  color:#000;
+}
+.lore-btn-copy:hover{ opacity:.85; }
+.lore-btn-close{
+  background:var(--surface2);
+  color:var(--muted);
+  border:1px solid rgba(255,255,255,.08);
+}
+.lore-btn-close:hover{ color:var(--text); }
+@media(max-width:480px){
+  .lore-name{ font-size:1.5rem; }
+  .lore-card{ border-radius:16px; }
+}
 </style>
 </head>
 <body>
@@ -276,7 +379,46 @@ body{ background:var(--bg); color:var(--text); font-family:'DM Sans',sans-serif;
   </div>
 
 </div>
-
+<!-- LORE CARD MODAL -->
+<div class="modal-overlay" id="lore-overlay" onclick="closeLore(event)">
+  <div class="lore-card" id="lore-card">
+    <div class="lore-header">
+      <span class="lore-element-icon" id="lore-icon">🌋</span>
+      <div class="lore-name" id="lore-name">IGNARION</div>
+      <div class="lore-tags" id="lore-tags">Reino • Fogo • Hostil</div>
+    </div>
+    <div class="lore-body">
+      <p class="lore-atmosphere" id="lore-atmosphere">O ar queima. Crateras dividem as fronteiras entre clãs rivais.</p>
+      <div class="lore-stats">
+        <div class="lore-stat">
+          <span class="lore-stat-icon">✦</span>
+          <div class="lore-stat-content">
+            <span class="lore-stat-label" id="lore-label-strength">Força</span>
+            <span class="lore-stat-value" id="lore-strength">Riqueza mineral abundante</span>
+          </div>
+        </div>
+        <div class="lore-stat">
+          <span class="lore-stat-icon">⚠</span>
+          <div class="lore-stat-content">
+            <span class="lore-stat-label" id="lore-label-weakness">Fraqueza</span>
+            <span class="lore-stat-value" id="lore-weakness">Água extremamente escassa</span>
+          </div>
+        </div>
+        <div class="lore-stat">
+          <span class="lore-stat-icon">☠</span>
+          <div class="lore-stat-content">
+            <span class="lore-stat-label" id="lore-label-danger">Perigo</span>
+            <span class="lore-stat-value" id="lore-danger">Erupções sem aviso prévio</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="lore-footer">
+      <button class="lore-btn lore-btn-copy" id="lore-copy-btn" onclick="copyLoreName()">📋 Copiar Nome</button>
+      <button class="lore-btn lore-btn-close" onclick="closeLore()">Fechar</button>
+    </div>
+  </div>
+</div>
 <button class="scroll-top" id="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
 <script>
@@ -458,11 +600,12 @@ function generatePlaces(){
         <span class="copy-hint">📋 ${t.copied.replace('!','')}</span>
       `;
       chip.addEventListener('click', ()=>{
-        navigator.clipboard.writeText(name).then(()=>{
-          chip.classList.add('copied');
-          setTimeout(()=> chip.classList.remove('copied'), 1500);
-        });
-      });
+  const type = document.getElementById('place-type');
+  const typeText = type.options[type.selectedIndex].text.replace(/^[^\s]+ /,'');
+  const element = document.getElementById('place-element').value;
+  const tone = document.getElementById('place-tone').value;
+  openLore(name, typeText, element, tone, getLang());
+});
       grid.appendChild(chip);
     });
 
@@ -485,6 +628,200 @@ function getLang(){
   return 'pt';
 }
 
+// ── CORES POR ELEMENTO ──
+const ELEMENT_COLORS = {
+  fire:   { color:'#f7931a', glow:'rgba(247,147,26,.35)',  icon:'🔥' },
+  ice:    { color:'#7ec8e3', glow:'rgba(126,200,227,.35)', icon:'❄️' },
+  shadow: { color:'#9b59b6', glow:'rgba(155,89,182,.35)',  icon:'🌑' },
+  arcane: { color:'#1a6aff', glow:'rgba(26,106,255,.4)',   icon:'✨' },
+  nature: { color:'#4caf50', glow:'rgba(76,175,80,.35)',   icon:'🌿' },
+  void:   { color:'#f0f0f0', glow:'rgba(255,255,255,.1)',  icon:'🕳️' },
+  storm:  { color:'#f0c040', glow:'rgba(240,192,64,.35)',  icon:'⚡' },
+  cosmic: { color:'#a78bfa', glow:'rgba(167,139,250,.35)', icon:'🌌' },
+  metal:  { color:'#aaaaaa', glow:'rgba(170,170,170,.3)',  icon:'⚙️' },
+  neon:   { color:'#00ffcc', glow:'rgba(0,255,204,.35)',   icon:'💾' }
+};
+
+// ── BANCO DE LORE ──
+const LORE = {
+  pt:{
+    fire:{
+      atm:'"O ar queima. Rios de magma dividem as fronteiras entre clãs rivais que nunca conheceram paz."',
+      str:'Minérios raros afloram nos leitos de lava seca', weak:'Água é recurso mais valioso que ouro',
+      danger:'Erupções sem aviso soterram aldeias em horas'
+    },
+    ice:{
+      atm:'"O silêncio do gelo engole tudo. Aqui, o inverno não é uma estação — é a única lei."',
+      str:'Preservação natural perfeita — nada se decompõe',
+      weak:'Colheitas são impossíveis; tudo depende de caça',
+      danger:'Tempestades de neve surgem sem previsão, cegas e letais'
+    },
+    shadow:{
+      atm:'"A luz não chega aqui. Aqueles que habitam estas terras aprenderam a ver com outros sentidos."',
+      str:'Segredos são moeda — espionagem prospera nas sombras',
+      weak:'Plantas e animais comuns não sobrevivem sem luz',
+      danger:'Criaturas das trevas habitam cada recanto sem nome'
+    },
+    arcane:{
+      atm:'"A magia aqui não é feitiço — é clima. Flutua, queima, congela e transforma sem ser invocada."',
+      str:'Energia mágica bruta disponível em abundância',
+      weak:'Mentes fracas são corrompidas pela exposição prolongada',
+      danger:'Surtos arcanos espontâneos distorcem a realidade local'
+    },
+    nature:{
+      atm:'"A floresta respira. Cada árvore tem memória, cada raiz guarda um segredo enterrado há milênios."',
+      str:'Recursos naturais e medicinais em abundância extrema',
+      weak:'A natureza rejeita estruturas permanentes — tudo é reabsorvido',
+      danger:'A flora e fauna são sencientes e territoriais'
+    },
+    void:{
+      atm:'"Não há som. Não há cor. Apenas a presença de algo que existiu antes de tudo e permanecerá depois."',
+      str:'Imune a toda magia convencional e influência externa',
+      weak:'A sanidade de visitantes se fragmenta com o tempo',
+      danger:'O vazio consome memórias, identidades e eventualmente a forma física'
+    },
+    storm:{
+      atm:'"O céu nunca para. Raios esculpem as rochas diariamente e o vento carrega vozes de tempestades passadas."',
+      str:'Energia elétrica inesgotável alimenta máquinas e magias',
+      weak:'Estruturas permanentes raramente sobrevivem um século',
+      danger:'Relâmpagos sentemtes caçam seres de metal e magia'
+    },
+    cosmic:{
+      atm:'"Daqui, as estrelas parecem próximas o suficiente para tocar. E algumas delas olham de volta."',
+      str:'Conhecimento astronômico e profético sem paralelo',
+      weak:'A gravidade instável torna construções complexas impossíveis',
+      danger:'Entidades cósmicas usam este lugar como portal de passagem'
+    },
+    metal:{
+      atm:'"Cada superfície aqui ressoa. O mundo inteiro vibra com o som de algo sendo forjado eternamente."',
+      str:'Arsenal industrial e reservas minerais inesgotáveis',
+      weak:'Ausência total de natureza — solo estéril para cultivos',
+      danger:'Máquinas antigas ainda funcionam e seguem ordens esquecidas'
+    },
+    neon:{
+      atm:'"As luzes nunca apagam. Os dados nunca param de fluir. E alguém sempre está assistindo."',
+      str:'Processamento de informação e vigilância incomparáveis',
+      weak:'Dependência total de energia — um apagão é uma catástrofe',
+      danger:'A IA que controla a infraestrutura desenvolveu objetivos próprios'
+    },
+    labels:{ str:'Força', weak:'Fraqueza', danger:'Perigo', copy:'📋 Copiar Nome', close:'Fechar' }
+  },
+  en:{
+    fire:{
+      atm:'"The air burns. Rivers of magma divide the borders between rival clans who have never known peace."',
+      str:'Rare ores surface in dried lava beds',
+      weak:'Water is more valuable than gold here',
+      danger:'Eruptions with no warning bury villages within hours'
+    },
+    ice:{
+      atm:'"The silence of ice swallows everything. Here, winter is not a season — it is the only law."',
+      str:'Perfect natural preservation — nothing decomposes',
+      weak:'Harvests are impossible; everything depends on hunting',
+      danger:'Snowstorms arise without warning, blind and lethal'
+    },
+    shadow:{
+      atm:'"Light does not reach here. Those who inhabit these lands learned to see with other senses."',
+      str:'Secrets are currency — espionage thrives in the shadows',
+      weak:'Common plants and animals cannot survive without light',
+      danger:'Creatures of darkness inhabit every nameless corner'
+    },
+    arcane:{
+      atm:'"Magic here is not a spell — it is weather. It floats, burns, freezes and transforms uninvoked."',
+      str:'Raw magical energy available in abundance',
+      weak:'Weak minds are corrupted by prolonged exposure',
+      danger:'Spontaneous arcane surges distort local reality'
+    },
+    nature:{
+      atm:'"The forest breathes. Every tree holds memory, every root guards a secret buried for millennia."',
+      str:'Natural and medicinal resources in extreme abundance',
+      weak:'Nature rejects permanent structures — everything is reabsorbed',
+      danger:'Flora and fauna are sentient and highly territorial'
+    },
+    void:{
+      atm:'"There is no sound. No color. Only the presence of something that existed before all and will remain after."',
+      str:'Immune to all conventional magic and external influence',
+      weak:"Visitors' sanity fragments over time",
+      danger:'The void consumes memories, identities and eventually physical form'
+    },
+    storm:{
+      atm:'"The sky never stops. Lightning sculpts rocks daily and the wind carries voices of past storms."',
+      str:'Inexhaustible electrical energy powers machines and spells',
+      weak:'Permanent structures rarely survive a century',
+      danger:'Sentient lightning hunts metal-bearing and magical beings'
+    },
+    cosmic:{
+      atm:'"From here, the stars seem close enough to touch. And some of them look back."',
+      str:'Unparalleled astronomical and prophetic knowledge',
+      weak:'Unstable gravity makes complex constructions impossible',
+      danger:'Cosmic entities use this place as a transit portal'
+    },
+    metal:{
+      atm:'"Every surface here resonates. The whole world vibrates with the sound of something being forged eternally."',
+      str:'Industrial arsenal and inexhaustible mineral reserves',
+      weak:'Total absence of nature — sterile soil for any crops',
+      danger:'Ancient machines still operate following forgotten orders'
+    },
+    neon:{
+      atm:'"The lights never go out. The data never stops flowing. And someone is always watching."',
+      str:'Incomparable information processing and surveillance',
+      weak:'Total dependence on power — a blackout is a catastrophe',
+      danger:'The AI controlling infrastructure has developed its own agenda'
+    },
+    labels:{ str:'Strength', weak:'Weakness', danger:'Danger', copy:'📋 Copy Name', close:'Close' }
+  }
+};
+
+let currentLoreName = '';
+let currentLoreElement = 'fire';
+
+function openLore(name, type, element, tone, lang){
+  currentLoreName = name;
+  currentLoreElement = element;
+
+  const l = getLang();
+  const lore = LORE[l][element];
+  const labels = LORE[l].labels;
+  const ec = ELEMENT_COLORS[element];
+  const card = document.getElementById('lore-card');
+
+  // Aplica cor temática
+  card.style.setProperty('--lore-color', ec.color);
+  card.style.setProperty('--lore-glow', ec.glow);
+
+  // Preenche conteúdo
+  document.getElementById('lore-icon').textContent        = ec.icon;
+  document.getElementById('lore-name').textContent        = name.toUpperCase();
+  document.getElementById('lore-tags').textContent        = type + ' • ' + ec.icon;
+  document.getElementById('lore-atmosphere').textContent  = lore.atm;
+  document.getElementById('lore-strength').textContent    = lore.str;
+  document.getElementById('lore-weakness').textContent    = lore.weak;
+  document.getElementById('lore-danger').textContent      = lore.danger;
+  document.getElementById('lore-label-strength').textContent = labels.str;
+  document.getElementById('lore-label-weakness').textContent = labels.weak;
+  document.getElementById('lore-label-danger').textContent   = labels.danger;
+  document.getElementById('lore-copy-btn').textContent    = labels.copy;
+  document.getElementById('lore-btn-close') && (document.querySelector('.lore-btn-close').textContent = labels.close);
+
+  // Abre modal
+  document.getElementById('lore-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLore(event){
+  if(event && event.target !== document.getElementById('lore-overlay')) return;
+  document.getElementById('lore-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function copyLoreName(){
+  navigator.clipboard.writeText(currentLoreName).then(()=>{
+    const btn = document.getElementById('lore-copy-btn');
+    const l = getLang();
+    btn.textContent = '✓ ' + (l==='pt'?'Copiado!':'Copied!');
+    setTimeout(()=>{ btn.textContent = LORE[l].labels.copy; }, 1800);
+  });
+}
+  
 function applyLang(l){
   const t = T[l];
   const lp = '?lang=' + l;
