@@ -264,6 +264,90 @@ body{ background:var(--bg); color:var(--text); font-family:'DM Sans',sans-serif;
   .lore-name{ font-size:1.5rem; }
   .lore-card{ border-radius:16px; }
 }
+  /* ESTRELA NO CHIP */
+.name-chip{ position:relative; }
+.chip-star{
+  position:absolute; top:8px; right:8px;
+  font-size:.85rem; cursor:pointer;
+  opacity:0.25; transition:all .2s;
+  line-height:1; z-index:2;
+  background:none; border:none; padding:0;
+}
+.chip-star:hover{ opacity:0.7; transform:scale(1.2); }
+.chip-star.saved{ opacity:1; filter:drop-shadow(0 0 4px rgba(255,200,0,.6)); }
+
+/* SEÇÃO FAVORITOS */
+.favorites-section{
+  margin-top:36px;
+  display:none;
+}
+.favorites-header{
+  display:flex; align-items:center;
+  justify-content:space-between;
+  margin-bottom:14px;
+}
+.favorites-title{
+  font-family:'Cinzel',serif;
+  font-size:.72rem;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  color:var(--accent);
+}
+.favorites-count{
+  font-family:'Cinzel',serif;
+  font-size:.68rem;
+  color:var(--muted);
+}
+.favorites-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
+  gap:10px;
+  margin-bottom:16px;
+}
+.fav-chip{
+  background:var(--surface2);
+  border:1.5px solid rgba(255,200,0,.2);
+  border-radius:12px;
+  padding:14px 12px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+}
+.fav-chip-name{
+  font-family:'Playfair Display',serif;
+  font-size:.95rem;
+  color:var(--accent);
+}
+.fav-chip-remove{
+  background:none; border:none;
+  color:var(--muted); cursor:pointer;
+  font-size:.9rem; padding:0;
+  transition:color .2s; flex-shrink:0;
+}
+.fav-chip-remove:hover{ color:#f44336; }
+.export-btn{
+  width:100%; padding:13px;
+  background:transparent;
+  border:1.5px solid rgba(232,199,122,.3);
+  color:var(--accent);
+  border-radius:12px;
+  font-family:'Cinzel',serif;
+  font-size:.78rem; font-weight:600;
+  letter-spacing:.06em;
+  cursor:pointer; transition:all .2s;
+}
+.export-btn:hover{
+  background:rgba(232,199,122,.08);
+  border-color:var(--accent);
+}
+.favorites-empty{
+  text-align:center;
+  color:var(--muted);
+  font-size:.85rem;
+  padding:20px 0;
+  opacity:.6;
+}
 </style>
 </head>
 <body>
@@ -415,9 +499,20 @@ body{ background:var(--bg); color:var(--text); font-family:'DM Sans',sans-serif;
     </div>
     <div class="lore-footer">
       <button class="lore-btn lore-btn-copy" id="lore-copy-btn" onclick="copyLoreName()">📋 Copiar Nome</button>
-      <button class="lore-btn lore-btn-close" onclick="closeLore()">Fechar</button>
+      <button class="lore-btn" id="lore-fav-btn" onclick="toggleFavFromModal()" style="background:var(--surface2);color:var(--muted);border:1px solid rgba(255,255,255,.08);">⭐ Salvar Favorito</button>
+      <button class="lore-btn lore-btn-close" onclick="closeLore()" style="flex:0.6;">Fechar</button>
     </div>
   </div>
+</div>
+  <!-- FAVORITOS -->
+<div class="favorites-section" id="favorites-section">
+  <hr class="divider">
+  <div class="favorites-header">
+    <span class="favorites-title" id="fav-title">⭐ Meu Mundo</span>
+    <span class="favorites-count" id="fav-count">0 lugares</span>
+  </div>
+  <div class="favorites-grid" id="favorites-grid"></div>
+  <button class="export-btn" id="export-btn" onclick="exportFavorites()">📄 Exportar Mundo como .txt</button>
 </div>
 <button class="scroll-top" id="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
@@ -594,7 +689,9 @@ function generatePlaces(){
     Array.from(names).forEach(name => {
       const chip = document.createElement('div');
       chip.className = 'name-chip';
+      const isSaved = isFav(name);
       chip.innerHTML = `
+        <button class="chip-star ${isSaved?'saved':''}" data-name="${name}" onclick="event.stopPropagation();toggleFav('${name}','${element}')">${isSaved?'⭐':'☆'}</button>
         <span class="name-text">${name}</span>
         <span class="name-type">${typeLabel}</span>
         <span class="copy-hint">📋 ${t.copied.replace('!','')}</span>
@@ -618,7 +715,105 @@ function generatePlaces(){
     btn.textContent = t.genBtn;
   }, 400);
 }
+// ── FAVORITOS ──
+let favorites = JSON.parse(localStorage.getItem('nf_lugares_favs') || '[]');
 
+function saveFavorites(){
+  localStorage.setItem('nf_lugares_favs', JSON.stringify(favorites));
+}
+
+function isFav(name){ return favorites.some(f => f.name === name); }
+
+function toggleFav(name, element){
+  if(isFav(name)){
+    favorites = favorites.filter(f => f.name !== name);
+  } else {
+    favorites.push({ name, element });
+  }
+  saveFavorites();
+  renderFavorites();
+  syncChipStars();
+  syncModalFavBtn();
+}
+
+function toggleFavFromModal(){
+  toggleFav(currentLoreName, currentLoreElement);
+}
+
+function syncChipStars(){
+  document.querySelectorAll('.chip-star').forEach(star => {
+    const name = star.dataset.name;
+    if(isFav(name)){
+      star.textContent = '⭐';
+      star.classList.add('saved');
+    } else {
+      star.textContent = '☆';
+      star.classList.remove('saved');
+    }
+  });
+}
+
+function syncModalFavBtn(){
+  const btn = document.getElementById('lore-fav-btn');
+  if(!btn) return;
+  const l = getLang();
+  if(isFav(currentLoreName)){
+    btn.textContent = '⭐ ' + (l==='pt'?'Salvo!':'Saved!');
+    btn.style.background = 'rgba(255,200,0,.15)';
+    btn.style.color = '#ffd700';
+    btn.style.borderColor = 'rgba(255,200,0,.3)';
+  } else {
+    btn.textContent = '☆ ' + (l==='pt'?'Salvar Favorito':'Save to World');
+    btn.style.background = 'var(--surface2)';
+    btn.style.color = 'var(--muted)';
+    btn.style.borderColor = 'rgba(255,255,255,.08)';
+  }
+}
+
+function renderFavorites(){
+  const section = document.getElementById('favorites-section');
+  const grid = document.getElementById('favorites-grid');
+  const count = document.getElementById('fav-count');
+  const l = getLang();
+
+  if(!favorites.length){
+    section.style.display = 'none';
+    return;
+  }
+
+  section.style.display = 'block';
+  count.textContent = favorites.length + (l==='pt' ? ' lugares' : ' places');
+
+  grid.innerHTML = '';
+  favorites.forEach(fav => {
+    const ec = ELEMENT_COLORS[fav.element] || ELEMENT_COLORS.fire;
+    const div = document.createElement('div');
+    div.className = 'fav-chip';
+    div.innerHTML = `
+      <span class="fav-chip-name" style="color:${ec.color}">${fav.name}</span>
+      <button class="fav-chip-remove" onclick="toggleFav('${fav.name}','${fav.element}')" title="Remover">✕</button>
+    `;
+    grid.appendChild(div);
+  });
+
+  document.getElementById('fav-title').textContent = l==='pt' ? '⭐ Meu Mundo' : '⭐ My World';
+  document.getElementById('export-btn').textContent = l==='pt' ? '📄 Exportar Mundo como .txt' : '📄 Export World as .txt';
+}
+
+function exportFavorites(){
+  const l = getLang();
+  const header = l==='pt' ? 'MEU MUNDO — NameForge\n' + '─'.repeat(30) : 'MY WORLD — NameForge\n' + '─'.repeat(30);
+  const lines = favorites.map(f => {
+    const ec = ELEMENT_COLORS[f.element];
+    return ec.icon + ' ' + f.name;
+  });
+  const content = header + '\n' + lines.join('\n') + '\n\n— quicklysite.github.io';
+  const blob = new Blob([content], { type:'text/plain' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'meu-mundo-nameforge.txt';
+  a.click();
+}
 // ── IDIOMA ──
 function getLang(){
   const param = new URLSearchParams(window.location.search).get('lang');
@@ -805,6 +1000,7 @@ function openLore(name, type, element, tone, lang){
   // Abre modal
   document.getElementById('lore-overlay').classList.add('open');
   document.body.style.overflow = 'hidden';
+  syncModalFavBtn();
 }
 
 function closeLore(event){
@@ -822,7 +1018,8 @@ function copyLoreName(){
   });
 }
   
-function applyLang(l){
+applyLang(getLang());
+renderFavorites();
   const t = T[l];
   const lp = '?lang=' + l;
   const q = id => document.getElementById(id);
