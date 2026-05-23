@@ -1018,8 +1018,7 @@ function copyLoreName(){
   });
 }
   
-  applyLang(getLang());
-  renderFavorites();
+  function applyLang(l){
   const t = T[l];
   const lp = '?lang=' + l;
   const q = id => document.getElementById(id);
@@ -1036,7 +1035,6 @@ function copyLoreName(){
   q('lbl-qty').textContent = t.lblQty;
   q('gen-btn').textContent = t.genBtn;
 
-  // Traduz options dos selects
   const selects = {
     'place-type': t.types,
     'place-element': t.elements,
@@ -1065,6 +1063,7 @@ window.addEventListener('scroll',()=>{
 
 // ── INIT ──
 applyLang(getLang());
+renderFavorites();
 </script>
 </body>
 </html>
