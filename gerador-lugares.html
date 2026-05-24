@@ -240,7 +240,7 @@ body{ background:var(--bg); color:var(--text); font-family:'DM Sans',sans-serif;
 .lore-stat-value{ font-size:.88rem; color:var(--text); line-height:1.4; }
 .lore-footer{
   padding:0 24px 20px;
-  display:flex; gap:10px;
+  display:flex; gap:8px; flex-wrap:wrap;
 }
 .lore-btn{
   flex:1; padding:11px;
@@ -618,6 +618,7 @@ body{ background:var(--bg); color:var(--text); font-family:'DM Sans',sans-serif;
     <div class="lore-footer">
       <button class="lore-btn lore-btn-copy" id="lore-copy-btn" onclick="copyLoreName()">📋 Copiar Nome</button>
       <button class="lore-btn" id="lore-fav-btn" onclick="toggleFavFromModal()" style="background:var(--surface2);color:var(--muted);border:1px solid rgba(255,255,255,.08);">⭐ Salvar Favorito</button>
+      <button class="lore-btn" id="lore-share-btn" onclick="sharePlace()" style="background:var(--surface2);color:var(--muted);border:1px solid rgba(255,255,255,.08);flex:0.8;">🔗 Compartilhar</button>
       <button class="lore-btn lore-btn-close" onclick="closeLore()" style="flex:0.6;">Fechar</button>
     </div>
   </div>
@@ -1338,9 +1339,58 @@ function sendFeedback(){
   document.getElementById('fb-btn').style.display = 'none';
   document.getElementById('fb-thanks').style.display = 'block';
 }
+ function sharePlace(){
+  const element = currentLoreElement;
+  const name = currentLoreName;
+  const type = document.getElementById('place-type').value;
+  const tone = document.getElementById('place-tone').value;
+  const l = getLang();
+
+  const params = new URLSearchParams({
+    lang: l,
+    name: name,
+    element: element,
+    type: type,
+    tone: tone,
+    shared: '1'
+  });
+
+  const url = window.location.origin + window.location.pathname + '?' + params.toString();
+
+  if(navigator.share){
+    navigator.share({
+      title: name + ' — NameForge',
+      text: (l==='pt' ? 'Olha o lugar que criei no NameForge: ' : 'Check out this place I created on NameForge: ') + name,
+      url: url
+    });
+  } else {
+    navigator.clipboard.writeText(url).then(()=>{
+      const btn = document.getElementById('lore-share-btn');
+      btn.textContent = '✓ ' + (l==='pt' ? 'Link copiado!' : 'Link copied!');
+      setTimeout(()=>{ btn.textContent = '🔗 ' + (l==='pt' ? 'Compartilhar' : 'Share'); }, 2000);
+    });
+  }
+} 
 // ── INIT ──
 applyLang(getLang());
 renderFavorites();
+
+// Abre Lore Card automaticamente se vier de link compartilhado
+(function(){
+  const params = new URLSearchParams(window.location.search);
+  if(params.get('shared') === '1'){
+    const name    = params.get('name');
+    const element = params.get('element');
+    const type    = params.get('type');
+    const tone    = params.get('tone');
+    const l       = getLang();
+    if(name && element){
+      const t = T[l];
+      const typeLabel = t.types[type] ? t.types[type].replace(/^[^\s]+ /,'') : type;
+      setTimeout(()=> openLore(name, typeLabel, element, tone, l), 400);
+    }
+  }
+})();
 </script>
 </body>
 </html>
