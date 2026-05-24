@@ -1441,7 +1441,9 @@ if(lang === 'en'){
       resultsEl.appendChild(chip);
     });
   }
-
+function goToWorldGen(){
+    window.location.href = 'gerador-lugares.html?lang=' + lang;
+}
   function copyName(name) {
     navigator.clipboard.writeText(name).catch(() => {});
     const toast = document.getElementById('toast');
