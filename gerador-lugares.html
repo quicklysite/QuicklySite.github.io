@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Gerador de Lugares – NameForge</title>
@@ -349,6 +350,122 @@ body{ background:var(--bg); color:var(--text); font-family:'DM Sans',sans-serif;
   padding:20px 0;
   opacity:.6;
 }
+  /* EXPORT BUTTON */
+.export-section{ margin-top:16px; }
+.export-main-btn{
+  width:100%; padding:14px;
+  background:#2d6a4f;
+  color:#fff;
+  border:none; border-radius:12px;
+  font-family:'Cinzel',serif;
+  font-size:.82rem; font-weight:600;
+  letter-spacing:.06em;
+  cursor:pointer; transition:all .2s;
+}
+.export-main-btn:hover{ background:#40916c; transform:translateY(-1px); }
+.export-options{
+  display:none;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:10px;
+}
+.export-options.open{ display:grid; }
+.export-opt-btn{
+  padding:12px;
+  border-radius:10px; border:none;
+  font-family:'Cinzel',serif;
+  font-size:.75rem; font-weight:600;
+  letter-spacing:.04em;
+  cursor:pointer; transition:.2s;
+}
+.export-opt-txt{
+  background:var(--surface2);
+  color:var(--muted);
+  border:1px solid rgba(255,255,255,.08);
+}
+.export-opt-txt:hover{ color:var(--text); border-color:rgba(255,255,255,.2); }
+.export-opt-pdf{
+  background:rgba(45,106,79,.3);
+  color:#52b788;
+  border:1px solid rgba(82,183,136,.2);
+}
+.export-opt-pdf:hover{ background:rgba(45,106,79,.5); border-color:#52b788; }
+
+/* FEEDBACK */
+.feedback-section{
+  margin-top:32px;
+  background:var(--surface);
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:20px;
+  padding:28px 24px;
+  text-align:center;
+  display:none;
+}
+.feedback-title{
+  font-family:'Playfair Display',serif;
+  font-size:1.1rem;
+  color:var(--accent);
+  margin-bottom:8px;
+}
+.feedback-sub{
+  color:var(--muted);
+  font-size:.85rem;
+  margin-bottom:20px;
+  line-height:1.6;
+}
+.feedback-options{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  justify-content:center;
+  margin-bottom:16px;
+}
+.feedback-tag{
+  background:var(--surface2);
+  border:1.5px solid rgba(255,255,255,.08);
+  color:var(--text);
+  padding:8px 16px;
+  border-radius:20px;
+  font-size:.82rem;
+  cursor:pointer;
+  transition:.2s;
+  user-select:none;
+}
+.feedback-tag:hover{ border-color:rgba(232,199,122,.4); color:var(--accent); }
+.feedback-tag.selected{ background:rgba(232,199,122,.12); border-color:var(--accent); color:var(--accent); }
+.feedback-textarea{
+  width:100%;
+  background:var(--surface2);
+  border:1px solid rgba(255,255,255,.08);
+  color:var(--text);
+  padding:12px;
+  border-radius:10px;
+  font-family:'DM Sans',sans-serif;
+  font-size:.88rem;
+  resize:vertical;
+  min-height:80px;
+  outline:none;
+  margin-bottom:12px;
+}
+.feedback-send-btn{
+  background:var(--accent);
+  color:#000;
+  border:none;
+  padding:11px 28px;
+  border-radius:10px;
+  font-family:'Cinzel',serif;
+  font-size:.78rem;
+  font-weight:700;
+  cursor:pointer;
+  transition:.2s;
+}
+.feedback-send-btn:hover{ opacity:.85; }
+.feedback-thanks{
+  display:none;
+  color:#4caf50;
+  font-size:.9rem;
+  margin-top:8px;
+  }
 </style>
 </head>
 <body>
@@ -513,7 +630,32 @@ body{ background:var(--bg); color:var(--text); font-family:'DM Sans',sans-serif;
     <span class="favorites-count" id="fav-count">0 lugares</span>
   </div>
   <div class="favorites-grid" id="favorites-grid"></div>
-  <button class="export-btn" id="export-btn" onclick="exportFavorites()">📄 Exportar Mundo como .txt</button>
+  <div class="export-section">
+    <button class="export-main-btn" onclick="toggleExportOptions()">📤 Exportar Mundo</button>
+    <div class="export-options" id="export-options">
+      <button class="export-opt-btn export-opt-txt" onclick="exportFavorites()">📄 Exportar .txt</button>
+      <button class="export-opt-btn export-opt-pdf" onclick="exportPDF()">🎲 Card de RPG em PDF</button>
+    </div>
+  </div>
+
+  <!-- FEEDBACK -->
+  <div class="feedback-section" id="feedback-section">
+    <div class="feedback-title" id="fb-title">💬 O que você gostaria de ver aqui?</div>
+    <div class="feedback-sub" id="fb-sub">Selecione o que faria este gerador ainda melhor para você.</div>
+    <div class="feedback-options">
+      <span class="feedback-tag" onclick="toggleTag(this)">🗺️ Mapa do mundo</span>
+      <span class="feedback-tag" onclick="toggleTag(this)">👥 Gerador de facções</span>
+      <span class="feedback-tag" onclick="toggleTag(this)">⚔️ Gerador de conflitos</span>
+      <span class="feedback-tag" onclick="toggleTag(this)">🌿 Mais habitats</span>
+      <span class="feedback-tag" onclick="toggleTag(this)">📖 Lore mais detalhado</span>
+      <span class="feedback-tag" onclick="toggleTag(this)">🎨 Mais temas visuais</span>
+      <span class="feedback-tag" onclick="toggleTag(this)">📱 App mobile</span>
+      <span class="feedback-tag" onclick="toggleTag(this)">🔗 Compartilhar lugar</span>
+    </div>
+    <textarea class="feedback-textarea" id="fb-textarea" placeholder="Alguma sugestão específica?"></textarea>
+    <button class="feedback-send-btn" onclick="sendFeedback()" id="fb-btn">Enviar Sugestão</button>
+    <div class="feedback-thanks" id="fb-thanks">✓ Obrigado! Seu feedback foi registrado.</div>
+  </div>
 </div>
 <button class="scroll-top" id="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
@@ -783,6 +925,7 @@ function renderFavorites(){
   }
 
   section.style.display = 'block';
+  document.getElementById('feedback-section').style.display = 'block';
   count.textContent = favorites.length + (l==='pt' ? ' lugares' : ' places');
 
   grid.innerHTML = '';
@@ -1061,7 +1204,140 @@ window.addEventListener('scroll',()=>{
   if(window.scrollY > 400) btn.classList.add('visible');
   else btn.classList.remove('visible');
 });
+// ── EXPORT OPTIONS TOGGLE ──
+function toggleExportOptions(){
+  const opts = document.getElementById('export-options');
+  opts.classList.toggle('open');
+}
 
+// ── EXPORT PDF ──
+function exportPDF(){
+  if(!favorites.length) return;
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({ orientation:'portrait', unit:'mm', format:'a4' });
+  const l = getLang();
+
+  const pageW = 210;
+  const margin = 20;
+  const cardW = pageW - margin * 2;
+  let y = 20;
+
+  // Header
+  doc.setFillColor(22, 22, 26);
+  doc.rect(0, 0, 210, 297, 'F');
+
+  doc.setFont('helvetica','bold');
+  doc.setFontSize(22);
+  doc.setTextColor(232, 199, 122);
+  doc.text(l==='pt' ? 'MEU MUNDO' : 'MY WORLD', pageW/2, y, { align:'center' });
+  y += 7;
+
+  doc.setFontSize(9);
+  doc.setTextColor(136, 136, 136);
+  doc.text('NameForge — quicklysite.github.io', pageW/2, y, { align:'center' });
+  y += 12;
+
+  // Linha divisória
+  doc.setDrawColor(232, 199, 122);
+  doc.setLineWidth(0.3);
+  doc.line(margin, y, pageW - margin, y);
+  y += 10;
+
+  favorites.forEach((fav, i) => {
+    const lore = LORE[l][fav.element];
+    const ec = ELEMENT_COLORS[fav.element];
+
+    // Cor do elemento em RGB
+    const hex = ec.color.replace('#','');
+    const r = parseInt(hex.substring(0,2),16);
+    const g = parseInt(hex.substring(2,4),16);
+    const b = parseInt(hex.substring(4,6),16);
+
+    // Card background
+    doc.setFillColor(30, 30, 36);
+    doc.roundedRect(margin, y, cardW, 52, 3, 3, 'F');
+
+    // Borda colorida esquerda
+    doc.setFillColor(r, g, b);
+    doc.roundedRect(margin, y, 3, 52, 1, 1, 'F');
+
+    // Nome do lugar
+    doc.setFont('helvetica','bold');
+    doc.setFontSize(14);
+    doc.setTextColor(r, g, b);
+    doc.text(fav.name.toUpperCase(), margin + 8, y + 10);
+
+    // Ícone + elemento
+    doc.setFont('helvetica','normal');
+    doc.setFontSize(8);
+    doc.setTextColor(136, 136, 136);
+    doc.text(ec.icon + ' ' + fav.element.toUpperCase(), margin + 8, y + 17);
+
+    // Linha separadora interna
+    doc.setDrawColor(60, 60, 70);
+    doc.setLineWidth(0.2);
+    doc.line(margin + 6, y + 20, margin + cardW - 6, y + 20);
+
+    // Força
+    doc.setFont('helvetica','bold');
+    doc.setFontSize(7);
+    doc.setTextColor(100, 200, 100);
+    doc.text((l==='pt'?'FORÇA:':'STRENGTH:'), margin + 8, y + 27);
+    doc.setFont('helvetica','normal');
+    doc.setTextColor(220, 220, 220);
+    doc.text(lore.str, margin + 30, y + 27);
+
+    // Fraqueza
+    doc.setFont('helvetica','bold');
+    doc.setTextColor(230, 150, 50);
+    doc.text((l==='pt'?'FRAQUEZA:':'WEAKNESS:'), margin + 8, y + 34);
+    doc.setFont('helvetica','normal');
+    doc.setTextColor(220, 220, 220);
+    doc.text(lore.weak, margin + 34, y + 34);
+
+    // Perigo
+    doc.setFont('helvetica','bold');
+    doc.setTextColor(220, 60, 60);
+    doc.text((l==='pt'?'PERIGO:':'DANGER:'), margin + 8, y + 41);
+    doc.setFont('helvetica','normal');
+    doc.setTextColor(220, 220, 220);
+    doc.text(lore.danger, margin + 28, y + 41);
+
+    // Notas do Mestre
+    doc.setFont('helvetica','italic');
+    doc.setFontSize(7);
+    doc.setTextColor(80, 80, 90);
+    doc.text((l==='pt'?'Notas do Mestre: ___________________________':'Master Notes: ___________________________'), margin + 8, y + 49);
+
+    y += 58;
+
+    // Nova página se necessário
+    if(y > 260 && i < favorites.length - 1){
+      doc.addPage();
+      doc.setFillColor(22, 22, 26);
+      doc.rect(0, 0, 210, 297, 'F');
+      y = 20;
+    }
+  });
+
+  doc.save(l==='pt' ? 'meu-mundo-nameforge.pdf' : 'my-world-nameforge.pdf');
+}
+
+// ── FEEDBACK ──
+function toggleTag(el){
+  el.classList.toggle('selected');
+}
+
+function sendFeedback(){
+  const tags = Array.from(document.querySelectorAll('.feedback-tag.selected')).map(t => t.textContent);
+  const text = document.getElementById('fb-textarea').value;
+  const data = { tags, text, date: new Date().toISOString() };
+  const existing = JSON.parse(localStorage.getItem('nf_feedback') || '[]');
+  existing.push(data);
+  localStorage.setItem('nf_feedback', JSON.stringify(existing));
+  document.getElementById('fb-btn').style.display = 'none';
+  document.getElementById('fb-thanks').style.display = 'block';
+}
 // ── INIT ──
 applyLang(getLang());
 renderFavorites();
