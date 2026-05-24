@@ -641,7 +641,7 @@ body{ background:var(--bg); color:var(--text); font-family:'DM Sans',sans-serif;
   </div>
   <div class="favorites-grid" id="favorites-grid"></div>
   <div class="export-section">
-    <button class="export-main-btn" onclick="toggleExportOptions()">📤 Exportar Mundo</button>
+    <button class="export-main-btn" id="export-main-btn" onclick="toggleExportOptions()">📤 Exportar Mundo</button>
     <div class="export-options" id="export-options">
       <button class="export-opt-btn export-opt-txt" onclick="exportFavorites()">📄 Exportar .txt</button>
       <button class="export-opt-btn export-opt-pdf" onclick="exportPDF()">🎲 Card de RPG em PDF</button>
@@ -650,25 +650,25 @@ body{ background:var(--bg); color:var(--text); font-family:'DM Sans',sans-serif;
 <div style="max-width:760px;margin:48px auto 0;padding:0 20px 60px;">
 
   <div style="background:#16161a;border:1px solid rgba(232,199,122,.1);border-radius:20px;padding:32px;margin-bottom:24px;">
-    <h2 style="color:#e8c77a;font-family:'Playfair Display',serif;font-size:1.2rem;margin-bottom:16px;">Por que o nome de um lugar importa tanto quanto o enredo?</h2>
+    <h2 id="seo-h1" style="color:#e8c77a;font-family:'Playfair Display',serif;font-size:1.2rem;margin-bottom:16px;">Por que o nome de um lugar importa tanto quanto o enredo?</h2>
     <p style="line-height:1.8;margin-bottom:14px;opacity:.88;font-size:.93rem;">Existe um motivo pelo qual ninguém esquece de Mordor, Tatooine ou Hogwarts. Não é só a história que acontece nesses lugares — é o próprio nome carregando o peso do que o lugar representa. Mordor soa pesado, duro, sem saída. Tatooine soa estrangeiro, árido, distante de qualquer civilização. Hogwarts soa absurdo o suficiente para ser mágico. Nenhum desses nomes foi escolhido por acaso.</p>
     <p style="line-height:1.8;opacity:.88;font-size:.93rem;">Tolkien levou esse princípio ao extremo: ele criou línguas inteiras antes de escrever uma única história. Os nomes de lugares em Middle-earth não foram inventados — eles foram traduzidos do Quenya e do Sindarin, idiomas com gramática e fonologia próprias que ele desenvolveu ao longo de décadas. "Moria" significa "abismo negro" em Sindarin. "Isengard" vem do inglês arcaico e significa "fortaleza de ferro". Cada nome é uma frase disfarçada de lugar.</p>
   </div>
 
   <div style="background:#16161a;border:1px solid rgba(232,199,122,.1);border-radius:20px;padding:32px;margin-bottom:24px;">
-    <h2 style="color:#e8c77a;font-family:'Playfair Display',serif;font-size:1.2rem;margin-bottom:16px;">O problema que nenhum guia de worldbuilding conta direito</h2>
+    <h2 id="seo-h2" style="color:#e8c77a;font-family:'Playfair Display',serif;font-size:1.2rem;margin-bottom:16px;">O problema que nenhum guia de worldbuilding conta direito</h2>
     <p style="line-height:1.8;margin-bottom:14px;opacity:.88;font-size:.93rem;">Existe um erro que praticamente todo iniciante em worldbuilding comete: criar nomes que parecem épicos isoladamente mas soam completamente inconsistentes quando colocados juntos no mesmo mapa. Imagine um reino chamado "Kael'tharion" com uma capital chamada "São Paulo do Norte". O problema não é nenhum dos dois nomes individualmente — é a mistura de registros sonoros que quebra a imersão do leitor ou do jogador de RPG.</p>
     <p style="line-height:1.8;opacity:.88;font-size:.93rem;">A solução que escritores experientes usam é simples: escolher um "DNA sonoro" para cada região e manter coerência dentro dela. Lugares do mesmo reino têm padrões similares de sílabas, terminações e consoantes. Quando uma região é invadida e renomeada por outro povo, o nome muda de padrão — e isso conta uma história sem precisar de explicação. O NameForge foi construído com essa lógica: cada elemento e universo gera nomes com DNA sonoro próprio e consistente.</p>
   </div>
 
   <div style="background:#16161a;border:1px solid rgba(232,199,122,.1);border-radius:20px;padding:32px;margin-bottom:24px;">
-    <h2 style="color:#e8c77a;font-family:'Playfair Display',serif;font-size:1.2rem;margin-bottom:16px;">Como lugares reais viram nomes fictícios — e o que aprender com isso</h2>
+    <h2 id="seo-h3" style="color:#e8c77a;font-family:'Playfair Display',serif;font-size:1.2rem;margin-bottom:16px;">Como lugares reais viram nomes fictícios — e o que aprender com isso</h2>
     <p style="line-height:1.8;margin-bottom:14px;opacity:.88;font-size:.93rem;">A maioria dos nomes de lugares no mundo real não foi inventada — foi descrita. "Amazonas" vem da lenda das guerreiras amazônicas que os exploradores portugueses acreditavam habitar a região. "Sahara" significa simplesmente "deserto" em árabe. "Atacama" provavelmente vem de uma palavra indígena que significa "onde acaba a chuva". As pessoas que nomearam esses lugares não estavam sendo poéticas — estavam sendo práticas, descrevendo o que viam.</p>
     <p style="line-height:1.8;opacity:.88;font-size:.93rem;">Essa lógica funciona perfeitamente em mundos fictícios. Um lugar chamado "Kaelvorn" pode soar misterioso para o leitor, mas para os habitantes ele pode simplesmente significar "vale das pedras negras" numa língua extinta. Você não precisa inventar a tradução — basta saber que ela existe. Isso dá profundidade sem exigir que você construa uma língua inteira como Tolkien fez.</p>
   </div>
 
   <div style="background:#16161a;border:1px solid rgba(232,199,122,.1);border-radius:20px;padding:32px;">
-    <h2 style="color:#e8c77a;font-family:'Playfair Display',serif;font-size:1.2rem;margin-bottom:16px;">Para mestres de RPG: por que o nome do lugar muda como os jogadores se comportam</h2>
+    <h2 id="seo-h4" style="color:#e8c77a;font-family:'Playfair Display',serif;font-size:1.2rem;margin-bottom:16px;">Para mestres de RPG: por que o nome do lugar muda como os jogadores se comportam</h2>
     <p style="line-height:1.8;margin-bottom:14px;opacity:.88;font-size:.93rem;">Existe um fenômeno bem documentado entre mestres de D&D e outros RPGs de mesa: jogadores se comportam de forma diferente dependendo do nome do lugar que estão visitando. Uma taverna chamada "A Espada Dourada" cria uma expectativa de aventura e prosperidade. A mesma taverna chamada "O Último Refúgio" cria tensão antes mesmo de o mestre descrever qualquer coisa. O nome é a primeira narrativa que o jogador recebe.</p>
     <p style="line-height:1.8;opacity:.88;font-size:.93rem;">Mestres experientes usam essa psicologia de forma intencional: nomes suaves e fluidos para lugares seguros, nomes duros e cortantes para lugares perigosos, nomes antigos e difíceis de pronunciar para lugares de poder ou mistério. Não é coincidência que "Dungeon" e "Dragon" soem pesados — e que "Elysium" e "Avalon" soem leves e distantes. O NameForge usa exatamente essa lógica sonora ao gerar nomes com base no elemento dominante, no tom e no tipo de lugar que você escolher.</p>
   </div>
@@ -678,7 +678,7 @@ body{ background:var(--bg); color:var(--text); font-family:'DM Sans',sans-serif;
   <div class="feedback-section" id="feedback-section">
     <div class="feedback-title" id="fb-title">💬 O que você gostaria de ver aqui?</div>
     <div class="feedback-sub" id="fb-sub">Selecione o que faria este gerador ainda melhor para você.</div>
-    <div class="feedback-options">
+    <div class="feedback-options" id="fb-tags-container">
       <span class="feedback-tag" onclick="toggleTag(this)">🗺️ Mapa do mundo</span>
       <span class="feedback-tag" onclick="toggleTag(this)">👥 Gerador de facções</span>
       <span class="feedback-tag" onclick="toggleTag(this)">⚔️ Gerador de conflitos</span>
@@ -733,7 +733,22 @@ const T = {
     universes:{
       fantasy:'⚔️ Fantasy / Medieval', scifi:'🚀 Sci-Fi / Futurista', steampunk:'⚙️ Steampunk',
       cyberpunk:'💾 Cyberpunk', cosmic:'🌌 Cósmico / Alien', dark:'🌑 Dark / Gótico', mythology:'🏛️ Mitológico'
-    }
+    },
+    exportBtn:'📤 Exportar Mundo',
+    exportTxt:'📄 Exportar .txt',
+    exportPdf:'🎲 Card de RPG em PDF',
+    fbTitle:'💬 O que você gostaria de ver aqui?',
+    fbSub:'Selecione o que faria este gerador ainda melhor para você.',
+    fbPlaceholder:'Alguma sugestão específica?',
+    fbBtn:'Enviar Sugestão',
+    fbThanks:'✓ Obrigado! Seu feedback foi registrado.',
+    fbTags:['🗺️ Mapa do mundo','👥 Gerador de facções','⚔️ Gerador de conflitos','🌿 Mais habitats','📖 Lore mais detalhado','🎨 Mais temas visuais','📱 App mobile','🔗 Compartilhar lugar'],
+    seoTitles:[
+      'Por que o nome de um lugar importa tanto quanto o enredo?',
+      'O problema que nenhum guia de worldbuilding conta direito',
+      'Como lugares reais viram nomes fictícios — e o que aprender com isso',
+      'Para mestres de RPG: por que o nome do lugar muda como os jogadores se comportam'
+    ]
   },
   en:{
     back:'← Back to NameForge',
@@ -770,7 +785,22 @@ const T = {
     universes:{
       fantasy:'⚔️ Fantasy / Medieval', scifi:'🚀 Sci-Fi / Futuristic', steampunk:'⚙️ Steampunk',
       cyberpunk:'💾 Cyberpunk', cosmic:'🌌 Cosmic / Alien', dark:'🌑 Dark / Gothic', mythology:'🏛️ Mythological'
-    }
+    },
+    exportBtn:'📤 Export World',
+    exportTxt:'📄 Export .txt',
+    exportPdf:'🎲 RPG Card as PDF',
+    fbTitle:'💬 What would you like to see here?',
+    fbSub:'Select what would make this generator even better for you.',
+    fbPlaceholder:'Any specific suggestion?',
+    fbBtn:'Send Suggestion',
+    fbThanks:'✓ Thank you! Your feedback has been registered.',
+    fbTags:['🗺️ World map','👥 Faction generator','⚔️ Conflict generator','🌿 More habitats','📖 More detailed lore','🎨 More visual themes','📱 Mobile app','🔗 Share place'],
+    seoTitles:[
+      'Why does a place name matter as much as the plot?',
+      'The problem no worldbuilding guide tells you properly',
+      'How real places become fictional names — and what to learn from it',
+      'For RPG Game Masters: why a place name changes how players behave'
+    ]
   }
 };
 
@@ -1230,7 +1260,40 @@ function copyLoreName(){
       if(opts[opt.value]) opt.text = opts[opt.value];
     });
   }
+// Export
+  const exportMainBtn = document.getElementById('export-main-btn');
+  if(exportMainBtn) exportMainBtn.textContent = t.exportBtn;
+  const exportTxtBtn = document.querySelector('.export-opt-txt');
+  if(exportTxtBtn) exportTxtBtn.textContent = t.exportTxt;
+  const exportPdfBtn = document.querySelector('.export-opt-pdf');
+  if(exportPdfBtn) exportPdfBtn.textContent = t.exportPdf;
 
+  // Feedback
+  const fbTitle = document.getElementById('fb-title');
+  if(fbTitle) fbTitle.textContent = t.fbTitle;
+  const fbSub = document.getElementById('fb-sub');
+  if(fbSub) fbSub.textContent = t.fbSub;
+  const fbTextarea = document.getElementById('fb-textarea');
+  if(fbTextarea) fbTextarea.placeholder = t.fbPlaceholder;
+  const fbBtn = document.getElementById('fb-btn');
+  if(fbBtn && fbBtn.style.display !== 'none') fbBtn.textContent = t.fbBtn;
+  const fbThanks = document.getElementById('fb-thanks');
+  if(fbThanks) fbThanks.textContent = t.fbThanks;
+
+  // Tags do feedback
+  const tagsContainer = document.getElementById('fb-tags-container');
+  if(tagsContainer){
+    const tags = tagsContainer.querySelectorAll('.feedback-tag');
+    tags.forEach((tag, i) => {
+      if(t.fbTags[i]) tag.textContent = t.fbTags[i];
+    });
+  }
+
+  // SEO titles
+  ['seo-h1','seo-h2','seo-h3','seo-h4'].forEach((id, i) => {
+    const el = document.getElementById(id);
+    if(el && t.seoTitles[i]) el.textContent = t.seoTitles[i];
+  });
   document.documentElement.lang = l;
 }
 
