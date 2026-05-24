@@ -789,6 +789,7 @@ h1 {
 
     <!-- RESULTS -->
     <div class="results" id="results"></div>
+    <button class="world-btn" id="world-btn" onclick="goToWorldGen()">🗺️ Criar um mundo para este personagem →</button>
   </div>
 
   <!-- AD SLOT MID -->
@@ -1417,7 +1418,19 @@ if(lang === 'en'){
       const pool   = (NAMES.biz[sector] || {})[style] || [];
       names = pick(pool, qty);
     }
-
+// Mostra botão de mundo apenas para fantasia e ficção
+    const worldBtn = document.getElementById('world-btn');
+    if(worldBtn){
+      if(currentTab === 'fantasy' || currentTab === 'fiction'){
+        worldBtn.style.display = 'block';
+        worldBtn.textContent = lang === 'en'
+          ? '🗺️ Create a world for this character →'
+          : '🗺️ Criar um mundo para este personagem →';
+      } else {
+        worldBtn.style.display = 'none';
+      }
+          }
+    
     names.forEach((name, i) => {
       const chip = document.createElement('div');
       chip.className = 'name-chip';
@@ -1676,6 +1689,9 @@ function translateConverters(t){
     if (saved === 'pt' || saved === 'en') {
       lang = saved;
       document.getElementById('lang-overlay').style.display = 'none';
+      function goToWorldGen(){
+    window.location.href = 'gerador-lugares.html?lang=' + lang;
+      }
       applyTranslations();
       updateSidebarLinks(lang);
     }
