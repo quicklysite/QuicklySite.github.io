@@ -1367,12 +1367,35 @@ function toggleTag(el){
 function sendFeedback(){
   const tags = Array.from(document.querySelectorAll('.feedback-tag.selected')).map(t => t.textContent);
   const text = document.getElementById('fb-textarea').value;
-  const data = { tags, text, date: new Date().toISOString() };
-  const existing = JSON.parse(localStorage.getItem('nf_feedback') || '[]');
-  existing.push(data);
-  localStorage.setItem('nf_feedback', JSON.stringify(existing));
-  document.getElementById('fb-btn').style.display = 'none';
-  document.getElementById('fb-thanks').style.display = 'block';
+  const btn  = document.getElementById('fb-btn');
+
+  btn.disabled = true;
+  btn.textContent = '...';
+
+  fetch('https://formspree.io/f/mnjrbzzy', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify({
+      message: text || '(sem texto)',
+      tags: tags.join(', ') || '(nenhuma tag)',
+      source: 'gerador-lugares',
+      date: new Date().toLocaleString('pt-BR')
+    })
+  })
+  .then(res => {
+    if(res.ok){
+      btn.style.display = 'none';
+      document.getElementById('fb-thanks').style.display = 'block';
+    } else {
+      btn.disabled = false;
+      btn.textContent = getLang()==='pt' ? 'Enviar Sugestão' : 'Send Suggestion';
+      alert(getLang()==='pt' ? 'Erro ao enviar. Tente novamente.' : 'Error sending. Please try again.');
+    }
+  })
+  .catch(()=>{
+    btn.disabled = false;
+    btn.textContent = getLang()==='pt' ? 'Enviar Sugestão' : 'Send Suggestion';
+  });
 }
  function sharePlace(){
   const element = currentLoreElement;
