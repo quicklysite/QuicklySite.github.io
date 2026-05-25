@@ -752,6 +752,19 @@ q('acc-h3').textContent = accContent[l].h3;
 q('acc-p1').textContent = ac.p1;
 q('acc-p2').textContent = ac.p2;
 q('acc-p3').textContent = ac.p3;
+    // Traduções do Chart Help
+q('chart-help-title').textContent = t.chartHelpTitle;
+q('chart-title').textContent = '📈 Histórico de Preço';
+q('chart-x-title').textContent = t.chartXTitle;
+q('chart-x-text').textContent = t.chartXText;
+q('chart-y-title').textContent = t.chartYTitle;
+q('chart-y-text').textContent = t.chartYText;
+q('chart-line-title').textContent = t.chartLineTitle;
+q('chart-line-text').textContent = t.chartLineText;
+q('chart-tabs-title').textContent = t.chartTabsTitle;
+q('chart-tabs-text').textContent = t.chartTabsText;
+q('chart-warning-title').textContent = t.chartWarningTitle;
+q('chart-warning-text').textContent = t.chartWarningText;
   updateCalcUI();
 }
 
@@ -929,22 +942,6 @@ window.onload = () => {
     const isBTC = currentCoin === 'btc';
 
     priceChart = new Chart(ctx, {
-'chart-help-title':t.chartHelpTitle,
-
-'chart-x-title':t.chartXTitle,
-'chart-x-text':t.chartXText,
-
-'chart-y-title':t.chartYTitle,
-'chart-y-text':t.chartYText,
-
-'chart-line-title':t.chartLineTitle,
-'chart-line-text':t.chartLineText,
-
-'chart-tabs-title':t.chartTabsTitle,
-'chart-tabs-text':t.chartTabsText,
-
-'chart-warning-title':t.chartWarningTitle,
-'chart-warning-text':t.chartWarningText,
       type:'line',
 
       data:{
