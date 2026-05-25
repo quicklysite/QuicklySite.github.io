@@ -202,10 +202,16 @@
 
 .chart-help{
   background:var(--surface2);
-  border:1px solid rgba(255,255,255,.05);
+  border:2px solid var(--accent);
   border-radius:var(--radius);
   margin:22px 0;
   overflow:hidden;
+  box-shadow: 0 0 20px rgba(232,199,122,.25), inset 0 0 15px rgba(232,199,122,.08);
+  transition: all .3s;
+}
+
+.chart-help:hover{
+  box-shadow: 0 0 30px rgba(232,199,122,.4), inset 0 0 20px rgba(232,199,122,.12);
 }
 
 .chart-help-btn{
