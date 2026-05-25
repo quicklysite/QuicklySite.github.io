@@ -198,6 +198,58 @@
 .content-block p { margin-bottom:12px; line-height:1.8; opacity:.88; font-size:.93rem; }
 .content-block strong { color:var(--accent); font-weight:600; }
 .content-divider { border:none; border-top:1px solid rgba(255,255,255,.06); margin:28px 0; }  
+     /* ── CHART HELP ── */
+
+.chart-help{
+  background:var(--surface2);
+  border:1px solid rgba(255,255,255,.05);
+  border-radius:var(--radius);
+  margin:22px 0;
+  overflow:hidden;
+}
+
+.chart-help-btn{
+  width:100%;
+  background:none;
+  border:none;
+  color:var(--text);
+  padding:18px 22px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  cursor:pointer;
+  font-size:1rem;
+  font-family:inherit;
+}
+
+.chart-help-btn:hover{
+  background:rgba(255,255,255,.02);
+}
+
+.chart-help-content{
+  display:none;
+  padding:0 22px 22px;
+}
+
+.chart-help-content.open{
+  display:block;
+}
+
+.chart-help-item{
+  margin-top:20px;
+}
+
+.chart-help-item h4{
+  margin-bottom:8px;
+  color:var(--accent);
+  font-size:.95rem;
+}
+
+.chart-help-item p{
+  line-height:1.7;
+  color:var(--muted);
+  font-size:.95rem;
+}
         /* ── CHART ── */
 
 .chart-box{
@@ -294,6 +346,87 @@
         <button class="refresh-btn eth-btn" onclick="fetchPrices()" id="btn-refresh-eth">🔄 Atualizar</button>
         <div class="auto-note" id="note-eth">⏱ Atualização automática a cada 60 segundos</div>
     </div>
+    <!-- ── EXPLICAÇÃO DO GRÁFICO ── -->
+
+<div class="chart-help">
+
+  <button class="chart-help-btn" onclick="toggleChartHelp()">
+
+    <span id="chart-help-title">
+      📘 Como ler este gráfico?
+    </span>
+
+    <span id="chart-help-icon">
+      +
+    </span>
+
+  </button>
+
+  <div class="chart-help-content" id="chart-help-content">
+
+    <div class="chart-help-item">
+
+      <h4 id="chart-x-title">
+        📅 Linha Horizontal (X)
+      </h4>
+
+      <p id="chart-x-text">
+        Representa a passagem do tempo. Dependendo do período escolhido, você verá dias, semanas ou meses.
+      </p>
+
+    </div>
+
+    <div class="chart-help-item">
+
+      <h4 id="chart-y-title">
+        💵 Linha Vertical (Y)
+      </h4>
+
+      <p id="chart-y-text">
+        Mostra o valor da criptomoeda em dólares americanos (USD).
+      </p>
+
+    </div>
+
+    <div class="chart-help-item">
+
+      <h4 id="chart-line-title">
+        📈 Linha do gráfico
+      </h4>
+
+      <p id="chart-line-text">
+        Cada ponto representa o preço da moeda naquele momento. Quando a linha sobe, o valor aumentou. Quando desce, o valor caiu.
+      </p>
+
+    </div>
+
+    <div class="chart-help-item">
+
+      <h4 id="chart-tabs-title">
+        ⏳ Botões 7D / 30D / 1Y
+      </h4>
+
+      <p id="chart-tabs-text">
+        Alteram o período analisado para visualizar tendências de curto ou longo prazo.
+      </p>
+
+    </div>
+
+    <div class="chart-help-item">
+
+      <h4 id="chart-warning-title">
+        ⚠️ Importante
+      </h4>
+
+      <p id="chart-warning-text">
+        O gráfico mostra movimentações históricas reais, mas não prevê resultados futuros nem constitui recomendação financeira.
+      </p>
+
+    </div>
+
+  </div>
+
+</div>
  <!-- ── GRÁFICO ── -->
 <div class="chart-box">
 
@@ -459,6 +592,21 @@ cbEthH4:'⛽ O que é "gas" no Ethereum?',
 cbEthP4:'Cada operação na rede Ethereum consome uma taxa chamada gas, paga em ETH. É como a gasolina que move a rede. Quanto mais congestionada a rede, mais caro o gas — por isso o preço do ETH influencia diretamente o custo de usar apps descentralizados.',
 cbEthH5:'🔄 Diferença entre Bitcoin e Ethereum em resumo',
 cbEthP5:'Bitcoin é ouro digital — escasso, simples e focado em reserva de valor. Ethereum é uma plataforma programável — mais flexível, com mais casos de uso. Os dois coexistem. Bitcoin atrai quem quer proteção de longo prazo. Ethereum atrai quem acredita no futuro das aplicações descentralizadas.',
+      chartHelpTitle:'📘 Como ler este gráfico?',
+chartXTitle:'📅 Linha Horizontal (X)',
+chartXText:'Representa a passagem do tempo. Dependendo do período escolhido, você verá dias, semanas ou meses.',
+
+chartYTitle:'💵 Linha Vertical (Y)',
+chartYText:'Mostra o valor da criptomoeda em dólares americanos (USD).',
+
+chartLineTitle:'📈 Linha do gráfico',
+chartLineText:'Cada ponto representa o preço da moeda naquele momento. Quando a linha sobe, o valor aumentou. Quando desce, o valor caiu.',
+
+chartTabsTitle:'⏳ Botões 7D / 30D / 1Y',
+chartTabsText:'Alteram o período analisado para visualizar tendências de curto ou longo prazo.',
+
+chartWarningTitle:'⚠️ Importante',
+chartWarningText:'O gráfico mostra movimentações históricas reais, mas não prevê resultados futuros nem constitui recomendação financeira.',
     pSource:'O preço exibido aqui vem diretamente da API da <strong>CoinGecko</strong>, atualizada a cada 60 segundos.',
     lNames:'✨ Gerador', lWeight:'⚖️ Peso', lTemp:'🌡️ Temp', lKitchen:'🍳 Cozinha', lCloth:'👕 Roupa', lBtc:'₿ Bitcoin',
     fAbout:'Sobre', fContact:'Contato', fTerms:'Termos', fPriv:'Privacidade',
@@ -491,6 +639,21 @@ cbEthH4:'⛽ What is "gas" in Ethereum?',
 cbEthP4:'Every operation on the Ethereum network consumes a fee called gas, paid in ETH. It\'s like the fuel that powers the network. The more congested the network, the more expensive the gas — which is why ETH\'s price directly affects the cost of using decentralized apps.',
 cbEthH5:'🔄 Bitcoin vs Ethereum in summary',
 cbEthP5:'Bitcoin is digital gold — scarce, simple, and focused on being a store of value. Ethereum is a programmable platform — more flexible, more versatile, with more use cases. Both coexist. Bitcoin attracts those who want long-term protection. Ethereum attracts those who believe in the future of decentralized applications.',
+      chartHelpTitle:'📘 How to read this chart?',
+chartXTitle:'📅 Horizontal Axis (X)',
+chartXText:'Represents the passage of time. Depending on the selected period, you will see days, weeks or months.',
+
+chartYTitle:'💵 Vertical Axis (Y)',
+chartYText:'Shows the cryptocurrency value in US dollars (USD).',
+
+chartLineTitle:'📈 Chart line',
+chartLineText:'Each point represents the coin price at that moment. When the line rises, the value increased. When it falls, the value decreased.',
+
+chartTabsTitle:'⏳ 7D / 30D / 1Y buttons',
+chartTabsText:'Change the analyzed period to visualize short or long-term trends.',
+
+chartWarningTitle:'⚠️ Important',
+chartWarningText:'The chart displays real historical movements but does not predict future results or constitute financial advice.',
     pSource:'The price displayed here comes directly from the <strong>CoinGecko</strong> API, updated every 60 seconds.',
     lNames:'✨ Generator', lWeight:'⚖️ Weight', lTemp:'🌡️ Temp', lKitchen:'🍳 Kitchen', lCloth:'👕 Clothing', lBtc:'₿ Bitcoin',
     fAbout:'About', fContact:'Contact', fTerms:'Terms', fPriv:'Privacy',
@@ -691,6 +854,28 @@ window.onload = () => {
     loadChart();
     setInterval(fetchPrices, 60000);
 };
+    function toggleChartHelp(){
+
+  const content =
+    document.getElementById('chart-help-content');
+
+  const icon =
+    document.getElementById('chart-help-icon');
+
+  if(!content) return;
+
+  content.classList.toggle('open');
+
+  if(icon){
+
+    icon.textContent =
+      content.classList.contains('open')
+      ? '−'
+      : '+';
+
+  }
+
+    }
     async function loadChart(days=7, btn=null){
 
   document
@@ -744,7 +929,22 @@ window.onload = () => {
     const isBTC = currentCoin === 'btc';
 
     priceChart = new Chart(ctx, {
+'chart-help-title':t.chartHelpTitle,
 
+'chart-x-title':t.chartXTitle,
+'chart-x-text':t.chartXText,
+
+'chart-y-title':t.chartYTitle,
+'chart-y-text':t.chartYText,
+
+'chart-line-title':t.chartLineTitle,
+'chart-line-text':t.chartLineText,
+
+'chart-tabs-title':t.chartTabsTitle,
+'chart-tabs-text':t.chartTabsText,
+
+'chart-warning-title':t.chartWarningTitle,
+'chart-warning-text':t.chartWarningText,
       type:'line',
 
       data:{
