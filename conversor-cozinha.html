@@ -238,30 +238,17 @@
     <div class="conv-card">
         <div class="conv-row">
     <div>
-        <label id="label-from">De</label>
-        <select id="k-from" onchange="convertKitchen()">
-            <option value="cup_br" id="opt-cupbr">Xícara BR (200ml)</option>
-            <option value="cup_us" id="opt-cupus">Xícara US (240ml)</option>
-            <option value="tbsp" id="opt-tbsp">Colher de sopa (15ml)</option>
-            <option value="tsp" id="opt-tsp">Colher de chá (5ml)</option>
-            <option value="ml" id="opt-ml">Mililitro (ml)</option>
-            <option value="floz" id="opt-floz">Fl oz (30ml)</option>
-        </select>
-    </div>
-    <div style="display:flex; align-items:flex-end; justify-content:center; margin-bottom:0;">
-        <button id="k-swap" onclick="swapKitchen()" style="background:var(--surface2); border:1.5px solid rgba(232,199,122,.3); color:var(--accent); width:48px; height:48px; border-radius:10px; cursor:pointer; font-size:1.3rem; display:flex; align-items:center; justify-content:center; transition:all .3s; flex-shrink:0;">⇅</button>
-    </div>
-    <div>
-        <label id="label-to">Para</label>
-        <select id="k-to" onchange="convertKitchen()">
-            <option value="ml" id="opt-ml2">Mililitro (ml)</option>
-            <option value="cup_br" id="opt-cupbr2">Xícara BR (200ml)</option>
-            <option value="cup_us" id="opt-cupus2">Xícara US (240ml)</option>
-            <option value="tbsp" id="opt-tbsp2">Colher de sopa (15ml)</option>
-            <option value="tsp" id="opt-tsp2">Colher de chá (5ml)</option>
-            <option value="floz" id="opt-floz2">Fl oz (30ml)</option>
-        </select>
-    </div>
+        <label id="label-val" style="margin-top: 15px;">Quantidade da Receita (em Xícaras ou Medidas)</label>
+        <div style="display: flex; gap: 10px; align-items: center;">
+            <input type="number" id="k-val" value="1" oninput="convertKitchen()" style="flex: 1;" placeholder="Ex: 2.5" />
+            <select id="k-from" onchange="convertKitchen()" style="flex: 1; margin: 0;">
+                <option value="cup_us" id="opt-cupus">Xícara Americana (240ml)</option>
+                <option value="cup_br" id="opt-cupbr">Xícara Brasileira (200ml)</option>
+                <option value="tbsp" id="opt-tbsp">Colher de sopa (15ml)</option>
+                <option value="tsp" id="opt-tsp">Colher de chá (5ml)</option>
+                <option value="floz" id="opt-floz">Fl oz (30ml)</option>
+            </select>
+        </div>
 </div>
         <label id="label-val">Quantidade</label>
         <input type="number" id="k-val" value="1" oninput="convertKitchen()" />
@@ -554,28 +541,19 @@ const ingredientDensities = {
   const lang = getLang();
   const ingredient = document.getElementById('k-ingredient').value;
   const f = document.getElementById('k-from').value;
-  const t = document.getElementById('k-to').value;
   const v = parseFloat(document.getElementById('k-val').value) || 0;
     
   // Dados do Ingrediente
   const density = ingredientDensities[ingredient].density;
   const ingredientName = ingredientDensities[ingredient].name[lang];
   
-  // 1. Cálculo Exato de Volume (De -> Para)
-  const volumeResult = Math.round(v * kMl[f] / kMl[t] * 100) / 100;
-  const labels = T[lang].unitLabels;
-  document.getElementById('k-result-vol').textContent = volumeResult + ' ' + labels[t];
-  
-  // 2. Cálculo Exato de Peso (Massa Líquida)
+  // 1. Cálculo de Volume em ML
   const volumeInMl = v * kMl[f];
-  const weightGrams = Math.round(volumeInMl * density / 200 * 100) / 100;
+  document.getElementById('k-result-vol').textContent = Math.round(volumeInMl * 100) / 100 + ' ml';
   
-  // Oculta o painel de peso se o usuário estiver calculando apenas ml/floz para evitar redundância
-  if(t === 'ml' || t === 'floz') {
-      document.getElementById('k-result-weight').textContent = '—';
-  } else {
-      document.getElementById('k-result-weight').textContent = weightGrams + ' g';
-  }
+  // 2. Cálculo Exato de Peso (Massa Líquida em gramas)
+  const weightGrams = Math.round(volumeInMl * density / 200 * 100) / 100;
+  document.getElementById('k-result-weight').textContent = weightGrams + ' g';
   
   // Atualiza rodapé informativo da densidade
   const densityText = lang === 'pt' 
@@ -583,15 +561,18 @@ const ingredientDensities = {
     : `Base Density: ${ingredientName} ≈ ${density}g per BR cup (200ml)`;
   document.getElementById('density-info').textContent = densityText;
   
-  // Gerencia o Aviso (Warning)
+  // Gerencia o Aviso (Warning) focando nas xícaras
   const warn = document.getElementById('k-warning');
-  if(f === 'cup_br' || t === 'cup_br' || f === 'cup_us' || t === 'cup_us'){
+  if(f === 'cup_us'){
     warn.classList.add('show');
+    document.getElementById('warn-text').textContent = lang === 'pt' ? 'Você selecionou a xícara americana padrão (240ml) usada em receitas gringas.' : 'You selected the standard US cup (240ml).';
+  } else if (f === 'cup_br') {
+    warn.classList.add('show');
+    document.getElementById('warn-text').textContent = lang === 'pt' ? 'Você selecionou a xícara comercial brasileira (200ml).' : 'You selected the commercial Brazilian cup (200ml).';
   } else {
     warn.classList.remove('show');
   }
 }
-
 const lang = getLang();
 applyLang(lang);
 convertKitchen();
