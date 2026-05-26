@@ -489,7 +489,7 @@
         </div>
         <div class="result-card" id="card-res-2">
             <div class="calc-label" id="label-res-2">USD</div>
-                        <div class="val" id="res-2">—</div>
+            <div class="val" id="res-val-2">—</div>
             <div class="cur" id="cur-res-2">Dólares</div>
         </div>
     </div>
@@ -714,6 +714,22 @@ function applyLang(l) {
   q('back-link').textContent = t.back; q('back-link').href = 'index.html' + lp;
   q('page-title').textContent = t.title;
   q('page-subtitle').textContent = t.subtitle;
+  q('chart-help-title').textContent = t.chartHelpTitle;
+
+q('chart-x-title').textContent = t.chartXTitle;
+q('chart-x-text').textContent = t.chartXText;
+
+q('chart-y-title').textContent = t.chartYTitle;
+q('chart-y-text').textContent = t.chartYText;
+
+q('chart-line-title').textContent = t.chartLineTitle;
+q('chart-line-text').textContent = t.chartLineText;
+
+q('chart-tabs-title').textContent = t.chartTabsTitle;
+q('chart-tabs-text').textContent = t.chartTabsText;
+
+q('chart-warning-title').textContent = t.chartWarningTitle;
+q('chart-warning-text').textContent = t.chartWarningText; 
   q('btc-label').textContent = t.btcLabel;
   q('eth-label').textContent = t.ethLabel;
   q('btn-refresh-btc').textContent = t.refresh;
@@ -910,7 +926,8 @@ window.onload = () => {
 
   }
 
-    }
+}
+    
     async function loadChart(days=7, btn=null){
 
   document
