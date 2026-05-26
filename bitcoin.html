@@ -963,25 +963,8 @@ window.onload = () => {
 
     const isBTC = currentCoin === 'btc';
 
-    priceChart = new Chart(ctx, {
-      'chart-help-title':t.chartHelpTitle,
-
-'chart-x-title':t.chartXTitle,
-'chart-x-text':t.chartXText,
-
-'chart-y-title':t.chartYTitle,
-'chart-y-text':t.chartYText,
-
-'chart-line-title':t.chartLineTitle,
-'chart-line-text':t.chartLineText,
-
-'chart-tabs-title':t.chartTabsTitle,
-'chart-tabs-text':t.chartTabsText,
-
-'chart-warning-title':t.chartWarningTitle,
-'chart-warning-text':t.chartWarningText,
-        
-      type:'line',
+    priceChart = new Chart(ctx, {   
+     type:'line',
 
       data:{
         labels,
