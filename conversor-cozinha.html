@@ -265,7 +265,16 @@
 </div>
         <label id="label-val">Quantidade</label>
         <input type="number" id="k-val" value="1" oninput="convertKitchen()" />
-        <div class="result-box" id="k-result">—</div>
+        <div style="display: flex; gap: 10px; margin-top: 16px;">
+            <div class="result-box" style="flex: 1; font-size: 1.3rem; padding: 12px; display: flex; flex-direction: column; justify-content: center;">
+                <span style="font-size: 0.75rem; color: var(--muted); font-family: 'DM Sans', sans-serif; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px;">Volume Convertido</span>
+                <span id="k-result-vol">—</span>
+            </div>
+            <div class="result-box" style="flex: 1; font-size: 1.3rem; padding: 12px; border-color: #4caf50; color: #4caf50; display: flex; flex-direction: column; justify-content: center;">
+                <span style="font-size: 0.75rem; color: #4caf50; opacity: 0.8; font-family: 'DM Sans', sans-serif; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px;">Peso Estimado</span>
+                <span id="k-result-weight">—</span>
+            </div>
+        </div>
         <div class="warning-box" id="k-warning">
             ⚠️ <strong id="warn-bold">Atenção:</strong> <span id="warn-text">A xícara brasileira tem 200ml. A xícara americana (cup) tem 240ml. Verifique qual padrão sua receita usa.</span>
         </div>
@@ -537,57 +546,42 @@ const ingredientDensities = {
   salt: {name: {pt: 'Sal de Cozinha', en: 'Table Salt'}, density: 300, unit: 'g'}
 };
 
- function swapKitchen(){
-  const fromSelect = document.getElementById('k-from');
-  const toSelect = document.getElementById('k-to');
-  const swapBtn = document.getElementById('k-swap');
-  const temp = fromSelect.value;
-  fromSelect.value = toSelect.value;
-  toSelect.value = temp;
-  swapBtn.style.transform = 'rotate(180deg)';
-  setTimeout(() => { swapBtn.style.transform = 'rotate(0deg)'; }, 300);
-  convertKitchen();
-}   
-function convertKitchen(){
+ function convertKitchen(){
   const lang = getLang();
   const ingredient = document.getElementById('k-ingredient').value;
   const f = document.getElementById('k-from').value;
   const t = document.getElementById('k-to').value;
   const v = parseFloat(document.getElementById('k-val').value) || 0;
     
-  // Densidade do ingrediente selecionado
+  // Dados do Ingrediente
   const density = ingredientDensities[ingredient].density;
   const ingredientName = ingredientDensities[ingredient].name[lang];
   
-  // Converter volume inicial para ml
-  const volumeInMl = v * kMl[f];
+  // 1. Cálculo Exato de Volume (De -> Para)
+  const volumeResult = Math.round(v * kMl[f] / kMl[t] * 100) / 100;
+  const labels = T[lang].unitLabels;
+  document.getElementById('k-result-vol').textContent = volumeResult + ' ' + labels[t];
   
-  // Se convertendo de/para xícara, mostrar peso
-  let resultText = '';
-  if((f==='cup_br' || f==='cup_us') && (t==='cup_br' || t==='cup_us')){
-    // Volume para volume (xícara para xícara)
-    const result = Math.round(v * kMl[f] / kMl[t] * 10000) / 10000;
-    const labels = T[lang].unitLabels;
-    resultText = result + ' ' + labels[t];
+  // 2. Cálculo Exato de Peso (Massa Líquida)
+  const volumeInMl = v * kMl[f];
+  const weightGrams = Math.round(volumeInMl * density / 200 * 100) / 100;
+  
+  // Oculta o painel de peso se o usuário estiver calculando apenas ml/floz para evitar redundância
+  if(t === 'ml' || t === 'floz') {
+      document.getElementById('k-result-weight').textContent = '—';
   } else {
-    // Mostrar ambas conversões: volume E peso
-    const result = Math.round(v * kMl[f] / kMl[t] * 10000) / 10000;
-    const labels = T[lang].unitLabels;
-    const weightGrams = Math.round(volumeInMl * density / 200 * 100) / 100;
-    resultText = result + ' ' + labels[t] + ' (' + weightGrams + 'g)';
+      document.getElementById('k-result-weight').textContent = weightGrams + ' g';
   }
   
-  document.getElementById('k-result').textContent = resultText;
-  
-  // Mostrar densidade do ingrediente
+  // Atualiza rodapé informativo da densidade
   const densityText = lang === 'pt' 
-    ? `Densidade: ${ingredientName} ≈ ${density}g por xícara BR (200ml)`
-    : `Density: ${ingredientName} ≈ ${density}g per BR cup (200ml)`;
+    ? `Densidade Base: ${ingredientName} ≈ ${density}g por xícara BR (200ml)`
+    : `Base Density: ${ingredientName} ≈ ${density}g per BR cup (200ml)`;
   document.getElementById('density-info').textContent = densityText;
   
-
+  // Gerencia o Aviso (Warning)
   const warn = document.getElementById('k-warning');
-  if(f==='cup_br'||t==='cup_br'||f==='cup_us'||t==='cup_us'){
+  if(f === 'cup_br' || t === 'cup_br' || f === 'cup_us' || t === 'cup_us'){
     warn.classList.add('show');
   } else {
     warn.classList.remove('show');
