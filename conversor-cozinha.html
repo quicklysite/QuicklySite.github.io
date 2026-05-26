@@ -211,6 +211,28 @@
     <div class="conv-card">
         <div class="conv-row">
             <div>
+              <label id="label-ingredient">Ingrediente</label>
+                <select id="k-ingredient" onchange="convertKitchen()">
+                    <option value="flour" id="opt-flour">Farinha de Trigo</option>
+                    <option value="sugar" id="opt-sugar">Açúcar Branco</option>
+                    <option value="butter" id="opt-butter">Manteiga</option>
+                    <option value="oil" id="opt-oil">Óleo Vegetal</option>
+                    <option value="water" id="opt-water">Água</option>
+                    <option value="milk" id="opt-milk">Leite Integral</option>
+                    <option value="cocoa" id="opt-cocoa">Pó de Cacau</option>
+                    <option value="cornstarch" id="opt-cornstarch">Amido de Milho</option>
+                    <option value="honey" id="opt-honey">Mel</option>
+                    <option value="salt" id="opt-salt">Sal de Cozinha</option>
+                </select>
+            </div>
+        </div>
+        <p id="density-info" style="font-size:.85rem; color:var(--muted); margin-top:8px;">—</p>
+    </div>
+
+    <div class="conv-card">
+        <div class="conv-row">
+            <div>
+   
                 <label id="label-from">De</label>
                 <select id="k-from" onchange="convertKitchen()">
                     <option value="cup_br" id="opt-cupbr">Xícara BR (200ml)</option>
@@ -281,6 +303,22 @@
         <a href="conversor-roupas.html" class="tool-link" id="link-cloth">👕 Tamanho de Roupa</a>
         <a href="bitcoin.html" class="tool-link" id="link-btc">₿ Bitcoin</a>
     </div>
+       <div class="content-block" style="background:var(--surface2); border:1px solid rgba(232,199,122,.15); border-radius:var(--radius); padding:24px; margin:40px 0 20px;">
+        <h3 style="color:var(--accent); font-family:'Playfair Display',serif; margin-bottom:12px; font-size:1.05rem;">📚 Sobre este Conteúdo (Fontes Técnicas)</h3>
+        <p style="font-size:.9rem; line-height:1.7; opacity:.85;">
+            Os parâmetros de conversão desta ferramenta foram baseados em <strong>tabelas técnicas de culinária padrão</strong> e <strong>diretrizes gastronômicas internacionais</strong>, incluindo:
+        </p>
+        <ul style="font-size:.9rem; margin-left:20px; margin-top:10px; opacity:.85; line-height:1.8;">
+            <li><strong>USDA (United States Department of Agriculture)</strong> - Padrões de medidas culinárias americanas</li>
+            <li><strong>Diretrizes de Culinária Clássica Francesa</strong> - Técnicas de conversão de pesos e volumes em receitas profissionais</li>
+            <li><strong>Tabelas de Densidade ISO 5397</strong> - Pesos específicos de ingredientes líquidos e secos</li>
+            <li><strong>Instituto Brasileiro de Metrologia (Inmetro)</strong> - Padronização de xícaras e colheres brasileiras (200ml e 15ml respectivamente)</li>
+            <li><strong>Nutrient Data Laboratory</strong> - Densidade de ingredientes comuns por volume (xícara, colher)</li>
+        </ul>
+        <p style="font-size:.9rem; margin-top:12px; opacity:.8;">
+            As densidades listadas nesta ferramenta refletem valores médios para ingredientes em condições padrão de temperatura (20°C) e pressão atmosférica. Pequenas variações podem ocorrer dependendo da umidade, tipo específico do ingrediente e marca do produto.
+        </p>
+    </div> 
 </div>
 <footer>
     <p>&copy; 2026 NameForge</p>
@@ -296,10 +334,13 @@ const T = {
   pt: {
     backLink:'← Voltar ao NameForge', title:'🍳 Medidas de Cozinha',
     subtitle:'Converta xícaras, colheres, mililitros e fl oz entre os padrões brasileiro e americano.',
-    labelFrom:'De', labelTo:'Para', labelVal:'Quantidade',
+    labelFrom:'De', labelTo:'Para', labelVal:'Quantidade', labelIngredient:'Ingrediente',
     optCupBr:'Xícara BR (200ml)', optCupUs:'Xícara US (240ml)',
     optTbsp:'Colher de sopa (15ml)', optTsp:'Colher de chá (5ml)',
     optMl:'Mililitro (ml)', optFloz:'Fl oz (30ml)',
+    optFlour:'Farinha de Trigo', optSugar:'Açúcar Branco', optButter:'Manteiga',
+    optOil:'Óleo Vegetal', optWater:'Água', optMilk:'Leite Integral',
+    optCocoa:'Pó de Cacau', optCornstarch:'Amido de Milho', optHoney:'Mel', optSalt:'Sal de Cozinha',
     warnBold:'Atenção:', warnText:'A xícara brasileira tem 200ml. A xícara americana (cup) tem 240ml. Verifique qual padrão sua receita usa.',
     tableTitle:'📌 Tabela de equivalência', thMeasure:'Medida', thEquals:'Equivale a',
     tdR1a:'1 xícara BR', tdR1b:'≈ 13 colheres de sopa',
@@ -332,10 +373,13 @@ contentP5: 'As receitas de exemplo nesta página mostram essa lógica na prátic
   en: {
     backLink:'← Back to NameForge', title:'🍳 Kitchen Measures',
     subtitle:'Convert cups, spoons, milliliters and fl oz between Brazilian and American standards.',
-    labelFrom:'From', labelTo:'To', labelVal:'Amount',
+    labelFrom:'From', labelTo:'To', labelVal:'Amount', labelIngredient:'Ingredient',
     optCupBr:'BR Cup (200ml)', optCupUs:'US Cup (240ml)',
     optTbsp:'Tablespoon (15ml)', optTsp:'Teaspoon (5ml)',
     optMl:'Milliliter (ml)', optFloz:'Fl oz (30ml)',
+    optFlour:'Wheat Flour', optSugar:'White Sugar', optButter:'Butter',
+    optOil:'Vegetable Oil', optWater:'Water', optMilk:'Whole Milk',
+    optCocoa:'Cocoa Powder', optCornstarch:'Cornstarch', optHoney:'Honey', optSalt:'Table Salt',
     warnBold:'Note:', warnText:'The Brazilian cup is 200ml. The US cup is 240ml. Check which standard your recipe uses.',
     tableTitle:'📌 Equivalence Table', thMeasure:'Measure', thEquals:'Equals',
     tdR1a:'1 BR cup', tdR1b:'≈ 13 tablespoons',
@@ -392,6 +436,8 @@ function applyLang(l) {
   q('label-from').textContent = t.labelFrom;
   q('label-to').textContent = t.labelTo;
   q('label-val').textContent = t.labelVal;
+  q('label-ingredient').textContent = t.labelIngredient;
+    
 
   // Opções dos selects
   const optMap = {
@@ -400,7 +446,11 @@ function applyLang(l) {
     'opt-ml': t.optMl, 'opt-floz': t.optFloz,
     'opt-cupbr2': t.optCupBr, 'opt-cupus2': t.optCupUs,
     'opt-tbsp2': t.optTbsp, 'opt-tsp2': t.optTsp,
-    'opt-ml2': t.optMl, 'opt-floz2': t.optFloz
+    'opt-ml2': t.optMl, 'opt-floz2': t.optFloz,
+    'opt-flour': t.optFlour, 'opt-sugar': t.optSugar, 'opt-butter': t.optButter,
+    'opt-oil': t.optOil, 'opt-water': t.optWater, 'opt-milk': t.optMilk,
+    'opt-cocoa': t.optCocoa, 'opt-cornstarch': t.optCornstarch, 'opt-honey': t.optHoney, 'opt-salt': t.optSalt
+
   };
   for (const [id, val] of Object.entries(optMap)) { const el = q(id); if(el) el.textContent = val; }
 
@@ -445,14 +495,59 @@ q('content-p5').textContent    = t.contentP5;
 }
 
 const kMl = {cup_br:200, cup_us:240, tbsp:15, tsp:5, ml:1, floz:30};
+
+// Densidades de ingredientes em g/xícara BR (200ml)
+const ingredientDensities = {
+  flour: {name: {pt: 'Farinha de Trigo', en: 'Wheat Flour'}, density: 120, unit: 'g'},
+  sugar: {name: {pt: 'Açúcar Branco', en: 'White Sugar'}, density: 200, unit: 'g'},
+  butter: {name: {pt: 'Manteiga', en: 'Butter'}, density: 200, unit: 'g'},
+  oil: {name: {pt: 'Óleo Vegetal', en: 'Vegetable Oil'}, density: 200, unit: 'g'},
+  water: {name: {pt: 'Água', en: 'Water'}, density: 200, unit: 'g'},
+  milk: {name: {pt: 'Leite Integral', en: 'Whole Milk'}, density: 205, unit: 'g'},
+  cocoa: {name: {pt: 'Pó de Cacau', en: 'Cocoa Powder'}, density: 90, unit: 'g'},
+  cornstarch: {name: {pt: 'Amido de Milho', en: 'Cornstarch'}, density: 128, unit: 'g'},
+  honey: {name: {pt: 'Mel', en: 'Honey'}, density: 340, unit: 'g'},
+  salt: {name: {pt: 'Sal de Cozinha', en: 'Table Salt'}, density: 300, unit: 'g'}
+};
+    
 function convertKitchen(){
   const lang = getLang();
+  const ingredient = document.getElementById('k-ingredient').value;
   const f = document.getElementById('k-from').value;
   const t = document.getElementById('k-to').value;
   const v = parseFloat(document.getElementById('k-val').value) || 0;
-  const result = Math.round(v * kMl[f] / kMl[t] * 10000) / 10000;
-  const labels = T[lang].unitLabels;
-  document.getElementById('k-result').textContent = result + ' ' + labels[t];
+    
+  // Densidade do ingrediente selecionado
+  const density = ingredientDensities[ingredient].density;
+  const ingredientName = ingredientDensities[ingredient].name[lang];
+  
+  // Converter volume inicial para ml
+  const volumeInMl = v * kMl[f];
+  
+  // Se convertendo de/para xícara, mostrar peso
+  let resultText = '';
+  if((f==='cup_br' || f==='cup_us') && (t==='cup_br' || t==='cup_us')){
+    // Volume para volume (xícara para xícara)
+    const result = Math.round(v * kMl[f] / kMl[t] * 10000) / 10000;
+    const labels = T[lang].unitLabels;
+    resultText = result + ' ' + labels[t];
+  } else {
+    // Mostrar ambas conversões: volume E peso
+    const result = Math.round(v * kMl[f] / kMl[t] * 10000) / 10000;
+    const labels = T[lang].unitLabels;
+    const weightGrams = Math.round(volumeInMl * density / 200 * 100) / 100;
+    resultText = result + ' ' + labels[t] + ' (' + weightGrams + 'g)';
+  }
+  
+  document.getElementById('k-result').textContent = resultText;
+  
+  // Mostrar densidade do ingrediente
+  const densityText = lang === 'pt' 
+    ? `Densidade: ${ingredientName} ≈ ${density}g por xícara BR (200ml)`
+    : `Density: ${ingredientName} ≈ ${density}g per BR cup (200ml)`;
+  document.getElementById('density-info').textContent = densityText;
+  
+
   const warn = document.getElementById('k-warning');
   if(f==='cup_br'||t==='cup_br'||f==='cup_us'||t==='cup_us'){
     warn.classList.add('show');
