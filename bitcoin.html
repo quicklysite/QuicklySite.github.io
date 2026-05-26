@@ -261,8 +261,7 @@
   border-radius:var(--radius);
   padding:24px;
   margin:22px 0;
-  border:2px solid #4caf50;
-  box-shadow: 0 0 25px rgba(76,175,80,.3), inset 0 0 15px rgba(76,175,80,.05);
+  border:1px solid rgba(255,255,255,.08); /* Borda sutil igual ao resto do site */
   transition: all .3s;
 }
 
@@ -902,31 +901,24 @@ function calcCoin() {
 window.onload = () => {
     applyLang(getLang());
     fetchPrices();
-    loadChart();
+    // Atraso de 1 segundo (1000ms) para o CoinGecko não bloquear seu acesso
+    setTimeout(() => loadChart(), 2000); 
     setInterval(fetchPrices, 60000);
 };
-    function toggleChartHelp(){
 
-  const content =
-    document.getElementById('chart-help-content');
-
-  const icon =
-    document.getElementById('chart-help-icon');
+function toggleChartHelp(){
+  const content = document.getElementById('chart-help-content');
+  const icon = document.getElementById('chart-help-icon');
 
   if(!content) return;
 
   content.classList.toggle('open');
 
   if(icon){
-
-    icon.textContent =
-      content.classList.contains('open')
-      ? '−'
-      : '+';
-
+    icon.textContent = content.classList.contains('open') ? '−' : '+';
   }
-
 }
+
     
     async function loadChart(days=7, btn=null){
 
@@ -948,9 +940,15 @@ window.onload = () => {
 
     const res = await fetch(url);
 
-    const data = await res.json();
-
+        const data = await res.json();
     const prices = data.prices || [];
+
+    // NOVA TRAVA: Se não vier preço, cancela o desenho do gráfico
+    if(prices.length === 0){
+        console.warn("API bloqueou os dados do gráfico.");
+        return;
+    }
+
 
     const labels = prices.map(p=>{
       const d = new Date(p[0]);
