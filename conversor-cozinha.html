@@ -225,6 +225,10 @@
                     <option value="cornstarch" id="opt-cornstarch">Amido de Milho</option>
                     <option value="honey" id="opt-honey">Mel</option>
                     <option value="salt" id="opt-salt">Sal de Cozinha</option>
+                    <option value="shoyu" id="opt-shoyu">Molho Shoyu (Soja)</option>
+                    <option value="mirin" id="opt-mirin">Saquê Mirin</option>
+                    <option value="mustard" id="opt-mustard">Mostarda (Líquida)</option>
+                    <option value="paprika" id="opt-paprika">Páprica (Pó)</option>
                 </select>
             </div>
         </div>
@@ -238,7 +242,7 @@
     <div class="conv-card">
         <div class="conv-row">
     <div>
-        <label id="label-val" style="margin-top: 15px;">Quantidade da Receita (em Xícaras ou Medidas)</label>
+        <label id="label-val" style="margin-top: 15px; font-size:.78rem; color:var(--muted); text-transform:uppercase; letter-spacing:.08em; display:block; margin-bottom:8px;">Quantidade da Receita (em Xícaras ou Medidas)</label>
         <div style="display: flex; gap: 10px; align-items: center;">
             <input type="number" id="k-val" value="1" oninput="convertKitchen()" style="flex: 1;" placeholder="Ex: 2.5" />
             <select id="k-from" onchange="convertKitchen()" style="flex: 1; margin: 0;">
@@ -249,9 +253,6 @@
                 <option value="floz" id="opt-floz">Fl oz (30ml)</option>
             </select>
         </div>
-</div>
-        <label id="label-val">Quantidade</label>
-        <input type="number" id="k-val" value="1" oninput="convertKitchen()" />
         <div style="display: flex; gap: 10px; margin-top: 16px;">
             <div class="result-box" style="flex: 1; font-size: 1.3rem; padding: 12px; display: flex; flex-direction: column; justify-content: center;">
                 <span style="font-size: 0.75rem; color: var(--muted); font-family: 'DM Sans', sans-serif; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px;">Volume Convertido</span>
@@ -534,9 +535,14 @@ const ingredientDensities = {
   cocoa: {name: {pt: 'Pó de Cacau', en: 'Cocoa Powder'}, density: 90, unit: 'g'},
   cornstarch: {name: {pt: 'Amido de Milho', en: 'Cornstarch'}, density: 128, unit: 'g'},
   honey: {name: {pt: 'Mel', en: 'Honey'}, density: 340, unit: 'g'},
-  salt: {name: {pt: 'Sal de Cozinha', en: 'Table Salt'}, density: 300, unit: 'g'}
+  salt: {name: {pt: 'Sal de Cozinha', en: 'Table Salt'}, density: 300, unit: 'g'},
+  // NOVOS INGREDIENTES ACRESCENTADOS
+  shoyu: {name: {pt: 'Molho Shoyu', en: 'Soy Sauce'}, density: 215, unit: 'g'},
+  mirin: {name: {pt: 'Saquê Mirin', en: 'Mirin (Rice Wine)'}, density: 230, unit: 'g'},
+  mustard: {name: {pt: 'Mostarda Amarela', en: 'Yellow Mustard'}, density: 210, unit: 'g'},
+  paprika: {name: {pt: 'Páprica / Especiarias', en: 'Paprika / Spices'}, density: 110, unit: 'g'}
 };
-
+    
  function convertKitchen(){
   const lang = getLang();
   const ingredient = document.getElementById('k-ingredient').value;
