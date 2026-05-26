@@ -122,7 +122,10 @@
   ]
 }
 </script>
-
+<!-- SEO: hreflang para evitar duplicação de conteúdo por idioma -->
+    <link rel="alternate" hreflang="pt-BR" href="https://quicklysite.github.io/bitcoin.html?lang=pt" />
+    <link rel="alternate" hreflang="en" href="https://quicklysite.github.io/bitcoin.html?lang=en" />
+    <link rel="alternate" hreflang="x-default" href="https://quicklysite.github.io/bitcoin.html?lang=pt" />
     <style>
         /* Accordion ⚠️ */
 .accordion { border:1.5px solid #c0392b; border-radius:var(--radius); margin:24px 0; overflow:hidden; }
@@ -554,6 +557,19 @@
     <p id="p-source" style="margin-top:20px; font-size:.82rem; opacity:.6;">O preço exibido aqui vem diretamente da API da <strong>CoinGecko</strong>, atualizada a cada 60 segundos.</p>
 
 </div>
+    
+    <!-- DISCLAIMER LEGAL - E-E-A-T -->
+    <div style="background:rgba(244,67,54,.12); border:2px solid #f44336; border-radius:var(--radius); padding:24px; margin:30px 0; text-align:center;">
+      <h3 id="disclaimer-title" style="color:#f44336; margin-bottom:12px; font-size:1.1rem; font-family:'Playfair Display',serif;">⚠️ AVISO LEGAL IMPORTANTE</h3>
+      <p id="disclaimer-text" style="color:var(--text); opacity:.95; font-size:.95rem; line-height:1.7;"></p>
+    </div>
+
+    <!-- SOBRE ESTE CONTEÚDO - E-E-A-T -->
+    <div style="background:var(--surface2); border:1px solid rgba(255,255,255,.1); border-radius:var(--radius); padding:20px; margin:20px 0;">
+      <h4 id="about-title" style="color:var(--accent); margin-bottom:8px; font-family:'Playfair Display',serif;">📝 Sobre este conteúdo</h4>
+      <p id="about-text" style="color:var(--muted); font-size:.9rem; opacity:.85; line-height:1.6;"></p>
+    </div>
+    
     <div class="tools-nav">
         <a href="index.html" class="tool-link" id="link-names">✨ Gerador</a>
         <a href="conversor-peso.html" class="tool-link" id="link-weight">⚖️ Peso</a>
@@ -620,6 +636,11 @@ chartTabsText:'Alteram o período analisado para visualizar tendências de curto
 chartWarningTitle:'⚠️ Importante',
 chartWarningText:'O gráfico mostra movimentações históricas reais, mas não prevê resultados futuros nem constitui recomendação financeira.',
     pSource:'O preço exibido aqui vem diretamente da API da <strong>CoinGecko</strong>, atualizada a cada 60 segundos.',
+    disclaimerTitle:'⚠️ AVISO LEGAL IMPORTANTE',
+    disclaimerText:'<strong>Este conteúdo é apenas informativo e educacional.</strong> Criptomoedas são investimentos de <strong>alto risco e volatilidade extrema</strong>. Você pode perder todo o capital investido. <strong>Não é recomendação financeira.</strong> Consulte um assessor financeiro qualificado antes de investir. NameForge não é responsável por perdas financeiras resultantes do uso desta ferramenta.',
+    aboutTitle:'📝 Sobre este conteúdo',
+    aboutText:'Este guia foi elaborado por <strong>NameForge</strong>, plataforma especializada em ferramentas educacionais de finanças digitais. Baseado em dados públicos da <strong>CoinGecko API</strong> e documentação oficial de Bitcoin e Ethereum. Atualizado regularmente conforme mudanças no mercado e tecnologia blockchain. Os preços exibidos refletem dados em tempo real, mas podem variar instantaneamente.',
+
     lNames:'✨ Gerador', lWeight:'⚖️ Peso', lTemp:'🌡️ Temp', lKitchen:'🍳 Cozinha', lCloth:'👕 Roupa', lBtc:'₿ Bitcoin',
     fAbout:'Sobre', fContact:'Contato', fTerms:'Termos', fPriv:'Privacidade',
     loading:'Atualizando...', last:'Última atualização: ', err:'Erro ao carregar.'
@@ -667,6 +688,11 @@ chartTabsText:'Change the analyzed period to visualize short or long-term trends
 chartWarningTitle:'⚠️ Important',
 chartWarningText:'The chart displays real historical movements but does not predict future results or constitute financial advice.',
     pSource:'The price displayed here comes directly from the <strong>CoinGecko</strong> API, updated every 60 seconds.',
+    disclaimerTitle:'⚠️ IMPORTANT LEGAL NOTICE',
+    disclaimerText:'<strong>This content is for informational and educational purposes only.</strong> Cryptocurrencies are <strong>high-risk and extremely volatile investments</strong>. You can lose all invested capital. <strong>This is not financial advice.</strong> Consult a qualified financial advisor before investing. NameForge is not responsible for financial losses resulting from the use of this tool.',
+    aboutTitle:'📝 About this content',
+    aboutText:'This guide was created by <strong>NameForge</strong>, a platform specialized in educational tools for digital finance. Based on public data from the <strong>CoinGecko API</strong> and official Bitcoin and Ethereum documentation. Regularly updated as the market and blockchain technology change. Prices displayed reflect real-time data but can vary instantly.',
+      
     lNames:'✨ Generator', lWeight:'⚖️ Weight', lTemp:'🌡️ Temp', lKitchen:'🍳 Kitchen', lCloth:'👕 Clothing', lBtc:'₿ Bitcoin',
     fAbout:'About', fContact:'Contact', fTerms:'Terms', fPriv:'Privacy',
     loading:'Updating...', last:'Last update: ', err:'Loading error.'
@@ -712,19 +738,21 @@ function applyLang(l) {
   q('cb-eth-h4').textContent = t.cbEthH4; q('cb-eth-p4').textContent = t.cbEthP4;
   q('cb-eth-h5').textContent = t.cbEthH5; q('cb-eth-p5').textContent = t.cbEthP5;
   q('p-source').innerHTML = t.pSource;
-
+  // Disclaimer e About Section
+  q('disclaimer-title').textContent = t.disclaimerTitle;
+  q('disclaimer-text').innerHTML = t.disclaimerText;
+  q('about-title').textContent = t.aboutTitle;
+  q('about-text').innerHTML = t.aboutText;
   q('link-names').textContent = t.lNames;   q('link-names').href = 'index.html' + lp;
   q('link-weight').textContent = t.lWeight;  q('link-weight').href = 'conversor-peso.html' + lp;
   q('link-temp').textContent = t.lTemp;    q('link-temp').href = 'conversor-temperatura.html' + lp;
   q('link-kitchen').textContent = t.lKitchen; q('link-kitchen').href = 'conversor-cozinha.html' + lp;
   q('link-cloth').textContent = t.lCloth;   q('link-cloth').href = 'conversor-roupas.html' + lp;
   q('link-btc').textContent = t.lBtc;     q('link-btc').href = 'bitcoin.html' + lp;
-
   q('f-about').textContent = t.fAbout;
   q('f-contact').textContent = t.fContact;
   q('f-terms').textContent = t.fTerms;
   q('f-priv').textContent = t.fPriv;
-
   document.documentElement.lang = l;
   q('toggle-to-fiat').textContent = currentCoin === 'btc' ? '₿ BTC → R$ / $' : 'Ξ ETH → R$ / $';
 q('toggle-to-coin').textContent = currentCoin === 'btc'
@@ -733,8 +761,8 @@ q('toggle-to-coin').textContent = currentCoin === 'btc'
     // Accordion — varia por idioma e moeda
 const isBtc = currentCoin === 'btc';
 const accTitles = {
-  pt: { btc:'⚠️ Como usar, obter e lucrar com Bitcoin', eth:'⚠️ Como usar, obter e lucrar com Ethereum' },
-  en: { btc:'⚠️ How to use, get and earn with Bitcoin', eth:'⚠️ How to use, get and earn with Ethereum' }
+    pt: { btc:'⚡ Dicas Rápidas: Bitcoin para Iniciantes', eth:'⚡ Dicas Rápidas: Ethereum para Iniciantes' },
+  en: { btc:'⚡ Quick Tips: Bitcoin for Beginners', eth:'⚡ Quick Tips: Ethereum for Beginners' }
 };
 const accContent = {
   pt: {
@@ -764,19 +792,6 @@ q('acc-h3').textContent = accContent[l].h3;
 q('acc-p1').textContent = ac.p1;
 q('acc-p2').textContent = ac.p2;
 q('acc-p3').textContent = ac.p3;
-    // Traduções do Chart Help
-q('chart-help-title').textContent = t.chartHelpTitle;
-q('chart-title').textContent = '📈 Histórico de Preço';
-q('chart-x-title').textContent = t.chartXTitle;
-q('chart-x-text').textContent = t.chartXText;
-q('chart-y-title').textContent = t.chartYTitle;
-q('chart-y-text').textContent = t.chartYText;
-q('chart-line-title').textContent = t.chartLineTitle;
-q('chart-line-text').textContent = t.chartLineText;
-q('chart-tabs-title').textContent = t.chartTabsTitle;
-q('chart-tabs-text').textContent = t.chartTabsText;
-q('chart-warning-title').textContent = t.chartWarningTitle;
-q('chart-warning-text').textContent = t.chartWarningText;
   updateCalcUI();
 }
 
@@ -954,6 +969,23 @@ window.onload = () => {
     const isBTC = currentCoin === 'btc';
 
     priceChart = new Chart(ctx, {
+      'chart-help-title':t.chartHelpTitle,
+
+'chart-x-title':t.chartXTitle,
+'chart-x-text':t.chartXText,
+
+'chart-y-title':t.chartYTitle,
+'chart-y-text':t.chartYText,
+
+'chart-line-title':t.chartLineTitle,
+'chart-line-text':t.chartLineText,
+
+'chart-tabs-title':t.chartTabsTitle,
+'chart-tabs-text':t.chartTabsText,
+
+'chart-warning-title':t.chartWarningTitle,
+'chart-warning-text':t.chartWarningText,
+        
       type:'line',
 
       data:{
