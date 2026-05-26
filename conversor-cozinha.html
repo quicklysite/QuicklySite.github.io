@@ -102,6 +102,8 @@
 }
 </script>
     <style>
+        #k-swap { transition:all .3s ease; }
+        #k-swap:hover { background:rgba(232,199,122,.12); border-color:var(--accent); box-shadow:0 0 15px rgba(232,199,122,.2); }
                 :root { 
             --bg:#0d0d0f; 
             --surface:#16161a; 
@@ -228,33 +230,39 @@
         </div>
         <p id="density-info" style="font-size:.85rem; color:var(--muted); margin-top:8px;">—</p>
     </div>
-
+<div style="background:rgba(76,175,80,.08); border:1.5px solid rgba(76,175,80,.3); border-radius:var(--radius); padding:18px; margin:20px 0;">
+    <p style="font-size:.9rem; color:var(--text); opacity:.9; line-height:1.7; margin:0;">
+        <strong style="color:#4caf50;">💧 Aviso Técnico — Variação de Densidades:</strong> O peso real pode variar conforme umidade do ar, marca do produto, compactação e altitude. Densidades aqui são médias em condições padrão (20°C, 1 atm). Para receitas profissionais, use balança.
+    </p>
+</div>
     <div class="conv-card">
         <div class="conv-row">
-            <div>
-   
-                <label id="label-from">De</label>
-                <select id="k-from" onchange="convertKitchen()">
-                    <option value="cup_br" id="opt-cupbr">Xícara BR (200ml)</option>
-                    <option value="cup_us" id="opt-cupus">Xícara US (240ml)</option>
-                    <option value="tbsp" id="opt-tbsp">Colher de sopa (15ml)</option>
-                    <option value="tsp" id="opt-tsp">Colher de chá (5ml)</option>
-                    <option value="ml" id="opt-ml">Mililitro (ml)</option>
-                    <option value="floz" id="opt-floz">Fl oz (30ml)</option>
-                </select>
-            </div>
-            <div>
-                <label id="label-to">Para</label>
-                <select id="k-to" onchange="convertKitchen()">
-                    <option value="ml" id="opt-ml2">Mililitro (ml)</option>
-                    <option value="cup_br" id="opt-cupbr2">Xícara BR (200ml)</option>
-                    <option value="cup_us" id="opt-cupus2">Xícara US (240ml)</option>
-                    <option value="tbsp" id="opt-tbsp2">Colher de sopa (15ml)</option>
-                    <option value="tsp" id="opt-tsp2">Colher de chá (5ml)</option>
-                    <option value="floz" id="opt-floz2">Fl oz (30ml)</option>
-                </select>
-            </div>
-        </div>
+    <div>
+        <label id="label-from">De</label>
+        <select id="k-from" onchange="convertKitchen()">
+            <option value="cup_br" id="opt-cupbr">Xícara BR (200ml)</option>
+            <option value="cup_us" id="opt-cupus">Xícara US (240ml)</option>
+            <option value="tbsp" id="opt-tbsp">Colher de sopa (15ml)</option>
+            <option value="tsp" id="opt-tsp">Colher de chá (5ml)</option>
+            <option value="ml" id="opt-ml">Mililitro (ml)</option>
+            <option value="floz" id="opt-floz">Fl oz (30ml)</option>
+        </select>
+    </div>
+    <div style="display:flex; align-items:flex-end; justify-content:center; margin-bottom:0;">
+        <button id="k-swap" onclick="swapKitchen()" style="background:var(--surface2); border:1.5px solid rgba(232,199,122,.3); color:var(--accent); width:48px; height:48px; border-radius:10px; cursor:pointer; font-size:1.3rem; display:flex; align-items:center; justify-content:center; transition:all .3s; flex-shrink:0;">⇅</button>
+    </div>
+    <div>
+        <label id="label-to">Para</label>
+        <select id="k-to" onchange="convertKitchen()">
+            <option value="ml" id="opt-ml2">Mililitro (ml)</option>
+            <option value="cup_br" id="opt-cupbr2">Xícara BR (200ml)</option>
+            <option value="cup_us" id="opt-cupus2">Xícara US (240ml)</option>
+            <option value="tbsp" id="opt-tbsp2">Colher de sopa (15ml)</option>
+            <option value="tsp" id="opt-tsp2">Colher de chá (5ml)</option>
+            <option value="floz" id="opt-floz2">Fl oz (30ml)</option>
+        </select>
+    </div>
+</div>
         <label id="label-val">Quantidade</label>
         <input type="number" id="k-val" value="1" oninput="convertKitchen()" />
         <div class="result-box" id="k-result">—</div>
@@ -509,7 +517,18 @@ const ingredientDensities = {
   honey: {name: {pt: 'Mel', en: 'Honey'}, density: 340, unit: 'g'},
   salt: {name: {pt: 'Sal de Cozinha', en: 'Table Salt'}, density: 300, unit: 'g'}
 };
-    
+
+ function swapKitchen(){
+  const fromSelect = document.getElementById('k-from');
+  const toSelect = document.getElementById('k-to');
+  const swapBtn = document.getElementById('k-swap');
+  const temp = fromSelect.value;
+  fromSelect.value = toSelect.value;
+  toSelect.value = temp;
+  swapBtn.style.transform = 'rotate(180deg)';
+  setTimeout(() => { swapBtn.style.transform = 'rotate(0deg)'; }, 300);
+  convertKitchen();
+}   
 function convertKitchen(){
   const lang = getLang();
   const ingredient = document.getElementById('k-ingredient').value;
