@@ -164,10 +164,11 @@
         .content-block h2 { margin-bottom:14px; }
         .content-block p { margin-bottom:14px; line-height:1.8; opacity:.88; }
         .content-block strong { color:var(--accent); font-weight:600; }
-        .ref-table { width: 100%; border-collapse: collapse; margin: 25px 0; background: #1a1a1a; border-radius: 8px; overflow: hidden; border: 1px solid #333; }
-        .ref-table th { background: #262626; color: #4caf50; padding: 14px; text-align: left; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; }
-        .ref-table td { padding: 12px; border-bottom: 1px solid #333; color: #d7d2c8; font-size: 0.9rem; }
-        .ref-table tr:hover { background: #222; }   
+         /* Wrapper para permitir o deslize horizontal apenas na tabela */
+        .table-container { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 20px 0; }
+        .ref-table { width: 100%; min-width: 320px; border-collapse: collapse; background: #1a1a1a; border-radius: 8px; overflow: hidden; border: 1px solid #333; }
+        .ref-table th { background: #262626; color: #4caf50; padding: 12px; text-align: left; font-size: 0.75rem; text-transform: uppercase; }
+        .ref-table td { padding: 12px; border-bottom: 1px solid #333; color: #d7d2c8; font-size: 0.85rem; white-space: nowrap; }
     </style>
 </head>
 <body>
@@ -261,34 +262,33 @@
             ⚠️ <strong id="warn-bold">Atenção:</strong> <span id="warn-text">A xícara brasileira tem 200ml. A xícara americana (cup) tem 240ml. Verifique qual padrão sua receita usa.</span>
         </div>
     </div>
-
-    <h2 id="table-title">📌 Tabela de equivalência</h2>
     <div class="conv-card">
         <h2 id="table-title">📌 Referência Rápida</h2>
-<table class="ref-table">
-    <thead>
-        <tr>
-            <th>Medida</th>
-            <th>Volume</th>
-            <th>Equivalência</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr><td><strong>1 Cup (US)</strong></td><td>240 ml</td><td>16 tbsp</td></tr>
-        <tr><td><strong>1 Xícara (BR)</strong></td><td>200 ml</td><td>13.3 tbsp</td></tr>
-        <tr><td><strong>1 Fl oz</strong></td><td>30 ml</td><td>2 tbsp</td></tr>
-        <tr><td><strong>1 Colher Sopa</strong></td><td>15 ml</td><td>3 tsp</td></tr>
-        <tr><td><strong>1 Colher Chá</strong></td><td>5 ml</td><td>—</td></tr>
-    </tbody>
-</table>
+
+<div class="table-container">
+    <table class="ref-table">
+        <thead>
+            <tr>
+                <th>Medida</th>
+                <th>Volume</th>
+                <th>Equivalência</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td><strong>1 Cup (US)</strong></td><td>240 ml</td><td>16 tbsp</td></tr>
+            <tr><td><strong>1 Xícara (BR)</strong></td><td>200 ml</td><td>13.3 tbsp</td></tr>
+            <tr><td><strong>1 Fl oz</strong></td><td>30 ml</td><td>2 tbsp</td></tr>
+            <tr><td><strong>1 Colher Sopa</strong></td><td>15 ml</td><td>3 tsp</td></tr>
+            <tr><td><strong>1 Colher Chá</strong></td><td>5 ml</td><td>—</td></tr>
+        </tbody>
+    </table>
+</div>
 <p style="font-size: 0.85rem; color: #8f887c; font-style: italic;">
     *Nota: A diferença de 40ml entre a Cup US e a Xícara BR é o fator crítico para o sucesso em receitas internacionais.
 </p>
     </div>
-
     <!-- ANÚNCIO ENTRE TABELA E TEXTO -->
     <div class="ad-slot">Anúncio</div>
-
     <!-- BLOCO DE CONTEÚDO SEO -->
     <div class="content-block">
         <h2 id="content-title">A Ciência da Adaptação: Reproduzindo Receitas Globais com Precisão</h2>
