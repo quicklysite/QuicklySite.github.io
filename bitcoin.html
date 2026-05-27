@@ -882,7 +882,9 @@ chartWarningText:'The chart displays real historical movements but does not pred
 };
 
 let currentCoin = 'btc';
-let priceChart = null;    
+let priceChart = null;
+let simulating = false;  // ← ADICIONE ISTO
+let currentCoin = 'btc';    
 let isSwapped = false; // Controla se é Moeda->BRL ou BRL->Moeda
 let pBTC_BRL=0, pBTC_USD=0, pETH_BRL=0, pETH_USD=0;
 
@@ -1176,101 +1178,6 @@ function toggleChartHelp(){
   }
 }
 
-async function runSimulation(){
-
-  const amount =
-    parseFloat(q('sim-amount').value || 0);
-
-  const date =
-    q('sim-date').value;
-
-  if(!amount || !date) return;
-
-  q('sim-result-big').textContent = '...';
-  q('sim-result-small').textContent =
-    getLang()==='pt'
-    ? 'Calculando retorno histórico...'
-    : 'Calculating historical return...';
-
-  const coinId =
-    currentCoin === 'btc'
-    ? 'bitcoin'
-    : 'ethereum';
-
-  try{
-
-    const res = await fetch(
-      `https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=usd&days=max`
-    );
-
-    const data = await res.json();
-
-    if(!data.prices || !data.prices.length){
-
-      q('sim-result-small').textContent =
-        getLang()==='pt'
-        ? 'Não foi possível carregar os dados.'
-        : 'Could not load historical data.';
-
-      return;
-    }
-
-    const target =
-      new Date(date).getTime();
-
-    let closest =
-      data.prices[0];
-
-    for(const p of data.prices){
-
-      if(
-        Math.abs(p[0]-target)
-        <
-        Math.abs(closest[0]-target)
-      ){
-        closest = p;
-      }
-
-    }
-
-    const oldPrice = closest[1];
-
-    const current =
-      currentCoin === 'btc'
-      ? pBTC_USD
-      : pETH_USD;
-
-    const qty =
-      amount / oldPrice;
-
-    const today =
-      qty * current;
-
-    const change =
-      ((today-amount)/amount)*100;
-
-    q('sim-result-big').textContent =
-      '$ ' + today.toLocaleString(
-        'en-US',
-        {maximumFractionDigits:2}
-      );
-
-    q('sim-result-small').textContent =
-      getLang()==='pt'
-      ? `Retorno de ${change.toFixed(1)}% desde a data escolhida.`
-      : `Return of ${change.toFixed(1)}% since selected date.`;
-
-  }catch(err){
-
-    console.error(err);
-
-    q('sim-result-small').textContent =
-      getLang()==='pt'
-      ? 'Erro ao calcular retorno.'
-      : 'Error calculating return.';
-
-  }
-
 }
     
     async function loadChart(days=7, btn=null){
@@ -1423,7 +1330,8 @@ async function runSimulation(){
 
     }
     // --- Lógica isolada do Simulador ---
-let simulating = false; // Flag para evitar múltiplas requisições simultâneas
+let simulating = false;
+let currentCoin = 'btc';  // ← Rastreia moeda selecionada //
 
 function calcularRetorno() {
     // ===== PROTEÇÃO CONTRA SPAM =====
@@ -1465,7 +1373,7 @@ function calcularRetorno() {
     resultadoDiv.textContent = "🔄 Consultando dados históricos...";
     resultadoDiv.style.color = "#8f887c";
     
-    fetch(`https://api.coingecko.com/api/v3/coins/${isBTC ? 'bitcoin' : 'ethereum'}/market_chart?vs_currency=brl&days=${dias}`)
+    fetch(`https://api.coingecko.com/api/v3/coins/${currentCoin === 'btc' ? 'bitcoin' : 'ethereum'}/market_chart?...
         .then(response => {
             if (!response.ok) throw new Error(`API Error: ${response.status}`);
             return response.json();
