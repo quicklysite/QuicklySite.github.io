@@ -1218,45 +1218,59 @@ async function runSimulation(){
 
   if(!amount || !date) return;
 
+  q('sim-result-big').textContent = '...';
+  q('sim-result-small').textContent =
+    getLang()==='pt'
+    ? 'Calculando retorno histórico...'
+    : 'Calculating historical return...';
+
   const coinId =
     currentCoin === 'btc'
     ? 'bitcoin'
     : 'ethereum';
 
-  const d = new Date(date);
-
-  const timestamp =
-    Math.floor(d.getTime()/1000);
-
-  const url =
-    `https://api.coingecko.com/api/v3/coins/${coinId}/history?date=${
-      String(d.getDate()).padStart(2,'0')
-    }-${
-      String(d.getMonth()+1).padStart(2,'0')
-    }-${
-      d.getFullYear()
-    }`;
-
   try{
 
-    const res = await fetch(url);
+    const res = await fetch(
+      `https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=usd&days=max`
+    );
 
     const data = await res.json();
 
-    if(
-  !data.market_data ||
-  !data.market_data.current_price
-){
-  return;
-}
+    if(!data.prices || !data.prices.length){
 
-const oldPrice =
-  data.market_data.current_price.usd;
+      q('sim-result-small').textContent =
+        getLang()==='pt'
+        ? 'Não foi possível carregar os dados.'
+        : 'Could not load historical data.';
+
+      return;
+    }
+
+    const target =
+      new Date(date).getTime();
+
+    let closest =
+      data.prices[0];
+
+    for(const p of data.prices){
+
+      if(
+        Math.abs(p[0]-target)
+        <
+        Math.abs(closest[0]-target)
+      ){
+        closest = p;
+      }
+
+    }
+
+    const oldPrice = closest[1];
 
     const current =
-  currentCoin === 'btc'
-  ? pBTC_USD
-  : pETH_USD;
+      currentCoin === 'btc'
+      ? pBTC_USD
+      : pETH_USD;
 
     const qty =
       amount / oldPrice;
@@ -1268,7 +1282,10 @@ const oldPrice =
       ((today-amount)/amount)*100;
 
     q('sim-result-big').textContent =
-      '$' + today.toFixed(2);
+      '$ ' + today.toLocaleString(
+        'en-US',
+        {maximumFractionDigits:2}
+      );
 
     q('sim-result-small').textContent =
       getLang()==='pt'
@@ -1279,9 +1296,14 @@ const oldPrice =
 
     console.error(err);
 
+    q('sim-result-small').textContent =
+      getLang()==='pt'
+      ? 'Erro ao calcular retorno.'
+      : 'Error calculating return.';
+
   }
 
-    }
+}
     
     async function loadChart(days=7, btn=null){
 
