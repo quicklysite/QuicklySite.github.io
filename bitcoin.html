@@ -1038,14 +1038,12 @@ function setCoin(coin) {
     applyLang(getLang());
     loadChart();
 }
-
-    function toggleAccordion() {
+ function toggleAccordion() {
     const body  = q('accordion-body');
     const arrow = q('accordion-arrow');
     body.classList.toggle('open');
     arrow.classList.toggle('open');
     }
-    
   function updateMarketStatus(data){
 
   const btcChange =
@@ -1326,9 +1324,6 @@ async function loadChart(days=7, btn=null){
   }
 
     }
-    // --- Lógica isolada do Simulador ---
-let simulating = false;
-let currentCoin = 'btc';  // ← Rastreia moeda selecionada //
 
 function calcularRetorno() {
     // ===== PROTEÇÃO CONTRA SPAM =====
