@@ -1143,7 +1143,7 @@ async function fetchPrices() {
     try {
         const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=brl,usd&include_24hr_change=true');
         const d = await res.json();
-        updateMarketStatus(data);
+        updateMarketStatus(d);
         pBTC_BRL = d.bitcoin.brl; pBTC_USD = d.bitcoin.usd;
         pETH_BRL = d.ethereum.brl; pETH_USD = d.ethereum.usd;
 
@@ -1239,9 +1239,9 @@ function toggleChartHelp(){
       data.market_data.current_price.usd;
 
     const current =
-      currentCoin === 'btc'
-      ? btc.usd
-      : eth.usd;
+  currentCoin === 'btc'
+  ? pBTC_USD
+  : pETH_USD;
 
     const qty =
       amount / oldPrice;
