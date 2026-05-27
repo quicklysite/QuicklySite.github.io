@@ -624,38 +624,32 @@
 
 </div>
     <!-- ── HISTORICAL SIMULATOR ── -->
-
-<div class="sim-box">
-
-  <div class="sim-top">
-
-    <div>
-      <div class="content-block" id="simulador-historico" style="margin-top: 40px; border-top: 2px solid #333; padding: 25px 0;">
-    <h3 style="color: #f7931a; margin-bottom: 5px;">Análise de Desempenho Histórico</h3>
-    <p style="font-size: 0.85rem; color: #8f887c; margin-bottom: 20px;">
-        Entenda o comportamento do preço comparando períodos específicos. 
-        Dados baseados no histórico real de mercado.
-    </p>
-    
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px;">
-        <input type="number" id="sim-val" placeholder="Valor (R$)" style="padding: 12px; border-radius: 4px; border: 1px solid #444; background: #1a1a1a; color: white;">
-        <select id="sim-date" style="padding: 12px; border-radius: 4px; border: 1px solid #444; background: #1a1a1a; color: white;">
-    <option value="7">7 dias atrás</option>
-    <option value="30">1 mês atrás</option>
-    <option value="90">3 meses atrás</option>
-    <option value="180">6 meses atrás</option>
-    <option value="365">1 ano atrás</option>
-    <option value="730">2 anos atrás</option>
-    <option value="1095">3 anos atrás</option>
-    <option value="1825">5 anos atrás</option>
-</select>
+    <div class="content-block" id="simulador-historico" style="margin-top: 40px; border-top: 2px solid #333; padding: 25px 0;">
+        <h3 style="color: #f7931a; margin-bottom: 5px;">Análise de Desempenho Histórico</h3>
+        <p style="font-size: 0.85rem; color: #8f887c; margin-bottom: 20px;">
+            Entenda o comportamento do preço comparando períodos específicos. 
+            Dados baseados no histórico real de mercado.
+        </p>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px;">
+            <input type="number" id="sim-val" placeholder="Valor (R$)" style="padding: 12px; border-radius: 4px; border: 1px solid #444; background: #1a1a1a; color: white;">
+            <select id="sim-date" style="padding: 12px; border-radius: 4px; border: 1px solid #444; background: #1a1a1a; color: white;">
+                <option value="7">7 dias atrás</option>
+                <option value="30">1 mês atrás</option>
+                <option value="90">3 meses atrás</option>
+                <option value="180">6 meses atrás</option>
+                <option value="365">1 ano atrás</option>
+                <option value="730">2 anos atrás</option>
+                <option value="1095">3 anos atrás</option>
+                <option value="1825">5 anos atrás</option>
+            </select>
+        </div>
+        <button onclick="calcularRetorno()" style="width: 100%; padding: 14px; background: #f7931a; border: none; border-radius: 4px; color: #000; font-weight: bold; cursor: pointer;">Calcular Proporção</button>
+        
+        <div id="sim-result" style="margin-top: 20px; padding: 20px; border-radius: 8px; background: rgba(76,175,80,.08); border: 1.5px solid rgba(76,175,80,.3); text-align: center; min-height: 80px; display: flex; align-items: center; justify-content: center;">
+            <span style="color: #8f887c; font-size: 0.9rem;">Insira um valor para ver a variação histórica.</span>
+        </div>
     </div>
-    <button onclick="calcularRetorno()" style="width: 100%; padding: 14px; background: #f7931a; border: none; border-radius: 4px; color: #000; font-weight: bold; cursor: pointer;">Calcular Proporção</button>
-    
-    <div id="sim-result" style="margin-top: 20px; padding: 20px; border-radius: 8px; background: rgba(76,175,80,.08); border: 1.5px solid rgba(76,175,80,.3); text-align: center; min-height: 80px; display: flex; align-items: center; justify-content: center;">
-    <span style="color: #8f887c; font-size: 0.9rem;">Insira um valor para ver a variação histórica.</span>
-</div>
-</div>
 
 </div>
         <div class="calc-box">
@@ -1365,7 +1359,9 @@ function calcularRetorno() {
     resultadoDiv.textContent = "🔄 Consultando dados históricos...";
     resultadoDiv.style.color = "#8f887c";
     
-    fetch(`https://api.coingecko.com/api/v3/coins/${currentCoin === 'btc' ? 'bitcoin' : 'ethereum'}/market_chart?...
+        fetch(`https://api.coingecko.com/api/v3/coins/${currentCoin === 'btc' ? 'bitcoin' : 'ethereum'}/market_chart?vs_currency=brl&days=${dias}`)
+        .then(response => {
+
         .then(response => {
             if (!response.ok) throw new Error(`API Error: ${response.status}`);
             return response.json();
