@@ -1179,14 +1179,22 @@ function calcCoin() {
 }
 
 // Inicialização correta
-window.onload = () => {
-    applyLang(getLang());
-    fetchPrices();
-    // Atraso de 1 segundo (1000ms) para o CoinGecko não bloquear seu acesso
-    setTimeout(() => loadChart(), 2000); 
-    setInterval(fetchPrices, 60000);
-};
+window.onload = async () => {
 
+    applyLang(getLang());
+
+    await fetchPrices();
+
+    setTimeout(() => {
+        loadChart();
+    }, 2000);
+
+    setInterval(async () => {
+        await fetchPrices();
+    }, 60000);
+
+};
+    
 function toggleChartHelp(){
   const content = document.getElementById('chart-help-content');
   const icon = document.getElementById('chart-help-icon');
@@ -1200,7 +1208,7 @@ function toggleChartHelp(){
   }
 }
 
-    async function runSimulation(){
+async function runSimulation(){
 
   const amount =
     parseFloat(q('sim-amount').value || 0);
@@ -1235,8 +1243,15 @@ function toggleChartHelp(){
 
     const data = await res.json();
 
-    const oldPrice =
-      data.market_data.current_price.usd;
+    if(
+  !data.market_data ||
+  !data.market_data.current_price
+){
+  return;
+}
+
+const oldPrice =
+  data.market_data.current_price.usd;
 
     const current =
   currentCoin === 'btc'
@@ -1288,7 +1303,7 @@ function toggleChartHelp(){
 
     const res = await fetch(url);
 
-        const data = await res.json();
+    const data = await res.json();
     const prices = data.prices || [];
 
     // NOVA TRAVA: Se não vier preço, cancela o desenho do gráfico
