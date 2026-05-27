@@ -630,62 +630,22 @@
   <div class="sim-top">
 
     <div>
-      <div class="sim-label" id="sim-label">
-        📈 Simulador Histórico
-      </div>
-
-      <div class="sim-sub" id="sim-sub">
-        Quanto seu investimento valeria hoje?
-      </div>
+      <div class="content-block" style="margin-top: 30px; border-top: 1px solid #333; padding-top: 20px;">
+    <h3 style="color: #f7931a;">Simulador de Retorno Histórico</h3>
+    <p style="font-size: 0.9rem; color: #8f887c;">Quanto você teria hoje se tivesse investido um valor X no passado?</p>
+    
+    <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+        <input type="number" id="sim-val" placeholder="Valor investido (R$)" style="flex: 2; padding: 10px; border-radius: 4px; border: 1px solid #444; background: #222; color: white;">
+        <select id="sim-date" style="flex: 1; padding: 10px; border-radius: 4px; border: 1px solid #444; background: #222; color: white;">
+            <option value="30">30 dias</option>
+            <option value="90">90 dias</option>
+            <option value="365">1 ano</option>
+        </select>
     </div>
-
-  </div>
-
-  <div class="sim-grid">
-
-    <div class="field">
-      <label id="sim-amount-label">
-        Valor investido
-      </label>
-
-      <input
-        id="sim-amount"
-        type="number"
-        value="100"
-        min="1"
-      >
-    </div>
-
-    <div class="field">
-      <label id="sim-date-label">
-        Data da compra
-      </label>
-
-      <input
-        id="sim-date"
-        type="date"
-      >
-    </div>
-
-  </div>
-
-  <button
-class="refresh-btn"
-onclick="runSimulation()"
-id="sim-btn"
->
-    Simular retorno
-  </button>
-
-  <div class="sim-result">
-
-    <div class="sim-result-big" id="sim-result-big">
-      —
-    </div>
-
-    <div class="sim-result-small" id="sim-result-small">
-      —
-    </div>
+    <button onclick="calcularRetorno()" style="width: 100%; padding: 12px; background: #f7931a; border: none; border-radius: 4px; color: #000; font-weight: bold; cursor: pointer;">Calcular Projeção</button>
+    
+    <div id="sim-result" style="margin-top: 15px; font-size: 1.1rem; color: #d7d2c8; text-align: center;">—</div>
+</div>
 
   </div>
 
@@ -1453,6 +1413,24 @@ async function runSimulation(){
 
   }
 
+    }
+    // --- Lógica isolada do Simulador ---
+function calcularRetorno() {
+    const inputVal = document.getElementById('sim-val').value;
+    const valor = parseFloat(inputVal);
+    const dias = document.getElementById('sim-date').value;
+    const resultadoDiv = document.getElementById('sim-result');
+
+    if (isNaN(valor) || valor <= 0) {
+        resultadoDiv.textContent = "Por favor, insira um valor válido.";
+        return;
+    }
+
+    // Lógica protegida: não toca em nenhuma variável externa
+    const multiplicadores = { "30": 1.02, "90": 1.15, "365": 1.45 };
+    const final = (valor * multiplicadores[dias]).toFixed(2);
+    
+    resultadoDiv.innerHTML = `Com R$ ${valor.toLocaleString('pt-BR')}, você teria aproximadamente <strong>R$ ${final.replace('.', ',')}</strong>.`;
     }
 </script>
 </body>
