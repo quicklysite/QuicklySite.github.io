@@ -214,22 +214,12 @@
         <div class="conv-row">
             <div>
               <label id="label-ingredient">Ingrediente</label>
-                <select id="k-ingredient" onchange="convertKitchen()">
-                    <option value="flour" id="opt-flour">Farinha de Trigo</option>
-                    <option value="sugar" id="opt-sugar">Açúcar Branco</option>
-                    <option value="butter" id="opt-butter">Manteiga</option>
-                    <option value="oil" id="opt-oil">Óleo Vegetal</option>
-                    <option value="water" id="opt-water">Água</option>
-                    <option value="milk" id="opt-milk">Leite Integral</option>
-                    <option value="cocoa" id="opt-cocoa">Pó de Cacau</option>
-                    <option value="cornstarch" id="opt-cornstarch">Amido de Milho</option>
-                    <option value="honey" id="opt-honey">Mel</option>
-                    <option value="salt" id="opt-salt">Sal de Cozinha</option>
-                    <option value="shoyu" id="opt-shoyu">Molho Shoyu (Soja)</option>
-                    <option value="mirin" id="opt-mirin">Saquê Mirin</option>
-                    <option value="mustard" id="opt-mustard">Mostarda (Líquida)</option>
-                    <option value="paprika" id="opt-paprika">Páprica (Pó)</option>
-                </select>
+                <div style="display: flex; gap: 5px; margin-bottom: 10px;">
+    <button type="button" onclick="updateIngredientList('dry')" id="btn-dry" style="flex:1; padding: 8px; border-radius: 4px; border: 1px solid #444; background: #333; color: white;">Secos</button>
+    <button type="button" onclick="updateIngredientList('wet')" id="btn-wet" style="flex:1; padding: 8px; border-radius: 4px; border: 1px solid #444; background: #333; color: white;">Líquidos</button>
+</div>
+<select id="k-ingredient" onchange="convertKitchen()" style="width: 100%; margin-bottom: 15px;">
+    </select>
             </div>
         </div>
         <p id="density-info" style="font-size:.85rem; color:var(--muted); margin-top:8px;">—</p>
@@ -523,6 +513,44 @@ unitExtLabels.forEach(el => {
 }
 
 const kMl = {cup_br:200, cup_us:240, tbsp:15, tsp:5, ml:1, floz:30};
+const ingredientData = {
+    dry: [
+        {val: 'flour', name: 'Farinha de Trigo'},
+        {val: 'sugar', name: 'Açúcar Branco'},
+        {val: 'cocoa', name: 'Pó de Cacau'},
+        {val: 'cornstarch', name: 'Amido de Milho'},
+        {val: 'salt', name: 'Sal de Cozinha'},
+        {val: 'paprika', name: 'Páprica / Especiarias'}
+    ],
+    wet: [
+        {val: 'butter', name: 'Manteiga'},
+        {val: 'oil', name: 'Óleo Vegetal'},
+        {val: 'water', name: 'Água'},
+        {val: 'milk', name: 'Leite Integral'},
+        {val: 'honey', name: 'Mel'},
+        {val: 'shoyu', name: 'Molho Shoyu'},
+        {val: 'mirin', name: 'Saquê Mirin'},
+        {val: 'mustard', name: 'Mostarda (Líquida)'}
+    ]
+};
+
+function updateIngredientList(type) {
+    const select = document.getElementById('k-ingredient');
+    select.innerHTML = '';
+    ingredientData[type].forEach(item => {
+        const opt = document.createElement('option');
+        opt.value = item.val;
+        opt.textContent = item.name;
+        select.appendChild(opt);
+    });
+    // Destaca o botão ativo
+    document.getElementById('btn-dry').style.background = type === 'dry' ? '#4caf50' : '#333';
+    document.getElementById('btn-wet').style.background = type === 'wet' ? '#4caf50' : '#333';
+    convertKitchen();
+}
+
+// Inicializa com secos ao carregar
+window.onload = () => updateIngredientList('dry');
 
 // Densidades de ingredientes em g/xícara BR (200ml)
 const ingredientDensities = {
