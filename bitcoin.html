@@ -1324,7 +1324,7 @@ async function loadChart(days=7, btn=null){
     }
 
 function calcularRetorno() {
-    // ===== PROTEÇÃO CONTRA SPAM =====
+    // 1. Proteção contra duplo clique
     if (simulating) {
         alert('Uma consulta já está em andamento. Aguarde.');
         return;
@@ -1334,15 +1334,14 @@ function calcularRetorno() {
     const valor = parseFloat(inputVal);
     const dias = parseInt(document.getElementById('sim-date').value);
     const resultadoDiv = document.getElementById('sim-result');
-    const btn = event.target; // Pega o botão que foi clicado
+    const btn = event.target;
 
-    // ===== VALIDAÇÃO =====
     if (isNaN(valor) || valor <= 0) {
         resultadoDiv.textContent = "Por favor, insira um valor válido.";
         return;
     }
 
-    // ===== BLOQUEIA BOTÃO E INICIA TIMER =====
+    // 2. Trava e Timer visual do botão
     simulating = true;
     btn.disabled = true;
     let timer = 5;
@@ -1359,19 +1358,18 @@ function calcularRetorno() {
         }
     }, 1000);
 
-    // ===== CONSULTA À API =====
+    // 3. Início da Consulta
     resultadoDiv.textContent = "🔄 Consultando dados históricos...";
     resultadoDiv.style.color = "#8f887c";
     
-        fetch(`https://api.coingecko.com/api/v3/coins/${currentCoin === 'btc' ? 'bitcoin' : 'ethereum'}/market_chart?vs_currency=brl&days=${dias}`)
-        .then(response => {
-
+    const coinName = currentCoin === 'btc' ? 'bitcoin' : 'ethereum';
+    
+    fetch(`https://api.coingecko.com/api/v3/coins/${coinName}/market_chart?vs_currency=brl&days=${dias}`)
         .then(response => {
             if (!response.ok) throw new Error(`API Error: ${response.status}`);
             return response.json();
         })
         .then(data => {
-            // ===== VALIDAÇÃO DOS DADOS =====
             if (!data.prices || data.prices.length < 2) {
                 throw new Error("Dados insuficientes da API");
             }
@@ -1382,7 +1380,6 @@ function calcularRetorno() {
             const valorFinal = valor * multiplicador;
             const variacao = ((multiplicador - 1) * 100).toFixed(1);
 
-            // ===== RESULTADO =====
             resultadoDiv.innerHTML = `
                 <div style="font-size: 0.9rem; color: #8f887c; margin-bottom: 8px;">Resultado do Período</div>
                 <div style="font-size: 1.4rem; color: white; margin: 10px 0;">R$ ${valorFinal.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</div>
@@ -1394,17 +1391,20 @@ function calcularRetorno() {
             resultadoDiv.style.color = "inherit";
         })
         .catch(error => {
+            // 4. Tratamento do erro de limite da API
+            let mensagemAmigavel = error.message;
+            if (error.message.includes('Failed to fetch') || error.message.includes('HTTP error')) {
+                mensagemAmigavel = "Limite de consultas atingido (Proteção Anti-Spam). Aguarde cerca de 1 a 2 minutos e tente novamente.";
+            }
+
             resultadoDiv.innerHTML = `
-                <div style="color: #f44336; font-weight: bold;">⚠️ Erro ao consultar dados</div>
-                <div style="font-size: 0.85rem; color: #8f887c; margin-top: 8px;">${error.message}</div>
-                <div style="font-size: 0.8rem; color: #666; margin-top: 6px;">Tente novamente em alguns segundos.</div>
+                <div style="color: #f7931a; font-weight: bold; margin-bottom: 5px;">⏳ Sistema em Cooldown</div>
+                <div style="font-size: 0.85rem; color: #8f887c; margin-top: 8px;">${mensagemAmigavel}</div>
             `;
-        })
-        .finally(() => {
-            // ===== LIMPEZA (quando requisição termina, independente de sucesso/erro) =====
-            // O timer continua rodando até completar os 5 segundos
+            resultadoDiv.style.color = "inherit";
         });
 }
+
 </script>
 </body>
 </html>
