@@ -1140,20 +1140,24 @@ function calcCoin() {
 }
 
 // Inicialização correta
+// Inicialização com Estrangulamento (Throttling) para evitar bloqueio da API
 window.onload = async () => {
-
     applyLang(getLang());
 
+    // Tarefa 1: Puxa o preço atual imediatamente
     await fetchPrices();
 
+    // Tarefa 2 (Com Timer): Só carrega o gráfico pesadão 4 segundos DEPOIS, 
+    // dando tempo para a API respirar e não encavalar com a Tarefa 1.
     setTimeout(() => {
         loadChart();
-    }, 2000);
+    }, 4000);
 
+    // Tarefa 3 (Periódica): Aumentamos o ciclo de 60s para 120s (2 minutos).
+    // Assim, se o usuário largar a aba aberta no celular, ele não gasta seu limite da API à toa.
     setInterval(async () => {
         await fetchPrices();
-    }, 60000);
-
+    }, 120000);
 };
     
 function toggleChartHelp(){
