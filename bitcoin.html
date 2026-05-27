@@ -1322,86 +1322,72 @@ async function loadChart(days=7, btn=null){
   }
 
     }
-
-function calcularRetorno() {
-    // 1. Proteção contra duplo clique
-    if (simulating) {
-        alert('Uma consulta já está em andamento. Aguarde.');
-        return;
-    }
+    
+   function calcularRetorno() {
+    // Verifica se já está em contagem (evita spam)
+    if (window.simulating) return;
 
     const inputVal = document.getElementById('sim-val').value;
     const valor = parseFloat(inputVal);
     const dias = parseInt(document.getElementById('sim-date').value);
     const resultadoDiv = document.getElementById('sim-result');
-    const btn = event.target;
+    const btn = document.querySelector('button[onclick="calcularRetorno()"]');
 
     if (isNaN(valor) || valor <= 0) {
-        resultadoDiv.textContent = "Por favor, insira um valor válido.";
+        resultadoDiv.innerHTML = `<span style="color: #ff6b6b;">Insira um valor maior que zero.</span>`;
         return;
     }
 
-    // 2. Trava e Timer visual do botão
-    simulating = true;
+    // --- EFEITO VISUAL DO BOTÃO ---
+    window.simulating = true;
     btn.disabled = true;
+    btn.style.opacity = "0.5";
+    btn.style.cursor = "not-allowed";
+    
     let timer = 5;
     const originalText = btn.textContent;
+    btn.textContent = `Aguarde ${timer}s`;
     
     const interval = setInterval(() => {
-        btn.textContent = `Aguarde ${timer}s`;
         timer--;
+        btn.textContent = timer > 0 ? `Aguarde ${timer}s` : originalText;
         if (timer < 0) {
             clearInterval(interval);
             btn.disabled = false;
-            btn.textContent = originalText;
-            simulating = false;
+            btn.style.opacity = "1";
+            btn.style.cursor = "pointer";
+            window.simulating = false;
         }
     }, 1000);
 
-    // 3. Início da Consulta
-    resultadoDiv.textContent = "🔄 Consultando dados históricos...";
-    resultadoDiv.style.color = "#8f887c";
+    // --- CONSULTA ---
+    resultadoDiv.innerHTML = `<div style="color: #f7931a;">Calculando histórico...</div>`;
     
     const coinName = currentCoin === 'btc' ? 'bitcoin' : 'ethereum';
     
     fetch(`https://api.coingecko.com/api/v3/coins/${coinName}/market_chart?vs_currency=brl&days=${dias}`)
-        .then(response => {
-            if (!response.ok) throw new Error(`API Error: ${response.status}`);
-            return response.json();
-        })
+        .then(res => res.json())
         .then(data => {
-            if (!data.prices || data.prices.length < 2) {
-                throw new Error("Dados insuficientes da API");
-            }
-
             const precoAntigo = data.prices[0][1];
             const precoAtual = data.prices[data.prices.length - 1][1];
-            const multiplicador = precoAtual / precoAntigo;
-            const valorFinal = valor * multiplicador;
-            const variacao = ((multiplicador - 1) * 100).toFixed(1);
+            const variacao = ((precoAtual / precoAntigo - 1) * 100).toFixed(1);
+            const valorFinal = valor * (precoAtual / precoAntigo);
 
+            // --- DESIGN DO RESULTADO ---
             resultadoDiv.innerHTML = `
-                <div style="font-size: 0.9rem; color: #8f887c; margin-bottom: 8px;">Resultado do Período</div>
-                <div style="font-size: 1.4rem; color: white; margin: 10px 0;">R$ ${valorFinal.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</div>
-                <div style="color: ${variacao >= 0 ? '#4caf50' : '#f44336'}; font-weight: bold;">
-                    ${variacao >= 0 ? '+' : ''}${variacao}% de variação
+                <div style="font-size: 0.8rem; color: #8f887c; text-transform: uppercase; letter-spacing: 1px;">Resultado</div>
+                <div style="font-size: 1.6rem; font-weight: bold; color: #fff; margin: 8px 0;">
+                    R$ ${valorFinal.toLocaleString('pt-BR', {minimumFractionDigits: 2})}
                 </div>
-                <div style="font-size: 0.8rem; color: #8f887c; margin-top: 8px;">Dados reais de ${dias} dias atrás</div>
+                <div style="background: ${variacao >= 0 ? 'rgba(76,175,80,0.1)' : 'rgba(244,67,54,0.1)'}; 
+                            padding: 5px 10px; border-radius: 4px; display: inline-block;
+                            color: ${variacao >= 0 ? '#4caf50' : '#f44336'}; font-weight: bold;">
+                    ${variacao >= 0 ? '▲' : '▼'} ${variacao}%
+                </div>
             `;
-            resultadoDiv.style.color = "inherit";
         })
-        .catch(error => {
-            // 4. Tratamento do erro de limite da API
-            let mensagemAmigavel = error.message;
-            if (error.message.includes('Failed to fetch') || error.message.includes('HTTP error')) {
-                mensagemAmigavel = "Limite de consultas atingido (Proteção Anti-Spam). Aguarde cerca de 1 a 2 minutos e tente novamente.";
-            }
-
-            resultadoDiv.innerHTML = `
-                <div style="color: #f7931a; font-weight: bold; margin-bottom: 5px;">⏳ Sistema em Cooldown</div>
-                <div style="font-size: 0.85rem; color: #8f887c; margin-top: 8px;">${mensagemAmigavel}</div>
-            `;
-            resultadoDiv.style.color = "inherit";
+        .catch(() => {
+            resultadoDiv.innerHTML = `<span style="color: #f44336;">Limite atingido. Tente em 1 min.</span>`;
         });
 }
 
