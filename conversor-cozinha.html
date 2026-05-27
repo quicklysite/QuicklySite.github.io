@@ -151,19 +151,23 @@
         .ad-slot { background:var(--surface2); border:1px dashed rgba(255,255,255,.08); border-radius:var(--radius); min-height:90px; display:flex; align-items:center; justify-content:center; color:var(--muted); font-size:.75rem; margin:20px 0; }
         @media(max-width:600px){ .conv-row{flex-direction:column} .container{padding:24px 16px;margin:16px} }
         /* ACCORDION RECEITAS */
-.accordion { border:1.5px solid #c4a45a; border-radius:var(--radius); margin:20px 0; overflow:hidden; }
-.accordion-header { display:flex; align-items:center; justify-content:space-between; padding:16px 20px; cursor:pointer; user-select:none; }
-.accordion-header span { color:var(--text); font-weight:600; font-size:.95rem; }
-.accordion-arrow { width:32px; height:32px; border:2px solid #c4a45a; border-radius:8px; display:flex; align-items:center; justify-content:center; color:#c4a45a; font-size:1.1rem; font-weight:900; transition:transform .3s; flex-shrink:0; }
-.accordion-arrow.open { transform:rotate(180deg); }
-.accordion-body { max-height:0; overflow:hidden; transition:max-height .4s ease; padding:0 20px; }
-.accordion-body.open { max-height:1200px; padding:0 20px 20px; }
-.accordion-body p { font-size:.9rem; margin-bottom:10px; opacity:.85; }
-/* BLOCO CONTEÚDO */
-.content-block { margin:28px 0; }
-.content-block h2 { margin-bottom:14px; }
-.content-block p { margin-bottom:14px; line-height:1.8; opacity:.88; }
-.content-block strong { color:var(--accent); font-weight:600; }
+        .accordion { border:1.5px solid #c4a45a; border-radius:var(--radius); margin:20px 0; overflow:hidden; }
+        .accordion-header { display:flex; align-items:center; justify-content:space-between; padding:16px 20px; cursor:pointer; user-select:none; }
+        .accordion-header span { color:var(--text); font-weight:600; font-size:.95rem; }
+        .accordion-arrow { width:32px; height:32px; border:2px solid #c4a45a; border-radius:8px; display:flex; align-items:center; justify-content:center; color:#c4a45a; font-size:1.1rem; font-weight:900; transition:transform .3s; flex-shrink:0; }
+        .accordion-arrow.open { transform:rotate(180deg); }
+        .accordion-body { max-height:0; overflow:hidden; transition:max-height .4s ease; padding:0 20px; }
+        .accordion-body.open { max-height:1200px; padding:0 20px 20px; }
+        .accordion-body p { font-size:.9rem; margin-bottom:10px; opacity:.85; }
+        /* BLOCO CONTEÚDO */
+        .content-block { margin:28px 0; }
+        .content-block h2 { margin-bottom:14px; }
+        .content-block p { margin-bottom:14px; line-height:1.8; opacity:.88; }
+        .content-block strong { color:var(--accent); font-weight:600; }
+        .ref-table { width: 100%; border-collapse: collapse; margin: 25px 0; background: #1a1a1a; border-radius: 8px; overflow: hidden; border: 1px solid #333; }
+        .ref-table th { background: #262626; color: #4caf50; padding: 14px; text-align: left; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; }
+        .ref-table td { padding: 12px; border-bottom: 1px solid #333; color: #d7d2c8; font-size: 0.9rem; }
+        .ref-table tr:hover { background: #222; }   
     </style>
 </head>
 <body>
@@ -260,16 +264,26 @@
 
     <h2 id="table-title">📌 Tabela de equivalência</h2>
     <div class="conv-card">
-        <table>
-            <tr><th id="th-measure">Medida</th><th>ml</th><th id="th-equals">Equivale a</th></tr>
-            <tr><td id="td-r1a">1 xícara BR</td><td>200ml</td><td id="td-r1b">≈ 13 colheres de sopa</td></tr>
-            <tr><td id="td-r2a">1 xícara US (cup)</td><td>240ml</td><td id="td-r2b">16 colheres de sopa</td></tr>
-            <tr><td id="td-r3a">½ xícara BR</td><td>100ml</td><td id="td-r3b">≈ 6.5 colheres de sopa</td></tr>
-            <tr><td id="td-r4a">½ xícara US</td><td>120ml</td><td id="td-r4b">8 colheres de sopa</td></tr>
-            <tr><td id="td-r5a">1 colher de sopa</td><td>15ml</td><td id="td-r5b">3 colheres de chá</td></tr>
-            <tr><td id="td-r6a">1 colher de chá</td><td>5ml</td><td>—</td></tr>
-            <tr><td id="td-r7a">1 fl oz</td><td>30ml</td><td id="td-r7b">2 colheres de sopa</td></tr>
-        </table>
+        <h2 id="table-title">📌 Referência Rápida</h2>
+<table class="ref-table">
+    <thead>
+        <tr>
+            <th>Medida</th>
+            <th>Volume</th>
+            <th>Equivalência</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr><td><strong>1 Cup (US)</strong></td><td>240 ml</td><td>16 tbsp</td></tr>
+        <tr><td><strong>1 Xícara (BR)</strong></td><td>200 ml</td><td>13.3 tbsp</td></tr>
+        <tr><td><strong>1 Fl oz</strong></td><td>30 ml</td><td>2 tbsp</td></tr>
+        <tr><td><strong>1 Colher Sopa</strong></td><td>15 ml</td><td>3 tsp</td></tr>
+        <tr><td><strong>1 Colher Chá</strong></td><td>5 ml</td><td>—</td></tr>
+    </tbody>
+</table>
+<p style="font-size: 0.85rem; color: #8f887c; font-style: italic;">
+    *Nota: A diferença de 40ml entre a Cup US e a Xícara BR é o fator crítico para o sucesso em receitas internacionais.
+</p>
     </div>
 
     <!-- ANÚNCIO ENTRE TABELA E TEXTO -->
@@ -289,8 +303,6 @@
 
         <p id="content-p5">Esta ferramenta foi desenvolvida com base no cálculo de <strong>densidade específica</strong> de cada ingrediente. O intuito é permitir que você assista a qualquer receita internacional, aplique a engenharia reversa nas medidas e alcance o resultado exato planejado pelo autor original, sem desperdiçar ingredientes ou depender de aproximações.</p>
     </div>
-    <div class="ad-slot">Anúncio</div>
-
     <div class="ad-slot">Anúncio</div>
        <div class="content-block" style="background:var(--surface2); border:1px solid rgba(232,199,122,.15); border-radius:var(--radius); padding:24px; margin:40px 0 20px;">
         <h3 style="color:var(--accent); font-family:'Playfair Display',serif; margin-bottom:12px; font-size:1.05rem;">📚 Sobre este Conteúdo (Fontes Técnicas)</h3>
