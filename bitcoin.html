@@ -640,13 +640,17 @@
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px;">
         <input type="number" id="sim-val" placeholder="Valor (R$)" style="padding: 12px; border-radius: 4px; border: 1px solid #444; background: #1a1a1a; color: white;">
         <select id="sim-date" style="padding: 12px; border-radius: 4px; border: 1px solid #444; background: #1a1a1a; color: white;">
-            <option value="365">1 Ano atrás</option>
-            <option value="730">2 Anos atrás</option>
-            <option value="1460">4 Anos atrás</option>
-            <option value="2190">6 Anos atrás</option>
-        </select>
+    <option value="7">7 dias atrás</option>
+    <option value="30">1 mês atrás</option>
+    <option value="90">3 meses atrás</option>
+    <option value="180">6 meses atrás</option>
+    <option value="365">1 ano atrás</option>
+    <option value="730">2 anos atrás</option>
+    <option value="1095">3 anos atrás</option>
+    <option value="1825">5 anos atrás</option>
+</select>
     </div>
-    <button onclick="fetchHistoricalData()" style="width: 100%; padding: 14px; background: #f7931a; border: none; border-radius: 4px; color: #000; font-weight: bold; cursor: pointer;">Calcular Proporção</button>
+    <button onclick="calcularRetorno()" style="width: 100%; padding: 14px; background: #f7931a; border: none; border-radius: 4px; color: #000; font-weight: bold; cursor: pointer;">Calcular Proporção</button>
     
     <div id="sim-result" style="margin-top: 20px; padding: 15px; border-radius: 8px; background: #222; text-align: center;">
         <span style="color: #8f887c; font-size: 0.9rem;">Insira um valor para ver a variação histórica.</span>
@@ -1419,62 +1423,88 @@ async function runSimulation(){
 
     }
     // --- Lógica isolada do Simulador ---
+let simulating = false; // Flag para evitar múltiplas requisições simultâneas
+
 function calcularRetorno() {
+    // ===== PROTEÇÃO CONTRA SPAM =====
+    if (simulating) {
+        alert('Uma consulta já está em andamento. Aguarde.');
+        return;
+    }
+
     const inputVal = document.getElementById('sim-val').value;
     const valor = parseFloat(inputVal);
-    const dias = document.getElementById('sim-date').value;
+    const dias = parseInt(document.getElementById('sim-date').value);
     const resultadoDiv = document.getElementById('sim-result');
+    const btn = event.target; // Pega o botão que foi clicado
 
+    // ===== VALIDAÇÃO =====
     if (isNaN(valor) || valor <= 0) {
         resultadoDiv.textContent = "Por favor, insira um valor válido.";
         return;
     }
 
-    // Lógica protegida: não toca em nenhuma variável externa
-    const multiplicadores = { "30": 1.02, "90": 1.15, "365": 1.45 };
-    const final = (valor * multiplicadores[dias]).toFixed(2);
+    // ===== BLOQUEIA BOTÃO E INICIA TIMER =====
+    simulating = true;
+    btn.disabled = true;
+    let timer = 5;
+    const originalText = btn.textContent;
     
-    resultadoDiv.innerHTML = `Com R$ ${valor.toLocaleString('pt-BR')}, você teria aproximadamente <strong>R$ ${final.replace('.', ',')}</strong>.`;
-    }
-        // --- LINHA DE BLOQUEIO DO BOTÃO (Anti-Spam) ---
-        btn.disabled = true;
-        let timer = 5;
-        const originalText = btn.textContent;
-        
-        const interval = setInterval(() => {
-            btn.textContent = `Aguarde ${timer}s`;
-            timer--;
-            if (timer < 0) {
-                clearInterval(interval);
-                btn.disabled = false;
-                btn.textContent = originalText;
-            }
-        }, 1000);
-        // ----------------------------------------------
+    const interval = setInterval(() => {
+        btn.textContent = `Aguarde ${timer}s`;
+        timer--;
+        if (timer < 0) {
+            clearInterval(interval);
+            btn.disabled = false;
+            btn.textContent = originalText;
+            simulating = false;
+        }
+    }, 1000);
 
-        resultadoDiv.textContent = "Consultando dados históricos...";
-        try {
-            const coinId = isBTC ? 'bitcoin' : 'ethereum';
-            const response = await fetch(`https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=brl&days=${dias}`);
-            const data = await response.json();
-            
+    // ===== CONSULTA À API =====
+    resultadoDiv.textContent = "🔄 Consultando dados históricos...";
+    resultadoDiv.style.color = "#8f887c";
+    
+    fetch(`https://api.coingecko.com/api/v3/coins/${isBTC ? 'bitcoin' : 'ethereum'}/market_chart?vs_currency=brl&days=${dias}`)
+        .then(response => {
+            if (!response.ok) throw new Error(`API Error: ${response.status}`);
+            return response.json();
+        })
+        .then(data => {
+            // ===== VALIDAÇÃO DOS DADOS =====
+            if (!data.prices || data.prices.length < 2) {
+                throw new Error("Dados insuficientes da API");
+            }
+
             const precoAntigo = data.prices[0][1];
             const precoAtual = data.prices[data.prices.length - 1][1];
             const multiplicador = precoAtual / precoAntigo;
             const valorFinal = valor * multiplicador;
             const variacao = ((multiplicador - 1) * 100).toFixed(1);
 
+            // ===== RESULTADO =====
             resultadoDiv.innerHTML = `
-                <div style="font-size: 0.9rem; color: #8f887c;">Resultado do Período</div>
+                <div style="font-size: 0.9rem; color: #8f887c; margin-bottom: 8px;">Resultado do Período</div>
                 <div style="font-size: 1.4rem; color: white; margin: 10px 0;">R$ ${valorFinal.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</div>
                 <div style="color: ${variacao >= 0 ? '#4caf50' : '#f44336'}; font-weight: bold;">
                     ${variacao >= 0 ? '+' : ''}${variacao}% de variação
                 </div>
+                <div style="font-size: 0.8rem; color: #8f887c; margin-top: 8px;">Dados reais de ${dias} dias atrás</div>
             `;
-        } catch (e) {
-            resultadoDiv.textContent = "Erro ao consultar dados.";
-        }
-    }
+            resultadoDiv.style.color = "inherit";
+        })
+        .catch(error => {
+            resultadoDiv.innerHTML = `
+                <div style="color: #f44336; font-weight: bold;">⚠️ Erro ao consultar dados</div>
+                <div style="font-size: 0.85rem; color: #8f887c; margin-top: 8px;">${error.message}</div>
+                <div style="font-size: 0.8rem; color: #666; margin-top: 6px;">Tente novamente em alguns segundos.</div>
+            `;
+        })
+        .finally(() => {
+            // ===== LIMPEZA (quando requisição termina, independente de sucesso/erro) =====
+            // O timer continua rodando até completar os 5 segundos
+        });
+}
 </script>
 </body>
 </html>
