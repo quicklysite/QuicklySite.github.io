@@ -1224,14 +1224,6 @@ function toggleChartHelp(){
   }
 }
 
-async function loadChart(days=7, btn=null){
-
-  document
-    .querySelectorAll('.chart-tab')
-    .forEach(b=>b.classList.remove('active'));
-
-  if(btn) btn.classList.add('active');
-
 // --- BUSCA B: GRÁFICO COM CACHE ---
 async function loadChart(days=7, btn=null){
   document.querySelectorAll('.chart-tab').forEach(b=>b.classList.remove('active'));
@@ -1264,7 +1256,7 @@ async function loadChart(days=7, btn=null){
   }
 }
 
-// Lógica de desenho do Chart.js intocada
+// Lógica de desenho do Chart.js
 function renderizarGraficoNaTela(data, days, coinId) {
     const prices = data.prices || [];
     if(prices.length === 0) return;
@@ -1319,8 +1311,8 @@ function renderizarGraficoNaTela(data, days, coinId) {
         sub.textContent = `${isBTC?'Bitcoin':'Ethereum'} over the last ${days===365?'12 months':days+' days'}`;
       }
     }
-}
-
+      }
+        
    function calcularRetorno() {
     // Verifica se já está em contagem (evita spam)
     if (window.simulating) return;
