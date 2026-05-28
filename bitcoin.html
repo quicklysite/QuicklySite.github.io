@@ -767,6 +767,7 @@
 </footer>
 
 <script>
+  
 // DICIONÁRIO DE TRADUÇÃO (PADRÃO DO SEU EXEMPLO)
 const T = {
   pt: {
@@ -882,6 +883,33 @@ let isSwapped = false; // Controla se é Moeda->BRL ou BRL->Moeda
 let pBTC_BRL=0, pBTC_USD=0, pETH_BRL=0, pETH_USD=0;
 
 const q = id => document.getElementById(id);
+    // Gerenciador de Cache com Validação de Ciclo de Tempo
+function obterDadosCache(chave, minutosValidade) {
+    const stringCache = localStorage.getItem(chave);
+    if (!stringCache) return null;
+
+    const dados = JSON.parse(stringCache);
+    const tempoAtual = Date.now(); // Tempo em milissegundos
+    const tempoValidade = minutosValidade * 60 * 1000; // Converte minutos para ms
+
+    // Contexto Matemático: Se (Tempo Atual - Tempo de Criação) < Limite de Validade, o cache é válido
+    if (tempoAtual - dados.timestamp < tempoValidade) {
+        return dados.conteudo;
+    }
+    
+    // Se passou do tempo, expira o cache antigo
+    localStorage.removeItem(chave);
+    return null;
+}
+
+function salvarDadosCache(chave, conteudo) {
+    const estrutura = {
+        timestamp: Date.now(),
+        conteudo: conteudo
+    };
+    localStorage.setItem(chave, JSON.stringify(estrutura));
+}
+  
 
 function getLang() {
   const param = new URLSearchParams(window.location.search).get('lang');
@@ -1098,32 +1126,37 @@ function setCoin(coin) {
 
 }
     
-async function fetchPrices() {
-    const l = getLang();
-    q('status').textContent = T[l].loading;
+async function inicializarPrecos(forçarAtualizacao = false) {
+    const cacheChave = 'cripto_precos_atuais';
+    const cacheValido = obterDadosCache(cacheChave, 3); // Validade matemática de 3 minutos
+
+    if (cacheValido && !forçarAtualizacao) {
+        // Se houver cache válido, renderiza direto na tela sem gastar internet/API
+        exibirPrecosNaTela(cacheValido);
+        return;
+    }
+
+    // Caso contrário, faz a requisição normal para a API
     try {
-        const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=brl,usd&include_24hr_change=true');
-        const d = await res.json();
-        updateMarketStatus(d);
-        pBTC_BRL = d.bitcoin.brl; pBTC_USD = d.bitcoin.usd;
-        pETH_BRL = d.ethereum.brl; pETH_USD = d.ethereum.usd;
-
-        q('btc-brl').textContent = 'R$ ' + pBTC_BRL.toLocaleString('pt-BR');
-        q('btc-usd').textContent = 'USD $ ' + pBTC_USD.toLocaleString('en-US');
-        const btcC = d.bitcoin.usd_24h_change;
-        q('btc-change').innerHTML = `<span class="${btcC >= 0 ? 'change-up' : 'change-down'}">${btcC >= 0 ? '+' : ''}${btcC.toFixed(2)}% (24h)</span>`;
-
-        q('eth-brl').textContent = 'R$ ' + pETH_BRL.toLocaleString('pt-BR');
-        q('eth-usd').textContent = 'USD $ ' + pETH_USD.toLocaleString('en-US');
-        const ethC = d.ethereum.usd_24h_change;
-        q('eth-change').innerHTML = `<span class="${ethC >= 0 ? 'change-up' : 'change-down'}">${ethC >= 0 ? '+' : ''}${ethC.toFixed(2)}% (24h)</span>`;
-
-        q('status').textContent = T[l].last + new Date().toLocaleTimeString();
-        calcCoin();
-    } catch (e) {
-        q('status').textContent = T[l].err;
+        const response = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=brl,usd&include_24hr_change=true');
+        const data = await response.json();
+        
+        salvarDadosCache(cacheChave, data);
+        exibirPrecosNaTela(data);
+    } catch (error) {
+        console.error("Erro na API de preços, tentando ler cache expirado:", error);
+        // Fallback de segurança caso a rede caia totalmente
+        const cacheExpirado = localStorage.getItem(cacheChave);
+        if (cacheExpirado) exibirPrecosNaTela(JSON.parse(cacheExpirado).conteudo);
     }
 }
+
+// Bloco isolado apenas para manipulação de layout (Agrada o interpretador do Google)
+function exibirPrecosNaTela(data) {
+    // Insira aqui exatamente a lógica que você já usa hoje para atualizar os elementos HTML 
+    // com os valores de data.bitcoin.brl, data.ethereum.brl, etc.
+}
+
 
 function calcCoin() {
     const val = parseFloat(q('coin-input').value) || 0;
@@ -1139,25 +1172,22 @@ function calcCoin() {
     }
 }
 
-// Inicialização correta
 // Inicialização com Estrangulamento (Throttling) para evitar bloqueio da API
 window.onload = async () => {
     applyLang(getLang());
 
-    // Tarefa 1: Puxa o preço atual imediatamente
-    await fetchPrices();
+    // Função 1: Preço Atual executa IMEDIATAMENTE (T = 0s)
+    await inicializarPrecos();
 
-    // Tarefa 2 (Com Timer): Só carrega o gráfico pesadão 4 segundos DEPOIS, 
-    // dando tempo para a API respirar e não encavalar com a Tarefa 1.
+    // Função 2: O Gráfico Histórico roda com uma janela de segurança de 3 segundos (T = 3s)
     setTimeout(() => {
-        loadChart();
-    }, 4000);
+        inicializarGrafico();
+    }, 3000);
 
-    // Tarefa 3 (Periódica): Aumentamos o ciclo de 60s para 120s (2 minutos).
-    // Assim, se o usuário largar a aba aberta no celular, ele não gasta seu limite da API à toa.
+    // Ciclo de atualização contínuo espaçado (a cada 3 minutos) para monitoramento em segundo plano
     setInterval(async () => {
-        await fetchPrices();
-    }, 120000);
+        await inicializarPrecos(true); // 'true' força atualização se o usuário esquecer a aba aberta
+    }, 180000);
 };
     
 function toggleChartHelp(){
@@ -1181,148 +1211,95 @@ async function loadChart(days=7, btn=null){
 
   if(btn) btn.classList.add('active');
 
-  const coinId =
-    currentCoin === 'btc'
-    ? 'bitcoin'
-    : 'ethereum';
+// --- BUSCA B: GRÁFICO COM CACHE ---
+async function loadChart(days=7, btn=null){
+  document.querySelectorAll('.chart-tab').forEach(b=>b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
 
-  const url =
-    `https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=usd&days=${days}`;
+  const coinId = currentCoin === 'btc' ? 'bitcoin' : 'ethereum';
+  const cacheChave = `grafico_${coinId}_${days}`;
+  const cacheValido = obterDadosCache(cacheChave, 10); // 10 minutos de validade para o gráfico
+
+  if (cacheValido) {
+      renderizarGraficoNaTela(cacheValido, days, coinId);
+      return;
+  }
+
+  const url = `https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=usd&days=${days}`;
 
   try{
-
     const res = await fetch(url);
-
+    if (!res.ok) throw new Error("API Limit");
     const data = await res.json();
-    const prices = data.prices || [];
-
-    // NOVA TRAVA: Se não vier preço, cancela o desenho do gráfico
-    if(prices.length === 0){
-        console.warn("API bloqueou os dados do gráfico.");
-        return;
+    
+    salvarDadosCache(cacheChave, data);
+    renderizarGraficoNaTela(data, days, coinId);
+  }catch(err){
+    console.error("Gráfico bloqueado pela API, buscando no cache...", err);
+    const stringAntiga = localStorage.getItem(cacheChave);
+    if (stringAntiga) {
+        renderizarGraficoNaTela(JSON.parse(stringAntiga).conteudo, days, coinId);
     }
+  }
+}
 
+// Lógica de desenho do Chart.js intocada
+function renderizarGraficoNaTela(data, days, coinId) {
+    const prices = data.prices || [];
+    if(prices.length === 0) return;
 
     const labels = prices.map(p=>{
       const d = new Date(p[0]);
-
       if(days <= 7){
-        return d.toLocaleDateString(
-          getLang()==='pt'?'pt-BR':'en-US',
-          { day:'2-digit', month:'2-digit' }
-        );
+        return d.toLocaleDateString(getLang()==='pt'?'pt-BR':'en-US',{ day:'2-digit', month:'2-digit' });
       }
-
-      return d.toLocaleDateString(
-        getLang()==='pt'?'pt-BR':'en-US',
-        { month:'short' }
-      );
+      return d.toLocaleDateString(getLang()==='pt'?'pt-BR':'en-US',{ month:'short' });
     });
 
     const values = prices.map(p=>p[1]);
-
-    const ctx =
-      document
-      .getElementById('priceChart');
+    const ctx = document.getElementById('priceChart');
 
     if(priceChart){
       priceChart.destroy();
     }
 
-    const isBTC = currentCoin === 'btc';
+    const isBTC = coinId === 'bitcoin';
 
     priceChart = new Chart(ctx, {   
      type:'line',
-
       data:{
         labels,
-
         datasets:[{
           label:isBTC?'Bitcoin':'Ethereum',
           data:values,
           tension:.35,
           borderWidth:2,
           pointRadius:0,
-          borderColor:isBTC
-            ? '#f7931a'
-            : '#627eea',
-
+          borderColor:isBTC ? '#f7931a' : '#627eea',
           fill:true,
-
-          backgroundColor:isBTC
-            ? 'rgba(247,147,26,.08)'
-            : 'rgba(98,126,234,.08)'
+          backgroundColor:isBTC ? 'rgba(247,147,26,.08)' : 'rgba(98,126,234,.08)'
         }]
       },
-
       options:{
         responsive:true,
-
-        plugins:{
-          legend:{
-            labels:{
-              color:'#d7d2c8'
-            }
-          }
-        },
-
+        plugins:{ legend:{ labels:{ color:'#d7d2c8' } } },
         scales:{
-
-          x:{
-            ticks:{
-              color:'#8f887c'
-            },
-            grid:{
-              color:'rgba(255,255,255,.04)'
-            }
-          },
-
-          y:{
-            ticks:{
-              color:'#8f887c',
-
-              callback:value=>'$'+
-              value.toLocaleString()
-            },
-
-            grid:{
-              color:'rgba(255,255,255,.04)'
-            }
-          }
-
+          x:{ ticks:{ color:'#8f887c' }, grid:{ color:'rgba(255,255,255,.04)' } },
+          y:{ ticks:{ color:'#8f887c', callback:value=>'$'+value.toLocaleString() }, grid:{ color:'rgba(255,255,255,.04)' } }
         }
-
       }
-
     });
 
-    const sub =
-      document.getElementById('chart-sub');
-
+    const sub = document.getElementById('chart-sub');
     if(sub){
-
       if(getLang()==='pt'){
-
-        sub.textContent =
-          `${isBTC?'Bitcoin':'Ethereum'} nos últimos ${days===365?'12 meses':days+' dias'}`;
-
+        sub.textContent = `${isBTC?'Bitcoin':'Ethereum'} nos últimos ${days===365?'12 meses':days+' dias'}`;
       }else{
-
-        sub.textContent =
-          `${isBTC?'Bitcoin':'Ethereum'} over the last ${days===365?'12 months':days+' days'}`;
-
+        sub.textContent = `${isBTC?'Bitcoin':'Ethereum'} over the last ${days===365?'12 months':days+' days'}`;
       }
-
     }
+}
 
-  }catch(err){
-
-    console.error(err);
-
-  }
-
-    }
-    
    function calcularRetorno() {
     // Verifica se já está em contagem (evita spam)
     if (window.simulating) return;
