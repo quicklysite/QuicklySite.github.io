@@ -1126,37 +1126,58 @@ function setCoin(coin) {
 
 }
     
-async function inicializarPrecos(forçarAtualizacao = false) {
+// --- BUSCA A: PREÇOS COM CACHE ---
+async function fetchPrices(forcarAtualizacao = false) {
+    const l = getLang();
+    q('status').textContent = T[l].loading;
+    
     const cacheChave = 'cripto_precos_atuais';
-    const cacheValido = obterDadosCache(cacheChave, 3); // Validade matemática de 3 minutos
+    const cacheValido = obterDadosCache(cacheChave, 3); // 3 minutos de validade
 
-    if (cacheValido && !forçarAtualizacao) {
-        // Se houver cache válido, renderiza direto na tela sem gastar internet/API
-        exibirPrecosNaTela(cacheValido);
+    // Se o cache for válido, não chama a API
+    if (cacheValido && !forcarAtualizacao) {
+        aplicarPrecosNaTela(cacheValido, l);
         return;
     }
 
-    // Caso contrário, faz a requisição normal para a API
     try {
-        const response = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=brl,usd&include_24hr_change=true');
-        const data = await response.json();
+        const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=brl,usd&include_24hr_change=true');
+        if (!res.ok) throw new Error("API Limit");
+        const d = await res.json();
         
-        salvarDadosCache(cacheChave, data);
-        exibirPrecosNaTela(data);
-    } catch (error) {
-        console.error("Erro na API de preços, tentando ler cache expirado:", error);
-        // Fallback de segurança caso a rede caia totalmente
-        const cacheExpirado = localStorage.getItem(cacheChave);
-        if (cacheExpirado) exibirPrecosNaTela(JSON.parse(cacheExpirado).conteudo);
+        salvarDadosCache(cacheChave, d);
+        aplicarPrecosNaTela(d, l);
+    } catch (e) {
+        // Fallback: Se a rede falhar ou a API bloquear, puxa o último preço salvo (mesmo vencido)
+        const stringAntiga = localStorage.getItem(cacheChave);
+        if (stringAntiga) {
+            aplicarPrecosNaTela(JSON.parse(stringAntiga).conteudo, l);
+            q('status').textContent = "Modo Offline (Dados em Cache)";
+        } else {
+            q('status').textContent = T[l].err;
+        }
     }
 }
 
-// Bloco isolado apenas para manipulação de layout (Agrada o interpretador do Google)
-function exibirPrecosNaTela(data) {
-    // Insira aqui exatamente a lógica que você já usa hoje para atualizar os elementos HTML 
-    // com os valores de data.bitcoin.brl, data.ethereum.brl, etc.
-}
+// Lógica isolada que atualiza o visual da sua página
+function aplicarPrecosNaTela(d, l) {
+    updateMarketStatus(d);
+    pBTC_BRL = d.bitcoin.brl; pBTC_USD = d.bitcoin.usd;
+    pETH_BRL = d.ethereum.brl; pETH_USD = d.ethereum.usd;
 
+    q('btc-brl').textContent = 'R$ ' + pBTC_BRL.toLocaleString('pt-BR');
+    q('btc-usd').textContent = 'USD $ ' + pBTC_USD.toLocaleString('en-US');
+    const btcC = d.bitcoin.usd_24h_change;
+    q('btc-change').innerHTML = `<span class="${btcC >= 0 ? 'change-up' : 'change-down'}">${btcC >= 0 ? '+' : ''}${btcC.toFixed(2)}% (24h)</span>`;
+
+    q('eth-brl').textContent = 'R$ ' + pETH_BRL.toLocaleString('pt-BR');
+    q('eth-usd').textContent = 'USD $ ' + pETH_USD.toLocaleString('en-US');
+    const ethC = d.ethereum.usd_24h_change;
+    q('eth-change').innerHTML = `<span class="${ethC >= 0 ? 'change-up' : 'change-down'}">${ethC >= 0 ? '+' : ''}${ethC.toFixed(2)}% (24h)</span>`;
+
+    q('status').textContent = T[l].last + new Date().toLocaleTimeString();
+    calcCoin();
+}
 
 function calcCoin() {
     const val = parseFloat(q('coin-input').value) || 0;
