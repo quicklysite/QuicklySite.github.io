@@ -625,29 +625,29 @@
 </div>
     <!-- ── HISTORICAL SIMULATOR ── -->
     <div class="content-block" id="simulador-historico" style="margin-top: 40px; border-top: 2px solid #333; padding: 25px 0;">
-        <h3 style="color: #f7931a; margin-bottom: 5px;">Análise de Desempenho Histórico</h3>
-        <p style="font-size: 0.85rem; color: #8f887c; margin-bottom: 20px;">
+        <h3 id="sim-title" style="color: #f7931a; margin-bottom: 5px;">Análise de Desempenho Histórico</h3>
+        <p id="sim-desc" style="font-size: 0.85rem; color: #8f887c; margin-bottom: 20px;">
             Entenda o comportamento do preço comparando períodos específicos. 
             Dados baseados no histórico real de mercado.
         </p>
         
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px;">
-            <input type="number" id="sim-val" placeholder="Valor (R$)" style="padding: 12px; border-radius: 4px; border: 1px solid #444; background: #1a1a1a; color: white;">
+            <input type="number" id="sim-val" placeholder="Valor" style="padding: 12px; border-radius: 4px; border: 1px solid #444; background: #1a1a1a; color: white;">
             <select id="sim-date" style="padding: 12px; border-radius: 4px; border: 1px solid #444; background: #1a1a1a; color: white;">
-                <option value="7">7 dias atrás</option>
-                <option value="30">1 mês atrás</option>
-                <option value="90">3 meses atrás</option>
-                <option value="180">6 meses atrás</option>
-                <option value="365">1 ano atrás</option>
-                <option value="730">2 anos atrás</option>
-                <option value="1095">3 anos atrás</option>
-                <option value="1825">5 anos atrás</option>
+                <option id="opt-7" value="7">7 dias atrás</option>
+                <option id="opt-30" value="30">1 mês atrás</option>
+                <option id="opt-90" value="90">3 meses atrás</option>
+                <option id="opt-180" value="180">6 meses atrás</option>
+                <option id="opt-365" value="365">1 ano atrás</option>
+                <option id="opt-730" value="730">2 anos atrás</option>
+                <option id="opt-1095" value="1095">3 anos atrás</option>
+                <option id="opt-1825" value="1825">5 anos atrás</option>
             </select>
         </div>
-        <button onclick="calcularRetorno()" style="width: 100%; padding: 14px; background: #f7931a; border: none; border-radius: 4px; color: #000; font-weight: bold; cursor: pointer;">Calcular Proporção</button>
+        <button id="sim-btn" onclick="calcularRetorno()" style="width: 100%; padding: 14px; background: #f7931a; border: none; border-radius: 4px; color: #000; font-weight: bold; cursor: pointer;">Calcular Proporção</button>
         
         <div id="sim-result" style="margin-top: 20px; padding: 20px; border-radius: 8px; background: rgba(76,175,80,.08); border: 1.5px solid rgba(76,175,80,.3); text-align: center; min-height: 80px; display: flex; align-items: center; justify-content: center;">
-            <span style="color: #8f887c; font-size: 0.9rem;">Insira um valor para ver a variação histórica.</span>
+            <span id="sim-empty" style="color: #8f887c; font-size: 0.9rem;">Insira um valor para ver a variação histórica.</span>
         </div>
     </div>
 
@@ -732,12 +732,12 @@
 
     <p id="p-source" style="margin-top:20px; font-size:.82rem; opacity:.6;">O preço exibido aqui vem diretamente da API da <strong>CoinGecko</strong>, atualizada a cada 60 segundos.</p>
     <div style="margin-top: 35px; border-top: 1px solid rgba(255,255,255,.06); padding-top: 25px;">
-        <h3 style="color: var(--accent); font-family: 'Playfair Display', serif; font-size: 1.1rem; margin-bottom: 15px;">⚡ Comparativo: Pix vs TED vs Bitcoin</h3>
+        <h3 id="tab-title" style="color: var(--accent); font-family: 'Playfair Display', serif; font-size: 1.1rem; margin-bottom: 15px;">⚡ Comparativo: Pix vs TED vs Bitcoin</h3>
         <div style="overflow-x: auto;">
             <table style="width: 100%; border-collapse: collapse; text-align: left; background: var(--surface2); border-radius: var(--radius); overflow: hidden; font-size: 0.9rem;">
                 <thead>
                     <tr style="background: rgba(255,255,255,0.05); border-bottom: 2px solid rgba(255,255,255,0.1);">
-                        <th style="padding: 16px; color: var(--muted); font-weight: 600;">Recurso</th>
+                        <th id="tab-h1" style="padding: 16px; color: var(--muted); font-weight: 600;">Recurso</th>
                         <th style="padding: 16px; color: #4caf50; font-weight: 600;">Pix</th>
                         <th style="padding: 16px; color: #f44336; font-weight: 600;">TED / DOC</th>
                         <th style="padding: 16px; color: var(--btc); font-weight: 600;">Bitcoin</th>
@@ -745,51 +745,53 @@
                 </thead>
                 <tbody>
                     <tr style="border-bottom: 1px solid rgba(255,255,255,0.03);">
-                        <td style="padding: 16px; color: var(--text);">Disponibilidade</td>
+                        <td id="tab-d1" style="padding: 16px; color: var(--text);">Disponibilidade</td>
                         <td style="padding: 16px; color: var(--text);">24/7</td>
-                        <td style="padding: 16px; color: var(--text);">Dias úteis</td>
+                        <td id="tab-d3" style="padding: 16px; color: var(--text);">Dias úteis</td>
                         <td style="padding: 16px; color: var(--text);">24/7</td>
                     </tr>
                     <tr style="border-bottom: 1px solid rgba(255,255,255,0.03);">
-                        <td style="padding: 16px; color: var(--text);">Alcance</td>
-                        <td style="padding: 16px; color: var(--text);">Apenas Brasil</td>
-                        <td style="padding: 16px; color: var(--text);">Apenas Brasil</td>
-                        <td style="padding: 16px; color: var(--accent); font-weight: 600;">Global (Sem fronteiras)</td>
+                        <td id="tab-a1" style="padding: 16px; color: var(--text);">Alcance</td>
+                        <td id="tab-a2" style="padding: 16px; color: var(--text);">Apenas Brasil</td>
+                        <td id="tab-a3" style="padding: 16px; color: var(--text);">Apenas Brasil</td>
+                        <td id="tab-a4" style="padding: 16px; color: var(--accent); font-weight: 600;">Global (Sem fronteiras)</td>
                     </tr>
                     <tr style="border-bottom: 1px solid rgba(255,255,255,0.03);">
-                        <td style="padding: 16px; color: var(--text);">Controle</td>
-                        <td style="padding: 16px; color: var(--text);">Banco Central</td>
-                        <td style="padding: 16px; color: var(--text);">Bancos</td>
-                        <td style="padding: 16px; color: var(--accent); font-weight: 600;">Descentralizado</td>
+                        <td id="tab-c1" style="padding: 16px; color: var(--text);">Controle</td>
+                        <td id="tab-c2" style="padding: 16px; color: var(--text);">Banco Central</td>
+                        <td id="tab-c3" style="padding: 16px; color: var(--text);">Bancos</td>
+                        <td id="tab-c4" style="padding: 16px; color: var(--accent); font-weight: 600;">Descentralizado</td>
                     </tr>
                     <tr>
-                        <td style="padding: 16px; color: var(--text);">Reversibilidade</td>
-                        <td style="padding: 16px; color: var(--text);">Mecanismo MED</td>
-                        <td style="padding: 16px; color: var(--text);">Depende do Banco</td>
-                        <td style="padding: 16px; color: var(--text);">Irreversível</td>
+                        <td id="tab-r1" style="padding: 16px; color: var(--text);">Reversibilidade</td>
+                        <td id="tab-r2" style="padding: 16px; color: var(--text);">Mecanismo MED</td>
+                        <td id="tab-r3" style="padding: 16px; color: var(--text);">Depende do Banco</td>
+                        <td id="tab-r4" style="padding: 16px; color: var(--text);">Irreversível</td>
                     </tr>
                 </tbody>
             </table>
         </div>
-        <p style="font-size: 0.8rem; color: var(--muted); margin-top: 10px; text-align: left;">* Tabela simplificada para rápida visualização.</p>
-            <div class="content-block" style="margin-top: 40px; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 30px;">
-        <h3 style="color: var(--accent); font-family: 'Playfair Display', serif; font-size: 1.1rem; margin-bottom: 20px;">❓ Perguntas Frequentes Rápida</h3>
+        <p id="tab-note" style="font-size: 0.8rem; color: var(--muted); margin-top: 10px; text-align: left;">* Tabela simplificada para rápida visualização.</p>
+    </div>
+
+    <div class="content-block" style="margin-top: 40px; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 30px;">
+        <h3 id="faq-title" style="color: var(--accent); font-family: 'Playfair Display', serif; font-size: 1.1rem; margin-bottom: 20px;">❓ Perguntas Frequentes Rápida</h3>
         
         <details style="background: var(--surface2); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; margin-bottom: 12px; padding: 15px; cursor: pointer;">
-            <summary style="font-weight: 600; color: var(--text); outline: none; font-size: 0.95rem;">O que é uma carteira de Bitcoin (Wallet)?</summary>
-            <p style="margin-top: 12px; font-size: 0.9rem; color: var(--muted); line-height: 1.6; margin-bottom: 0;">Uma carteira de Bitcoin não guarda moedas físicas, mas sim as "chaves criptográficas" que provam que você é o dono daquele saldo na rede. Existem opções em software (apps de celular) e hardware (dispositivos físicos, parecidos com pendrives, muito mais seguros).</p>
+            <summary id="faq-q1" style="font-weight: 600; color: var(--text); outline: none; font-size: 0.95rem;">O que é uma carteira de Bitcoin (Wallet)?</summary>
+            <p id="faq-a1" style="margin-top: 12px; font-size: 0.9rem; color: var(--muted); line-height: 1.6; margin-bottom: 0;">Uma carteira de Bitcoin não guarda moedas físicas, mas sim as "chaves criptográficas" que provam que você é o dono daquele saldo na rede. Existem opções em software (apps de celular) e hardware (dispositivos físicos, parecidos com pendrives, muito mais seguros).</p>
         </details>
 
         <details style="background: var(--surface2); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; margin-bottom: 12px; padding: 15px; cursor: pointer;">
-            <summary style="font-weight: 600; color: var(--text); outline: none; font-size: 0.95rem;">O que acontece se eu enviar para o endereço errado?</summary>
-            <p style="margin-top: 12px; font-size: 0.9rem; color: var(--muted); line-height: 1.6; margin-bottom: 0;">Ao contrário do sistema bancário tradicional (onde você pode pedir estorno), as transações em blockchain são <strong>100% irreversíveis</strong>. Se você enviar para o endereço de outra pessoa ou de uma rede incompatível, as moedas são perdidas para sempre. Sempre confira o endereço copiado.</p>
+            <summary id="faq-q2" style="font-weight: 600; color: var(--text); outline: none; font-size: 0.95rem;">O que acontece se eu enviar para o endereço errado?</summary>
+            <p id="faq-a2" style="margin-top: 12px; font-size: 0.9rem; color: var(--muted); line-height: 1.6; margin-bottom: 0;">Ao contrário do sistema bancário tradicional (onde você pode pedir estorno), as transações em blockchain são <strong>100% irreversíveis</strong>. Se você enviar para o endereço de outra pessoa ou de uma rede incompatível, as moedas são perdidas para sempre. Sempre confira o endereço copiado.</p>
         </details>
 
         <details style="background: var(--surface2); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; margin-bottom: 12px; padding: 15px; cursor: pointer;">
-            <summary style="font-weight: 600; color: var(--text); outline: none; font-size: 0.95rem;">Preciso comprar 1 Bitcoin inteiro?</summary>
-            <p style="margin-top: 12px; font-size: 0.9rem; color: var(--muted); line-height: 1.6; margin-bottom: 0;">Não. O Bitcoin é altamente divisível (em até 8 casas decimais). A menor fração da moeda é chamada de <strong>Satoshi</strong>. Nas corretoras brasileiras, você geralmente pode investir comprando a partir de R$ 50, adquirindo assim uma pequena fração da moeda.</p>
+            <summary id="faq-q3" style="font-weight: 600; color: var(--text); outline: none; font-size: 0.95rem;">Preciso comprar 1 Bitcoin inteiro?</summary>
+            <p id="faq-a3" style="margin-top: 12px; font-size: 0.9rem; color: var(--muted); line-height: 1.6; margin-bottom: 0;">Não. O Bitcoin é altamente divisível (em até 8 casas decimais). A menor fração da moeda é chamada de <strong>Satoshi</strong>. Nas corretoras brasileiras, você geralmente pode investir comprando a partir de R$ 50, adquirindo assim uma pequena fração da moeda.</p>
         </details>
-            </div>
+    </div>
         
     </div>
         
