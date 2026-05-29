@@ -219,94 +219,99 @@
         </div>
     </div>
 
+    <!-- ANÚNCIO TOP: ALTA RETENÇÃO -->
     <div class="ad-slot">Anúncio</div>
 
+    <!-- CARD 1: SELEÇÃO DE INGREDIENTES -->
     <div class="conv-card">
         <div class="conv-row">
-            <div>
-              <label id="label-ingredient">Ingrediente</label>
+            <div style="width: 100%;">
+                <label id="label-ingredient">Ingrediente</label>
                 <div style="display: flex; gap: 10px; margin-bottom: 14px;">
-    <button type="button" onclick="updateIngredientList('dry')" id="btn-dry" style="flex:1; padding: 10px 12px; border-radius: 6px; border: 1.5px solid rgba(232,199,122,.2); background: var(--surface2); color: var(--text); font-size:.87rem; transition:all .2s; cursor:pointer;">Secos</button>
-    <button type="button" onclick="updateIngredientList('wet')" id="btn-wet" style="flex:1; padding: 10px 12px; border-radius: 6px; border: 1.5px solid rgba(232,199,122,.2); background: var(--surface2); color: var(--text); font-size:.87rem; transition:all .2s; cursor:pointer;">Líquidos</button>
-</div>
-<select id="k-ingredient" onchange="convertKitchen()" style="width: 100%; margin-bottom: 15px;">
-    </select>
+                    <button type="button" onclick="updateIngredientList('dry')" id="btn-dry" style="flex:1; padding: 10px 12px; border-radius: 6px; border: 1.5px solid rgba(232,199,122,.2); background: var(--surface2); color: var(--text); font-size:.87rem; transition:all .2s; cursor:pointer;">Secos</button>
+                    <button type="button" onclick="updateIngredientList('wet')" id="btn-wet" style="flex:1; padding: 10px 12px; border-radius: 6px; border: 1.5px solid rgba(232,199,122,.2); background: var(--surface2); color: var(--text); font-size:.87rem; transition:all .2s; cursor:pointer;">Líquidos</button>
+                </div>
+                <select id="k-ingredient" onchange="convertKitchen()" style="width: 100%; margin-bottom: 15px;"></select>
             </div>
         </div>
         <p id="density-info" style="font-size:.85rem; color:var(--muted); margin-top:8px;">—</p>
     </div>
-<div style="background:rgba(76,175,80,.08); border:1.5px solid rgba(76,175,80,.3); border-radius:var(--radius); padding:22px; margin:20px 0;">
-    <p style="font-size:.9rem; color:var(--text); opacity:.9; line-height:1.7; margin:0;">
-        <strong style="color:#4caf50;">💧 Aviso Técnico — Variação de Densidades:</strong> O peso real pode variar conforme umidade do ar, marca do produto, compactação e altitude. Densidades aqui são médias em condições padrão (20°C, 1 atm). Para receitas profissionais, use balança.
-    </p>
-</div>
+
+    <!-- AVISO TÉCNICO DE DENSIDADES -->
+    <div style="background:rgba(76,175,80,.08); border:1.5px solid rgba(76,175,80,.3); border-radius:var(--radius); padding:22px; margin:20px 0;">
+        <p style="font-size:.9rem; color:var(--text); opacity:.9; line-height:1.7; margin:0;">
+            <strong id="tech-warn-bold" style="color:#4caf50;">💧 Aviso Técnico — Variação de Densidades:</strong> <span id="tech-warn-text">O peso real pode variar conforme umidade do ar, marca do produto, compactação e altitude. Densidades aqui são médias em condições padrão (20°C, 1 atm). Para receitas profissionais, use balança.</span>
+        </p>
+    </div>
+
+    <!-- CARD 2: CALCULADORA INPUT/OUTPUT -->
     <div class="conv-card">
         <div class="conv-row">
-    <div>
-        <label id="label-val" style="margin-top: 15px; font-size:.78rem; color:var(--muted); text-transform:uppercase; letter-spacing:.08em; display:block; margin-bottom:8px;">Quantidade da Receita (em Xícaras ou Medidas)</label>
-        <div style="display: flex; gap: 10px; align-items: center;">
-            <input type="number" id="k-val" value="1" oninput="convertKitchen()" style="flex: 1;" placeholder="Ex: 2.5" />
-            <select id="k-from" onchange="convertKitchen()" style="flex: 1; margin: 0;">
-                <option value="cup_us" id="opt-cupus">Xícara Americana (240ml)</option>
-                <option value="cup_br" id="opt-cupbr">Xícara Brasileira (200ml)</option>
-                <option value="tbsp" id="opt-tbsp">Colher de sopa (15ml)</option>
-                <option value="tsp" id="opt-tsp">Colher de chá (5ml)</option>
-                <option value="floz" id="opt-floz">Fl oz (30ml)</option>
-            </select>
-        </div>
-        <div style="display: flex; gap: 10px; margin-top: 16px;">
-            <div class="result-box" style="flex: 1; font-size: 1.3rem; padding: 12px; display: flex; flex-direction: column; justify-content: center;">
-                <span style="font-size: 0.75rem; color: var(--muted); font-family: 'DM Sans', sans-serif; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px;">Volume Convertido</span>
-                <span id="k-result-vol">—</span>
+            <div style="width: 100%;">
+                <label id="label-val" style="font-size:.78rem; color:var(--muted); text-transform:uppercase; letter-spacing:.08em; display:block; margin-bottom:8px;">Quantidade da Receita (em Xícaras ou Medidas)</label>
+                <div style="display: flex; gap: 10px; align-items: center;">
+                    <input type="number" id="k-val" value="1" oninput="convertKitchen()" style="flex: 1;" placeholder="Ex: 2.5" />
+                    <select id="k-from" onchange="convertKitchen()" style="flex: 1; margin: 0;">
+                        <option value="cup_us" id="opt-cupus">Xícara Americana (240ml)</option>
+                        <option value="cup_br" id="opt-cupbr">Xícara Brasileira (200ml)</option>
+                        <option value="tbsp" id="opt-tbsp">Colher de sopa (15ml)</option>
+                        <option value="tsp" id="opt-tsp">Colher de chá (5ml)</option>
+                        <option value="floz" id="opt-floz">Fl oz (30ml)</option>
+                    </select>
+                </div>
+                <div style="display: flex; gap: 10px; margin-top: 16px;">
+                    <div class="result-box" style="flex: 1; font-size: 1.3rem; padding: 12px; display: flex; flex-direction: column; justify-content: center;">
+                        <span id="label-res-vol" style="font-size: 0.75rem; color: var(--muted); font-family: 'DM Sans', sans-serif; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px;">Volume Convertido</span>
+                        <span id="k-result-vol">—</span>
+                    </div>
+                    <div class="result-box" style="flex: 1; font-size: 1.3rem; padding: 12px; border-color: #4caf50; color: #4caf50; display: flex; flex-direction: column; justify-content: center;">
+                        <span id="label-res-weight" style="font-size: 0.75rem; color: #4caf50; opacity: 0.8; font-family: 'DM Sans', sans-serif; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px;">Peso Estimado</span>
+                        <span id="k-result-weight">—</span>
+                    </div>
+                </div>
+                <div class="warning-box" id="k-warning">
+                    ⚠️ <strong id="warn-bold">Atenção:</strong> <span id="warn-text">A xícara brasileira tem 200ml. A xícara americana (cup) tem 240ml. Verifique qual padrão sua receita usa.</span>
+                </div>
             </div>
-            <div class="result-box" style="flex: 1; font-size: 1.3rem; padding: 12px; border-color: #4caf50; color: #4caf50; display: flex; flex-direction: column; justify-content: center;">
-                <span style="font-size: 0.75rem; color: #4caf50; opacity: 0.8; font-family: 'DM Sans', sans-serif; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px;">Peso Estimado</span>
-                <span id="k-result-weight">—</span>
-            </div>
-        </div>
-        <div class="warning-box" id="k-warning">
-            ⚠️ <strong id="warn-bold">Atenção:</strong> <span id="warn-text">A xícara brasileira tem 200ml. A xícara americana (cup) tem 240ml. Verifique qual padrão sua receita usa.</span>
         </div>
     </div>
+
+    <!-- CARD 3: TABELA DE EQUIVALÊNCIA -->
     <div class="conv-card">
         <h2 id="table-title">📌 Referência Rápida</h2>
-
-<div class="table-container">
-    <table class="ref-table">
-        <thead>
-            <tr>
-                <th>Medida</th>
-                <th>Volume</th>
-                <th>Equivalência</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr><td><strong>1 Cup (US)</strong></td><td>240 ml</td><td>16 tbsp</td></tr>
-            <tr><td><strong>1 Xícara (BR)</strong></td><td>200 ml</td><td>13.3 tbsp</td></tr>
-            <tr><td><strong>1 Fl oz</strong></td><td>30 ml</td><td>2 tbsp</td></tr>
-            <tr><td><strong>1 Colher Sopa</strong></td><td>15 ml</td><td>3 tsp</td></tr>
-            <tr><td><strong>1 Colher Chá</strong></td><td>5 ml</td><td>—</td></tr>
-        </tbody>
-    </table>
-</div>
-<p style="font-size: 0.85rem; color: #8f887c; font-style: italic;">
-    *Nota: A diferença de 40ml entre a Cup US e a Xícara BR é o fator crítico para o sucesso em receitas internacionais.
-</p>
+        <div class="table-container">
+            <table class="ref-table">
+                <thead>
+                    <tr>
+                        <th id="th-measure">Medida</th>
+                        <th id="th-volume">Volume</th>
+                        <th id="th-equals">Equivalência</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>1 Cup (US)</strong></td><td>240 ml</td><td>16 tbsp</td></tr>
+                    <tr><td><strong>1 Xícara (BR)</strong></td><td>200 ml</td><td>13.3 tbsp</td></tr>
+                    <tr><td><strong>1 Fl oz</strong></td><td>30 ml</td><td>2 tbsp</td></tr>
+                    <tr><td><strong>1 Colher Sopa</strong></td><td>15 ml</td><td>3 tsp</td></tr>
+                    <tr><td><strong>1 Colher Chá</strong></td><td>5 ml</td><td>—</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <p id="table-note" style="font-size: 0.85rem; color: #8f887c; font-style: italic;">
+            *Nota: A diferença de 40ml entre a Cup US e a Xícara BR é o fator crítico para o sucesso em receitas internacionais.
+        </p>
     </div>
-    <!-- ANÚNCIO ENTRE TABELA E TEXTO -->
+
+    <!-- ANÚNCIO ESTRATÉGICO: TRAVA VISUAL DO USUÁRIO ANTES DO CONTEÚDO SEO -->
     <div class="ad-slot">Anúncio</div>
+
     <!-- BLOCO DE CONTEÚDO SEO -->
     <div class="content-block">
         <h2 id="content-title">A Ciência da Adaptação: Reproduzindo Receitas Globais com Precisão</h2>
-        
         <p id="content-p1">Com a explosão de vídeos curtos ensinando técnicas culinárias, replicar na sua cozinha aquele prato visto em um perfil estrangeiro exige muito mais do que apenas traduzir a lista de ingredientes. O verdadeiro desafio está na <strong>metrologia gastronômica</strong>. O padrão de medidas americano ou europeu diverge do sistema brasileiro, e ignorar esse detalhe é o atalho mais rápido para desestabilizar uma receita inteira.</p>
-        
         <p id="content-p2"><strong>A armadilha invisível da xícara:</strong> O erro mais comum ocorre na conversão volumétrica primária. A xícara brasileira padrão (estabelecida comercialmente) comporta 200ml, enquanto a xícara americana — a famosa <em>cup</em> — comporta 240ml. Essa variação de 20% é fatal. Se um criador de conteúdo americano pede 2 <em>cups</em> de farinha e você utiliza medidores nacionais, o seu preparo perderá 80ml de estrutura seca, alterando drasticamente a textura da massa.</p>
-
         <p id="content-p3">A situação se torna ainda mais crítica quando lidamos com líquidos, marinadas ou molhos emulsionados. Ao tentar reproduzir o "molho secreto" de uma rede de fast-food ou um teriyaki autêntico, a proporção exata de líquidos como saquê mirin, shoyu ou a carga de especiarias (como mostarda em pó e páprica defumada) dita o equilíbrio fino entre o salgado, o doce e o umami. Um erro de conversão de onças fluidas (<em>fl oz</em>) para mililitros pode deixar o preparo ácido demais ou arruinar o ponto de redução.</p>
-
         <p id="content-p4"><strong>Densidade Aparente vs. Volume Real:</strong> Outro erro amador é presumir que todos os ingredientes pesam o mesmo dentro de um medidor. Uma colher de sopa de água pesa 15g, mas a mesma colher cheia de cacau em pó pesa cerca de 6g. Por isso, conversores simplistas falham.</p>
-
         <p id="content-p5">Esta ferramenta foi desenvolvida com base no cálculo de <strong>densidade específica</strong> de cada ingrediente. O intuito é permitir que você assista a qualquer receita internacional, aplique a engenharia reversa nas medidas e alcance o resultado exato planejado pelo autor original, sem desperdiçar ingredientes ou depender de aproximações.</p>
     </div>
     <div class="ad-slot">Anúncio</div>
@@ -350,21 +355,15 @@ const T = {
   pt: {
     backLink:'← Voltar ao NameForge', title:'🍳 Medidas de Cozinha',
     subtitle:'Converta xícaras, colheres, mililitros e fl oz entre os padrões brasileiro e americano.',
-    labelFrom:'De', labelTo:'Para', labelVal:'Quantidade', labelIngredient:'Ingrediente',
-    optCupBr:'Xícara BR (200ml)', optCupUs:'Xícara US (240ml)',
-    optTbsp:'Colher de sopa (15ml)', optTsp:'Colher de chá (5ml)',
-    optMl:'Mililitro (ml)', optFloz:'Fl oz (30ml)',
-    optFlour:'Farinha de Trigo', optSugar:'Açúcar Branco', optButter:'Manteiga',
-    optOil:'Óleo Vegetal', optWater:'Água', optMilk:'Leite Integral',
-    optCocoa:'Pó de Cacau', optCornstarch:'Amido de Milho', optHoney:'Mel', optSalt:'Sal de Cozinha',
+    labelVal:'Quantidade da Receita (em Xícaras ou Medidas)', labelIngredient:'Ingrediente',
+    btnDry:'Secos', btnWet:'Líquidos',
+    optCupBr:'Xícara Brasileira (200ml)', optCupUs:'Xícara Americana (240ml)',
+    optTbsp:'Colher de sopa (15ml)', optTsp:'Colher de chá (5ml)', optFloz:'Fl oz (30ml)',
     warnBold:'Atenção:', warnText:'A xícara brasileira tem 200ml. A xícara americana (cup) tem 240ml. Verifique qual padrão sua receita usa.',
-    tableTitle:'📌 Tabela de equivalência', thMeasure:'Medida', thEquals:'Equivale a',
-    tdR1a:'1 xícara BR', tdR1b:'≈ 13 colheres de sopa',
-    tdR2a:'1 xícara US (cup)', tdR2b:'16 colheres de sopa',
-    tdR3a:'½ xícara BR', tdR3b:'≈ 6.5 colheres de sopa',
-    tdR4a:'½ xícara US', tdR4b:'8 colheres de sopa',
-    tdR5a:'1 colher de sopa', tdR5b:'3 colheres de chá',
-    tdR6a:'1 colher de chá', tdR7a:'1 fl oz', tdR7b:'2 colheres de sopa',
+    tableTitle:'📌 Referência Rápida', thMeasure:'Medida', thVolume:'Volume', thEquals:'Equivalência',
+    tableNote:'*Nota: A diferença de 40ml entre a Cup US e a Xícara BR é o fator crítico para o sucesso em receitas internacionais.',
+    techWarnBold:'💧 Aviso Técnico — Variação de Densidades:', techWarnText:'O peso real pode variar conforme umidade do ar, marca do produto, compactação e altitude. Densidades aqui são médias em condições padrão (20°C, 1 atm). Para receitas profissionais, use balança.',
+    labelResVol:'Volume Convertido', labelResWeight:'Peso Estimado',
     recipe1Title:'🧀 Receita: Pão de Queijo (para estrangeiros)',
     recipe1Sub:'Ingredientes (usando medidas americanas)',
     recipe1Items:['2 cups of tapioca starch (480ml)','1 cup of milk (240ml)','½ cup of oil (120ml)','2 eggs','1½ cups of grated cheese (360ml)','1 tsp salt'],
@@ -377,40 +376,26 @@ const T = {
     linkNames:'✨ Gerador de Nomes', linkWeight:'⚖️ Peso', linkTemp:'🌡️ Temperatura',
     linkKitchen:'🍳 Medidas de Cozinha', linkCloth:'👕 Tamanho de Roupa', linkBtc:'₿ Bitcoin',
     recipesTitle: '🍳 Receitas de Exemplo',
-    contentTitle: 'Medidas de Cozinha: o guia para quem cozinha com receitas de todo o mundo',
-    contentP1: 'Às vezes você está no TikTok ou no Instagram, assiste àquele vídeo irresistível de uma receita americana incrível — bolo de red velvet, cookie gigante, cheesecake perfeito — e na hora de tentar fazer em casa bate aquela dúvida: "1 cup é quanto aqui no Brasil?" É exatamente para esse momento que este conversor existe. Simples, direto e sem enrolação.',
-    contentP2: 'A principal armadilha das receitas internacionais está na xícara. A xícara brasileira padrão tem 200ml, mas a xícara americana — chamada de "cup" — tem 240ml. São apenas 40ml de diferença, mas em uma receita de bolo isso pode ser o suficiente para mudar a textura completamente.',
-    contentP3: 'As colheres também mudam dependendo do país. No Brasil, a colher de sopa padrão tem 15ml e a de chá tem 5ml — os mesmos valores dos EUA. Já o fl oz (fluid ounce) que aparece em embalagens americanas equivale a 30ml. Uma garrafa de 16 fl oz contém 480ml — quase meio litro.',
-    contentP4: 'Para quem cozinha com frequência usando referências de fora, vale memorizar três conversões essenciais: 1 cup = 240ml, 1 tablespoon = 15ml e 1 teaspoon = 5ml. Com esses três valores você já adapta a maioria das receitas americanas sem precisar de calculadora.',
-    contentP5: 'As receitas de exemplo nesta página mostram essa lógica na prática: o Pão de Queijo adaptado para medidas americanas e os Buttermilk Pancakes adaptados para medidas brasileiras. Com as conversões certas, qualquer receita do mundo pode ser feita na sua cozinha.',
-    labelIngredient:'Ingrediente',
-    unitLabelsExt:{cup_br:'xícara(s) BR',cup_us:'xícara(s) US',tbsp:'colher(es) de sopa',tsp:'colher(es) de chá',ml:'ml',floz:'fl oz',g:'gramas'},
-    techTermsCup:'Xícaras (Cups)',
-    techTermsTbsp:'Colheres de Sopa (Tablespoons)',
-    techTermsTsp:'Colheres de Chá (Teaspoons)',
-    techTermsGram:'Gramas (Grams)',
-    techTermsML:'Mililitros (Milliliters)',
-    footerAbout:'Sobre', footerContact:'Contato', footerTerms:'Termos', footerPriv:'Privacidade',
-    unitLabels:{cup_br:'xícara(s) BR',cup_us:'xícara(s) US',tbsp:'col. sopa',tsp:'col. chá',ml:'ml',floz:'fl oz'}
+    contentTitle: 'A Ciência da Adaptação: Reproduzindo Receitas Globais com Precisão',
+    contentP1: 'Com a explosão de vídeos curtos ensinando técnicas culinárias, replicar na sua cozinha aquele prato visto em um perfil estrangeiro exige muito mais do que apenas traduzir a lista de ingredientes. O verdadeiro desafio está na metrologia gastronômica. O padrão de medidas americano ou europeu diverge do sistema brasileiro, e ignorar esse detalhe é o atalho mais rápido para desestabilizar uma receita inteira.',
+    contentP2: 'A armadilha invisível da xícara: O erro mais comum ocorre na conversão volumétrica primária. A xícara brasileira padrão (estabelecida comercialmente) comporta 200ml, enquanto a xícara americana — a famosa cup — comporta 240ml. Essa variação de 20% é fatal. Se um criador de conteúdo americano pede 2 cups de farinha e você utiliza medidores nacionais, o seu preparo perderá 80ml de estrutura seca, alterando drasticamente a textura da massa.',
+    contentP3: 'A situação se torna ainda mais crítica quando lidamos com líquidos, marinadas ou molhos emulsionados. Ao tentar reproduzir o "molho secreto" de uma rede de fast-food ou um teriyaki autêntico, a proporção exata de líquidos como saquê mirin, shoyu ou a carga de especiarias (como mostarda em pó e páprica defumada) dita o equilíbrio fino entre o salgado, o doce e o umami. Um erro de conversão de onças fluidas (fl oz) para mililitros pode deixar o preparo ácido demais ou arruinar o ponto de redução.',
+    contentP4: 'Densidade Aparente vs. Volume Real: Outro erro amador é presumir que todos os ingredientes pesam o mesmo dentro de um medidor. Uma colher de sopa de água pesa 15g, mas a mesma colher cheia de cacau em pó pesa cerca de 6g. Por isso, conversores simplistas falham.',
+    contentP5: 'Esta ferramenta foi desenvolvida com base no cálculo de densidade específica de cada ingrediente. O intuito é permitir que você assista a qualquer receita internacional, aplique a engenharia reversa nas medidas e alcance o resultado exato planejado pelo autor original, sem desperdiçar ingredientes ou depender de aproximações.',
+    footerAbout:'Sobre', footerContact:'Contato', footerTerms:'Termos', footerPriv:'Privacidade'
   },
   en: {
     backLink:'← Back to NameForge', title:'🍳 Kitchen Measures',
     subtitle:'Convert cups, spoons, milliliters and fl oz between Brazilian and American standards.',
-    labelFrom:'From', labelTo:'To', labelVal:'Amount', labelIngredient:'Ingredient',
-    optCupBr:'BR Cup (200ml)', optCupUs:'US Cup (240ml)',
-    optTbsp:'Tablespoon (15ml)', optTsp:'Teaspoon (5ml)',
-    optMl:'Milliliter (ml)', optFloz:'Fl oz (30ml)',
-    optFlour:'Wheat Flour', optSugar:'White Sugar', optButter:'Butter',
-    optOil:'Vegetable Oil', optWater:'Water', optMilk:'Whole Milk',
-    optCocoa:'Cocoa Powder', optCornstarch:'Cornstarch', optHoney:'Honey', optSalt:'Table Salt',
+    labelVal:'Recipe Quantity (in Cups or Measurements)', labelIngredient:'Ingredient',
+    btnDry:'Dry Items', btnWet:'Liquids',
+    optCupBr:'Brazilian Cup (200ml)', optCupUs:'US Cup (240ml)',
+    optTbsp:'Tablespoon (15ml)', optTsp:'Teaspoon (5ml)', optFloz:'Fl oz (30ml)',
     warnBold:'Note:', warnText:'The Brazilian cup is 200ml. The US cup is 240ml. Check which standard your recipe uses.',
-    tableTitle:'📌 Equivalence Table', thMeasure:'Measure', thEquals:'Equals',
-    tdR1a:'1 BR cup', tdR1b:'≈ 13 tablespoons',
-    tdR2a:'1 US cup', tdR2b:'16 tablespoons',
-    tdR3a:'½ BR cup', tdR3b:'≈ 6.5 tablespoons',
-    tdR4a:'½ US cup', tdR4b:'8 tablespoons',
-    tdR5a:'1 tablespoon', tdR5b:'3 teaspoons',
-    tdR6a:'1 teaspoon', tdR7a:'1 fl oz', tdR7b:'2 tablespoons',
+    tableTitle:'📌 Quick Reference', thMeasure:'Measure', thVolume:'Volume', thEquals:'Equivalence',
+    tableNote:'*Note: The 40ml difference between the US Cup and the BR Cup is the critical factor for success in international recipes.',
+    techWarnBold:'💧 Technical Notice — Density Variation:', techWarnText:'Actual weight may vary based on air humidity, product brand, compaction, and altitude. Densities shown here are averages under standard conditions (20°C, 1 atm). For professional recipes, use a scale.',
+    labelResVol:'Converted Volume', labelResWeight:'Estimated Weight',
     recipe1Title:'🧀 Recipe: Pão de Queijo / Brazilian Cheese Bread',
     recipe1Sub:'Ingredients (using American measures)',
     recipe1Items:['2 cups of tapioca starch (480ml)','1 cup of milk (240ml)','½ cup of oil (120ml)','2 eggs','1½ cups of grated cheese (360ml)','1 tsp salt'],
@@ -423,21 +408,13 @@ const T = {
     linkNames:'✨ Name Generator', linkWeight:'⚖️ Weight', linkTemp:'🌡️ Temperature',
     linkKitchen:'🍳 Kitchen Measures', linkCloth:'👕 Clothing Size', linkBtc:'₿ Bitcoin',
     recipesTitle: '🍳 Example Recipes',
-    contentTitle: 'Kitchen Measures: the guide for cooking with recipes from around the world',
-    contentP1: 'Sometimes you\'re scrolling through TikTok or Instagram and come across an irresistible recipe — but it\'s in a different language with different measurements. "How much is 1 cup in Brazil?" That\'s exactly the moment this converter was made for. Simple, direct, no fuss.',
-    contentP2: 'The biggest trap in international recipes is the cup. The Brazilian standard cup holds 200ml, but the American "cup" holds 240ml. That\'s only 40ml of difference, but in a cake recipe it can completely change the texture. If a recipe calls for 2 cups of flour and you use Brazilian cups, you\'re adding 80ml less than needed.',
-    contentP3: 'Spoons are consistent between countries — a tablespoon is 15ml and a teaspoon is 5ml in both Brazil and the US. The fl oz (fluid ounce) found on American packaging equals 30ml. A 16 fl oz bottle of juice contains 480ml — almost half a liter.',
-    contentP4: 'If you cook often with international references, memorize three key conversions: 1 cup = 240ml, 1 tablespoon = 15ml, 1 teaspoon = 5ml. With those three values you can adapt most American recipes without a calculator — but when precision matters, the converter above does it in a second.',
-    contentP5: 'The example recipes on this page show this logic in practice: Brazilian Cheese Bread adapted to American measures, and Buttermilk Pancakes adapted to Brazilian measures. With the right conversions, any recipe in the world can be made in your kitchen.',  
-    labelIngredient:'Ingredient',
-    unitLabelsExt:{cup_br:'BR cup(s)',cup_us:'US cup(s)',tbsp:'tablespoon(s)',tsp:'teaspoon(s)',ml:'ml',floz:'fl oz',g:'grams'},
-    techTermsCup:'Cups',
-    techTermsTbsp:'Tablespoons',
-    techTermsTsp:'Teaspoons',
-    techTermsGram:'Grams',
-    techTermsML:'Milliliters',
-    footerAbout:'About', footerContact:'Contact', footerTerms:'Terms', footerPriv:'Privacy',
-    unitLabels:{cup_br:'BR cup(s)',cup_us:'US cup(s)',tbsp:'tbsp',tsp:'tsp',ml:'ml',floz:'fl oz'}
+    contentTitle: 'The Science of Adaptation: Reproducing Global Recipes with Precision',
+    contentP1: 'With the explosion of short videos teaching culinary techniques, replicating that dish seen on a foreign profile in your kitchen requires much more than just translating the ingredient list. The real challenge lies in gastronomic metrology. The American or European measurement standard differs from the Brazilian system, and ignoring this detail is the fastest shortcut to destabilizing an entire recipe.',
+    contentP2: 'The invisible cup trap: The most common error occurs in primary volumetric conversion. The standard Brazilian cup (commercially established) holds 200ml, while the American cup — the famous cup — holds 240ml. This 20% variation is fatal. If an American content creator asks for 2 cups of flour and you use national measuring cups, your preparation will lose 80ml of dry structure, drastically altering the texture of the dough.',
+    contentP3: 'The situation becomes even more critical when dealing with liquids, marinades, or emulsified sauces. When trying to reproduce a fast-food chain\'s "secret sauce" or an authentic teriyaki, the exact proportion of liquids like mirin rice wine, soy sauce, or the load of spices (like mustard powder and smoked paprika) dictates the fine balance between salty, sweet, and umami. A conversion error from fluid ounces (fl oz) to milliliters can leave the preparation too acidic or ruin the reduction point.',
+    contentP4: 'Apparent Density vs. Real Volume: Another amateur mistake is assuming that all ingredients weigh the same inside a measuring cup. A tablespoon of water weighs 15g, but the same tablespoon full of cocoa powder weighs about 6g. This is why simplistic converters fail.',
+    contentP5: 'This tool was developed based on the specific density calculation of each ingredient. The purpose is to allow you to watch any international recipe, reverse engineer the measurements, and achieve the exact result planned by the original author, without wasting ingredients or relying on approximations.',
+    footerAbout:'About', footerContact:'Contact', footerTerms:'Terms', footerPriv:'Privacy'
   }
 };
 function toggleRecipes() {
@@ -463,32 +440,22 @@ function applyLang(l) {
   q('back-link').textContent = t.backLink; q('back-link').href = 'index.html' + lp;
   q('page-title').textContent = t.title;
   q('page-subtitle').textContent = t.subtitle;
-  q('label-from').textContent = t.labelFrom;
-  q('label-to').textContent = t.labelTo;
   q('label-val').textContent = t.labelVal;
   q('label-ingredient').textContent = t.labelIngredient;
-    
+  q('btn-dry').textContent = t.btnDry;
+  q('btn-wet').textContent = t.btnWet;
+  q('label-res-vol').textContent = t.labelResVol;
+  q('label-res-weight').textContent = t.labelResWeight;
+  q('tech-warn-bold').textContent = t.techWarnBold;
+  q('tech-warn-text').textContent = t.techWarnText;
 
-  // Opções dos selects
-  const optMap = {
-    'opt-cupbr': t.optCupBr, 'opt-cupus': t.optCupUs,
-    'opt-tbsp': t.optTbsp, 'opt-tsp': t.optTsp,
-    'opt-ml': t.optMl, 'opt-floz': t.optFloz,
-    'opt-cupbr2': t.optCupBr, 'opt-cupus2': t.optCupUs,
-    'opt-tbsp2': t.optTbsp, 'opt-tsp2': t.optTsp,
-    'opt-ml2': t.optMl, 'opt-floz2': t.optFloz,
-    'opt-flour': t.optFlour, 'opt-sugar': t.optSugar, 'opt-butter': t.optButter,
-    'opt-oil': t.optOil, 'opt-water': t.optWater, 'opt-milk': t.optMilk,
-    'opt-cocoa': t.optCocoa, 'opt-cornstarch': t.optCornstarch, 'opt-honey': t.optHoney, 'opt-salt': t.optSalt
+  // Opções do select k-from
+  q('opt-cupbr').textContent = t.optCupBr;
+  q('opt-cupus').textContent = t.optCupUs;
+  q('opt-tbsp').textContent = t.optTbsp;
+  q('opt-tsp').textContent = t.optTsp;
+  q('opt-floz').textContent = t.optFloz;
 
-  };
-  for (const [id, val] of Object.entries(optMap)) { const el = q(id); if(el) el.textContent = val; }
-// Atualizar labels dinâmicos de unidades
-const unitExtLabels = document.querySelectorAll('[data-unit]');
-unitExtLabels.forEach(el => {
-  const unit = el.getAttribute('data-unit');
-  if(t.unitLabelsExt[unit]) el.textContent = t.unitLabelsExt[unit];
-});
   q('warn-bold').textContent = t.warnBold; q('warn-text').textContent = t.warnText;
   q('recipes-title').textContent = t.recipesTitle;
   q('content-title').textContent = t.contentTitle;
@@ -498,13 +465,10 @@ unitExtLabels.forEach(el => {
   q('content-p4').textContent    = t.contentP4;
   q('content-p5').textContent    = t.contentP5; 
   q('table-title').textContent = t.tableTitle;
-  q('th-measure').textContent = t.thMeasure; q('th-equals').textContent = t.thEquals;
-  q('td-r1a').textContent = t.tdR1a; q('td-r1b').textContent = t.tdR1b;
-  q('td-r2a').textContent = t.tdR2a; q('td-r2b').textContent = t.tdR2b;
-  q('td-r3a').textContent = t.tdR3a; q('td-r3b').textContent = t.tdR3b;
-  q('td-r4a').textContent = t.tdR4a; q('td-r4b').textContent = t.tdR4b;
-  q('td-r5a').textContent = t.tdR5a; q('td-r5b').textContent = t.tdR5b;
-  q('td-r6a').textContent = t.tdR6a; q('td-r7a').textContent = t.tdR7a; q('td-r7b').textContent = t.tdR7b;
+  q('th-measure').textContent = t.thMeasure; 
+  q('th-volume').textContent = t.thVolume;
+  q('th-equals').textContent = t.thEquals;
+  q('table-note').textContent = t.tableNote;
 
   q('recipe1-title').textContent = t.recipe1Title;
   q('recipe1-subtitle').textContent = t.recipe1Sub;
@@ -528,7 +492,7 @@ unitExtLabels.forEach(el => {
 
   document.documentElement.lang = l;
 }
-
+    
 const kMl = {cup_br:200, cup_us:240, tbsp:15, tsp:5, ml:1, floz:30};
 const ingredientData = {
     dry: [
@@ -553,19 +517,31 @@ const ingredientData = {
 
 function updateIngredientList(type) {
     const select = document.getElementById('k-ingredient');
+    const lang = getLang();
     select.innerHTML = '';
+    
     ingredientData[type].forEach(item => {
         const opt = document.createElement('option');
         opt.value = item.val;
-        opt.textContent = item.name;
+        
+        // Tenta buscar do dicionário dinâmico baseado na chave do ingrediente (ex: optFlour, optShoyu)
+        const dictKey = 'opt' + item.val.charAt(0).toUpperCase() + item.val.slice(1);
+        if (T[lang] && T[lang][dictKey]) {
+            opt.textContent = T[lang][dictKey];
+        } else if (ingredientDensities[item.val]) {
+            opt.textContent = ingredientDensities[item.val].name[lang];
+        } else {
+            opt.textContent = item.name;
+        }
+        
         select.appendChild(opt);
     });
-    // Destaca o botão ativo
-    document.getElementById('btn-dry').style.background = type === 'dry' ? '#4caf50' : '#333';
-    document.getElementById('btn-wet').style.background = type === 'wet' ? '#4caf50' : '#333';
+    
+    // Destaca o botão ativo com as cores corretas
+    document.getElementById('btn-dry').style.background = type === 'dry' ? '#4caf50' : 'var(--surface2)';
+    document.getElementById('btn-wet').style.background = type === 'wet' ? '#4caf50' : 'var(--surface2)';
     convertKitchen();
-}
-
+    }
 // Inicializa com secos ao carregar
 window.onload = () => updateIngredientList('dry');
 
