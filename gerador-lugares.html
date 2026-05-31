@@ -4,18 +4,20 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- Google tag (gtag.js) -->
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="canonical" href="https://quicklysite.github.io/gerador-lugares.html" />
+<title>Gerador de Lugares e Cenários para RPG e Literatura – NameForge</title>
+<meta name="description" content="Crie cenários e mundos completos para suas campanhas de RPG e livros. Gerador de nomes, atmosferas e fichas de lore com exportação em PDF e TXT.">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-3FEPS5KJLN"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
+  function gtag()){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-3FEPS5KJLN');
 </script>  
-<title>Gerador de Lugares – NameForge</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@700&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
+/* Seus estilos CSS originais mantidos integralmente */
 :root{
   --bg:#0d0d0f;
   --surface:#16161a;
@@ -483,8 +485,8 @@ body{ background:var(--bg); color:var(--text); font-family:'DM Sans',sans-serif;
   <a href="index.html" class="back-link" id="back-link">← Voltar ao NameForge</a>
 
   <div class="hero">
-    <h1 id="hero-title">🗺️ Gerador de Lugares</h1>
-    <p id="hero-sub">Crie nomes únicos para mundos, reinos, planetas e dimensões. Cada configuração gera um som diferente.</p>
+    <h1 id="hero-title">🗺️ Gerador de Lugares e Lore</h1>
+    <p id="hero-sub">Ferramenta avançada de worldbuilding para escritores e mestres de RPG. Escolha o ecossistema, os elementos dominantes e a física do ambiente para moldar o contexto e a identidade sonora de novos mundos.</p>
   </div>
 
   <div class="panel">
@@ -647,30 +649,38 @@ body{ background:var(--bg); color:var(--text); font-family:'DM Sans',sans-serif;
       <button class="export-opt-btn export-opt-pdf" onclick="exportPDF()">🎲 Card de RPG em PDF</button>
     </div>
   </div>
-<div style="max-width:760px;margin:48px auto 0;padding:0 20px 60px;">
+  <div style="max-width:760px;margin:48px auto 0;padding:0 0px 60px;">
 
-  <div style="background:#16161a;border:1px solid rgba(232,199,122,.1);border-radius:20px;padding:32px;margin-bottom:24px;">
-    <h2 id="seo-h1" style="color:#e8c77a;font-family:'Playfair Display',serif;font-size:1.2rem;margin-bottom:16px;">Por que o nome de um lugar importa tanto quanto o enredo?</h2>
-    <p id="seo-h5" style="line-height:1.8;margin-bottom:14px;opacity:.88;font-size:.93rem;">Existe um motivo pelo qual ninguém esquece de MORDOR, TATOOINE ou HOGWARTS. Não é só a história que acontece nesses lugares — é o próprio nome carregando o peso do que o lugar representa. Mordor soa pesado, duro, sem saída. Tatooine soa estrangeiro, árido, distante de qualquer civilização. Hogwarts soa absurdo o suficiente para ser mágico. Nenhum desses nomes foi escolhido por acaso.</p>
-    <p id="seo-h6" style="line-height:1.8;opacity:.88;font-size:.93rem;">TOLKIEN levou esse princípio ao extremo: ele criou línguas inteiras antes de escrever uma única história. Os nomes de lugares em Middle-earth não foram inventados — eles foram traduzidos do Quenya e do SINDARIN, idiomas com gramática e fonologia próprias que ele desenvolveu ao longo de décadas. "MORIA" significa "ABISMO NEGRO" em Sindarin. "ISENGARD" vem do inglês arcaico e significa "FORTALEZA DE FERRO". Cada nome é uma frase disfarçada de lugar.</p>
-  </div>
+    <article style="background:#16161a;border:1px solid rgba(232,199,122,.1);border-radius:20px;padding:32px;margin-bottom:24px;">
+      <h2 id="seo-h1" style="color:#e8c77a;font-family:'Playfair Display',serif;font-size:1.3rem;margin-bottom:16px;">Como utilizar o contexto gerado no seu processo de Worldbuilding</h2>
+      <p style="line-height:1.8;margin-bottom:14px;opacity:.88;font-size:.93rem;">Mais do que um simples sorteador de codinomes, esta ferramenta funciona através do cruzamento de matrizes geográficas, físicas e mitológicas. Ao definir variáveis de tom, gravidade e ecossistemas, o motor calcula não apenas a fonética ideal para o universo escolhido, mas projeta os pilares de sustentação de uma civilização fictícia coerente.</p>
+      <p style="line-height:1.8;opacity:.88;font-size:.93rem;">Ao salvar seus lugares favoritos na aba <strong>"Meu Mundo"</strong>, você constrói uma teia geopolítica integrada, ideal para ser exportada diretamente em formato de crônica de texto (.txt) ou transformada em cartões físicos estruturados de consulta rápida (.pdf) para usar atrás da tela do mestre ou durante sessões de escrita criativa.</p>
+    </article>
 
-  <div style="background:#16161a;border:1px solid rgba(232,199,122,.1);border-radius:20px;padding:32px;margin-bottom:24px;">
-    <h2 id="seo-h2" style="color:#e8c77a;font-family:'Playfair Display',serif;font-size:1.2rem;margin-bottom:16px;">O problema que nenhum guia de worldbuilding conta direito</h2>
-    <p style="line-height:1.8;margin-bottom:14px;opacity:.88;font-size:.93rem;">Existe um erro que praticamente todo iniciante em worldbuilding comete: criar nomes que parecem épicos isoladamente mas soam completamente inconsistentes quando colocados juntos no mesmo mapa. Imagine um reino chamado "KAEL'THARION" com uma capital chamada "São Paulo do Norte". O problema não é nenhum dos dois nomes individualmente — é a mistura de registros sonoros que quebra a imersão do leitor ou do jogador de RPG.</p>
-    <p style="line-height:1.8;opacity:.88;font-size:.93rem;">A solução que escritores experientes usam é simples: escolher um "DNA sonoro" para cada região e manter coerência dentro dela. Lugares do mesmo reino têm padrões similares de sílabas, terminações e consoantes. Quando uma região é invadida e renomeada por outro povo, o nome muda de padrão — e isso conta uma história sem precisar de explicação. O NameForge foi construído com essa lógica: cada elemento e universo gera nomes com DNA sonoro próprio e consistente.</p>
-  </div>
+    <article style="background:#16161a;border:1px solid rgba(232,199,122,.1);border-radius:20px;padding:32px;margin-bottom:24px;">
+      <h2 id="seo-h2" style="color:#e8c77a;font-family:'Playfair Display',serif;font-size:1.3rem;margin-bottom:16px;">Por que o nome de um lugar importa tanto quanto o enredo?</h2>
+      <p id="seo-h5" style="line-height:1.8;margin-bottom:14px;opacity:.88;font-size:.93rem;">Existe um motivo pelo qual ninguém esquece de MORDOR, TATOOINE ou HOGWARTS. Não é só a história que acontece nesses lugares — é o próprio nome carregando o peso do que o lugar representa. Mordor soa pesado, duro, sem saída. Tatooine soa estrangeiro, árido, distante de qualquer civilização. Hogwarts soa absurdo o suficiente para ser mágico. Nenhum desses nomes foi escolhido por acaso.</p>
+      <p id="seo-h6" style="line-height:1.8;opacity:.88;font-size:.93rem;">TOLKIEN levou esse princípio ao extremo: ele criou línguas inteiras antes de escrever uma única história. Os nomes de lugares em Middle-earth não foram inventados — eles foram traduzidos do Quenya e do SINDARIN, idiomas com gramática e fonologia próprias que ele desenvolveu ao longo de décadas. "MORIA" significa "ABISMO NEGRO" em Sindarin. "ISENGARD" vem do inglês arcaico e significa "FORTALEZA DE FERRO". Cada nome é uma frase disfarçada de lugar.</p>
+    </article>
 
-  <div style="background:#16161a;border:1px solid rgba(232,199,122,.1);border-radius:20px;padding:32px;margin-bottom:24px;">
-    <h2 id="seo-h3" style="color:#e8c77a;font-family:'Playfair Display',serif;font-size:1.2rem;margin-bottom:16px;">Como lugares reais viram nomes fictícios — e o que aprender com isso</h2>
-    <p style="line-height:1.8;margin-bottom:14px;opacity:.88;font-size:.93rem;">A maioria dos nomes de lugares no mundo real não foi inventada — foi descrita. "Amazonas" vem da lenda das guerreiras amazônicas que os exploradores portugueses acreditavam habitar a região. "Sahara" significa simplesmente "deserto" em árabe. "Atacama" provavelmente vem de uma palavra indígena que significa "onde acaba a chuva". As pessoas que nomearam esses lugares não estavam sendo poéticas — estavam sendo práticas, descrevendo o que viam.</p>
-    <p style="line-height:1.8;opacity:.88;font-size:.93rem;">Essa lógica funciona perfeitamente em mundos fictícios. Um lugar chamado "Kaelvorn" pode soar misterioso para o leitor, mas para os habitantes ele pode simplesmente significar "vale das pedras negras" numa língua extinta. Você não precisa inventar a tradução — basta saber que ela existe. Isso dá profundidade sem exigir que você construa uma língua inteira como Tolkien fez.</p>
-  </div>
+    <article style="background:#16161a;border:1px solid rgba(232,199,122,.1);border-radius:20px;padding:32px;margin-bottom:24px;">
+      <h2 id="seo-h3" style="color:#e8c77a;font-family:'Playfair Display',serif;font-size:1.3rem;margin-bottom:16px;">O problema da inconsistência fonética em cenários de fantasia</h2>
+      <p style="line-height:1.8;margin-bottom:14px;opacity:.88;font-size:.93rem;">Existe um erro que praticamente todo iniciante em worldbuilding comete: criar nomes que parecem épicos isoladamente mas soam completamente inconsistentes quando colocados juntos no mesmo mapa. Imagine um reino chamado "KAEL'THARION" com uma capital chamada "São Paulo do Norte". O problema não é nenhum dos dois nomes individualmente — é a mistura de registros sonoros que quebra a imersão do leitor ou do jogador de RPG.</p>
+      <p style="line-height:1.8;opacity:.88;font-size:.93rem;">A solução que escritores experientes usam é simples: escolher um "DNA sonoro" para cada região e manter coerência dentro dela. Lugares do mesmo reino têm padrões similares de sílabas, terminações e consoantes. Quando uma região é invadida e renomeada por outro povo, o nome muda de padrão — e isso conta uma história sem precisar de explicação. O NameForge foi construído com essa lógica: cada elemento e universo gera nomes com DNA sonoro próprio e consistente.</p>
+    </article>
 
-  <div style="background:#16161a;border:1px solid rgba(232,199,122,.1);border-radius:20px;padding:32px;">
-    <h2 id="seo-h4" style="color:#e8c77a;font-family:'Playfair Display',serif;font-size:1.2rem;margin-bottom:16px;">Para mestres de RPG: por que o nome do lugar muda como os jogadores se comportam</h2>
-    <p style="line-height:1.8;margin-bottom:14px;opacity:.88;font-size:.93rem;">Existe um fenômeno bem documentado entre mestres de D&D e outros RPGs de mesa: jogadores se comportam de forma diferente dependendo do nome do lugar que estão visitando. Uma taverna chamada "A Espada Dourada" cria uma expectativa de aventura e prosperidade. A mesma taverna chamada "O Último Refúgio" cria tensão antes mesmo de o mestre descrever qualquer coisa. O nome é a primeira narrativa que o jogador recebe.</p>
-    <p style="line-height:1.8;opacity:.88;font-size:.93rem;">Mestres experientes usam essa psicologia de forma intencional: nomes suaves e fluidos para lugares seguros, nomes duros e cortantes para lugares perigosos, nomes antigos e difíceis de pronunciar para lugares de poder ou mistério. Não é coincidência que "Dungeon" e "Dragon" soem pesados — e que "Elysium" e "Avalon" soem leves e distantes. O NameForge usa exatamente essa lógica sonora ao gerar nomes com base no elemento dominante, no tom e no tipo de lugar que você escolher.</p>
+    <article style="background:#16161a;border:1px solid rgba(232,199,122,.1);border-radius:20px;padding:32px;margin-bottom:24px;">
+      <h2 id="seo-h4" style="color:#e8c77a;font-family:'Playfair Display',serif;font-size:1.3rem;margin-bottom:16px;">Como lugares reais viram nomes fictícios — e o que aprender com isso</h2>
+      <p style="line-height:1.8;margin-bottom:14px;opacity:.88;font-size:.93rem;">A maioria dos nomes de lugares no mundo real não foi inventada — foi descrita. "Amazonas" vem da lenda das guerreiras amazônicas que os exploradores portugueses acreditavam habitar a região. "Sahara" significa simplesmente "deserto" em árabe. "Atacama" provavelmente vem de uma palavra indígena que significa "onde acaba a chuva". As pessoas que nomearam esses lugares não estavam sendo poéticas — estavam sendo práticas, descrevendo o que viam.</p>
+      <p style="line-height:1.8;opacity:.88;font-size:.93rem;">Essa lógica funciona perfeitamente em mundos fictícios. Um lugar chamado "Kaelvorn" pode soar misterioso para o leitor, mas para os habitantes ele pode simplesmente significar "vale das pedras negras" numa língua extinta. Você não precisa inventar a tradução — basta saber que ela existe. Isso dá profundidade sem exigir que você construa uma língua inteira como Tolkien fez.</p>
+    </article>
+
+    <article style="background:#16161a;border:1px solid rgba(232,199,122,.1);border-radius:20px;padding:32px;">
+      <h2 id="seo-h5-title" style="color:#e8c77a;font-family:'Playfair Display',serif;font-size:1.3rem;margin-bottom:16px;">Psicologia fonética: O impacto dos nomes na mesa de RPG</h2>
+      <p style="line-height:1.8;margin-bottom:14px;opacity:.88;font-size:.93rem;">Existe um fenômeno bem documentado entre mestres de D&D e outros RPGs de mesa: jogadores se comportam de forma diferente dependendo do nome do lugar que estão visitando. Uma taverna chamada "A Espada Dourada" cria uma expectativa de aventura e prosperidade. A mesma taverna chamada "O Último Refúgio" cria tensão antes mesmo de o mestre descrever qualquer coisa. O nome é a primeira narrativa que o jogador recebe.</p>
+      <p style="line-height:1.8;opacity:.88;font-size:.93rem;">Mestres experientes usam essa psicologia de forma intencional: nomes suaves e fluidos para lugares seguros, nomes duros e cortantes para lugares perigosos, nomes antigos e difíceis de pronunciar para lugares de poder ou mistério. Não é coincidência que "Dungeon" e "Dragon" soem pesados — e que "Elysium" e "Avalon" soem leves e distantes. O NameForge usa exatamente essa lógica sonora ao gerar nomes com base no elemento dominante, no tom e no tipo de lugar que você escolher.</p>
+    </article>
+
   </div>
 
 </div>
@@ -700,8 +710,8 @@ body{ background:var(--bg); color:var(--text); font-family:'DM Sans',sans-serif;
 const T = {
   pt:{
     back:'← Voltar ao NameForge',
-    title:'🗺️ Gerador de Lugares',
-    sub:'Crie nomes únicos para mundos, reinos, planetas e dimensões. Cada configuração gera um som diferente.',
+    title: '🗺️ Gerador de Lugares e Lore',
+    sub: 'Ferramenta avançada de worldbuilding para escritores e mestres de RPG. Escolha o ecossistema, os elementos dominantes e a física do ambiente para moldar o contexto e a identidade sonora de novos mundos.',
     lblType:'Tipo de Lugar', lblElement:'Elemento Dominante', lblHabitat:'Habitat',
     lblGravity:'Gravidade', lblTone:'Tom', lblUniverse:'Universo', lblQty:'Quantidade',
     genBtn:'🗺️ Gerar Lugares',
@@ -752,8 +762,8 @@ const T = {
   },
   en:{
     back:'← Back to NameForge',
-    title:'🗺️ Place Name Generator',
-    sub:'Create unique names for worlds, kingdoms, planets and dimensions. Each setting generates a different sound.',
+    title: '🗺️ Place & Setting Lore Generator',
+    sub: 'Advanced worldbuilding tool for writers and Game Masters. Define ecosystems, elements, and environmental physics to forge context and sonic identities for new worlds.',
     lblType:'Place Type', lblElement:'Dominant Element', lblHabitat:'Habitat',
     lblGravity:'Gravity', lblTone:'Tone', lblUniverse:'Universe', lblQty:'Quantity',
     genBtn:'🗺️ Generate Places',
